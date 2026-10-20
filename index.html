@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HealthyBite</title>
+<meta name="description" content="Muat turun HealthyBite, app penjejak kalori dengan AI untuk Android.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#101400">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HealthyBite: penjejak kalori dengan AI">
+<meta property="og:description" content="Ambil gambar makanan, terus tahu kalorinya. Muat turun APK untuk Android.">
+<meta property="og:url" content="https://shahredza.github.io/healthybite-web/">
+<meta property="og:image" content="https://shahredza.github.io/healthybite-web/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Mona+Sans:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
+<style>
+  /* Layout: giant split-type hero beside a phone mock, a scrolling ticker, a numbered
+     feature grid, a dark band for the steps, gallery, download panel with QR, FAQ,
+     about-me, about-this-site, privacy, and an oversized footer slogan.
+     Visual language: lime highlight bands that sweep behind headings on scroll. */
+  :root {
+    --bg: #f3f3ec;
+    --surface: #ffffff;
+    --fg: #101400;
+    --muted: #535a45;
+    --line: #d8dbca;
+    --lime: #d2ff00;
+    --on-lime: #101400;
+    --band: #101400;
+    --band-fg: #f3f3ec;
+    --band-muted: #a8ae95;
+    --band-line: #2b3214;
+    --warn-bg: #fff1c2;
+    --warn-fg: #6b4a00;
+    --font-sans: "Mona Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+    --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --radius: 22px;
+    --gutter: max(16px, env(safe-area-inset-left, 0px));
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b0e02;
+      --surface: #151a07;
+      --fg: #eef1e1;
+      --muted: #a3a98e;
+      --line: #283012;
+      --band: #1a2009;
+      --band-fg: #eef1e1;
+      --band-muted: #a3a98e;
+      --band-line: #333c18;
+      --warn-bg: #2e2508;
+      --warn-fg: #f2d27a;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0e02;
+    --surface: #151a07;
+    --fg: #eef1e1;
+    --muted: #a3a98e;
+    --line: #283012;
+    --band: #1a2009;
+    --band-fg: #eef1e1;
+    --band-muted: #a3a98e;
+    --band-line: #333c18;
+    --warn-bg: #2e2508;
+    --warn-fg: #f2d27a;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; border-radius: 8px; }
+  h1, h2, h3 { margin: 0; line-height: 0.95; font-weight: 800; letter-spacing: -0.02em; }
+  p { margin: 0; }
+  .wrap { max-width: 1212px; margin-inline: auto; padding-inline: var(--gutter); }
+  section { padding-block: 96px; scroll-margin-top: 8px; }
+
+  /* Type system: wide heavy caps paired with an italic serif, like a signature */
+  .impact { font-family: var(--font-sans); font-stretch: 125%; font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; }
+  .sig { font-family: var(--font-serif); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: -0.01em; }
+  .title { font-size: clamp(40px, 7vw, 88px); line-height: 1.02; }
+  .label { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 18px; }
+  .label::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 2px var(--fg); }
+  .lede { color: var(--muted); max-width: 58ch; font-size: 18px; }
+  .section-head { margin-bottom: 44px; display: grid; gap: 18px; }
+
+  /* Lime highlight band that sweeps in behind a phrase */
+  .hl { background-image: linear-gradient(var(--lime), var(--lime)); background-repeat: no-repeat; background-position: 0 88%; background-size: 100% 42%; color: inherit; padding-inline: 0.06em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .hl.full { background-size: 100% 78%; background-position: 0 62%; color: var(--on-lime); }
+  html.js .hl { background-size: 0% 42%; transition: background-size 0.9s cubic-bezier(.2,.7,.1,1); }
+  html.js .hl.full { background-size: 0% 78%; transition: background-size 0.9s cubic-bezier(.2,.7,.1,1), color 0.2s 0.35s; color: inherit; }
+  html.js .hl.on { background-size: 100% 42%; }
+  html.js .hl.full.on { background-size: 100% 78%; color: var(--on-lime); }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--lime); color: var(--on-lime); font-weight: 800; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; padding: 16px 26px; border-radius: 999px; border: 2px solid var(--lime); transition: transform .2s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn .arrow { font-size: 18px; line-height: 1; }
+  .btn.ghost { background: transparent; color: var(--fg); border-color: var(--fg); }
+  .btn.small { padding: 10px 18px; font-size: 13px; }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 900; font-stretch: 125%; font-size: 19px; text-transform: uppercase; letter-spacing: -0.02em; }
+  .brand svg { width: 34px; height: 34px; }
+  nav { display: flex; align-items: center; gap: 24px; font-size: 14px; font-weight: 600; }
+  nav a:not(.btn) { text-decoration: none; color: var(--muted); }
+  nav a:not(.btn):hover { color: var(--fg); }
+  .lang { display: inline-flex; border: 1.5px solid var(--fg); border-radius: 999px; padding: 3px; }
+  .lang button { font: inherit; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; padding: 6px 11px; border: 0; border-radius: 999px; background: transparent; color: var(--fg); cursor: pointer; }
+  .lang button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+
+  /* Hero */
+  .hero { padding-top: 48px; padding-bottom: 56px; }
+  .hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: end; }
+  .hero h1 { font-size: clamp(64px, 13vw, 184px); line-height: 0.82; }
+  .hero h1 .sig { display: block; font-size: 0.78em; line-height: 1.15; margin-bottom: 0.02em; }
+  .hero h1 .impact { display: block; }
+  .hero-sub { margin-top: 34px; display: grid; gap: 26px; }
+  .hero-sub .lede { font-size: 19px; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .callout { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 8px 18px 8px 8px; align-self: start; justify-self: start; }
+  .callout b { background: var(--fg); color: var(--bg); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; }
+  .callout span { font-size: 14px; font-weight: 600; }
+
+  /* Phone mock */
+  .phone-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 0; }
+  .phone { width: 100%; max-width: 310px; background: var(--band); color: var(--band-fg); border-radius: 44px; padding: 20px 16px 22px; box-shadow: 0 30px 70px -30px rgba(16, 20, 0, 0.6); border: 6px solid var(--band); outline: 2px solid var(--line); transform: rotate(3deg); }
+  .phone .notch { width: 84px; height: 7px; border-radius: 99px; background: var(--band-line); margin: 0 auto 16px; }
+  .phone h3 { font-size: 15px; font-weight: 600; color: var(--band-muted); letter-spacing: 0; }
+  .ring-row { display: flex; align-items: center; gap: 14px; margin: 12px 0 14px; }
+  .ring { position: relative; width: 104px; height: 104px; flex: none; }
+  .ring svg { width: 104px; height: 104px; transform: rotate(-90deg); }
+  .ring .track { stroke: var(--band-line); }
+  .ring .bar { stroke: var(--lime); }
+  .ring .num { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; line-height: 1.1; }
+  .ring .num b { font-size: 22px; font-weight: 900; font-variant-numeric: tabular-nums; }
+  .ring .num span { font-size: 11px; color: var(--band-muted); }
+  .macros { flex: 1; min-width: 0; display: grid; gap: 9px; }
+  .macro { font-size: 12px; }
+  .macro .row { display: flex; justify-content: space-between; color: var(--band-muted); font-variant-numeric: tabular-nums; }
+  .macro .row b { color: var(--band-fg); font-weight: 700; }
+  .macro .meter { height: 6px; border-radius: 99px; background: var(--band-line); margin-top: 3px; overflow: hidden; }
+  .macro .meter i { display: block; height: 100%; background: var(--lime); border-radius: 99px; }
+  .meals { display: grid; gap: 8px; margin-top: 4px; }
+  .meal { display: flex; justify-content: space-between; gap: 10px; align-items: center; font-size: 13px; border: 1px solid var(--band-line); border-radius: 14px; padding: 9px 12px; }
+  .meal span:last-child { color: var(--band-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .scan-btn { margin-top: 12px; text-align: center; background: var(--lime); color: var(--on-lime); border-radius: 999px; padding: 10px; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .caption { font-size: 13px; color: var(--muted); text-align: center; }
+
+  /* Ticker */
+  .ticker { background: var(--lime); color: var(--on-lime); overflow: hidden; border-block: 2px solid var(--fg); }
+  .ticker-track { display: flex; width: max-content; animation: tick 38s linear infinite; }
+  .ticker ul { display: flex; list-style: none; margin: 0; padding: 14px 0; }
+  .ticker li { font-weight: 900; font-stretch: 125%; text-transform: uppercase; font-size: 22px; letter-spacing: -0.01em; white-space: nowrap; padding-inline: 22px; display: flex; align-items: center; gap: 44px; }
+  .ticker li::after { content: "✺"; font-size: 18px; }
+  @keyframes tick { to { transform: translateX(-50%); } }
+
+  /* Features */
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .card { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; gap: 12px; min-height: 270px; transition: background-color .3s, color .3s, transform .3s; }
+  .card .no { font-family: var(--font-serif); font-style: italic; font-size: 44px; line-height: 1; color: var(--muted); transition: color .3s; }
+  .card h3 { font-size: 24px; font-stretch: 112%; letter-spacing: -0.02em; line-height: 1.05; margin-top: auto; }
+  .card p { color: var(--muted); font-size: 15.5px; transition: color .3s; }
+  .card .ico { position: absolute; top: 24px; right: 24px; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid currentColor; display: grid; place-items: center; }
+  .card .ico svg { width: 20px; height: 20px; }
+  .card:hover { background: var(--lime); color: var(--on-lime); border-color: var(--lime); transform: translateY(-4px); }
+  .card:hover p, .card:hover .no { color: var(--on-lime); }
+  .tag { align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid currentColor; border-radius: 99px; padding: 3px 10px; }
+
+  /* Dark band: steps */
+  .band { background: var(--band); color: var(--band-fg); border-radius: 36px; margin-inline: var(--gutter); }
+  .band .lede { color: var(--band-muted); }
+  .band .label::before { box-shadow: 0 0 0 2px var(--band-fg); }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; counter-reset: s; border-top: 1px solid var(--band-line); }
+  .steps li { counter-increment: s; padding: 32px 28px 8px 0; display: flex; flex-direction: column; gap: 10px; }
+  .steps li + li { padding-left: 28px; border-left: 1px solid var(--band-line); }
+  .steps li::before { content: "0" counter(s); font-weight: 900; font-stretch: 125%; font-size: clamp(56px, 7vw, 92px); line-height: 0.9; color: var(--lime); letter-spacing: -0.04em; }
+  .steps h3 { font-size: 24px; font-stretch: 112%; }
+  .steps p { color: var(--band-muted); font-size: 15.5px; }
+
+  /* Gallery */
+  .shots { list-style: none; padding: 0 0 12px; margin: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 230px; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .shots li { scroll-snap-align: start; }
+  .shots li:nth-child(even) { margin-top: 40px; }
+  .shots figure { margin: 0; display: grid; gap: 12px; }
+  .shot { aspect-ratio: 9 / 19.5; background: var(--surface); border: 6px solid var(--band); border-radius: 34px; overflow: hidden; display: grid; place-items: center; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shot .ph { font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--muted); padding: 16px; text-align: center; }
+  .shots figcaption { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* Download */
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 36px; padding: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .meta { display: grid; grid-template-columns: auto 1fr; margin: 28px 0 30px; font-size: 15px; border-top: 1px solid var(--line); }
+  .meta dt, .meta dd { padding-block: 10px; border-bottom: 1px solid var(--line); margin: 0; }
+  .meta dt { color: var(--muted); padding-right: 24px; }
+  .meta dd { font-weight: 700; text-align: right; }
+  .install { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; counter-reset: i; }
+  .install li { counter-increment: i; display: grid; grid-template-columns: 40px 1fr; gap: 14px; color: var(--muted); font-size: 15.5px; }
+  .install li::before { content: counter(i); width: 36px; height: 36px; border-radius: 50%; background: var(--lime); color: var(--on-lime); font-weight: 900; display: grid; place-items: center; }
+  .install strong { color: var(--fg); font-weight: 700; }
+  .notice { margin-top: 26px; background: var(--warn-bg); color: var(--warn-fg); border-radius: 16px; padding: 16px 18px; font-size: 14.5px; }
+  .qr { display: flex; align-items: center; gap: 18px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .qr-box { width: 132px; height: 132px; flex: none; background: #fff; border-radius: 16px; padding: 10px; display: grid; place-items: center; border: 2px solid var(--fg); }
+  .qr-box img, .qr-box canvas { width: 112px !important; height: 112px !important; }
+  .qr-box .qr-empty { font-size: 11px; color: #535a45; text-align: center; line-height: 1.3; }
+  .qr p { font-size: 14.5px; color: var(--muted); }
+  .qr p b { color: var(--fg); display: block; font-size: 16px; margin-bottom: 4px; }
+
+  /* FAQ */
+  .faq-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
+  .faq { border-top: 2px solid var(--fg); }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary { cursor: pointer; font-weight: 700; font-size: 18px; padding: 22px 48px 22px 0; list-style: none; position: relative; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; position: absolute; right: 0; top: 16px; width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--fg); display: grid; place-items: center; font-size: 20px; font-weight: 500; line-height: 1; transition: background-color .2s; }
+  .faq details[open] summary::after { content: "−"; background: var(--lime); color: var(--on-lime); border-color: var(--lime); }
+  .faq details p { color: var(--muted); font-size: 16px; padding: 0 48px 22px 0; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 0.75fr 1.25fr; gap: 56px; align-items: start; }
+  .id-card { background: var(--band); color: var(--band-fg); border-radius: 30px; padding: 30px; display: grid; gap: 22px; transform: rotate(-2deg); }
+  .avatar { width: 84px; height: 84px; border-radius: 50%; background: var(--lime); color: var(--on-lime); display: grid; place-items: center; font-family: var(--font-serif); font-style: italic; font-size: 48px; }
+  .id-card dl { margin: 0; display: grid; gap: 14px; font-size: 15px; }
+  .id-card dt { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--band-muted); }
+  .id-card dd { margin: 0; font-weight: 600; }
+  .about-copy { display: grid; gap: 16px; }
+  .about-copy h2 { margin-bottom: 10px; }
+  .stack { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }
+  .stack li { border: 1.5px solid var(--fg); border-radius: 99px; padding: 5px 16px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* About site + privacy */
+  .mini { min-height: 0; }
+  .mini h3 { margin-top: 0; }
+  .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .cols ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; color: var(--muted); font-size: 15.5px; }
+  .cols .card:hover ul { color: var(--on-lime); }
+
+  /* Footer */
+  footer { background: var(--band); color: var(--band-fg); margin-top: 40px; border-radius: 36px 36px 0 0; padding-block: 80px 32px; overflow: hidden; }
+  .slogan { font-size: clamp(56px, 12vw, 176px); line-height: 0.84; }
+  .slogan .sig { display: block; font-size: 0.8em; line-height: 1; }
+  .slogan .impact { color: var(--lime); display: block; }
+  .foot-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--band-line); font-size: 14px; color: var(--band-muted); }
+  .foot-row nav { gap: 20px; }
+  .foot-row nav a { color: var(--band-muted); }
+  .foot-row nav a:hover { color: var(--lime); }
+
+  @media (max-width: 900px) {
+    section { padding-block: 64px; }
+    .hero-grid, .panel, .about-grid, .faq-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+    .grid, .steps, .cols { grid-template-columns: minmax(0, 1fr); }
+    .steps li, .steps li + li { padding: 26px 0 8px; border-left: 0; }
+    .steps li + li { border-top: 1px solid var(--band-line); }
+    .panel { padding: 26px; border-radius: 28px; }
+    .band { border-radius: 28px; }
+    .card { min-height: 0; }
+    .card h3 { margin-top: 18px; }
+    .phone { transform: none; }
+    .id-card { transform: none; }
+    nav a:not(.btn) { display: none; }
+    nav { gap: 10px; }
+    .foot-row nav a { display: inline; }
+    .qr { flex-direction: column; align-items: flex-start; }
+  }
+  /* Motion (only when html.anim is set, which skips reduced-motion users).
+     Uses the individual translate property so it never fights hover/rotate transforms. */
+  html.lenis, html.lenis body { height: auto; }
+  html.lenis { scroll-behavior: auto; }
+  .lenis.lenis-stopped { overflow: hidden; }
+  html.anim .line { display: inline-block; clip-path: inset(0 -0.2em 100% -0.2em); translate: 0 0.5em; transition: clip-path 1.1s cubic-bezier(.16,1,.3,1), translate 1.1s cubic-bezier(.16,1,.3,1); transition-delay: var(--d, 0s); }
+  html.anim .line.in { clip-path: inset(-0.3em -0.2em -0.3em -0.2em); translate: 0 0; }
+  html.anim .hero h1 .line, html.anim .slogan .line { display: block; }
+  html.anim .rv { opacity: 0; translate: 0 48px; transition: opacity .9s ease, translate 1.1s cubic-bezier(.16,1,.3,1); transition-delay: var(--d, 0s); }
+  html.anim .rv.in { opacity: 1; translate: 0 0; }
+  html.anim .hl { transition-delay: .45s; }
+  html.anim header { translate: 0 -100%; transition: translate .9s cubic-bezier(.16,1,.3,1) .2s; }
+  html.anim.loaded header { translate: 0 0; }
+  html.anim .phone-wrap { opacity: 0; translate: 0 120px; transition: opacity 1s ease .35s, translate 1.4s cubic-bezier(.16,1,.3,1) .35s; }
+  html.anim.loaded .phone-wrap { opacity: 1; translate: 0 0; }
+  html.anim .phone { transition: transform .5s cubic-bezier(.2,.7,.2,1); will-change: transform; }
+  html.anim .ticker-track { animation: none; will-change: transform; }
+  html.anim .slogan .line { will-change: transform; }
+
+  @media (max-width: 420px) {
+    .brand-name { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .ticker-track { animation: none; }
+    html.js .hl, html.js .hl.full { transition: none; }
+    .card, .btn { transition: none; }
+  }
+</style>
+<script>
+  document.documentElement.classList.add("js");
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("anim");
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#atas" aria-label="HealthyBite, ke atas">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <rect width="40" height="40" rx="20" fill="#d2ff00"/>
+        <path d="M9 21h22a11 11 0 0 1-22 0Z" fill="#101400"/>
+        <path d="M20 19c0-5 2.5-8 7-8 0 5-2.5 8-7 8Z" fill="#101400" opacity=".9"/>
+        <path d="M20 19c0-4-2-6.5-6-6.5 0 4 2 6.5 6 6.5Z" fill="#101400" opacity=".6"/>
+      </svg>
+      <span class="brand-name">HealthyBite</span>
+    </a>
+    <nav aria-label="Navigasi utama">
+      <a href="#ciri">Ciri</a>
+      <a href="#cara">Cara guna</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#soalan">Soalan</a>
+      <a href="#tentang">Tentang saya</a>
+      <div class="lang" role="group" aria-label="Bahasa / Language">
+        <button type="button" data-lang="ms" aria-pressed="true">BM</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn small" href="#muat-turun">Muat turun</a>
+    </nav>
+  </div>
+</header>
+
+<main id="atas">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="label">Penjejak kalori dengan AI</p>
+        <h1><span class="sig">Healthy</span><span class="impact"><span class="hl full">Bite</span></span></h1>
+        <div class="hero-sub">
+          <p class="lede">Ambil gambar makanan, terus tahu kalorinya. HealthyBite menganggar kalori, protein, karbohidrat dan lemak daripada gambar hidangan anda, supaya mencatat makanan tak lagi memakan masa.</p>
+          <div class="cta-row">
+            <a class="btn" href="#muat-turun">Muat turun untuk Android <span class="arrow" aria-hidden="true">↓</span></a>
+            <a class="btn ghost" href="#ciri">Lihat ciri</a>
+          </div>
+          <a class="callout" href="#muat-turun"><b>Terkini</b><span>Versi 1.0.0 · Android sahaja · Projek pelajar</span></a>
+        </div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone" role="img" aria-label="Contoh paparan skrin utama HealthyBite dengan ringkasan kalori harian dan senarai makanan">
+          <div class="notch"></div>
+          <h3>Hari ini</h3>
+          <div class="ring-row">
+            <div class="ring">
+              <svg viewBox="0 0 104 104" aria-hidden="true">
+                <circle class="track" cx="52" cy="52" r="42" fill="none" stroke-width="10"/>
+                <circle class="bar" cx="52" cy="52" r="42" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="163.6 263.9"/>
+              </svg>
+              <div class="num"><b>1,240</b><span>/ 2,000 kcal</span></div>
+            </div>
+            <div class="macros">
+              <div class="macro"><div class="row"><span>Protein</span><b>52 g</b></div><div class="meter"><i style="width:58%"></i></div></div>
+              <div class="macro"><div class="row"><span>Karbo</span><b>160 g</b></div><div class="meter"><i style="width:66%"></i></div></div>
+              <div class="macro"><div class="row"><span>Lemak</span><b>38 g</b></div><div class="meter"><i style="width:52%"></i></div></div>
+            </div>
+          </div>
+          <div class="meals">
+            <div class="meal"><span>Roti canai</span><span>≈ 300 kcal</span></div>
+            <div class="meal"><span>Nasi lemak ayam</span><span>≈ 640 kcal</span></div>
+            <div class="meal"><span>Teh o ais limau</span><span>≈ 90 kcal</span></div>
+          </div>
+          <div class="scan-btn">Imbas makanan</div>
+        </div>
+        <p class="caption">Contoh paparan. Angka hanya untuk ilustrasi.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <ul><li>Imbas makanan</li><li>Imbas barcode</li><li>Sasaran harian</li><li>Pembantu pemakanan</li><li>Mod Keluarga</li><li>Jejak tidur</li></ul>
+      <ul><li>Imbas makanan</li><li>Imbas barcode</li><li>Sasaran harian</li><li>Pembantu pemakanan</li><li>Mod Keluarga</li><li>Jejak tidur</li></ul>
+    </div>
+  </div>
+
+  <section id="ciri">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Ciri</p>
+        <h2 class="title"><span class="sig">Semua yang</span> <span class="impact">perlu, <span class="hl">setiap hari</span></span></h2>
+        <p class="lede">Dibina untuk hidangan yang kita makan setiap hari di Malaysia, dengan fokus pada kemudahan mencatat.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <span class="no">01</span>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8a2 2 0 0 1 2-2h2l1.5-2h5L16 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><circle cx="12" cy="12.5" r="3.5"/></svg></div>
+          <h3>Imbas gambar makanan</h3>
+          <p>Ambil gambar hidangan dan app menganggar kalori serta makro. Ia anggaran, jadi semak sebelum disimpan.</p>
+        </article>
+        <article class="card">
+          <span class="no">02</span>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6v12M8 6v12M12 6v12M16 6v12M20 6v12"/></svg></div>
+          <h3>Imbas barcode</h3>
+          <p>Untuk makanan berbungkus, imbas barcode pada kotak atau bungkusan untuk mencatat dengan pantas.</p>
+        </article>
+        <article class="card">
+          <span class="no">03</span>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3"/></svg></div>
+          <h3>Sasaran dan peringatan</h3>
+          <p>Tetapkan sasaran badan dan kalori harian, kemudian terima peringatan supaya anda ingat untuk mencatat.</p>
+        </article>
+        <article class="card">
+          <span class="no">04</span>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></svg></div>
+          <h3>Pembantu pemakanan</h3>
+          <p>Tanya soalan tentang makanan dan pemakanan, dan dapatkan jawapan ringkas dalam app.</p>
+        </article>
+        <article class="card">
+          <span class="no">05</span>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.4"/><path d="M3 19c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M15.5 14c2.8-.3 5.5 1.3 5.5 4.5"/></svg></div>
+          <h3>Mod Keluarga</h3>
+          <p>Sertai keluarga dengan kod jemputan. Setiap orang memilih sendiri apa yang dikongsi, dan berat badan tidak pernah dikongsi.</p>
+        </article>
+        <article class="card">
+          <span class="no">06</span>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg></div>
+          <h3>Tidur dan widget</h3>
+          <p>Jejak tidur secara automatik dan log air terus daripada widget skrin utama.</p>
+          <span class="tag">Android sahaja</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="cara" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Cara guna</p>
+        <h2 class="title"><span class="sig">Pinggan ke log,</span> <span class="impact">tiga langkah</span></h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Ambil gambar</h3><p>Buka kamera dalam app dan arahkan ke hidangan anda.</p></li>
+        <li><h3>Semak anggaran</h3><p>Lihat kalori dan makro yang dicadangkan. Betulkan jika perlu.</p></li>
+        <li><h3>Simpan ke log</h3><p>Makanan masuk ke jumlah harian dan anda nampak baki sasaran.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="galeri">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Galeri</p>
+        <h2 class="title"><span class="sig">Lihat dulu,</span> <span class="impact"><span class="hl">pasang kemudian</span></span></h2>
+        <p class="lede">Paparan sebenar daripada HealthyBite pada telefon Android.</p>
+      </div>
+      <!-- Letak screenshot app dalam folder "screenshots" di sebelah index.html,
+           dengan nama skrin-1.png hingga skrin-4.png. -->
+      <ul class="shots">
+        <li><figure><div class="shot"><img src="screenshots/skrin-1.png" alt="Skrin utama HealthyBite" loading="lazy"></div><figcaption>Skrin utama</figcaption></figure></li>
+        <li><figure><div class="shot"><img src="screenshots/skrin-2.png" alt="Imbas gambar makanan" loading="lazy"></div><figcaption>Imbas makanan</figcaption></figure></li>
+        <li><figure><div class="shot"><img src="screenshots/skrin-3.png" alt="Pembantu pemakanan" loading="lazy"></div><figcaption>Pembantu pemakanan</figcaption></figure></li>
+        <li><figure><div class="shot"><img src="screenshots/skrin-4.png" alt="Mod Keluarga" loading="lazy"></div><figcaption>Mod Keluarga</figcaption></figure></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="muat-turun" style="padding-top:0">
+    <div class="wrap">
+      <div class="panel">
+        <div>
+          <p class="label">Muat turun</p>
+          <h2 class="title"><span class="sig">HealthyBite</span> <span class="impact"><span class="hl full">Android</span></span></h2>
+          <dl class="meta">
+            <dt>Versi</dt><dd>1.0.0</dd>
+            <dt>Saiz</dt><dd>lebih kurang 145 MB</dd>
+            <dt>Format</dt><dd>Fail APK</dd>
+            <dt>iPhone</dt><dd>Belum tersedia</dd>
+          </dl>
+          <!-- APK diambil daripada GitHub Release terkini (fail mesti bernama HealthyBite.apk).
+               Untuk versi baharu: gh release create vX.Y.Z HealthyBite.apk --repo shahredza/healthybite-web -->
+          <a class="btn" id="apk-link" href="https://github.com/shahredza/healthybite-web/releases/latest/download/HealthyBite.apk" download>Muat turun APK <span class="arrow" aria-hidden="true">↓</span></a>
+          <div class="qr">
+            <div class="qr-box" id="qr" role="img" aria-label="Kod QR untuk muat turun HealthyBite"></div>
+            <p><b>Buka di laptop?</b>Imbas kod QR ini dengan kamera telefon Android anda untuk terus ke muat turun.</p>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-size:24px;font-stretch:112%;margin-bottom:22px">Cara pasang</h3>
+          <ol class="install">
+            <li><span><strong>Muat turun</strong> fail APK ke telefon Android anda.</span></li>
+            <li><span><strong>Buka fail itu.</strong> Jika diminta, benarkan pemasangan daripada sumber luar untuk app yang anda guna membuka fail.</span></li>
+            <li><span><strong>Tekan Install</strong> dan tunggu sehingga selesai.</span></li>
+            <li><span><strong>Daftar akaun</strong> dengan e-mel, sahkan e-mel anda, kemudian lengkapkan profil.</span></li>
+          </ol>
+          <p class="notice"><b>Amaran Google Play Protect?</b> App ini tidak datang dari Play Store, jadi Android mungkin menunjukkan amaran. Teruskan hanya jika anda memuat turun daripada pautan di halaman ini.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="soalan" style="padding-top:0">
+    <div class="wrap faq-grid">
+      <div class="section-head">
+        <p class="label">Soalan lazim</p>
+        <h2 class="title"><span class="sig">Ada</span> <span class="impact"><span class="hl">soalan?</span></span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Selamat ke memasang fail APK ini?</summary>
+          <p>Ya, selagi anda memuat turun daripada butang di laman ini. Fail ini dibina dan diterbitkan sendiri oleh pembangun HealthyBite. Jangan pasang APK HealthyBite yang dikongsi daripada sumber lain.</p>
+        </details>
+        <details>
+          <summary>Kenapa HealthyBite tiada di Play Store?</summary>
+          <p>HealthyBite ialah projek pelajar dan belum diterbitkan di Google Play. Buat masa ini, laman web ini ialah satu-satunya tempat rasmi untuk mendapatkannya.</p>
+        </details>
+        <details>
+          <summary>Ada untuk iPhone?</summary>
+          <p>Belum. Fail APK hanya boleh dipasang pada telefon Android.</p>
+        </details>
+        <details>
+          <summary>Kenapa keluar amaran Play Protect?</summary>
+          <p>Android memberi amaran untuk semua app yang tidak datang dari Play Store. Jika anda memuat turun dari laman ini, tekan "Install anyway" untuk teruskan.</p>
+        </details>
+        <details>
+          <summary>Macam mana nak kemas kini ke versi baharu?</summary>
+          <p>Muat turun APK terkini dari laman ini dan pasang terus di atas app lama. Log makanan anda disimpan dalam akaun, jadi ia tidak akan hilang.</p>
+        </details>
+        <details>
+          <summary>Perlu internet ke?</summary>
+          <p>Ya. Internet diperlukan untuk log masuk, menyimpan log makanan dan menganggar kalori daripada gambar.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="tentang" style="padding-top:0">
+    <div class="wrap about-grid">
+      <div class="id-card">
+        <div class="avatar" aria-hidden="true">S</div>
+        <dl>
+          <div><dt>Nama</dt><dd>Muhammad Shah Redza Bin Shahrir</dd></div>
+          <div><dt>Program</dt><dd>Diploma Teknologi Komputer (Big Data)</dd></div>
+          <div><dt>Institusi</dt><dd>TVETMARA Lumut</dd></div>
+          <div><dt>Dijangka tamat</dt><dd>Jun 2027</dd></div>
+        </dl>
+      </div>
+      <div class="about-copy">
+        <p class="label">Tentang saya</p>
+        <h2 class="title"><span class="sig">Hai, saya</span> <span class="impact"><span class="hl">Shah</span></span></h2>
+        <p class="lede">HealthyBite bermula sebagai projek analisis keperluan di TVETMARA Lumut. Kami mahu tahu apa yang orang perlukan untuk menjejak pemakanan dengan lebih mudah, dan bancian soal selidik digunakan untuk membentuk ciri-cirinya.</p>
+        <p class="lede">Saya membina app ini sendiri, daripada reka bentuk skrin hingga ke pelayan dan pangkalan data. Ia terus berkembang, dan maklum balas anda sangat dialu-alukan.</p>
+        <ul class="stack" aria-label="Teknologi yang digunakan">
+          <li>React Native (Expo)</li>
+          <li>Supabase</li>
+          <li>Android dan iOS</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="laman-web" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Tentang laman web ini</p>
+        <h2 class="title"><span class="sig">Tempat rasmi</span> <span class="impact">untuk pasang</span></h2>
+        <p class="lede">Laman web ini dibina khas untuk HealthyBite. Oleh sebab app ini belum ada di Play Store, di sinilah anda boleh memuat turun fail APK yang sah dan membaca cara memasangnya.</p>
+      </div>
+      <div class="grid">
+        <article class="card mini">
+          <span class="no">a.</span>
+          <h3>Muat turun yang selamat</h3>
+          <p>Butang muat turun di laman ini sentiasa menghala ke versi terkini yang saya terbitkan sendiri. Elakkan memasang APK HealthyBite daripada sumber lain.</p>
+        </article>
+        <article class="card mini">
+          <span class="no">b.</span>
+          <h3>Panduan pemasangan</h3>
+          <p>Langkah demi langkah untuk memasang app pada telefon Android, termasuk apa yang perlu dibuat jika Play Protect menunjukkan amaran.</p>
+        </article>
+        <article class="card mini">
+          <span class="no">c.</span>
+          <h3>Maklumat projek</h3>
+          <p>Penerangan ciri, siapa yang membina app ini, serta cara data anda digunakan. Laman ini dikemas kini setiap kali versi baharu dikeluarkan.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="privasi" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Privasi dan had</p>
+        <h2 class="title"><span class="sig">Sebelum</span> <span class="impact">anda guna</span></h2>
+      </div>
+      <div class="cols">
+        <article class="card mini">
+          <h3>Data anda</h3>
+          <ul>
+            <li>Akaun dan log makanan disimpan dalam pangkalan data Supabase.</li>
+            <li>Dalam Mod Keluarga, anda memilih sendiri sama ada makanan dan tekanan darah dikongsi.</li>
+            <li>Berat badan tidak pernah dikongsi dengan ahli keluarga.</li>
+          </ul>
+        </article>
+        <article class="card mini">
+          <h3>Had app ini</h3>
+          <ul>
+            <li>Kalori dan makro ialah anggaran daripada gambar, bukan ukuran tepat.</li>
+            <li>HealthyBite bukan nasihat perubatan. Rujuk doktor atau pakar pemakanan untuk keperluan kesihatan anda.</li>
+            <li>Ini projek pelajar. Ciri tidur dan widget hanya ada pada Android.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="slogan" role="heading" aria-level="2"><span class="sig">Makan bijak,</span><span class="impact">hidup sihat.</span></p>
+    <div style="margin-top:40px"><a class="btn" href="#muat-turun">Muat turun HealthyBite <span class="arrow" aria-hidden="true">↓</span></a></div>
+    <div class="foot-row">
+      <span>HealthyBite, projek pelajar TVETMARA Lumut · Dibina oleh Muhammad Shah Redza</span>
+      <nav aria-label="Pautan bawah">
+        <a href="#ciri">Ciri</a>
+        <a href="#soalan">Soalan</a>
+        <a href="#tentang">Tentang saya</a>
+        <a href="#privasi">Privasi</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+  // Motion, in the spirit of landonorris.com: smooth scroll, line-by-line heading reveals,
+  // staggered fade-ups, a cursor-tilted phone, a scroll-driven ticker and a sliding footer slogan.
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains("anim")) return;
+
+    // Smooth scroll (falls back to native if the library did not load).
+    var lenis = null;
+    if (typeof Lenis !== "undefined") {
+      lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener("click", function (e) {
+          var target = document.querySelector(a.getAttribute("href"));
+          if (!target) return;
+          e.preventDefault();
+          lenis.scrollTo(target, { offset: a.getAttribute("href") === "#atas" ? -200 : -72, duration: 1.4 });
+        });
+      });
+    }
+
+    // Tag elements for reveal, with a stagger inside each group.
+    document.querySelectorAll(".hero h1 > span, .title > span, .slogan > span").forEach(function (el) {
+      el.classList.add("line");
+      var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+      el.style.setProperty("--d", (i * 0.12) + "s");
+    });
+    var groups = [".grid", ".steps", ".shots", ".faq", ".cols", ".install", ".hero-sub"];
+    groups.forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (g) {
+        Array.prototype.forEach.call(g.children, function (c, i) {
+          c.classList.add("rv");
+          c.style.setProperty("--d", Math.min(i, 6) * 0.08 + "s");
+        });
+      });
+    });
+    document.querySelectorAll(".label, .section-head .lede, .panel, .id-card, .about-copy > .lede, .stack, .meta, .qr, .notice, .foot-row").forEach(function (el) {
+      el.classList.add("rv");
+    });
+
+    // Lines are clipped while hidden, so watch their heading instead of the lines themselves.
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in");
+        e.target.querySelectorAll(":scope > .line").forEach(function (l) { l.classList.add("in"); });
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
+    document.querySelectorAll(".hero h1, .title, .slogan, .rv").forEach(function (el) { io.observe(el); });
+
+    requestAnimationFrame(function () { root.classList.add("loaded"); });
+
+    // Phone tilts toward the cursor (pointer devices only).
+    var hero = document.querySelector(".hero");
+    var phone = document.querySelector(".phone");
+    if (matchMedia("(hover: hover) and (min-width: 901px)").matches) {
+      hero.addEventListener("pointermove", function (e) {
+        var r = hero.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        phone.style.transform = "perspective(1000px) rotateY(" + (x * 16) + "deg) rotateX(" + (-y * 12) + "deg) rotate(3deg)";
+      });
+      hero.addEventListener("pointerleave", function () { phone.style.transform = ""; });
+    }
+
+    // One frame loop: ticker speed follows scroll velocity and direction; footer slogan slides in.
+    var track = document.querySelector(".ticker-track");
+    var slogan = document.querySelectorAll(".slogan .line");
+    var footer = document.querySelector("footer");
+    var x = 0, dir = 1, boost = 0, lastY = window.scrollY;
+    function frame(t) {
+      if (lenis) lenis.raf(t);
+      var y = window.scrollY, v = y - lastY;
+      lastY = y;
+      if (v > 0.5) dir = 1; else if (v < -0.5) dir = -1;
+      boost += (Math.min(Math.abs(v), 60) * 0.25 - boost) * 0.1;
+      var half = track.scrollWidth / 2;
+      x -= (0.6 + boost) * dir;
+      if (x <= -half) x += half;
+      if (x > 0) x -= half;
+      track.style.transform = "translate3d(" + x + "px,0,0)";
+
+      var r = footer.getBoundingClientRect();
+      var p = Math.max(0, Math.min(1, (innerHeight - r.top) / (innerHeight * 0.9)));
+      var ease = 1 - Math.pow(1 - p, 3);
+      if (slogan[0]) slogan[0].style.transform = "translate3d(" + ((1 - ease) * -18) + "vw,0,0)";
+      if (slogan[1]) slogan[1].style.transform = "translate3d(" + ((1 - ease) * 22) + "vw,0,0)";
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
+</script>
+<script>
+  // Highlight bands sweep in when their heading scrolls into view.
+  (function () {
+    var marks = document.querySelectorAll(".hl");
+    if (!("IntersectionObserver" in window)) { marks.forEach(function (m) { m.classList.add("on"); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    marks.forEach(function (m) { io.observe(m); });
+  })();
+
+  // Language switch. The page is written in Malay; EN maps each Malay string to English.
+  // Text nodes and labels remember their Malay original, so switching back is exact.
+  var EN = {
+    "HealthyBite, ke atas": "HealthyBite, back to top",
+    "Navigasi utama": "Main navigation",
+    "Bahasa / Language": "Language / Bahasa",
+    "Ciri": "Features",
+    "Cara guna": "How it works",
+    "Galeri": "Gallery",
+    "Soalan": "FAQ",
+    "Tentang saya": "About me",
+    "Muat turun": "Download",
+    "Penjejak kalori dengan AI": "AI calorie tracker",
+    "Ambil gambar makanan, terus tahu kalorinya. HealthyBite menganggar kalori, protein, karbohidrat dan lemak daripada gambar hidangan anda, supaya mencatat makanan tak lagi memakan masa.": "Snap your food, see the calories. HealthyBite estimates calories, protein, carbs and fat from a photo of your meal, so logging food no longer takes up your time.",
+    "Muat turun untuk Android": "Download for Android",
+    "Lihat ciri": "See features",
+    "Terkini": "Latest",
+    "Versi 1.0.0 · Android sahaja · Projek pelajar": "Version 1.0.0 · Android only · Student project",
+    "Contoh paparan skrin utama HealthyBite dengan ringkasan kalori harian dan senarai makanan": "Sample HealthyBite home screen with a daily calorie summary and a list of meals",
+    "Hari ini": "Today",
+    "Karbo": "Carbs",
+    "Lemak": "Fat",
+    "Teh o ais limau": "Iced lime tea",
+    "Imbas makanan": "Scan food",
+    "Contoh paparan. Angka hanya untuk ilustrasi.": "Sample screen. Numbers are for illustration only.",
+    "Imbas barcode": "Barcode scan",
+    "Sasaran harian": "Daily goals",
+    "Pembantu pemakanan": "Nutrition assistant",
+    "Mod Keluarga": "Family Mode",
+    "Jejak tidur": "Sleep tracking",
+    "Semua yang": "Everything you",
+    "perlu,": "need,",
+    "setiap hari": "every day",
+    "Dibina untuk hidangan yang kita makan setiap hari di Malaysia, dengan fokus pada kemudahan mencatat.": "Built for the meals we eat every day in Malaysia, with a focus on making logging easy.",
+    "Imbas gambar makanan": "Scan a food photo",
+    "Ambil gambar hidangan dan app menganggar kalori serta makro. Ia anggaran, jadi semak sebelum disimpan.": "Take a photo of your meal and the app estimates its calories and macros. It is an estimate, so check it before saving.",
+    "Untuk makanan berbungkus, imbas barcode pada kotak atau bungkusan untuk mencatat dengan pantas.": "For packaged food, scan the barcode on the box or wrapper to log it quickly.",
+    "Sasaran dan peringatan": "Goals and reminders",
+    "Tetapkan sasaran badan dan kalori harian, kemudian terima peringatan supaya anda ingat untuk mencatat.": "Set your body and daily calorie goals, then get reminders so you remember to log.",
+    "Tanya soalan tentang makanan dan pemakanan, dan dapatkan jawapan ringkas dalam app.": "Ask questions about food and nutrition and get short answers right in the app.",
+    "Sertai keluarga dengan kod jemputan. Setiap orang memilih sendiri apa yang dikongsi, dan berat badan tidak pernah dikongsi.": "Join your family with an invite code. Everyone chooses what they share, and body weight is never shared.",
+    "Tidur dan widget": "Sleep and widgets",
+    "Jejak tidur secara automatik dan log air terus daripada widget skrin utama.": "Track sleep automatically and log water straight from a home screen widget.",
+    "Android sahaja": "Android only",
+    "Pinggan ke log,": "Plate to log,",
+    "tiga langkah": "three steps",
+    "Ambil gambar": "Take a photo",
+    "Buka kamera dalam app dan arahkan ke hidangan anda.": "Open the camera in the app and point it at your meal.",
+    "Semak anggaran": "Check the estimate",
+    "Lihat kalori dan makro yang dicadangkan. Betulkan jika perlu.": "Review the suggested calories and macros. Correct them if needed.",
+    "Simpan ke log": "Save to your log",
+    "Makanan masuk ke jumlah harian dan anda nampak baki sasaran.": "The meal is added to your daily total and you see what is left of your goal.",
+    "Lihat dulu,": "See it first,",
+    "pasang kemudian": "install later",
+    "Paparan sebenar daripada HealthyBite pada telefon Android.": "Real screens from HealthyBite on an Android phone.",
+    "Skrin utama HealthyBite": "HealthyBite home screen",
+    "Skrin utama": "Home screen",
+    "Screenshot akan datang": "Screenshot coming soon",
+    "Versi": "Version",
+    "Saiz": "Size",
+    "lebih kurang 145 MB": "about 145 MB",
+    "Fail APK": "APK file",
+    "Belum tersedia": "Not available yet",
+    "Muat turun APK": "Download APK",
+    "Kod QR untuk muat turun HealthyBite": "QR code to download HealthyBite",
+    "Kod QR muncul bila laman ini online": "QR code appears once this site is online",
+    "Buka di laptop?": "On a laptop?",
+    "Imbas kod QR ini dengan kamera telefon Android anda untuk terus ke muat turun.": "Scan this QR code with your Android phone's camera to go straight to the download.",
+    "Cara pasang": "How to install",
+    "fail APK ke telefon Android anda.": "the APK file to your Android phone.",
+    "Buka fail itu.": "Open the file.",
+    "Jika diminta, benarkan pemasangan daripada sumber luar untuk app yang anda guna membuka fail.": "If asked, allow installs from unknown sources for the app you used to open the file.",
+    "Tekan Install": "Tap Install",
+    "dan tunggu sehingga selesai.": "and wait until it finishes.",
+    "Daftar akaun": "Sign up",
+    "dengan e-mel, sahkan e-mel anda, kemudian lengkapkan profil.": "with your email, verify it, then complete your profile.",
+    "Amaran Google Play Protect?": "Google Play Protect warning?",
+    "App ini tidak datang dari Play Store, jadi Android mungkin menunjukkan amaran. Teruskan hanya jika anda memuat turun daripada pautan di halaman ini.": "This app does not come from the Play Store, so Android may show a warning. Only continue if you downloaded it from the link on this page.",
+    "Soalan lazim": "FAQ",
+    "Ada": "Got",
+    "soalan?": "questions?",
+    "Selamat ke memasang fail APK ini?": "Is it safe to install this APK?",
+    "Ya, selagi anda memuat turun daripada butang di laman ini. Fail ini dibina dan diterbitkan sendiri oleh pembangun HealthyBite. Jangan pasang APK HealthyBite yang dikongsi daripada sumber lain.": "Yes, as long as you download it from the button on this site. The file is built and published by the HealthyBite developer. Do not install a HealthyBite APK shared from anywhere else.",
+    "Kenapa HealthyBite tiada di Play Store?": "Why isn't HealthyBite on the Play Store?",
+    "HealthyBite ialah projek pelajar dan belum diterbitkan di Google Play. Buat masa ini, laman web ini ialah satu-satunya tempat rasmi untuk mendapatkannya.": "HealthyBite is a student project and has not been published on Google Play yet. For now, this website is the only official place to get it.",
+    "Ada untuk iPhone?": "Is there an iPhone version?",
+    "Belum. Fail APK hanya boleh dipasang pada telefon Android.": "Not yet. APK files can only be installed on Android phones.",
+    "Kenapa keluar amaran Play Protect?": "Why does Play Protect show a warning?",
+    "Android memberi amaran untuk semua app yang tidak datang dari Play Store. Jika anda memuat turun dari laman ini, tekan \"Install anyway\" untuk teruskan.": "Android warns about every app that does not come from the Play Store. If you downloaded it from this site, tap \"Install anyway\" to continue.",
+    "Macam mana nak kemas kini ke versi baharu?": "How do I update to a new version?",
+    "Muat turun APK terkini dari laman ini dan pasang terus di atas app lama. Log makanan anda disimpan dalam akaun, jadi ia tidak akan hilang.": "Download the latest APK from this site and install it over the old app. Your food log is saved to your account, so you won't lose it.",
+    "Perlu internet ke?": "Do I need internet?",
+    "Ya. Internet diperlukan untuk log masuk, menyimpan log makanan dan menganggar kalori daripada gambar.": "Yes. You need internet to sign in, save your food log and estimate calories from photos.",
+    "Nama": "Name",
+    "Diploma Teknologi Komputer (Big Data)": "Diploma in Computer Technology (Big Data)",
+    "Institusi": "Institution",
+    "Dijangka tamat": "Expected to graduate",
+    "Jun 2027": "June 2027",
+    "Hai, saya": "Hi, I'm",
+    "HealthyBite bermula sebagai projek analisis keperluan di TVETMARA Lumut. Kami mahu tahu apa yang orang perlukan untuk menjejak pemakanan dengan lebih mudah, dan bancian soal selidik digunakan untuk membentuk ciri-cirinya.": "HealthyBite started as a needs analysis project at TVETMARA Lumut. We wanted to know what people need to track their nutrition more easily, and a questionnaire survey shaped its features.",
+    "Saya membina app ini sendiri, daripada reka bentuk skrin hingga ke pelayan dan pangkalan data. Ia terus berkembang, dan maklum balas anda sangat dialu-alukan.": "I built the app myself, from the screen designs to the server and database. It keeps growing, and your feedback is very welcome.",
+    "Teknologi yang digunakan": "Technologies used",
+    "Android dan iOS": "Android and iOS",
+    "Tentang laman web ini": "About this website",
+    "Tempat rasmi": "The official place",
+    "untuk pasang": "to install",
+    "Laman web ini dibina khas untuk HealthyBite. Oleh sebab app ini belum ada di Play Store, di sinilah anda boleh memuat turun fail APK yang sah dan membaca cara memasangnya.": "This website was built just for HealthyBite. Since the app is not on the Play Store yet, this is where you can download the genuine APK and learn how to install it.",
+    "Muat turun yang selamat": "Safe downloads",
+    "Butang muat turun di laman ini sentiasa menghala ke versi terkini yang saya terbitkan sendiri. Elakkan memasang APK HealthyBite daripada sumber lain.": "The download button on this site always points to the latest version I published myself. Avoid installing a HealthyBite APK from other sources.",
+    "Panduan pemasangan": "Install guide",
+    "Langkah demi langkah untuk memasang app pada telefon Android, termasuk apa yang perlu dibuat jika Play Protect menunjukkan amaran.": "Step-by-step instructions for installing the app on an Android phone, including what to do if Play Protect shows a warning.",
+    "Maklumat projek": "Project info",
+    "Penerangan ciri, siapa yang membina app ini, serta cara data anda digunakan. Laman ini dikemas kini setiap kali versi baharu dikeluarkan.": "What the app does, who built it, and how your data is used. This site is updated with every new release.",
+    "Privasi dan had": "Privacy and limits",
+    "Sebelum": "Before",
+    "anda guna": "you start",
+    "Data anda": "Your data",
+    "Akaun dan log makanan disimpan dalam pangkalan data Supabase.": "Your account and food log are stored in a Supabase database.",
+    "Dalam Mod Keluarga, anda memilih sendiri sama ada makanan dan tekanan darah dikongsi.": "In Family Mode, you choose whether your meals and blood pressure are shared.",
+    "Berat badan tidak pernah dikongsi dengan ahli keluarga.": "Body weight is never shared with family members.",
+    "Had app ini": "Limits of this app",
+    "Kalori dan makro ialah anggaran daripada gambar, bukan ukuran tepat.": "Calories and macros are estimates from a photo, not exact measurements.",
+    "HealthyBite bukan nasihat perubatan. Rujuk doktor atau pakar pemakanan untuk keperluan kesihatan anda.": "HealthyBite is not medical advice. See a doctor or dietitian for your health needs.",
+    "Ini projek pelajar. Ciri tidur dan widget hanya ada pada Android.": "This is a student project. Sleep tracking and widgets are Android only.",
+    "Makan bijak,": "Eat smart,",
+    "hidup sihat.": "live healthy.",
+    "Muat turun HealthyBite": "Download HealthyBite",
+    "HealthyBite, projek pelajar TVETMARA Lumut · Dibina oleh Muhammad Shah Redza": "HealthyBite, a TVETMARA Lumut student project · Built by Muhammad Shah Redza",
+    "Pautan bawah": "Footer links",
+    "Privasi": "Privacy"
+  };
+  var lang = "ms";
+  function applyLang() {
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) { return /^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }
+    });
+    var n;
+    while ((n = walker.nextNode())) {
+      if (n.__ms === undefined) n.__ms = n.nodeValue;
+      var key = n.__ms.replace(/\s+/g, " ").trim();
+      if (lang === "en" && EN[key]) n.nodeValue = n.__ms.match(/^\s*/)[0] + EN[key] + n.__ms.match(/\s*$/)[0];
+      else n.nodeValue = n.__ms;
+    }
+    document.querySelectorAll("[aria-label], img[alt]").forEach(function (el) {
+      ["aria-label", "alt"].forEach(function (attr) {
+        if (!el.hasAttribute(attr)) return;
+        var store = "data-ms-" + attr;
+        if (!el.hasAttribute(store)) el.setAttribute(store, el.getAttribute(attr));
+        var ms = el.getAttribute(store);
+        el.setAttribute(attr, lang === "en" && EN[ms] ? EN[ms] : ms);
+      });
+    });
+    document.documentElement.lang = lang;
+    document.querySelectorAll(".lang button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
+    });
+  }
+  document.querySelectorAll(".lang button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      lang = b.dataset.lang;
+      try { localStorage.setItem("hb-lang", lang); } catch (e) {}
+      applyLang();
+    });
+  });
+  try { if (localStorage.getItem("hb-lang") === "en") lang = "en"; } catch (e) {}
+
+  // Gallery: show a placeholder when a screenshot file is missing.
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    function fallback() { img.parentElement.innerHTML = '<span class="ph">Screenshot akan datang</span>'; applyLang(); }
+    if (img.complete && img.naturalWidth === 0) fallback(); else img.addEventListener("error", fallback);
+  });
+
+  // QR: point at the APK link once it is set, otherwise at this page's download section.
+  (function () {
+    var box = document.getElementById("qr");
+    var apk = document.getElementById("apk-link").getAttribute("href");
+    var target = null;
+    if (/^https?:\/\//.test(apk)) target = apk;
+    else if (/^https?:$/.test(location.protocol)) target = location.href.split("#")[0] + "#muat-turun";
+    if (!target || typeof QRCode === "undefined") {
+      box.innerHTML = '<span class="qr-empty">Kod QR muncul bila laman ini online</span>';
+      return;
+    }
+    new QRCode(box, { text: target, width: 112, height: 112, colorDark: "#101400", colorLight: "#ffffff" });
+  })();
+
+  applyLang();
+</script>
+</body>
+</html>
