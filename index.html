@@ -494,7 +494,13 @@
   .id-card dl { margin: 0; display: grid; gap: 14px; font-size: 15px; }
   .id-card dt { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--band-muted); }
   .id-card dd { margin: 0; font-weight: 600; }
-  .about-copy { display: grid; gap: 16px; }
+  .about-copy { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 32px; align-items: start; }
+  .about-text { display: grid; gap: 16px; }
+  .about-photo { display: block; width: 280px; height: 280px; border-radius: 36px; object-fit: cover; object-position: center 30%; background: var(--surface); border: 1px solid var(--line); }
+  @media (max-width: 767px) {
+    .about-copy { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .about-photo { justify-self: center; width: min(280px, 100%); height: auto; aspect-ratio: 1; }
+  }
   .about-copy h2 { margin-bottom: 10px; }
   .stack { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }
   .stack li { border: 1.5px solid var(--fg); border-radius: 99px; padding: 5px 16px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
@@ -1123,6 +1129,8 @@
         </div>
       </div>
       <div class="about-copy">
+        <img class="about-photo" src="images/shah.jpg" alt="Muhammad Shah Redza" width="280" height="280" loading="lazy">
+        <div class="about-text">
         <p class="label">Tentang saya</p>
         <h2 class="title"><span class="sig">Hai, saya</span> <span class="impact"><span class="hl">Shah</span></span></h2>
         <p class="lede">HealthyBite bermula sebagai projek analisis keperluan di TVETMARA Lumut. Kami mahu tahu apa yang orang perlukan untuk menjejak pemakanan dengan lebih mudah, dan bancian soal selidik digunakan untuk membentuk ciri-cirinya.</p>
@@ -1132,6 +1140,7 @@
           <li>Supabase</li>
           <li>Android dan iOS</li>
         </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -1287,7 +1296,7 @@
         });
       });
     });
-    document.querySelectorAll(".label, .section-head .lede, .panel, .flip, .about-copy > .lede, .stack, .meta, .qr, .notice, .foot-row").forEach(function (el) {
+    document.querySelectorAll(".label, .section-head .lede, .panel, .flip, .about-text > .lede, .stack, .meta, .qr, .notice, .foot-row").forEach(function (el) {
       el.classList.add("rv");
     });
 
@@ -1525,7 +1534,7 @@
         }
         if (id === "tentang") {
           tl.from(ch.querySelector(".flip"), { rotationY: -40, scale: .85, autoAlpha: 0, transformPerspective: 900, duration: .45 }, 0)
-            .from(ch.querySelectorAll(".about-copy > *"), { x: 70, autoAlpha: 0, stagger: .06, duration: .35 }, .05);
+            .from(ch.querySelectorAll(".about-photo, .about-text > *"), { x: 70, autoAlpha: 0, stagger: .06, duration: .35 }, .05);
         }
         return tl;
       }
