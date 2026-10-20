@@ -304,6 +304,50 @@
   .glare { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.22), transparent 45%); opacity: 0; transition: opacity .3s; }
   .flip:hover .glare { opacity: 1; }
 
+  /* Intro (logo reveal) — shown once per session, skipped for reduced motion */
+  .intro { display: none; }
+  html.anim.intro-on .intro { display: block; position: fixed; inset: 0; z-index: 200; background: #101400; overflow: hidden; cursor: pointer; }
+  html.intro-on, html.intro-on body { overflow: hidden; }
+  .intro.clear { background: transparent !important; }
+  .intro-bands { position: absolute; inset: 0; }
+  .intro-bands i { position: absolute; left: -25vw; width: 150vw; height: calc(20vh + 2px); background: #d2ff00; transform: skewX(-22deg) translateX(115%); transition: transform .75s cubic-bezier(.7,0,.2,1); transition-delay: calc(var(--k) * .06s); }
+  .intro-bands i:nth-child(1) { top: 0; --k: 0; } .intro-bands i:nth-child(2) { top: 20vh; --k: 1; } .intro-bands i:nth-child(3) { top: 40vh; --k: 2; } .intro-bands i:nth-child(4) { top: 60vh; --k: 3; } .intro-bands i:nth-child(5) { top: 80vh; --k: 4; }
+  .intro-bands i:nth-child(even) { background: #c4ee00; }
+  .intro.s1 .intro-bands i { transform: skewX(-22deg) translateX(0); }
+  .intro.s3 .intro-bands i { transform: skewX(-22deg) translateX(-125%); transition-timing-function: cubic-bezier(.7,0,.3,1); }
+  .intro-logo { position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: grid; justify-items: center; gap: 18px; z-index: 2; pointer-events: none; }
+  .intro-mark { width: 150px; height: 150px; scale: 9; rotate: -18deg; opacity: 0; transition: scale 1.1s cubic-bezier(.16,1,.3,1), rotate 1.1s cubic-bezier(.16,1,.3,1), opacity .25s; }
+  .intro.s2 .intro-mark { scale: 1; rotate: 0deg; opacity: 1; }
+  .intro-word { display: flex; gap: .18em; overflow: hidden; font-weight: 900; font-stretch: 125%; font-size: clamp(28px, 5vw, 56px); letter-spacing: -.03em; color: #101400; text-transform: uppercase; line-height: 1; }
+  .intro-word span { display: inline-block; translate: 0 110%; transition: translate .7s cubic-bezier(.16,1,.3,1) calc(.45s + var(--k) * .025s); }
+  .intro.s2 .intro-word span { translate: 0 0; }
+  .intro.s3 .intro-logo { opacity: 0; translate: -50% -60%; transition: opacity .35s, translate .5s cubic-bezier(.7,0,.3,1); }
+  .intro-skip { position: absolute; right: 22px; bottom: 18px; z-index: 3; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #101400; opacity: 0; transition: opacity .3s .8s; }
+  .intro.s2 .intro-skip { opacity: .6; }
+  html.anim.intro-on .hl { background-size: 0% 42% !important; }
+  html.anim.intro-on .hl.full { background-size: 0% 78% !important; color: inherit !important; }
+
+  /* Grid-paper backdrop on light areas */
+  body { background-image: linear-gradient(color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px); background-size: 64px 64px; background-position: center top; }
+
+  /* Skewed sweep bars between sections (scroll-driven) */
+  .sweep { display: none; }
+  html.anim .sweep { display: block; position: relative; height: 34vh; overflow: hidden; pointer-events: none; }
+  .sweep i { position: absolute; left: 0; width: 72vw; transform: skewX(-24deg); will-change: transform; }
+  .sweep .a { top: 8%; height: 24%; background: var(--lime); }
+  .sweep .b { top: 40%; height: 30%; background: var(--band); width: 90vw; }
+  .sweep .c { top: 80%; height: 7%; background: var(--lime); width: 50vw; }
+
+  /* Pinned manifesto: giant condensed line that travels sideways as you scroll */
+  .mani { background: var(--band); color: var(--band-fg); border-radius: 36px; margin: 0 var(--gutter); position: relative; }
+  .mani-stick { position: relative; padding: 64px 24px; overflow: hidden; border-radius: 36px; }
+  .mani-text { font-weight: 800; font-stretch: 75%; text-transform: uppercase; font-size: clamp(56px, 10vw, 150px); line-height: .9; letter-spacing: -.01em; }
+  .mani-text .sig { font-stretch: 100%; text-transform: none; color: var(--lime); }
+  .mani-text .lime { color: var(--lime); }
+  .mani-mark { position: absolute; width: 70vh; height: 70vh; right: -14vh; top: 15vh; opacity: .12; pointer-events: none; }
+  html.anim .mani-stick { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; padding: 0; }
+  html.anim .mani-text { white-space: nowrap; font-size: min(36vh, 30vw); will-change: transform; padding-inline: 4vw; }
+
   /* Hadith rotator at the top */
   .hadith-top { padding: 20px 0 0; }
   .hadith-bar { position: relative; overflow: hidden; background: var(--band); color: var(--band-fg); border-radius: 28px; padding: 26px 30px 30px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 36px; cursor: pointer; user-select: none; -webkit-user-select: none; }
@@ -498,10 +542,23 @@
 </style>
 <script>
   document.documentElement.classList.add("js");
-  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("anim");
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("anim");
+    var seen = false;
+    try { seen = sessionStorage.getItem("hb-intro") === "1"; } catch (e) {}
+    document.documentElement.classList.add(seen ? "no-intro" : "intro-on");
+  }
 </script>
 </head>
 <body>
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-bands"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="intro-logo">
+    <svg class="intro-mark" viewBox="0 0 40 40"><rect width="40" height="40" rx="20" fill="#101400"/><path d="M9 21h22a11 11 0 0 1-22 0Z" fill="#d2ff00"/><path d="M20 19c0-5 2.5-8 7-8 0 5-2.5 8-7 8Z" fill="#d2ff00" opacity=".9"/><path d="M20 19c0-4-2-6.5-6-6.5 0 4 2 6.5 6 6.5Z" fill="#d2ff00" opacity=".6"/></svg>
+    <div class="intro-word"><span style="--k:0">H</span><span style="--k:1">e</span><span style="--k:2">a</span><span style="--k:3">l</span><span style="--k:4">t</span><span style="--k:5">h</span><span style="--k:6">y</span><span style="--k:7">B</span><span style="--k:8">i</span><span style="--k:9">t</span><span style="--k:10">e</span></div>
+  </div>
+  <span class="intro-skip">Klik untuk langkau</span>
+</div>
 
 <header>
   <div class="wrap">
@@ -816,6 +873,8 @@
     </div>
   </section>
 
+  <div class="sweep" aria-hidden="true"><i class="a" data-from="-90" data-to="120"></i><i class="b" data-from="110" data-to="-95"></i><i class="c" data-from="-60" data-to="150"></i></div>
+
   <section id="cara" class="band">
     <div class="wrap">
       <div class="section-head">
@@ -828,6 +887,12 @@
         <li><h3>Simpan ke log</h3><p>Makanan masuk ke jumlah harian dan anda nampak baki sasaran.</p></li>
       </ol>
     </div>
+  </section>
+
+  <section class="mani" aria-label="Setiap suap ada kiranya">
+    <div class="mani-stick">
+<svg class="mani-mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="20" fill="#d2ff00"/><path d="M9 21h22a11 11 0 0 1-22 0Z" fill="#101400"/><path d="M20 19c0-5 2.5-8 7-8 0 5-2.5 8-7 8Z" fill="#101400"/><path d="M20 19c0-4-2-6.5-6-6.5 0 4 2 6.5 6 6.5Z" fill="#101400"/></svg>
+      <p class="mani-text">Setiap suap <span class="lime">ada kiranya</span> <span class="sig">makan bijak,</span> hidup sihat</p></div>
   </section>
 
   <section id="sunnah">
@@ -1056,6 +1121,7 @@
   </section>
 </main>
 
+  <div class="sweep" aria-hidden="true"><i class="a" data-from="-90" data-to="120"></i><i class="b" data-from="110" data-to="-95"></i><i class="c" data-from="-60" data-to="150"></i></div>
 <footer>
   <div class="wrap">
     <p class="slogan" role="heading" aria-level="2"><span class="sig">Makan bijak,</span><span class="impact">hidup sihat.</span></p>
@@ -1096,6 +1162,31 @@
       });
     }
 
+    // Intro: lime skewed bands cover the screen, the logo zooms in, then the bands slice away.
+    var intro = document.getElementById("intro");
+    var introOn = root.classList.contains("intro-on");
+    if (introOn && lenis) lenis.stop();
+    function endIntro() {
+      if (!root.classList.contains("intro-on")) return;
+      root.classList.remove("intro-on");
+      try { sessionStorage.setItem("hb-intro", "1"); } catch (e) {}
+      if (lenis) lenis.start();
+      if (intro) intro.remove();
+      begin();
+    }
+    if (introOn && intro) {
+      var tm = [];
+      tm.push(setTimeout(function () { intro.classList.add("s1"); }, 120));
+      tm.push(setTimeout(function () { intro.classList.add("s2"); }, 800));
+      tm.push(setTimeout(function () { intro.classList.add("s3", "clear"); }, 2300));
+      tm.push(setTimeout(endIntro, 3200));
+      intro.addEventListener("click", function () {
+        tm.forEach(clearTimeout);
+        intro.classList.add("s1", "s2", "s3", "clear");
+        setTimeout(endIntro, 650);
+      });
+    }
+
     // Tag elements for reveal, with a stagger inside each group.
     document.querySelectorAll(".hero h1 > span, .title > span, .slogan > span").forEach(function (el) {
       el.classList.add("line");
@@ -1124,9 +1215,57 @@
         io.unobserve(e.target);
       });
     }, { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
-    document.querySelectorAll(".hero h1, .title, .slogan, .rv").forEach(function (el) { io.observe(el); });
+    function begin() {
+      document.querySelectorAll(".hero h1, .title, .slogan, .rv").forEach(function (el) { io.observe(el); });
+      requestAnimationFrame(function () { root.classList.add("loaded"); });
+    }
+    if (!introOn) begin();
 
-    requestAnimationFrame(function () { root.classList.add("loaded"); });
+    // Scroll-driven extras: hero splits apart, skewed sweep bars, pinned sideways manifesto.
+    (function () {
+      var heroEl = document.querySelector(".hero");
+      var hSig = heroEl.querySelector("h1 .sig"), hImp = heroEl.querySelector("h1 .impact"), hPhone = heroEl.querySelector(".phone-wrap");
+      var sweeps = Array.prototype.slice.call(document.querySelectorAll(".sweep"));
+      var mani = document.querySelector(".mani"), maniText = mani && mani.querySelector(".mani-text"), maniMark = mani && mani.querySelector(".mani-mark");
+      var textW = 0;
+      function sizeMani() {
+        if (!mani) return;
+        textW = maniText.scrollWidth;
+        mani.style.height = Math.max(innerHeight * 1.6, textW - innerWidth * 0.35 + innerHeight) + "px";
+      }
+      sizeMani(); addEventListener("resize", sizeMani); addEventListener("load", sizeMani);
+      if (window.ResizeObserver && maniText) new ResizeObserver(sizeMani).observe(maniText);
+      function frame() {
+        var vh = innerHeight;
+        var hr = heroEl.getBoundingClientRect();
+        if (hr.bottom > 0) {
+          var hp = Math.max(0, Math.min(1, -hr.top / hr.height));
+          hSig.style.transform = "translate3d(" + (-hp * 22) + "vw,0,0)";
+          hImp.style.transform = "translate3d(" + (hp * 22) + "vw,0,0)";
+          hPhone.style.transform = "translate3d(0," + (-hp * 120) + "px,0) rotate(" + (hp * 8) + "deg)";
+        }
+        sweeps.forEach(function (sw) {
+          var r = sw.getBoundingClientRect();
+          if (r.bottom < -50 || r.top > vh + 50) return;
+          var p = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+          Array.prototype.forEach.call(sw.children, function (bar) {
+            var a = +bar.dataset.from, b = +bar.dataset.to;
+            bar.style.transform = "translate3d(" + (a + (b - a) * p) + "vw,0,0) skewX(-24deg)";
+          });
+        });
+        if (mani) {
+          var mr = mani.getBoundingClientRect();
+          if (mr.bottom > 0 && mr.top < vh) {
+            var mp = Math.max(0, Math.min(1, -mr.top / (mr.height - vh)));
+            var start = innerWidth * 0.55, end = -(textW - innerWidth * 0.75);
+            maniText.style.transform = "translate3d(" + (start + (end - start) * mp) + "px,0,0)";
+            maniMark.style.transform = "rotate(" + (mp * 180) + "deg)";
+          }
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    })();
 
     // Phone tilts toward the cursor (pointer devices only).
     var hero = document.querySelector(".hero");
@@ -1618,6 +1757,12 @@
     "Kad pengenalan, klik untuk pusing": "ID card, click to flip",
     "Pembangun · HealthyBite": "Developer · HealthyBite",
     "Klik untuk pusing ↻": "Click to flip ↻",
+    "Klik untuk langkau": "Click to skip",
+    "Setiap suap ada kiranya": "Every bite counts",
+    "Setiap suap": "Every bite",
+    "ada kiranya": "counts",
+    "makan bijak,": "eat smart,",
+    "hidup sihat": "live healthy",
     "Privasi": "Privacy"
   };
   var lang = "ms";
