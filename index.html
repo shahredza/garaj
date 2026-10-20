@@ -299,6 +299,24 @@
   html.anim .ticker-track { animation: none; will-change: transform; }
   html.anim .slogan .line { will-change: transform; }
 
+  /* Custom cursor + hero paint trail (fine pointers only; enabled by JS) */
+  html.has-cursor, html.has-cursor * { cursor: none !important; }
+  .cur-dot, .cur-ring { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 100; border-radius: 50%; transition: opacity .3s; }
+  .cur-dot { width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; background: var(--lime); box-shadow: 0 0 0 1.5px #101400; }
+  .cur-ring { width: 40px; height: 40px; margin: -20px 0 0 -20px; border: 1.5px solid var(--fg); transition: width .35s cubic-bezier(.2,.7,.2,1), height .35s cubic-bezier(.2,.7,.2,1), margin .35s cubic-bezier(.2,.7,.2,1), background-color .25s, border-color .25s, scale .2s, opacity .3s; }
+  .cur-ring.hover { width: 76px; height: 76px; margin: -38px 0 0 -38px; background: var(--lime); border-color: var(--lime); mix-blend-mode: multiply; }
+  .cur-ring.dark { border-color: var(--lime); }
+  .cur-ring.dark.hover { mix-blend-mode: normal; background: color-mix(in srgb, var(--lime) 30%, transparent); }
+  .cur-ring.down { scale: .8; }
+  .cur-off { opacity: 0; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .cur-ring.hover { mix-blend-mode: normal; background: color-mix(in srgb, var(--lime) 30%, transparent); }
+  }
+  :root[data-theme="dark"] .cur-ring.hover { mix-blend-mode: normal; background: color-mix(in srgb, var(--lime) 30%, transparent); }
+  .hero { position: relative; overflow: hidden; }
+  .hero > .wrap { position: relative; z-index: 1; }
+  .trail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
   @media (max-width: 420px) {
     .brand-name { display: none; }
   }
@@ -344,6 +362,7 @@
 
 <main id="atas">
   <section class="hero">
+    <canvas class="trail" aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
       <div>
         <p class="label">Penjejak kalori dengan AI</p>
@@ -706,6 +725,68 @@
         phone.style.transform = "perspective(1000px) rotateY(" + (x * 16) + "deg) rotateX(" + (-y * 12) + "deg) rotate(3deg)";
       });
       hero.addEventListener("pointerleave", function () { phone.style.transform = ""; });
+    }
+
+    // Custom cursor: a dot that sticks to the pointer and a ring that eases after it,
+    // growing into a lime disc over anything clickable. Hero gets a fading lime paint trail.
+    if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      root.classList.add("has-cursor");
+      var dot = document.createElement("div"), ring = document.createElement("div");
+      dot.className = "cur-dot cur-off"; ring.className = "cur-ring cur-off";
+      dot.setAttribute("aria-hidden", "true"); ring.setAttribute("aria-hidden", "true");
+      document.body.append(dot, ring);
+      var mx = -100, my = -100, rx = -100, ry = -100;
+      addEventListener("pointermove", function (e) {
+        mx = e.clientX; my = e.clientY;
+        dot.classList.remove("cur-off"); ring.classList.remove("cur-off");
+      }, { passive: true });
+      document.addEventListener("pointerleave", function () { dot.classList.add("cur-off"); ring.classList.add("cur-off"); });
+      addEventListener("pointerdown", function () { ring.classList.add("down"); });
+      addEventListener("pointerup", function () { ring.classList.remove("down"); });
+      document.addEventListener("pointerover", function (e) {
+        ring.classList.toggle("hover", !!e.target.closest("a, button, summary, .card, .phone"));
+        ring.classList.toggle("dark", !!e.target.closest(".band, footer, .phone, .id-card"));
+      });
+      (function moveCursor() {
+        rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+        dot.style.transform = "translate3d(" + mx + "px," + my + "px,0)";
+        ring.style.transform = "translate3d(" + rx + "px," + ry + "px,0)";
+        requestAnimationFrame(moveCursor);
+      })();
+
+      var canvas = document.querySelector(".trail"), ctx = canvas.getContext("2d");
+      var blobs = [], lastP = null, dpr = Math.min(devicePixelRatio || 1, 2), heroVisible = true;
+      function sizeCanvas() {
+        canvas.width = hero.offsetWidth * dpr; canvas.height = hero.offsetHeight * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      sizeCanvas(); addEventListener("resize", sizeCanvas);
+      new IntersectionObserver(function (en) { heroVisible = en[0].isIntersecting; }).observe(hero);
+      hero.addEventListener("pointermove", function (e) {
+        var r = hero.getBoundingClientRect(), p = { x: e.clientX - r.left, y: e.clientY - r.top };
+        if (lastP) {
+          var dx = p.x - lastP.x, dy = p.y - lastP.y, steps = Math.min(12, Math.ceil(Math.hypot(dx, dy) / 14));
+          for (var i = 1; i <= steps; i++) blobs.push({ x: lastP.x + dx * i / steps, y: lastP.y + dy * i / steps, life: 1 });
+        }
+        lastP = p;
+      });
+      hero.addEventListener("pointerleave", function () { lastP = null; });
+      var lime = getComputedStyle(root).getPropertyValue("--lime").trim() || "#d2ff00";
+      (function paint() {
+        if (heroVisible) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = lime;
+          for (var i = blobs.length - 1; i >= 0; i--) {
+            var b = blobs[i];
+            b.life -= 0.018;
+            if (b.life <= 0) { blobs.splice(i, 1); continue; }
+            ctx.globalAlpha = Math.min(1, b.life * 1.4) * 0.85;
+            ctx.beginPath(); ctx.arc(b.x, b.y, 16 + 38 * b.life, 0, Math.PI * 2); ctx.fill();
+          }
+          ctx.globalAlpha = 1;
+        }
+        requestAnimationFrame(paint);
+      })();
     }
 
     // One frame loop: ticker speed follows scroll velocity and direction; footer slogan slides in.
