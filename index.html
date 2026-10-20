@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Mona+Sans:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Instrument+Serif:ital@0;1&family=Mona+Sans:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
 <style>
   /* Layout: giant split-type hero beside a phone mock, a scrolling ticker, a numbered
      feature grid, a dark band for the steps, gallery, download panel with QR, FAQ,
@@ -196,6 +196,26 @@
   .steps h3 { font-size: 24px; font-stretch: 112%; }
   .steps p { color: var(--band-muted); font-size: 15.5px; }
 
+  /* Sunnah */
+  .ar { font-family: "Amiri", "Traditional Arabic", serif; direction: rtl; text-align: right; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.9; }
+  .tr { font-family: var(--font-serif); font-style: italic; font-size: 21px; line-height: 1.35; }
+  .src { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .ayah { display: grid; gap: 6px; border-left: 4px solid var(--lime); padding: 4px 0 4px 18px; max-width: 640px; }
+  .ayah .ar { text-align: left; direction: rtl; unicode-bidi: plaintext; font-size: 28px; line-height: 1.6; }
+  .hadith-feature { background: var(--surface); border: 1px solid var(--line); border-radius: 36px; padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 16px; }
+  .hadith-feature .ar { font-size: clamp(26px, 2.8vw, 38px); line-height: 2; }
+  .hadith-feature .tr { font-size: clamp(24px, 2.6vw, 34px); line-height: 1.25; }
+  .hadith-feature .src { margin-top: 20px; }
+  .hadith-feature .tag { margin-bottom: 18px; }
+  .hadith-feature { margin: 0 0 16px; }
+  .hadith { gap: 14px; }
+  .card.hadith .ar { font-size: 25px; color: var(--fg); }
+  .card.hadith .tr { font-size: 20px; color: var(--fg); margin-top: auto; }
+  .card.hadith .src { font-size: 12px; }
+  .card.hadith:hover .ar, .card.hadith:hover .tr { color: var(--on-lime); }
+  .card:hover .src { color: var(--on-lime); }
+  .note { margin-top: 20px; font-size: 14px; color: var(--muted); }
+
   /* Gallery */
   .shots { list-style: none; padding: 0 0 12px; margin: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 230px; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; }
   .shots li { scroll-snap-align: start; }
@@ -265,6 +285,7 @@
 
   @media (max-width: 900px) {
     section { padding-block: 64px; }
+    .hadith-feature { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 26px; border-radius: 28px; }
     .hero-grid, .panel, .about-grid, .faq-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
     .grid, .steps, .cols { grid-template-columns: minmax(0, 1fr); }
     .steps li, .steps li + li { padding: 26px 0 8px; border-left: 0; }
@@ -476,6 +497,52 @@
     </div>
   </section>
 
+  <section id="sunnah">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Sunnah pemakanan</p>
+        <h2 class="title"><span class="sig">Sunnah</span> <span class="impact"><span class="hl">dalam pinggan</span></span></h2>
+        <p class="lede">HealthyBite membantu anda mengira kalori, tetapi panduan makan secara seimbang sudah lama diajar. Berikut beberapa hadis tentang adab dan kadar makan.</p>
+        <blockquote class="ayah" style="margin:0">
+          <p class="ar" lang="ar" dir="rtl">وَكُلُوا وَاشْرَبُوا وَلَا تُسْرِفُوا</p>
+          <p class="tr">Makan dan minumlah, dan janganlah kamu berlebih-lebihan.</p>
+          <p class="src">Surah al-A'raf, 7:31</p>
+        </blockquote>
+      </div>
+
+      <figure class="hadith-feature">
+        <p class="ar" lang="ar" dir="rtl">مَا مَلَأَ آدَمِيٌّ وِعَاءً شَرًّا مِنْ بَطْنٍ، بِحَسْبِ ابْنِ آدَمَ أُكُلَاتٌ يُقِمْنَ صُلْبَهُ، فَإِنْ كَانَ لَا مَحَالَةَ فَثُلُثٌ لِطَعَامِهِ وَثُلُثٌ لِشَرَابِهِ وَثُلُثٌ لِنَفَسِهِ</p>
+        <figcaption>
+          <span class="tag">Kawal porsi</span>
+          <p class="tr">Tidak ada bekas yang diisi oleh anak Adam yang lebih buruk daripada perutnya. Cukuplah bagi anak Adam beberapa suap untuk menegakkan tulang belakangnya. Jika perlu juga, maka sepertiga untuk makanannya, sepertiga untuk minumannya dan sepertiga untuk nafasnya.</p>
+          <p class="src">HR at-Tirmizi (2380) dan Ibn Majah (3349). Hasan sahih.</p>
+        </figcaption>
+      </figure>
+
+      <div class="grid">
+        <article class="card hadith">
+          <span class="tag">Adab makan</span>
+          <p class="ar" lang="ar" dir="rtl">يَا غُلَامُ، سَمِّ اللَّهَ، وَكُلْ بِيَمِينِكَ، وَكُلْ مِمَّا يَلِيكَ</p>
+          <p class="tr">Wahai anak, sebutlah nama Allah, makanlah dengan tangan kananmu, dan makanlah daripada makanan yang dekat denganmu.</p>
+          <p class="src">HR al-Bukhari (5376) dan Muslim (2022)</p>
+        </article>
+        <article class="card hadith">
+          <span class="tag">Berkongsi</span>
+          <p class="ar" lang="ar" dir="rtl">طَعَامُ الِاثْنَيْنِ كَافِي الثَّلَاثَةِ، وَطَعَامُ الثَّلَاثَةِ كَافِي الْأَرْبَعَةِ</p>
+          <p class="tr">Makanan untuk dua orang mencukupi untuk tiga orang, dan makanan untuk tiga orang mencukupi untuk empat orang.</p>
+          <p class="src">HR al-Bukhari (5392) dan Muslim (2058)</p>
+        </article>
+        <article class="card hadith">
+          <span class="tag">Bersyukur</span>
+          <p class="ar" lang="ar" dir="rtl">مَا عَابَ النَّبِيُّ ﷺ طَعَامًا قَطُّ، إِنِ اشْتَهَاهُ أَكَلَهُ، وَإِنْ كَرِهَهُ تَرَكَهُ</p>
+          <p class="tr">Nabi ﷺ tidak pernah sekali-kali mencela makanan. Jika baginda berselera, baginda memakannya. Jika tidak, baginda meninggalkannya.</p>
+          <p class="src">HR al-Bukhari (5409) dan Muslim (2064)</p>
+        </article>
+      </div>
+      <p class="note">Terjemahan ialah maksud ringkas. Rujuk guru agama atau sumber muktabar untuk huraian penuh.</p>
+    </div>
+  </section>
+
   <section id="galeri">
     <div class="wrap">
       <div class="section-head">
@@ -651,6 +718,7 @@
       <span>HealthyBite, projek pelajar TVETMARA Lumut · Dibina oleh Muhammad Shah Redza</span>
       <nav aria-label="Pautan bawah">
         <a href="#ciri">Ciri</a>
+        <a href="#sunnah">Sunnah</a>
         <a href="#soalan">Soalan</a>
         <a href="#tentang">Tentang saya</a>
         <a href="#privasi">Privasi</a>
@@ -958,6 +1026,24 @@
     "Muat turun HealthyBite": "Download HealthyBite",
     "HealthyBite, projek pelajar TVETMARA Lumut · Dibina oleh Muhammad Shah Redza": "HealthyBite, a TVETMARA Lumut student project · Built by Muhammad Shah Redza",
     "Pautan bawah": "Footer links",
+    "Sunnah pemakanan": "Sunnah of eating",
+    "dalam pinggan": "on your plate",
+    "HealthyBite membantu anda mengira kalori, tetapi panduan makan secara seimbang sudah lama diajar. Berikut beberapa hadis tentang adab dan kadar makan.": "HealthyBite helps you count calories, but guidance on balanced eating was taught long ago. Here are a few hadith on how and how much to eat.",
+    "Makan dan minumlah, dan janganlah kamu berlebih-lebihan.": "Eat and drink, but do not be excessive.",
+    "Surah al-A'raf, 7:31": "Surah al-A'raf, 7:31",
+    "Kawal porsi": "Portion control",
+    "Tidak ada bekas yang diisi oleh anak Adam yang lebih buruk daripada perutnya. Cukuplah bagi anak Adam beberapa suap untuk menegakkan tulang belakangnya. Jika perlu juga, maka sepertiga untuk makanannya, sepertiga untuk minumannya dan sepertiga untuk nafasnya.": "No human fills a vessel worse than his stomach. A few morsels are enough for the son of Adam to keep his back upright. If he must eat more, then a third for his food, a third for his drink and a third for his breath.",
+    "HR at-Tirmizi (2380) dan Ibn Majah (3349). Hasan sahih.": "Narrated by at-Tirmidhi (2380) and Ibn Majah (3349). Hasan sahih.",
+    "Adab makan": "Eating etiquette",
+    "Wahai anak, sebutlah nama Allah, makanlah dengan tangan kananmu, dan makanlah daripada makanan yang dekat denganmu.": "Young man, say the name of Allah, eat with your right hand, and eat from what is in front of you.",
+    "HR al-Bukhari (5376) dan Muslim (2022)": "Narrated by al-Bukhari (5376) and Muslim (2022)",
+    "Berkongsi": "Sharing",
+    "Makanan untuk dua orang mencukupi untuk tiga orang, dan makanan untuk tiga orang mencukupi untuk empat orang.": "Food for two is enough for three, and food for three is enough for four.",
+    "HR al-Bukhari (5392) dan Muslim (2058)": "Narrated by al-Bukhari (5392) and Muslim (2058)",
+    "Bersyukur": "Gratitude",
+    "Nabi ﷺ tidak pernah sekali-kali mencela makanan. Jika baginda berselera, baginda memakannya. Jika tidak, baginda meninggalkannya.": "The Prophet ﷺ never once criticised any food. If he liked it, he ate it. If not, he left it.",
+    "HR al-Bukhari (5409) dan Muslim (2064)": "Narrated by al-Bukhari (5409) and Muslim (2064)",
+    "Terjemahan ialah maksud ringkas. Rujuk guru agama atau sumber muktabar untuk huraian penuh.": "Translations give the brief meaning. Consult a religious teacher or a recognised source for full explanation.",
     "Privasi": "Privacy"
   };
   var lang = "ms";
