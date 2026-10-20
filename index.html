@@ -327,6 +327,48 @@
   html.anim.intro-on .hl { background-size: 0% 42% !important; }
   html.anim.intro-on .hl.full { background-size: 0% 78% !important; color: inherit !important; }
 
+  /* ===== Chapters (storytelling scroll) ===== */
+  .hero-bg { position: absolute; inset: -4%; z-index: 0; pointer-events: none; color: var(--lime); transform-origin: 70% 45%; will-change: transform;
+    background: radial-gradient(55% 55% at 78% 45%, color-mix(in srgb, var(--lime) 26%, transparent), transparent 70%), radial-gradient(38% 40% at 10% 88%, color-mix(in srgb, var(--lime) 14%, transparent), transparent 70%); }
+  .hero-bg svg { position: absolute; right: -4%; top: 8%; width: min(64vh, 52vw); height: min(64vh, 52vw); opacity: .08; }
+  .trail { z-index: 0; }
+  .scroll-hint { position: absolute; left: 50%; bottom: 22px; translate: -50% 0; z-index: 3; display: grid; justify-items: center; gap: 8px; text-decoration: none; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .scroll-hint i { display: block; width: 2px; height: 34px; background: linear-gradient(var(--fg), var(--fg)) top / 100% 40% no-repeat, color-mix(in srgb, var(--fg) 18%, transparent); border-radius: 2px; }
+  html.anim .scroll-hint i { animation: hint 1.6s cubic-bezier(.6,0,.3,1) infinite; }
+  @keyframes hint { 0% { background-position: 0 -14px; } 100% { background-position: 0 40px; } }
+  .hero h1 .ch { display: inline-block; }
+
+  /* Chapter menu */
+  .chap-nav { position: fixed; right: 16px; top: 50%; translate: 0 -50%; z-index: 15; display: grid; gap: 8px; justify-items: end; }
+  .chap-label { margin: 0 4px 2px 0; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); background: color-mix(in srgb, var(--bg) 85%, transparent); padding: 3px 8px; border-radius: 99px; }
+  .chap-nav ol { list-style: none; margin: 0; padding: 8px 6px; display: grid; gap: 4px; background: color-mix(in srgb, var(--surface) 88%, transparent); border: 1px solid var(--line); border-radius: 99px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .chap-nav a { position: relative; display: grid; place-items: center; width: 26px; height: 26px; text-decoration: none; color: var(--fg); border-radius: 50%; }
+  .chap-nav i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--fg); transition: transform .3s, background-color .3s; }
+  .chap-nav a.on i { background: var(--lime); transform: scale(1.35); box-shadow: 0 0 0 1.5px var(--fg); border-color: var(--lime); }
+  .chap-nav .chap-no { display: none; }
+  .chap-nav .chap-name { position: absolute; right: 34px; top: 50%; translate: 6px -50%; white-space: nowrap; font-size: 12px; font-weight: 700; background: var(--fg); color: var(--bg); padding: 4px 10px; border-radius: 99px; opacity: 0; pointer-events: none; transition: opacity .2s, translate .2s; }
+  .chap-nav a:hover .chap-name, .chap-nav a:focus-visible .chap-name { opacity: 1; translate: 0 -50%; }
+  @media (max-width: 767px) {
+    .chap-nav { right: auto; left: 50%; top: auto; bottom: 12px; translate: -50% 0; justify-items: center; }
+    .chap-label { display: none; }
+    .chap-nav ol { grid-auto-flow: column; padding: 5px 8px; }
+    .chap-nav .chap-name { display: none; }
+  }
+
+  /* Chapter layout + motion hooks (set by JS; never applied for reduced motion) */
+  html.ch-on .chapter .rv { opacity: 1 !important; translate: none !important; transition: none !important; }
+  html.ch-desk .chapter { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-block: calc(var(--hh, 68px) + 20px) 44px !important; }
+  html.ch-desk .band.chapter { margin-block: 0; }
+  html.ch-desk .hero.chapter { min-height: calc(100vh - var(--hh, 68px)); padding-top: 24px !important; padding-bottom: 72px !important; }
+  html.ch-desk #ciri { overflow: hidden; }
+  html.ch-desk #ciri > .wrap { max-width: none; width: max-content; display: flex; align-items: center; gap: 28px; padding-inline: max(var(--gutter), calc((100vw - 1212px) / 2 + 16px)) 12vw; }
+  html.ch-desk #ciri .section-head { flex: 0 0 min(440px, 36vw); margin: 0; }
+  html.ch-desk #ciri .title { font-size: clamp(40px, 4.6vw, 72px); }
+  html.ch-desk.fx-track .fx { display: block; }
+  html.ch-desk.fx-track .fx-list { display: none; }
+  html.ch-desk.fx-track .fx-view { background: none; color: inherit; padding: 0; min-height: 0; display: flex; gap: 20px; overflow: visible; border-radius: 0; }
+  html.ch-desk.fx-track .fx-panel { display: grid; grid-area: auto; width: min(500px, 40vw); min-height: min(620px, 72vh); background: var(--band); color: var(--band-fg); border-radius: 30px; padding: 32px; align-content: start; }
+
   /* Hero "slice & roll" exit (desktop): hero pins, is cut into strips that slide sideways,
      and skewed blocks in the page colour eat it away */
   .hero.pinned { position: sticky; top: var(--hh, 68px); }
@@ -600,6 +642,17 @@
   </div>
 </header>
 <div id="prog" aria-hidden="true"></div>
+<div class="chap-nav" role="navigation" aria-label="Pilih bab">
+  <p class="chap-label">Pilih bab</p>
+  <ol>
+    <li><a href="#mula"><i aria-hidden="true"></i><span class="chap-no">01</span><span class="chap-name">Mula</span></a></li>
+    <li><a href="#ciri"><i aria-hidden="true"></i><span class="chap-no">02</span><span class="chap-name">Ciri</span></a></li>
+    <li><a href="#cara"><i aria-hidden="true"></i><span class="chap-no">03</span><span class="chap-name">Cara guna</span></a></li>
+    <li><a href="#galeri"><i aria-hidden="true"></i><span class="chap-no">04</span><span class="chap-name">Galeri</span></a></li>
+    <li><a href="#muat-turun"><i aria-hidden="true"></i><span class="chap-no">05</span><span class="chap-name">Muat turun</span></a></li>
+    <li><a href="#tentang"><i aria-hidden="true"></i><span class="chap-no">06</span><span class="chap-name">Tentang saya</span></a></li>
+  </ol>
+</div>
 <div class="mmenu" id="mmenu" role="navigation" aria-label="Menu">
   <a href="#ciri">Ciri</a>
   <a href="#demo">Demo</a>
@@ -612,6 +665,55 @@
 </div>
 
 <main id="atas">
+  <section class="hero chapter" id="mula" data-chapter="Mula">
+    <div class="hero-bg" aria-hidden="true">
+      <svg viewBox="0 0 40 40"><rect width="40" height="40" rx="20" fill="currentColor"/><path d="M9 21h22a11 11 0 0 1-22 0Z" fill="var(--bg)"/><path d="M20 19c0-5 2.5-8 7-8 0 5-2.5 8-7 8Z" fill="var(--bg)"/><path d="M20 19c0-4-2-6.5-6-6.5 0 4 2 6.5 6 6.5Z" fill="var(--bg)"/></svg>
+    </div>
+    <canvas class="trail" aria-hidden="true"></canvas>
+    <a class="scroll-hint" href="#ciri"><span>Scroll untuk teroka</span><i aria-hidden="true"></i></a>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="label">Penjejak kalori dengan AI</p>
+        <h1><span class="sig">Healthy</span><span class="impact"><span class="hl full">Bite</span></span></h1>
+        <div class="hero-sub">
+          <p class="lede">Ambil gambar makanan, terus tahu kalorinya. HealthyBite menganggar kalori, protein, karbohidrat dan lemak daripada gambar hidangan anda, supaya mencatat makanan tak lagi memakan masa.</p>
+          <div class="cta-row">
+            <a class="btn" href="#muat-turun">Muat turun untuk Android <span class="arrow" aria-hidden="true">↓</span></a>
+            <a class="btn ghost" href="#ciri">Lihat ciri</a>
+          </div>
+          <a class="callout" href="#muat-turun"><b>Terkini</b><span>Versi 1.0.0 · Android sahaja · Projek pelajar</span></a>
+        </div>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone" role="img" aria-label="Contoh paparan skrin utama HealthyBite dengan ringkasan kalori harian dan senarai makanan">
+          <div class="notch"></div>
+          <h3>Hari ini</h3>
+          <div class="ring-row">
+            <div class="ring">
+              <svg viewBox="0 0 104 104" aria-hidden="true">
+                <circle class="track" cx="52" cy="52" r="42" fill="none" stroke-width="10"/>
+                <circle class="bar" cx="52" cy="52" r="42" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="163.6 263.9"/>
+              </svg>
+              <div class="num"><b>1,240</b><span>/ 2,000 kcal</span></div>
+            </div>
+            <div class="macros">
+              <div class="macro"><div class="row"><span>Protein</span><b>52 g</b></div><div class="meter"><i style="width:58%"></i></div></div>
+              <div class="macro"><div class="row"><span>Karbo</span><b>160 g</b></div><div class="meter"><i style="width:66%"></i></div></div>
+              <div class="macro"><div class="row"><span>Lemak</span><b>38 g</b></div><div class="meter"><i style="width:52%"></i></div></div>
+            </div>
+          </div>
+          <div class="meals">
+            <div class="meal"><span>Roti canai</span><span>≈ 300 kcal</span></div>
+            <div class="meal"><span>Nasi lemak ayam</span><span>≈ 640 kcal</span></div>
+            <div class="meal"><span>Teh o ais limau</span><span>≈ 90 kcal</span></div>
+          </div>
+          <div class="scan-btn">Imbas makanan</div>
+        </div>
+        <p class="caption">Contoh paparan. Angka hanya untuk ilustrasi.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="hadith-top" aria-label="Hadis tentang pemakanan dan kesihatan">
     <div class="wrap">
       <div class="hadith-bar" id="hadith-bar">
@@ -708,51 +810,6 @@
     </div>
   </section>
 
-  <section class="hero">
-    <canvas class="trail" aria-hidden="true"></canvas>
-    <div class="wrap hero-grid">
-      <div>
-        <p class="label">Penjejak kalori dengan AI</p>
-        <h1><span class="sig">Healthy</span><span class="impact"><span class="hl full">Bite</span></span></h1>
-        <div class="hero-sub">
-          <p class="lede">Ambil gambar makanan, terus tahu kalorinya. HealthyBite menganggar kalori, protein, karbohidrat dan lemak daripada gambar hidangan anda, supaya mencatat makanan tak lagi memakan masa.</p>
-          <div class="cta-row">
-            <a class="btn" href="#muat-turun">Muat turun untuk Android <span class="arrow" aria-hidden="true">↓</span></a>
-            <a class="btn ghost" href="#ciri">Lihat ciri</a>
-          </div>
-          <a class="callout" href="#muat-turun"><b>Terkini</b><span>Versi 1.0.0 · Android sahaja · Projek pelajar</span></a>
-        </div>
-      </div>
-      <div class="phone-wrap">
-        <div class="phone" role="img" aria-label="Contoh paparan skrin utama HealthyBite dengan ringkasan kalori harian dan senarai makanan">
-          <div class="notch"></div>
-          <h3>Hari ini</h3>
-          <div class="ring-row">
-            <div class="ring">
-              <svg viewBox="0 0 104 104" aria-hidden="true">
-                <circle class="track" cx="52" cy="52" r="42" fill="none" stroke-width="10"/>
-                <circle class="bar" cx="52" cy="52" r="42" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="163.6 263.9"/>
-              </svg>
-              <div class="num"><b>1,240</b><span>/ 2,000 kcal</span></div>
-            </div>
-            <div class="macros">
-              <div class="macro"><div class="row"><span>Protein</span><b>52 g</b></div><div class="meter"><i style="width:58%"></i></div></div>
-              <div class="macro"><div class="row"><span>Karbo</span><b>160 g</b></div><div class="meter"><i style="width:66%"></i></div></div>
-              <div class="macro"><div class="row"><span>Lemak</span><b>38 g</b></div><div class="meter"><i style="width:52%"></i></div></div>
-            </div>
-          </div>
-          <div class="meals">
-            <div class="meal"><span>Roti canai</span><span>≈ 300 kcal</span></div>
-            <div class="meal"><span>Nasi lemak ayam</span><span>≈ 640 kcal</span></div>
-            <div class="meal"><span>Teh o ais limau</span><span>≈ 90 kcal</span></div>
-          </div>
-          <div class="scan-btn">Imbas makanan</div>
-        </div>
-        <p class="caption">Contoh paparan. Angka hanya untuk ilustrasi.</p>
-      </div>
-    </div>
-  </section>
-
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
       <ul><li>Imbas makanan</li><li>Imbas barcode</li><li>Sasaran harian</li><li>Pembantu pemakanan</li><li>Mod Keluarga</li><li>Jejak tidur</li></ul>
@@ -760,7 +817,7 @@
     </div>
   </div>
 
-  <section id="ciri">
+  <section id="ciri" class="chapter" data-chapter="Ciri">
     <div class="wrap">
       <div class="section-head">
         <p class="label">Ciri</p>
@@ -888,7 +945,7 @@
 
   <div class="sweep" aria-hidden="true"><i class="a" data-from="-90" data-to="120"></i><i class="b" data-from="110" data-to="-95"></i><i class="c" data-from="-60" data-to="150"></i></div>
 
-  <section id="cara" class="band">
+  <section id="cara" class="band chapter" data-chapter="Cara guna">
     <div class="wrap">
       <div class="section-head">
         <p class="label">Cara guna</p>
@@ -954,7 +1011,7 @@
     </div>
   </section>
 
-  <section id="galeri">
+  <section id="galeri" class="chapter" data-chapter="Galeri">
     <div class="wrap">
       <div class="section-head">
         <p class="label">Galeri</p>
@@ -962,17 +1019,17 @@
         <p class="lede">Paparan sebenar daripada HealthyBite pada telefon Android.</p>
       </div>
       <!-- Letak screenshot app dalam folder "screenshots" di sebelah index.html,
-           dengan nama skrin-1.png hingga skrin-4.png. -->
-      <ul class="shots">
-        <li><figure><div class="shot"><img src="screenshots/skrin-1.png" alt="Skrin utama HealthyBite" loading="lazy"></div><figcaption>Skrin utama</figcaption></figure></li>
-        <li><figure><div class="shot"><img src="screenshots/skrin-2.png" alt="Imbas gambar makanan" loading="lazy"></div><figcaption>Imbas makanan</figcaption></figure></li>
-        <li><figure><div class="shot"><img src="screenshots/skrin-3.png" alt="Pembantu pemakanan" loading="lazy"></div><figcaption>Pembantu pemakanan</figcaption></figure></li>
-        <li><figure><div class="shot"><img src="screenshots/skrin-4.png" alt="Mod Keluarga" loading="lazy"></div><figcaption>Mod Keluarga</figcaption></figure></li>
+           dengan nama skrin-1.png hingga skrin-4.png, kemudian tukar data-ready="false" kepada "true". -->
+      <ul class="shots" data-ready="false">
+        <li><figure><div class="shot"><img data-src="screenshots/skrin-1.png" alt="Skrin utama HealthyBite" loading="lazy"></div><figcaption>Skrin utama</figcaption></figure></li>
+        <li><figure><div class="shot"><img data-src="screenshots/skrin-2.png" alt="Imbas gambar makanan" loading="lazy"></div><figcaption>Imbas makanan</figcaption></figure></li>
+        <li><figure><div class="shot"><img data-src="screenshots/skrin-3.png" alt="Pembantu pemakanan" loading="lazy"></div><figcaption>Pembantu pemakanan</figcaption></figure></li>
+        <li><figure><div class="shot"><img data-src="screenshots/skrin-4.png" alt="Mod Keluarga" loading="lazy"></div><figcaption>Mod Keluarga</figcaption></figure></li>
       </ul>
     </div>
   </section>
 
-  <section id="muat-turun" style="padding-top:0">
+  <section id="muat-turun" class="chapter" data-chapter="Muat turun" style="padding-top:0">
     <div class="wrap">
       <div class="panel">
         <div>
@@ -1041,7 +1098,7 @@
     </div>
   </section>
 
-  <section id="tentang" style="padding-top:0">
+  <section id="tentang" class="chapter" data-chapter="Tentang saya" style="padding-top:0">
     <div class="wrap about-grid">
       <div class="flip" tabindex="0" role="button" aria-pressed="false" aria-label="Kad pengenalan, klik untuk pusing">
         <div class="flip-in">
@@ -1153,7 +1210,10 @@
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<!-- Lenis is not published on cdnjs, so it comes from jsDelivr, pinned to an exact version. -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
   // Motion, in the spirit of landonorris.com: smooth scroll, line-by-line heading reveals,
   // staggered fade-ups, a cursor-tilted phone, a scroll-driven ticker and a sliding footer slogan.
@@ -1161,16 +1221,28 @@
     var root = document.documentElement;
     if (!root.classList.contains("anim")) return;
 
-    // Smooth scroll (falls back to native if the library did not load).
-    var lenis = null;
+    // Smooth scroll (falls back to native if the library did not load). When GSAP is present,
+    // Lenis is driven by GSAP's ticker so ScrollTrigger and the smooth scroll stay in step.
+    var lenis = null, gsapOK = !!(window.gsap && window.ScrollTrigger), lenisOnTicker = false;
+    if (gsapOK) gsap.registerPlugin(ScrollTrigger);
     if (typeof Lenis !== "undefined") {
       lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+      if (gsapOK) {
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+        gsap.ticker.lagSmoothing(0);
+        lenisOnTicker = true;
+      }
       document.querySelectorAll('a[href^="#"]').forEach(function (a) {
         a.addEventListener("click", function (e) {
-          var target = document.querySelector(a.getAttribute("href"));
-          if (!target) return;
+          var id = a.getAttribute("href"), target = id === "#atas" ? null : document.querySelector(id);
+          if (id !== "#atas" && !target) return;
           e.preventDefault();
-          lenis.scrollTo(target, { offset: a.getAttribute("href") === "#atas" ? -200 : -72, duration: 1.4 });
+          var hh = document.querySelector("header").offsetHeight, y = 0;
+          // Pinned chapters: jump to where their pin starts, not to the (moving) element.
+          if (target && target.__st) y = target.__st.start + 2;
+          else if (target) y = target.getBoundingClientRect().top + scrollY - hh - 4;
+          lenis.scrollTo(y, { duration: 1.4 });
         });
       });
     }
@@ -1228,18 +1300,33 @@
         io.unobserve(e.target);
       });
     }, { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
+    // Hero title: split into letters that rise one by one.
+    var heroChars = [];
+    [".hero h1 .sig", ".hero h1 .impact .hl"].forEach(function (sel) {
+      var el = document.querySelector(sel);
+      if (!el) return;
+      var text = el.textContent;
+      el.setAttribute("aria-label", text);
+      el.textContent = "";
+      text.split("").forEach(function (c) {
+        var sp = document.createElement("span"); sp.className = "ch"; sp.setAttribute("aria-hidden", "true");
+        sp.textContent = c; el.appendChild(sp); heroChars.push(sp);
+      });
+    });
     function begin() {
       document.querySelectorAll(".hero h1, .title, .slogan, .rv").forEach(function (el) { io.observe(el); });
       requestAnimationFrame(function () { root.classList.add("loaded"); });
+      if (gsapOK) {
+        gsap.from(heroChars, { yPercent: 110, autoAlpha: 0, rotate: 8, duration: .9, ease: "power4.out", stagger: .055, delay: .15 });
+        ScrollTrigger.refresh();
+      }
     }
     if (!introOn) begin();
 
-    // Hero "slice & roll" (wide screens where the hero fits): pin the hero, cut it into strips
-    // that slide sideways at different speeds, while skewed blocks in the page colour eat it.
+    // Hero "slice & roll": once the hero chapter is pinned (see chapters below), its exit cuts it
+    // into strips that slide sideways at different speeds while skewed grid blocks eat it away.
     var heroSliced = (function () {
       var hero = document.querySelector(".hero"), wrap = hero.querySelector(":scope > .wrap");
-      var pin = document.createElement("div"); pin.className = "hero-pin";
-      hero.parentNode.insertBefore(pin, hero); pin.appendChild(hero);
       var fx = document.createElement("div"); fx.className = "hero-fx"; fx.setAttribute("aria-hidden", "true");
       hero.appendChild(fx);
       var BITES = [
@@ -1256,13 +1343,12 @@
         fx.appendChild(el); return el;
       });
       var cover = document.createElement("div"); cover.className = "cover"; fx.appendChild(cover);
-      var N = 4, SPEED = [-14, 20, -9, 25], slices = null, on = false;
+      var N = 4, SPEED = [-14, 20, -9, 25], slices = null, enabled = false;
       function makeSlices() {
         slices = [];
-        var pt = getComputedStyle(hero).paddingTop;
         for (var i = 0; i < N; i++) {
           var sl = document.createElement("div"); sl.className = "slice";
-          sl.style.paddingTop = pt;
+          sl.style.paddingTop = wrap.offsetTop + "px";
           sl.style.clipPath = "inset(" + (i * 100 / N) + "% -10% " + (100 - (i + 1) * 100 / N) + "% -10%)";
           var c = wrap.cloneNode(true);
           c.querySelectorAll("[id]").forEach(function (n) { n.removeAttribute("id"); });
@@ -1270,25 +1356,15 @@
         }
         wrap.style.visibility = "hidden";
       }
-      function dropSlices() {
-        if (!slices) return;
-        slices.forEach(function (sl) { sl.remove(); }); slices = null;
+      function reset() {
+        if (slices) { slices.forEach(function (sl) { sl.remove(); }); slices = null; }
         wrap.style.visibility = "";
+        bites.forEach(function (b) { b.style.width = "0"; });
+        cover.style.opacity = "0";
       }
-      function size() {
-        var hh = document.querySelector("header").offsetHeight;
-        on = innerWidth > 900 && hero.offsetHeight + hh <= innerHeight;
-        hero.classList.toggle("pinned", on);
-        pin.style.height = on ? (hero.offsetHeight + innerHeight * 1.1) + "px" : "";
-        bites.forEach(function (b, i) { b.style.setProperty("--o", Math.round(hero.offsetHeight * BITES[i].h / 100 * 0.36) + "px"); });
-        if (!on) { dropSlices(); bites.forEach(function (b) { b.style.width = "0"; }); cover.style.opacity = "0"; }
-      }
-      size(); addEventListener("resize", size); addEventListener("load", size);
-      function tick() {
-        if (!on) return false;
-        var r = pin.getBoundingClientRect(), hh = parseFloat(getComputedStyle(root).getPropertyValue("--hh")) || 68;
-        var p = Math.max(0, Math.min(1, (hh - r.top) / (r.height - hero.offsetHeight)));
-        if (p <= 0.002) { dropSlices(); bites.forEach(function (b) { b.style.width = "0"; }); cover.style.opacity = "0"; return true; }
+      function set(p) {
+        if (!enabled) return;
+        if (p <= 0.002) { reset(); return; }
         if (!slices) makeSlices();
         var e = p * p * (3 - 2 * p);
         slices.forEach(function (sl, i) { sl.style.transform = "translate3d(" + SPEED[i] * e + "vw,0,0)"; });
@@ -1297,9 +1373,12 @@
           b.style.width = (1 - Math.pow(1 - k, 3)) * BITES[i].w + "%";
         });
         cover.style.opacity = String(Math.max(0, Math.min(1, (p - 0.78) / 0.2)));
-        return true;
       }
-      return { tick: tick };
+      function enable(v) {
+        enabled = v; reset();
+        bites.forEach(function (b, i) { b.style.setProperty("--o", Math.round(hero.offsetHeight * BITES[i].h / 100 * 0.36) + "px"); });
+      }
+      return { set: set, enable: enable };
     })();
 
     // Scroll-driven extras: hero splits apart, skewed sweep bars, pinned sideways manifesto.
@@ -1319,8 +1398,8 @@
       function frame() {
         var vh = innerHeight;
         var hr = heroEl.getBoundingClientRect();
-        if (heroSliced.tick()) {
-          hSig.style.transform = hImp.style.transform = hPhone.style.transform = "";
+        if (root.classList.contains("ch-desk")) {
+          // The hero chapter's own pin handles its exit on wide screens.
         } else if (hr.bottom > 0) {
           var hp = Math.max(0, Math.min(1, -hr.top / hr.height));
           hSig.style.transform = "translate3d(" + (-hp * 22) + "vw,0,0)";
@@ -1397,6 +1476,7 @@
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
       sizeCanvas(); addEventListener("resize", sizeCanvas);
+      if (window.ResizeObserver) new ResizeObserver(sizeCanvas).observe(hero);
       new IntersectionObserver(function (en) { heroVisible = en[0].isIntersecting; }).observe(hero);
       hero.addEventListener("pointermove", function (e) {
         var r = hero.getBoundingClientRect(), p = { x: e.clientX - r.left, y: e.clientY - r.top };
@@ -1425,13 +1505,101 @@
       })();
     }
 
+    // ===== Chapters =====
+    // Desktop/tablet (768px+): each chapter is a full-screen scene. It pins, its content is
+    // scrubbed by scroll, then it fades and slides out while the next one fades and slides in.
+    // "Ciri" runs sideways: scrolling down moves the feature panels to the left.
+    // Phones: plain vertical chapters with a light fade. Reduced motion never reaches this code.
+    if (gsapOK) (function () {
+      var hh = function () { return document.querySelector("header").offsetHeight; };
+      var mm = gsap.matchMedia();
+
+      function scenes(ch) {
+        var id = ch.id, tl = gsap.timeline();
+        if (id === "cara") tl.from(ch.querySelectorAll(".steps li"), { y: 90, autoAlpha: 0, stagger: .12, duration: .4 });
+        if (id === "galeri") tl.from(ch.querySelectorAll(".shots li"), { yPercent: 55, rotate: function (i) { return i % 2 ? 7 : -7; }, autoAlpha: 0, stagger: .1, duration: .45 });
+        if (id === "muat-turun") {
+          var cols = ch.querySelectorAll(".panel > div");
+          tl.from(cols[0], { x: -90, autoAlpha: 0, duration: .4 }, 0).from(cols[1], { x: 90, autoAlpha: 0, duration: .4 }, .05)
+            .from(ch.querySelector(".qr-box"), { scale: .6, rotate: -12, duration: .35 }, .2);
+        }
+        if (id === "tentang") {
+          tl.from(ch.querySelector(".flip"), { rotationY: -40, scale: .85, autoAlpha: 0, transformPerspective: 900, duration: .45 }, 0)
+            .from(ch.querySelectorAll(".about-copy > *"), { x: 70, autoAlpha: 0, stagger: .06, duration: .35 }, .05);
+        }
+        return tl;
+      }
+
+      mm.add("(min-width: 768px)", function () {
+        root.classList.add("ch-on", "ch-desk", "fx-track");
+        var hero = document.querySelector(".hero"), bg = hero.querySelector(".hero-bg"), hint = hero.querySelector(".scroll-hint");
+        heroSliced.enable(true);
+        hero.querySelector("h1 .sig").style.transform = hero.querySelector("h1 .impact").style.transform = hero.querySelector(".phone-wrap").style.transform = "";
+
+        document.querySelectorAll(".chapter").forEach(function (ch) {
+          var inner = ch.querySelector(":scope > .wrap");
+          if (ch === hero) {
+            ch.__st = ScrollTrigger.create({
+              trigger: ch, start: function () { return "top " + hh() + "px"; }, end: function () { return "+=" + innerHeight * 1.3; }, pin: true,
+              onUpdate: function (self) {
+                var p = self.progress;
+                bg.style.transform = "scale(" + (1 + .18 * Math.min(1, p / .45)) + ")";
+                hint.style.opacity = String(1 - Math.min(1, p / .12));
+                heroSliced.set(Math.max(0, (p - .4) / .6));
+              }
+            });
+            return;
+          }
+          // Enter: fade + slide up as the chapter arrives; its pieces assemble on the way in.
+          var enter = gsap.timeline({ scrollTrigger: { trigger: ch, start: "top bottom", end: "top top", scrub: true } });
+          enter.fromTo(inner, { autoAlpha: 0, yPercent: 10 }, { autoAlpha: 1, yPercent: 0, ease: "none", duration: 1 }, 0);
+          if (ch.id !== "ciri") enter.add(scenes(ch), .35);
+          var tl;
+          if (ch.id === "ciri") {
+            var dist = function () { return Math.max(0, inner.scrollWidth - innerWidth); };
+            tl = gsap.timeline({ scrollTrigger: { trigger: ch, start: "top top", end: function () { return "+=" + (dist() + innerHeight * .5); }, pin: true, scrub: 1, invalidateOnRefresh: true } });
+            tl.to(inner, { x: function () { return -dist(); }, ease: "none", duration: 1 });
+          } else {
+            var over = function () { return Math.max(0, inner.offsetHeight - (innerHeight - hh() - 60)); };
+            tl = gsap.timeline({ scrollTrigger: { trigger: ch, start: "top top", end: function () { return "+=" + (innerHeight * .8 + over()); }, pin: true, scrub: 1, invalidateOnRefresh: true } });
+            // While pinned the content drifts gently (and scrolls through anything taller than the screen).
+            tl.to(inner, { y: function () { return -(over() + 36); }, ease: "none", duration: .7 }, 0);
+          }
+          ch.__st = tl.scrollTrigger;
+          // Exit: once the pin releases, fade + slide out while the next chapter fades + slides in.
+          gsap.fromTo(inner, { autoAlpha: 1, yPercent: 0, scale: 1 }, { autoAlpha: 0, yPercent: -8, scale: .97, ease: "none", immediateRender: false,
+            scrollTrigger: { start: function () { return ch.__st.end; }, end: function () { return ch.__st.end + innerHeight * .85; }, scrub: true } });
+        });
+        ScrollTrigger.refresh();
+
+        return function () {
+          root.classList.remove("ch-on", "ch-desk", "fx-track");
+          heroSliced.enable(false);
+          bg.style.transform = ""; hint.style.opacity = "";
+          document.querySelectorAll(".chapter").forEach(function (ch) { ch.__st = null; });
+        };
+      });
+
+      mm.add("(max-width: 767px)", function () {
+        root.classList.add("ch-on");
+        document.querySelectorAll(".chapter:not(.hero)").forEach(function (ch) {
+          gsap.from(ch.querySelector(":scope > .wrap"), { autoAlpha: 0, y: 40, duration: .8, ease: "power2.out",
+            scrollTrigger: { trigger: ch, start: "top 85%", toggleActions: "play none none reverse" } });
+        });
+        return function () { root.classList.remove("ch-on"); };
+      });
+
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+      addEventListener("load", function () { ScrollTrigger.refresh(); });
+    })();
+
     // One frame loop: ticker speed follows scroll velocity and direction; footer slogan slides in.
     var track = document.querySelector(".ticker-track");
     var slogan = document.querySelectorAll(".slogan .line");
     var footer = document.querySelector("footer");
     var x = 0, dir = 1, boost = 0, lastY = window.scrollY;
     function frame(t) {
-      if (lenis) lenis.raf(t);
+      if (lenis && !lenisOnTicker) lenis.raf(t);
       var y = window.scrollY, v = y - lastY;
       lastY = y;
       if (v > 0.5) dir = 1; else if (v < -0.5) dir = -1;
@@ -1495,6 +1663,23 @@
     });
   })();
 
+  // Chapter menu: highlight the chapter in the middle of the screen.
+  (function () {
+    var links = document.querySelectorAll(".chap-nav a");
+    document.querySelectorAll(".chapter").forEach(function (ch) {
+      new IntersectionObserver(function (en) {
+        en.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          links.forEach(function (a) {
+            var on = a.getAttribute("href") === "#" + ch.id;
+            a.classList.toggle("on", on);
+            if (on) a.setAttribute("aria-current", "step"); else a.removeAttribute("aria-current");
+          });
+        });
+      }, { rootMargin: "-45% 0px -50% 0px" }).observe(ch);
+    });
+  })();
+
   // Feature explorer: hover, click or arrow keys pick a feature; it cycles on its own until touched.
   (function () {
     var tabs = Array.prototype.slice.call(document.querySelectorAll(".fx-tab"));
@@ -1518,7 +1703,7 @@
       });
     });
     new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: 0.3 }).observe(document.querySelector(".fx"));
-    setInterval(function () { if (auto && visible) show((cur + 1) % tabs.length); }, 5200);
+    setInterval(function () { if (auto && visible && !document.documentElement.classList.contains("fx-track")) show((cur + 1) % tabs.length); }, 5200);
   })();
 
   // Flip card: click / Enter / Space flips; tilt and glare follow the pointer.
@@ -1846,6 +2031,9 @@
     "ada kiranya": "counts",
     "makan bijak,": "eat smart,",
     "hidup sihat": "live healthy",
+    "Scroll untuk teroka": "Scroll to explore",
+    "Pilih bab": "Choose a chapter",
+    "Mula": "Start",
     "Privasi": "Privacy"
   };
   var lang = "ms";
@@ -1884,10 +2072,15 @@
   try { if (localStorage.getItem("hb-lang") === "en") lang = "en"; } catch (e) {}
 
   // Gallery: show a placeholder when a screenshot file is missing.
-  document.querySelectorAll(".shot img").forEach(function (img) {
-    function fallback() { img.parentElement.innerHTML = '<span class="ph">Screenshot akan datang</span>'; applyLang(); }
-    if (img.complete && img.naturalWidth === 0) fallback(); else img.addEventListener("error", fallback);
-  });
+  (function () {
+    var ready = (document.querySelector(".shots") || {}).dataset;
+    document.querySelectorAll(".shot img").forEach(function (img) {
+      function fallback() { img.parentElement.innerHTML = '<span class="ph">Screenshot akan datang</span>'; applyLang(); }
+      if (!ready || ready.ready !== "true") { fallback(); return; }
+      img.addEventListener("error", fallback);
+      img.src = img.dataset.src;
+    });
+  })();
 
   // QR: point at the APK link once it is set, otherwise at this page's download section.
   (function () {
