@@ -196,6 +196,114 @@
   .steps h3 { font-size: 24px; font-stretch: 112%; }
   .steps p { color: var(--band-muted); font-size: 15.5px; }
 
+  /* Scroll progress, active nav, mobile menu */
+  #prog { position: fixed; left: 0; top: 0; height: 3px; width: 0; background: var(--lime); z-index: 30; }
+  nav a:not(.btn) { position: relative; }
+  nav a.on:not(.btn) { color: var(--fg); }
+  nav a.on:not(.btn)::after { content: ""; position: absolute; left: 50%; bottom: -9px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 1.5px var(--fg); }
+  .burger { display: none; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--fg); background: transparent; color: var(--fg); cursor: pointer; place-items: center; padding: 0; }
+  .burger span, .burger span::before, .burger span::after { display: block; width: 16px; height: 2px; background: currentColor; border-radius: 2px; transition: transform .3s, opacity .2s; }
+  .burger span { position: relative; }
+  .burger span::before, .burger span::after { content: ""; position: absolute; left: 0; }
+  .burger span::before { top: -5px; } .burger span::after { top: 5px; }
+  .burger[aria-expanded="true"] span { background: transparent; }
+  .burger[aria-expanded="true"] span::before { transform: translateY(5px) rotate(45deg); }
+  .burger[aria-expanded="true"] span::after { transform: translateY(-5px) rotate(-45deg); }
+  .mmenu { position: fixed; left: 0; right: 0; top: var(--hh, 68px); z-index: 9; background: var(--band); color: var(--band-fg); padding: 12px var(--gutter) 28px; border-radius: 0 0 28px 28px; max-height: calc(100dvh - var(--hh, 68px)); overflow: auto; display: none; }
+  .mmenu.open { display: grid; }
+  .mmenu a { font-weight: 900; font-stretch: 125%; text-transform: uppercase; font-size: 28px; letter-spacing: -0.02em; text-decoration: none; padding: 10px 0; border-bottom: 1px solid var(--band-line); }
+  .mmenu a.on, .mmenu a:hover { color: var(--lime); }
+
+  /* Feature explorer */
+  .fx { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 20px; align-items: stretch; }
+  .fx-list { display: grid; gap: 8px; align-content: start; }
+  .fx-tab { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center; text-align: left; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 15px 18px; cursor: pointer; transition: background-color .25s, border-color .25s, transform .25s; }
+  .fx-tab i { font-family: var(--font-serif); font-style: italic; font-size: 30px; color: var(--muted); line-height: 1; }
+  .fx-tab b { display: block; font-size: 18px; font-stretch: 112%; font-weight: 800; line-height: 1.15; }
+  .fx-tab small { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+  .fx-tab:hover { transform: translateX(4px); }
+  .fx-tab[aria-selected="true"] { background: var(--lime); border-color: var(--lime); color: var(--on-lime); }
+  .fx-tab[aria-selected="true"] i, .fx-tab[aria-selected="true"] small { color: var(--on-lime); }
+  .fx-view { position: relative; background: var(--band); color: var(--band-fg); border-radius: 30px; padding: 36px; min-height: 560px; display: grid; overflow: hidden; }
+  .fx-panel { grid-area: 1 / 1; display: none; align-content: start; gap: 14px; }
+  .fx-panel.on { display: grid; }
+  .fx-panel h3 { font-size: clamp(28px, 3vw, 40px); font-stretch: 112%; }
+  .fx-panel > p { color: var(--band-muted); max-width: 46ch; }
+  .fx-panel .tag { color: var(--lime); justify-self: start; }
+  .demo { margin-top: 10px; display: grid; gap: 10px; align-content: start; }
+  html.anim .fx-panel.on .pop { animation: pop .6s cubic-bezier(.16,1,.3,1) both; animation-delay: calc(var(--i, 0) * .12s); }
+  @keyframes pop { from { opacity: 0; translate: 0 14px; scale: .96; } to { opacity: 1; translate: 0 0; scale: 1; } }
+  .d-box { border: 1px solid var(--band-line); border-radius: 16px; padding: 13px 16px; display: flex; justify-content: space-between; gap: 12px; align-items: center; font-size: 15px; }
+  .d-box b { color: var(--lime); white-space: nowrap; }
+  .d-chip { display: inline-flex; justify-self: start; background: var(--lime); color: var(--on-lime); font-weight: 800; font-size: 13px; border-radius: 99px; padding: 6px 13px; }
+  .d-chip.ghost { background: transparent; color: var(--lime); border: 1px solid var(--lime); }
+  .d-cam { position: relative; height: 180px; border-radius: 20px; overflow: hidden; background: radial-gradient(circle at 45% 50%, #ffffff 0 7%, transparent 7.5%), radial-gradient(circle at 57% 60%, #c2411f 0 6%, transparent 6.5%), radial-gradient(circle at 57% 42%, #b8742b 0 7%, transparent 7.5%), radial-gradient(circle at 43% 62%, #3f7d2a 0 4%, transparent 4.5%), radial-gradient(circle at 50% 52%, #fbf6e6 0 22%, #e8d6a2 22.5% 25%, transparent 25.5%), repeating-linear-gradient(45deg, #1f2610 0 10px, #242c12 10px 20px); }
+  .d-cam::before { content: ""; position: absolute; inset: 16px; background:
+      linear-gradient(var(--lime), var(--lime)) top left / 26px 3px no-repeat, linear-gradient(var(--lime), var(--lime)) top left / 3px 26px no-repeat,
+      linear-gradient(var(--lime), var(--lime)) top right / 26px 3px no-repeat, linear-gradient(var(--lime), var(--lime)) top right / 3px 26px no-repeat,
+      linear-gradient(var(--lime), var(--lime)) bottom left / 26px 3px no-repeat, linear-gradient(var(--lime), var(--lime)) bottom left / 3px 26px no-repeat,
+      linear-gradient(var(--lime), var(--lime)) bottom right / 26px 3px no-repeat, linear-gradient(var(--lime), var(--lime)) bottom right / 3px 26px no-repeat; }
+  .d-cam::after { content: ""; position: absolute; left: 16px; right: 16px; top: 16px; height: 3px; background: var(--lime); box-shadow: 0 0 18px var(--lime); }
+  html.anim .d-cam::after { animation: scan 2.2s ease-in-out infinite alternate; }
+  @keyframes scan { to { top: calc(100% - 19px); } }
+  .d-code { position: relative; height: 130px; border-radius: 16px; background: #f3f3ec; overflow: hidden; }
+  .d-code::before { content: ""; position: absolute; inset: 22px 30px; background: repeating-linear-gradient(90deg, #101400 0 3px, transparent 3px 6px, #101400 6px 7px, transparent 7px 11px, #101400 11px 15px, transparent 15px 17px); }
+  .d-code::after { content: ""; position: absolute; top: 12px; bottom: 12px; left: 20px; width: 3px; background: #ff4d2e; box-shadow: 0 0 14px #ff4d2e; }
+  html.anim .d-code::after { animation: scanx 1.8s ease-in-out infinite alternate; }
+  @keyframes scanx { to { left: calc(100% - 23px); } }
+  .d-ring { display: flex; align-items: center; gap: 18px; }
+  .d-ring .ring .track { stroke: var(--band-line); }
+  .d-ring .ring .bar { stroke: var(--lime); }
+  html.anim .fx-panel.on .d-ring .bar { animation: ringfill 1.4s .2s cubic-bezier(.16,1,.3,1) both; }
+  @keyframes ringfill { from { stroke-dasharray: 0 263.9; } }
+  .d-q { justify-self: end; background: var(--lime); color: var(--on-lime); border-radius: 18px 18px 4px 18px; padding: 10px 14px; max-width: 80%; font-weight: 600; font-size: 15px; }
+  .d-a { justify-self: start; border: 1px solid var(--band-line); border-radius: 18px 18px 18px 4px; padding: 10px 14px; max-width: 88%; font-size: 15px; }
+  .d-av { width: 34px; height: 34px; border-radius: 50%; background: var(--lime); color: var(--on-lime); display: grid; place-items: center; font-weight: 900; flex: none; }
+  .d-row { display: flex; align-items: center; gap: 12px; }
+  .d-row span { display: grid; line-height: 1.3; }
+  .d-row small { color: var(--band-muted); }
+  .d-sleep { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; align-items: end; height: 150px; }
+  .d-sleep i { display: block; height: var(--h); background: var(--lime); border-radius: 8px 8px 3px 3px; transform-origin: bottom; }
+  html.anim .fx-panel.on .d-sleep i { animation: grow .9s cubic-bezier(.16,1,.3,1) both; animation-delay: calc(var(--i) * .07s); }
+  @keyframes grow { from { scale: 1 0; } }
+  .d-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; text-align: center; font-size: 11px; color: var(--band-muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
+
+  /* Scroll-driven live demo */
+  .demo-sec { position: relative; }
+  .demo-stage { display: grid; grid-template-columns: 1fr auto 1fr; gap: 28px; align-items: center; max-width: 1212px; margin: 0 auto; padding: 0 var(--gutter); }
+  .demo-col { display: grid; gap: 16px; }
+  .demo-col.l { justify-items: end; }
+  .demo-col.r { justify-items: start; }
+  .demo-phone { width: 290px; max-width: 100%; transform: none; position: relative; z-index: 2; display: grid; gap: 10px; align-content: start; min-height: 0; }
+  .demo-phone .d-q, .demo-phone .d-a { font-size: 13px; }
+  .pc { position: relative; z-index: 1; width: min(330px, 100%); background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 14px 18px; display: grid; gap: 6px; box-shadow: 0 18px 40px -26px rgba(16, 20, 0, .45); will-change: transform; }
+  .pc .q { font-weight: 700; }
+  .pc .r { color: var(--muted); font-size: 15px; }
+  .pc .lb { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+  .pc .lb::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 1.5px var(--fg); }
+  .demo-sec.fly { height: 230vh; }
+  .demo-sec.fly .demo-stick { position: sticky; top: 0; height: 100vh; display: grid; align-content: center; gap: 28px; overflow: hidden; }
+  .demo-sec.fly .section-head { margin-bottom: 0; }
+  .demo-stick > .wrap, .demo-stage { width: 100%; }
+
+  /* Flip ID card */
+  .flip { perspective: 1200px; cursor: pointer; rotate: -2deg; outline-offset: 6px; }
+  .flip-in { position: relative; display: grid; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.2,.7,.2,1); transform: rotateX(var(--rx, 0deg)) rotateY(calc(var(--ry, 0deg) + var(--fl, 0deg))); }
+  .flip.flipped .flip-in { --fl: 180deg; }
+  .flip-face { grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--band); color: var(--band-fg); border-radius: 30px; padding: 30px; display: grid; gap: 18px; align-content: start; min-height: 400px; position: relative; overflow: hidden; }
+  .flip-face.back { transform: rotateY(180deg); background: var(--lime); color: var(--on-lime); }
+  .flip-face .avatar { width: 120px; height: 120px; font-size: 72px; }
+  .flip-face .who { font-weight: 900; font-stretch: 112%; font-size: 30px; line-height: 1.05; letter-spacing: -.02em; }
+  .flip-face .role { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--lime); }
+  .flip-face .tnum { position: absolute; top: 22px; right: 28px; font-family: var(--font-serif); font-style: italic; font-size: 48px; line-height: 1; color: var(--lime); }
+  .flip-face .hint { margin-top: auto; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--band-muted); }
+  .flip-face.back .hint { color: var(--on-lime); opacity: .7; }
+  .flip-face dl { margin: 0; display: grid; gap: 14px; font-size: 15px; }
+  .flip-face dt { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; opacity: .7; }
+  .flip-face dd { margin: 0; font-weight: 700; }
+  .glare { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.22), transparent 45%); opacity: 0; transition: opacity .3s; }
+  .flip:hover .glare { opacity: 1; }
+
   /* Hadith rotator at the top */
   .hadith-top { padding: 20px 0 0; }
   .hadith-bar { position: relative; overflow: hidden; background: var(--band); color: var(--band-fg); border-radius: 28px; padding: 26px 30px 30px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 36px; cursor: pointer; user-select: none; -webkit-user-select: none; }
@@ -364,6 +472,20 @@
   .hero > .wrap { position: relative; z-index: 1; }
   .trail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 
+  @media (max-width: 900px) {
+    .burger { display: grid; }
+    .fx { grid-template-columns: minmax(0, 1fr); }
+    .fx-list { grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+    .fx-tab { scroll-snap-align: start; }
+    .fx-tab:hover { transform: none; }
+    .fx-view { padding: 24px; min-height: 0; border-radius: 24px; }
+    .demo-stage { grid-template-columns: minmax(0, 1fr); }
+    .demo-col.l, .demo-col.r { justify-items: stretch; }
+    .pc { width: 100%; }
+    .demo-phone { justify-self: center; min-height: 0; }
+    .flip { rotate: none; }
+  }
+
   @media (max-width: 420px) {
     .brand-name { display: none; }
   }
@@ -403,9 +525,21 @@
         <button type="button" data-lang="en" aria-pressed="false">EN</button>
       </div>
       <a class="btn small" href="#muat-turun">Muat turun</a>
+      <button type="button" class="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="mmenu"><span></span></button>
     </nav>
   </div>
 </header>
+<div id="prog" aria-hidden="true"></div>
+<div class="mmenu" id="mmenu" role="navigation" aria-label="Menu">
+  <a href="#ciri">Ciri</a>
+  <a href="#demo">Demo</a>
+  <a href="#cara">Cara guna</a>
+  <a href="#sunnah">Sunnah</a>
+  <a href="#galeri">Galeri</a>
+  <a href="#muat-turun">Muat turun</a>
+  <a href="#soalan">Soalan</a>
+  <a href="#tentang">Tentang saya</a>
+</div>
 
 <main id="atas">
   <section class="hadith-top" aria-label="Hadis tentang pemakanan dan kesihatan">
@@ -563,45 +697,122 @@
         <h2 class="title"><span class="sig">Semua yang</span> <span class="impact">perlu, <span class="hl">setiap hari</span></span></h2>
         <p class="lede">Dibina untuk hidangan yang kita makan setiap hari di Malaysia, dengan fokus pada kemudahan mencatat.</p>
       </div>
-      <div class="grid">
-        <article class="card">
-          <span class="no">01</span>
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8a2 2 0 0 1 2-2h2l1.5-2h5L16 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><circle cx="12" cy="12.5" r="3.5"/></svg></div>
-          <h3>Imbas gambar makanan</h3>
-          <p>Ambil gambar hidangan dan app menganggar kalori serta makro. Ia anggaran, jadi semak sebelum disimpan.</p>
-        </article>
-        <article class="card">
-          <span class="no">02</span>
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6v12M8 6v12M12 6v12M16 6v12M20 6v12"/></svg></div>
-          <h3>Imbas barcode</h3>
-          <p>Untuk makanan berbungkus, imbas barcode pada kotak atau bungkusan untuk mencatat dengan pantas.</p>
-        </article>
-        <article class="card">
-          <span class="no">03</span>
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3"/></svg></div>
-          <h3>Sasaran dan peringatan</h3>
-          <p>Tetapkan sasaran badan dan kalori harian, kemudian terima peringatan supaya anda ingat untuk mencatat.</p>
-        </article>
-        <article class="card">
-          <span class="no">04</span>
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></svg></div>
-          <h3>Pembantu pemakanan</h3>
-          <p>Tanya soalan tentang makanan dan pemakanan, dan dapatkan jawapan ringkas dalam app.</p>
-        </article>
-        <article class="card">
-          <span class="no">05</span>
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.4"/><path d="M3 19c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M15.5 14c2.8-.3 5.5 1.3 5.5 4.5"/></svg></div>
-          <h3>Mod Keluarga</h3>
-          <p>Sertai keluarga dengan kod jemputan. Setiap orang memilih sendiri apa yang dikongsi, dan berat badan tidak pernah dikongsi.</p>
-        </article>
-        <article class="card">
-          <span class="no">06</span>
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg></div>
-          <h3>Tidur dan widget</h3>
-          <p>Jejak tidur secara automatik dan log air terus daripada widget skrin utama.</p>
-          <span class="tag">Android sahaja</span>
-        </article>
+      <div class="fx">
+        <div class="fx-list" role="tablist" aria-label="Ciri HealthyBite">
+          <button type="button" class="fx-tab" role="tab" id="fx-t0" aria-controls="fx-p0" aria-selected="true"><i>01</i><span><b>Imbas gambar makanan</b><small>AI · Kamera</small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t1" aria-controls="fx-p1" aria-selected="false"><i>02</i><span><b>Imbas barcode</b><small>Pantas</small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t2" aria-controls="fx-p2" aria-selected="false"><i>03</i><span><b>Sasaran dan peringatan</b><small>Harian</small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t3" aria-controls="fx-p3" aria-selected="false"><i>04</i><span><b>Pembantu pemakanan</b><small>Sembang</small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t4" aria-controls="fx-p4" aria-selected="false"><i>05</i><span><b>Mod Keluarga</b><small>Keluarga</small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t5" aria-controls="fx-p5" aria-selected="false"><i>06</i><span><b>Tidur dan widget</b><small>Android sahaja</small></span></button>
+        </div>
+        <div class="fx-view">
+          <div class="fx-panel on" role="tabpanel" id="fx-p0" aria-labelledby="fx-t0">
+            <span class="tag">AI · Kamera</span>
+            <h3>Imbas gambar makanan</h3>
+            <p>Ambil gambar hidangan dan app menganggar kalori serta makro. Ia anggaran, jadi semak sebelum disimpan.</p>
+            <div class="demo">
+              <div class="d-cam pop" style="--i:0"></div>
+              <span class="d-chip ghost pop" style="--i:1">Mengimbas...</span>
+              <div class="d-box pop" style="--i:2"><span>Nasi lemak ayam</span><b>≈ 640 kcal</b></div>
+              <div class="d-box pop" style="--i:3"><span>Protein 24 g · Karbo 78 g · Lemak 26 g</span></div>
+              <span class="d-chip pop" style="--i:4">Simpan ke log</span>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p1" aria-labelledby="fx-t1">
+            <span class="tag">Pantas</span>
+            <h3>Imbas barcode</h3>
+            <p>Untuk makanan berbungkus, imbas barcode pada kotak atau bungkusan untuk mencatat dengan pantas.</p>
+            <div class="demo">
+              <div class="d-code pop" style="--i:0"></div>
+              <div class="d-box pop" style="--i:1"><span>Biskut krim (3 keping)</span><b>≈ 140 kcal</b></div>
+              <span class="d-chip pop" style="--i:2">Ditambah ke snek</span>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p2" aria-labelledby="fx-t2">
+            <span class="tag">Harian</span>
+            <h3>Sasaran dan peringatan</h3>
+            <p>Tetapkan sasaran badan dan kalori harian, kemudian terima peringatan supaya anda ingat untuk mencatat.</p>
+            <div class="demo">
+              <div class="d-ring pop" style="--i:0">
+                <div class="ring">
+                  <svg viewBox="0 0 104 104" aria-hidden="true"><circle class="track" cx="52" cy="52" r="42" fill="none" stroke-width="10"/><circle class="bar" cx="52" cy="52" r="42" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="163.6 263.9"/></svg>
+                  <div class="num"><b>1,240</b><span>/ 2,000 kcal</span></div>
+                </div>
+                <div class="d-box" style="flex:1"><span>Baki hari ini</span><b>760 kcal</b></div>
+              </div>
+              <div class="d-box pop" style="--i:1"><span>🔔 Jangan lupa catat makan tengah hari</span></div>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p3" aria-labelledby="fx-t3">
+            <span class="tag">Sembang</span>
+            <h3>Pembantu pemakanan</h3>
+            <p>Tanya soalan tentang makanan dan pemakanan, dan dapatkan jawapan ringkas dalam app.</p>
+            <div class="demo">
+              <p class="d-q pop" style="--i:0">Nasi lemak tinggi kalori ke?</p>
+              <p class="d-a pop" style="--i:1">Sepinggan biasa sekitar 400 hingga 650 kcal, bergantung pada lauk. Pilih telur rebus dan kurangkan sambal untuk lebih ringan.</p>
+              <p class="d-q pop" style="--i:2">Snek sihat petang?</p>
+              <p class="d-a pop" style="--i:3">Cuba buah-buahan atau segenggam kacang tanpa garam.</p>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p4" aria-labelledby="fx-t4">
+            <span class="tag">Keluarga</span>
+            <h3>Mod Keluarga</h3>
+            <p>Sertai keluarga dengan kod jemputan. Setiap orang memilih sendiri apa yang dikongsi, dan berat badan tidak pernah dikongsi.</p>
+            <div class="demo">
+              <div class="d-box pop" style="--i:0"><span>Kod jemputan</span><b>HB-7Q2K</b></div>
+              <div class="d-box pop" style="--i:1"><div class="d-row"><span class="d-av">A</span><span>Ayah<small>Nasi ayam · 1:10 ptg</small></span></div></div>
+              <div class="d-box pop" style="--i:2"><div class="d-row"><span class="d-av">I</span><span>Ibu<small>Bubur nasi · 8:05 pg</small></span></div></div>
+              <div class="d-box pop" style="--i:3"><span>Berat badan</span><b>Tidak pernah dikongsi</b></div>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p5" aria-labelledby="fx-t5">
+            <span class="tag">Android sahaja</span>
+            <h3>Tidur dan widget</h3>
+            <p>Jejak tidur secara automatik dan log air terus daripada widget skrin utama.</p>
+            <div class="demo">
+              <div class="d-sleep pop" style="--i:0"><i style="--h:62%;--i:0"></i><i style="--h:80%;--i:1"></i><i style="--h:55%;--i:2"></i><i style="--h:90%;--i:3"></i><i style="--h:70%;--i:4"></i><i style="--h:95%;--i:5"></i><i style="--h:75%;--i:6"></i></div>
+              <div class="d-days"><span>Isn</span><span>Sel</span><span>Rab</span><span>Kha</span><span>Jum</span><span>Sab</span><span>Ahd</span></div>
+              <div class="d-box pop" style="--i:2"><span>Purata tidur</span><b>6 j 40 m</b></div>
+              <div class="d-box pop" style="--i:3"><span>Air hari ini</span><b>6 / 8 gelas</b></div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <section id="demo" class="demo-sec">
+    <div class="demo-stick">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="label">Demo langsung</p>
+          <h2 class="title"><span class="sig">Tanya,</span> <span class="impact"><span class="hl">app jawab</span></span></h2>
+          <p class="lede">Scroll untuk lihat apa yang HealthyBite boleh buat dalam sehari.</p>
+        </div>
+      </div>
+      <div class="demo-stage">
+        <div class="demo-col l">
+          <div class="pc"><span class="q">Berapa kalori roti canai ni?</span><span class="r">≈ 300 kcal. Simpan ke log?</span><span class="lb">Imbas makanan</span></div>
+          <div class="pc"><span class="q">Berapa baki kalori saya?</span><span class="r">760 kcal lagi untuk hari ini.</span><span class="lb">Sasaran harian</span></div>
+          <div class="pc"><span class="q">Dah cukup minum air?</span><span class="r">6 daripada 8 gelas. Lagi 2!</span><span class="lb">Widget air</span></div>
+        </div>
+        <div class="phone demo-phone" role="img" aria-label="Contoh perbualan dalam app HealthyBite">
+          <div class="notch"></div>
+          <h3>Tanya HealthyBite</h3>
+          <p class="d-q">Berapa kalori ni?</p>
+          <p class="d-a">≈ 300 kcal</p>
+          <p class="d-q">Ayah dah makan tengah hari?</p>
+          <p class="d-a">Dah, nasi ayam pukul 1:10 ptg.</p>
+          <div class="scan-btn">Imbas makanan</div>
+        </div>
+        <div class="demo-col r">
+          <div class="pc"><span class="q">Imbas biskut ni.</span><span class="r">140 kcal untuk 3 keping.</span><span class="lb">Imbas barcode</span></div>
+          <div class="pc"><span class="q">Ayah dah makan tengah hari?</span><span class="r">Dah, nasi ayam pukul 1:10 ptg.</span><span class="lb">Mod Keluarga</span></div>
+          <div class="pc"><span class="q">Tidur saya cukup tak minggu ni?</span><span class="r">Purata 6 jam 40 minit setiap malam.</span><span class="lb">Jejak tidur</span></div>
+        </div>
+      </div>
+      <p class="caption" style="margin-top:8px">Contoh paparan. Angka hanya untuk ilustrasi.</p>
     </div>
   </section>
 
@@ -754,14 +965,27 @@
 
   <section id="tentang" style="padding-top:0">
     <div class="wrap about-grid">
-      <div class="id-card">
-        <div class="avatar" aria-hidden="true">S</div>
-        <dl>
-          <div><dt>Nama</dt><dd>Muhammad Shah Redza Bin Shahrir</dd></div>
-          <div><dt>Program</dt><dd>Diploma Teknologi Komputer (Big Data)</dd></div>
-          <div><dt>Institusi</dt><dd>TVETMARA Lumut</dd></div>
-          <div><dt>Dijangka tamat</dt><dd>Jun 2027</dd></div>
-        </dl>
+      <div class="flip" tabindex="0" role="button" aria-pressed="false" aria-label="Kad pengenalan, klik untuk pusing">
+        <div class="flip-in">
+          <div class="flip-face front">
+            <span class="tnum">01</span>
+            <div class="avatar" aria-hidden="true">S</div>
+            <span class="role">Pembangun · HealthyBite</span>
+            <span class="who">Muhammad Shah Redza Bin Shahrir</span>
+            <span class="hint">Klik untuk pusing ↻</span>
+            <i class="glare"></i>
+          </div>
+          <div class="flip-face back">
+            <dl>
+              <div><dt>Nama</dt><dd>Muhammad Shah Redza Bin Shahrir</dd></div>
+              <div><dt>Program</dt><dd>Diploma Teknologi Komputer (Big Data)</dd></div>
+              <div><dt>Institusi</dt><dd>TVETMARA Lumut</dd></div>
+              <div><dt>Dijangka tamat</dt><dd>Jun 2027</dd></div>
+            </dl>
+            <span class="hint">Klik untuk pusing ↻</span>
+            <i class="glare"></i>
+          </div>
+        </div>
       </div>
       <div class="about-copy">
         <p class="label">Tentang saya</p>
@@ -878,7 +1102,7 @@
       var i = Array.prototype.indexOf.call(el.parentNode.children, el);
       el.style.setProperty("--d", (i * 0.12) + "s");
     });
-    var groups = [".grid", ".steps", ".shots", ".faq", ".cols", ".install", ".hero-sub"];
+    var groups = [".grid", ".steps", ".shots", ".faq", ".cols", ".install", ".hero-sub", ".fx-list"];
     groups.forEach(function (sel) {
       document.querySelectorAll(sel).forEach(function (g) {
         Array.prototype.forEach.call(g.children, function (c, i) {
@@ -887,7 +1111,7 @@
         });
       });
     });
-    document.querySelectorAll(".label, .section-head .lede, .panel, .id-card, .about-copy > .lede, .stack, .meta, .qr, .notice, .foot-row").forEach(function (el) {
+    document.querySelectorAll(".label, .section-head .lede, .panel, .flip, .about-copy > .lede, .stack, .meta, .qr, .notice, .foot-row").forEach(function (el) {
       el.classList.add("rv");
     });
 
@@ -934,8 +1158,8 @@
       addEventListener("pointerdown", function () { ring.classList.add("down"); });
       addEventListener("pointerup", function () { ring.classList.remove("down"); });
       document.addEventListener("pointerover", function (e) {
-        ring.classList.toggle("hover", !!e.target.closest("a, button, summary, .card, .phone, .hadith-bar"));
-        ring.classList.toggle("dark", !!e.target.closest(".band, footer, .phone, .id-card, .hadith-bar"));
+        ring.classList.toggle("hover", !!e.target.closest("a, button, summary, .card, .phone, .hadith-bar, .flip, .pc"));
+        ring.classList.toggle("dark", !!e.target.closest(".band, footer, .phone, .flip, .hadith-bar, .fx-view"));
       });
       (function moveCursor() {
         rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
@@ -1017,6 +1241,125 @@
       });
     }, { threshold: 0.6 });
     marks.forEach(function (m) { io.observe(m); });
+  })();
+
+  // Scroll progress, active nav link, mobile menu.
+  (function () {
+    var prog = document.getElementById("prog");
+    var header = document.querySelector("header");
+    var burger = document.querySelector(".burger"), menu = document.getElementById("mmenu");
+    function onScroll() {
+      var max = document.documentElement.scrollHeight - innerHeight;
+      prog.style.width = (max > 0 ? scrollY / max * 100 : 0) + "%";
+    }
+    addEventListener("scroll", onScroll, { passive: true }); onScroll();
+    function setHH() { document.documentElement.style.setProperty("--hh", header.offsetHeight + "px"); }
+    setHH(); addEventListener("resize", setHH);
+    function closeMenu() { menu.classList.remove("open"); burger.setAttribute("aria-expanded", "false"); }
+    burger.addEventListener("click", function () {
+      var open = !menu.classList.contains("open");
+      menu.classList.toggle("open", open); burger.setAttribute("aria-expanded", String(open));
+    });
+    menu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeMenu); });
+    addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+    var links = document.querySelectorAll('header nav a[href^="#"]:not(.brand), .mmenu a');
+    document.querySelectorAll("main section[id]").forEach(function (sec) {
+      new IntersectionObserver(function (en) {
+        en.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          links.forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + sec.id); });
+        });
+      }, { rootMargin: "-45% 0px -50% 0px" }).observe(sec);
+    });
+  })();
+
+  // Feature explorer: hover, click or arrow keys pick a feature; it cycles on its own until touched.
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll(".fx-tab"));
+    var panels = document.querySelectorAll(".fx-panel");
+    if (!tabs.length) return;
+    var cur = 0, auto = !matchMedia("(prefers-reduced-motion: reduce)").matches, visible = false;
+    function show(i) {
+      if (i === cur) return;
+      tabs[cur].setAttribute("aria-selected", "false"); panels[cur].classList.remove("on");
+      cur = i;
+      tabs[cur].setAttribute("aria-selected", "true"); panels[cur].classList.add("on");
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener("click", function () { auto = false; show(i); });
+      t.addEventListener("mouseenter", function () { if (matchMedia("(hover: hover)").matches) { auto = false; show(i); } });
+      t.addEventListener("keydown", function (e) {
+        var d = e.key === "ArrowDown" || e.key === "ArrowRight" ? 1 : e.key === "ArrowUp" || e.key === "ArrowLeft" ? -1 : 0;
+        if (!d) return;
+        e.preventDefault(); auto = false;
+        var n = (cur + d + tabs.length) % tabs.length; show(n); tabs[n].focus();
+      });
+    });
+    new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: 0.3 }).observe(document.querySelector(".fx"));
+    setInterval(function () { if (auto && visible) show((cur + 1) % tabs.length); }, 5200);
+  })();
+
+  // Flip card: click / Enter / Space flips; tilt and glare follow the pointer.
+  (function () {
+    var card = document.querySelector(".flip");
+    if (!card) return;
+    var inner = card.querySelector(".flip-in");
+    function flip() { var on = card.classList.toggle("flipped"); card.setAttribute("aria-pressed", String(on)); }
+    card.addEventListener("click", flip);
+    card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+    if (!matchMedia("(hover: hover) and (pointer: fine)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    card.addEventListener("pointermove", function (e) {
+      var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      inner.style.setProperty("--ry", ((x - .5) * 14) + "deg");
+      inner.style.setProperty("--rx", ((.5 - y) * 12) + "deg");
+      card.querySelectorAll(".glare").forEach(function (g) { g.style.setProperty("--mx", x * 100 + "%"); g.style.setProperty("--my", y * 100 + "%"); });
+    });
+    card.addEventListener("pointerleave", function () { inner.style.setProperty("--rx", "0deg"); inner.style.setProperty("--ry", "0deg"); });
+  })();
+
+  // Live demo: on wide screens the section pins and the cards fly out from behind the phone as you scroll.
+  (function () {
+    var sec = document.getElementById("demo");
+    if (!sec || !document.documentElement.classList.contains("anim")) return;
+    var cards = Array.prototype.slice.call(sec.querySelectorAll(".pc")), phone = sec.querySelector(".demo-phone");
+    var offs = [], on = false;
+    function measure() {
+      var wide = innerWidth > 900 && innerHeight > 640;
+      sec.classList.toggle("fly", wide); on = wide;
+      cards.forEach(function (c) { c.style.transform = ""; c.style.opacity = ""; });
+      if (!wide) return;
+      var pr = phone.getBoundingClientRect(), px = pr.left + pr.width / 2, py = pr.top + pr.height / 2;
+      offs = cards.map(function (c) { var r = c.getBoundingClientRect(); return { x: px - (r.left + r.width / 2), y: py - (r.top + r.height / 2) }; });
+      tick();
+    }
+    function tick() {
+      if (!on) return;
+      var r = sec.getBoundingClientRect();
+      var p = Math.max(0, Math.min(1, -r.top / (r.height - innerHeight)));
+      cards.forEach(function (c, i) {
+        var k = Math.max(0, Math.min(1, p * 1.7 - (i % 3) * 0.12 - (i >= 3 ? 0.06 : 0)));
+        var s = 1 - Math.pow(1 - k, 3), o = offs[i];
+        c.style.transform = "translate3d(" + o.x * (1 - s) + "px," + o.y * (1 - s) + "px,0) scale(" + (0.55 + 0.45 * s) + ") rotate(" + ((i >= 3 ? 1 : -1) * 8 * (1 - s)) + "deg)";
+        c.style.opacity = String(Math.min(1, s * 1.6));
+      });
+    }
+    addEventListener("scroll", tick, { passive: true });
+    addEventListener("resize", measure);
+    addEventListener("load", measure);
+    (function loop() { tick(); requestAnimationFrame(loop); })();
+    measure();
+  })();
+
+  // Magnetic buttons.
+  (function () {
+    if (!document.documentElement.classList.contains("anim") || !matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    document.querySelectorAll(".btn, .hb-btn").forEach(function (m) {
+      m.addEventListener("pointermove", function (e) {
+        var r = m.getBoundingClientRect();
+        m.style.transform = "translate(" + (e.clientX - r.left - r.width / 2) * 0.2 + "px," + (e.clientY - r.top - r.height / 2) * 0.3 + "px)";
+      });
+      m.addEventListener("pointerleave", function () { m.style.transform = ""; });
+    });
   })();
 
   // Hadith rotator: click the card (or the arrows) to change; auto-advances unless hovered or reduced motion.
@@ -1223,6 +1566,58 @@
     "Kebersihan": "Cleanliness",
     "Bersuci itu separuh daripada iman.": "Purity is half of faith.",
     "HR Muslim (223)": "Narrated by Muslim (223)",
+    "Buka menu": "Open menu",
+    "Ciri HealthyBite": "HealthyBite features",
+    "AI · Kamera": "AI · Camera",
+    "Pantas": "Quick",
+    "Harian": "Daily",
+    "Sembang": "Chat",
+    "Keluarga": "Family",
+    "Mengimbas...": "Scanning...",
+    "Protein 24 g · Karbo 78 g · Lemak 26 g": "Protein 24 g · Carbs 78 g · Fat 26 g",
+    "Biskut krim (3 keping)": "Cream biscuits (3 pieces)",
+    "Ditambah ke snek": "Added to snacks",
+    "Baki hari ini": "Left today",
+    "🔔 Jangan lupa catat makan tengah hari": "🔔 Don't forget to log lunch",
+    "Nasi lemak tinggi kalori ke?": "Is nasi lemak high in calories?",
+    "Sepinggan biasa sekitar 400 hingga 650 kcal, bergantung pada lauk. Pilih telur rebus dan kurangkan sambal untuk lebih ringan.": "A typical plate is around 400 to 650 kcal, depending on the sides. Pick a boiled egg and go easy on the sambal for a lighter meal.",
+    "Snek sihat petang?": "A healthy afternoon snack?",
+    "Cuba buah-buahan atau segenggam kacang tanpa garam.": "Try some fruit or a handful of unsalted nuts.",
+    "Kod jemputan": "Invite code",
+    "Ayah": "Dad",
+    "Nasi ayam · 1:10 ptg": "Chicken rice · 1:10 pm",
+    "Ibu": "Mum",
+    "Bubur nasi · 8:05 pg": "Rice porridge · 8:05 am",
+    "Berat badan": "Body weight",
+    "Tidak pernah dikongsi": "Never shared",
+    "Isn": "Mon", "Sel": "Tue", "Rab": "Wed", "Kha": "Thu", "Jum": "Fri", "Sab": "Sat", "Ahd": "Sun",
+    "Purata tidur": "Average sleep",
+    "6 j 40 m": "6 h 40 m",
+    "Air hari ini": "Water today",
+    "6 / 8 gelas": "6 / 8 glasses",
+    "Demo langsung": "Live demo",
+    "Tanya,": "Ask,",
+    "app jawab": "the app answers",
+    "Scroll untuk lihat apa yang HealthyBite boleh buat dalam sehari.": "Scroll to see what HealthyBite can do in a day.",
+    "Berapa kalori roti canai ni?": "How many calories in this roti canai?",
+    "≈ 300 kcal. Simpan ke log?": "≈ 300 kcal. Save to log?",
+    "Berapa baki kalori saya?": "How many calories do I have left?",
+    "760 kcal lagi untuk hari ini.": "760 kcal left for today.",
+    "Dah cukup minum air?": "Have I had enough water?",
+    "6 daripada 8 gelas. Lagi 2!": "6 of 8 glasses. 2 to go!",
+    "Widget air": "Water widget",
+    "Contoh perbualan dalam app HealthyBite": "Sample conversation in the HealthyBite app",
+    "Tanya HealthyBite": "Ask HealthyBite",
+    "Berapa kalori ni?": "How many calories is this?",
+    "Ayah dah makan tengah hari?": "Has Dad had lunch?",
+    "Dah, nasi ayam pukul 1:10 ptg.": "Yes, chicken rice at 1:10 pm.",
+    "Imbas biskut ni.": "Scan these biscuits.",
+    "140 kcal untuk 3 keping.": "140 kcal for 3 pieces.",
+    "Tidur saya cukup tak minggu ni?": "Did I sleep enough this week?",
+    "Purata 6 jam 40 minit setiap malam.": "An average of 6 h 40 min a night.",
+    "Kad pengenalan, klik untuk pusing": "ID card, click to flip",
+    "Pembangun · HealthyBite": "Developer · HealthyBite",
+    "Klik untuk pusing ↻": "Click to flip ↻",
     "Privasi": "Privacy"
   };
   var lang = "ms";
