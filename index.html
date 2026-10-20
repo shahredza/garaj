@@ -327,8 +327,21 @@
   html.anim.intro-on .hl { background-size: 0% 42% !important; }
   html.anim.intro-on .hl.full { background-size: 0% 78% !important; color: inherit !important; }
 
+  /* Hero "slice & roll" exit (desktop): hero pins, is cut into strips that slide sideways,
+     and skewed blocks in the page colour eat it away */
+  .hero.pinned { position: sticky; top: var(--hh, 68px); }
+  .hero-fx { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+  .hero-fx .slice { position: absolute; inset: 0; will-change: transform; }
+  .hero-fx .slice > .wrap { position: relative; }
+  .hero-fx .bite { position: absolute; height: var(--h); top: var(--t); left: var(--l); width: 0; clip-path: polygon(var(--o, 30px) 0, 100% 0, calc(100% - var(--o, 30px)) 100%, 0 100%); }
+  .hero-fx .bite, .hero-fx .cover { background-color: var(--bg); background-image: var(--grid); background-size: 64px 64px; background-position: center top; background-attachment: fixed; }
+  .hero-fx .bite.lime { background: var(--lime); }
+  .hero-fx .bite.dark { background: var(--band); }
+  .hero-fx .cover { position: absolute; inset: 0; opacity: 0; }
+
   /* Grid-paper backdrop on light areas */
-  body { background-image: linear-gradient(color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px); background-size: 64px 64px; background-position: center top; }
+  :root { --grid: linear-gradient(color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px); }
+  body { background-image: var(--grid); background-size: 64px 64px; background-position: center top; background-attachment: fixed; }
 
   /* Skewed sweep bars between sections (scroll-driven) */
   .sweep { display: none; }
@@ -1221,6 +1234,74 @@
     }
     if (!introOn) begin();
 
+    // Hero "slice & roll" (wide screens where the hero fits): pin the hero, cut it into strips
+    // that slide sideways at different speeds, while skewed blocks in the page colour eat it.
+    var heroSliced = (function () {
+      var hero = document.querySelector(".hero"), wrap = hero.querySelector(":scope > .wrap");
+      var pin = document.createElement("div"); pin.className = "hero-pin";
+      hero.parentNode.insertBefore(pin, hero); pin.appendChild(hero);
+      var fx = document.createElement("div"); fx.className = "hero-fx"; fx.setAttribute("aria-hidden", "true");
+      hero.appendChild(fx);
+      var BITES = [
+        { t: 4, h: 20, l: 52, d: 0, w: 70 }, { t: 30, h: 16, l: 6, d: .08, w: 60, c: "lime" },
+        { t: 52, h: 24, l: 38, d: .14, w: 90 }, { t: 80, h: 22, l: -6, d: .1, w: 80 },
+        { t: 0, h: 30, l: -12, d: .3, w: 75 }, { t: 26, h: 44, l: 58, d: .24, w: 70 },
+        { t: 62, h: 6, l: 20, d: .2, w: 60, c: "dark" }, { t: 64, h: 40, l: -22, d: .36, w: 110 },
+        { t: 18, h: 40, l: 22, d: .44, w: 100 }
+      ];
+      var bites = BITES.map(function (b) {
+        var el = document.createElement("i");
+        el.className = "bite" + (b.c ? " " + b.c : "");
+        el.style.setProperty("--t", b.t + "%"); el.style.setProperty("--h", b.h + "%"); el.style.setProperty("--l", b.l + "%");
+        fx.appendChild(el); return el;
+      });
+      var cover = document.createElement("div"); cover.className = "cover"; fx.appendChild(cover);
+      var N = 4, SPEED = [-14, 20, -9, 25], slices = null, on = false;
+      function makeSlices() {
+        slices = [];
+        var pt = getComputedStyle(hero).paddingTop;
+        for (var i = 0; i < N; i++) {
+          var sl = document.createElement("div"); sl.className = "slice";
+          sl.style.paddingTop = pt;
+          sl.style.clipPath = "inset(" + (i * 100 / N) + "% -10% " + (100 - (i + 1) * 100 / N) + "% -10%)";
+          var c = wrap.cloneNode(true);
+          c.querySelectorAll("[id]").forEach(function (n) { n.removeAttribute("id"); });
+          sl.appendChild(c); fx.insertBefore(sl, bites[0]); slices.push(sl);
+        }
+        wrap.style.visibility = "hidden";
+      }
+      function dropSlices() {
+        if (!slices) return;
+        slices.forEach(function (sl) { sl.remove(); }); slices = null;
+        wrap.style.visibility = "";
+      }
+      function size() {
+        var hh = document.querySelector("header").offsetHeight;
+        on = innerWidth > 900 && hero.offsetHeight + hh <= innerHeight;
+        hero.classList.toggle("pinned", on);
+        pin.style.height = on ? (hero.offsetHeight + innerHeight * 1.1) + "px" : "";
+        bites.forEach(function (b, i) { b.style.setProperty("--o", Math.round(hero.offsetHeight * BITES[i].h / 100 * 0.36) + "px"); });
+        if (!on) { dropSlices(); bites.forEach(function (b) { b.style.width = "0"; }); cover.style.opacity = "0"; }
+      }
+      size(); addEventListener("resize", size); addEventListener("load", size);
+      function tick() {
+        if (!on) return false;
+        var r = pin.getBoundingClientRect(), hh = parseFloat(getComputedStyle(root).getPropertyValue("--hh")) || 68;
+        var p = Math.max(0, Math.min(1, (hh - r.top) / (r.height - hero.offsetHeight)));
+        if (p <= 0.002) { dropSlices(); bites.forEach(function (b) { b.style.width = "0"; }); cover.style.opacity = "0"; return true; }
+        if (!slices) makeSlices();
+        var e = p * p * (3 - 2 * p);
+        slices.forEach(function (sl, i) { sl.style.transform = "translate3d(" + SPEED[i] * e + "vw,0,0)"; });
+        bites.forEach(function (b, i) {
+          var k = Math.max(0, Math.min(1, (p - BITES[i].d) / 0.5));
+          b.style.width = (1 - Math.pow(1 - k, 3)) * BITES[i].w + "%";
+        });
+        cover.style.opacity = String(Math.max(0, Math.min(1, (p - 0.78) / 0.2)));
+        return true;
+      }
+      return { tick: tick };
+    })();
+
     // Scroll-driven extras: hero splits apart, skewed sweep bars, pinned sideways manifesto.
     (function () {
       var heroEl = document.querySelector(".hero");
@@ -1238,7 +1319,9 @@
       function frame() {
         var vh = innerHeight;
         var hr = heroEl.getBoundingClientRect();
-        if (hr.bottom > 0) {
+        if (heroSliced.tick()) {
+          hSig.style.transform = hImp.style.transform = hPhone.style.transform = "";
+        } else if (hr.bottom > 0) {
           var hp = Math.max(0, Math.min(1, -hr.top / hr.height));
           hSig.style.transform = "translate3d(" + (-hp * 22) + "vw,0,0)";
           hImp.style.transform = "translate3d(" + (hp * 22) + "vw,0,0)";
