@@ -455,7 +455,9 @@
   .shots li:nth-child(even) { margin-top: 40px; }
   .shots figure { margin: 0; display: grid; gap: 12px; }
   .shot { aspect-ratio: 9 / 19.5; background: var(--surface); border: 6px solid var(--band); border-radius: 34px; overflow: hidden; display: grid; place-items: center; }
-  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shot img { width: 100%; height: 100%; object-fit: contain; object-position: center top; display: block; }
+  .shot img.pin-bottom { object-position: center bottom; }
+  .shot:has(img) { background: #f1f6ef; }
   .shot .ph { font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--muted); padding: 16px; text-align: center; }
   .shots figcaption { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
 
@@ -1024,13 +1026,12 @@
         <h2 class="title"><span class="sig">Lihat dulu,</span> <span class="impact"><span class="hl">pasang kemudian</span></span></h2>
         <p class="lede">Paparan sebenar daripada HealthyBite pada telefon Android.</p>
       </div>
-      <!-- Letak screenshot app dalam folder "screenshots" di sebelah index.html,
-           dengan nama skrin-1.png hingga skrin-4.png, kemudian tukar data-ready="false" kepada "true". -->
-      <ul class="shots" data-ready="false">
-        <li><figure><div class="shot"><img data-src="screenshots/skrin-1.png" alt="Skrin utama HealthyBite" loading="lazy"></div><figcaption>Skrin utama</figcaption></figure></li>
-        <li><figure><div class="shot"><img data-src="screenshots/skrin-2.png" alt="Imbas gambar makanan" loading="lazy"></div><figcaption>Imbas makanan</figcaption></figure></li>
-        <li><figure><div class="shot"><img data-src="screenshots/skrin-3.png" alt="Pembantu pemakanan" loading="lazy"></div><figcaption>Pembantu pemakanan</figcaption></figure></li>
-        <li><figure><div class="shot"><img data-src="screenshots/skrin-4.png" alt="Mod Keluarga" loading="lazy"></div><figcaption>Mod Keluarga</figcaption></figure></li>
+      <!-- Tangkapan skrin sebenar app, dalam images/screenshots/. -->
+      <ul class="shots">
+        <li><figure><div class="shot"><img src="images/screenshots/home.png" alt="Skrin utama HealthyBite menunjukkan baki kalori, makro, air dan tidur hari ini" width="696" height="1530" loading="lazy"></div><figcaption>Skrin utama</figcaption></figure></li>
+        <li><figure><div class="shot"><img src="images/screenshots/ai.png" alt="HealthyBite AI mencadangkan menu makan malam tinggi protein bawah 500 kcal" width="684" height="1532" loading="lazy"></div><figcaption>HealthyBite AI</figcaption></figure></li>
+        <li><figure><div class="shot"><img src="images/screenshots/family.png" alt="Skrin Family untuk mencipta keluarga atau menyertai dengan kod jemputan" width="684" height="1130" loading="lazy"></div><figcaption>Mod Keluarga</figcaption></figure></li>
+        <li><figure><div class="shot"><img class="pin-bottom" src="images/screenshots/meals.png" alt="Bahagian makanan hari ini dengan pilihan Snap, Say it dan Barcode untuk mencatat makanan" width="680" height="744" loading="lazy"></div><figcaption>Log makanan</figcaption></figure></li>
       </ul>
     </div>
   </section>
@@ -2043,6 +2044,11 @@
     "Scroll untuk teroka": "Scroll to explore",
     "Pilih bab": "Choose a chapter",
     "Mula": "Start",
+    "Skrin utama HealthyBite menunjukkan baki kalori, makro, air dan tidur hari ini": "HealthyBite home screen showing today's remaining calories, macros, water and sleep",
+    "HealthyBite AI mencadangkan menu makan malam tinggi protein bawah 500 kcal": "HealthyBite AI suggesting a high-protein dinner under 500 kcal",
+    "Skrin Family untuk mencipta keluarga atau menyertai dengan kod jemputan": "Family screen for creating a family or joining with an invite code",
+    "Bahagian makanan hari ini dengan pilihan Snap, Say it dan Barcode untuk mencatat makanan": "Today's meals section with Snap, Say it and Barcode options for logging food",
+    "Log makanan": "Meal log",
     "Privasi": "Privacy"
   };
   var lang = "ms";
@@ -2081,15 +2087,10 @@
   try { if (localStorage.getItem("hb-lang") === "en") lang = "en"; } catch (e) {}
 
   // Gallery: show a placeholder when a screenshot file is missing.
-  (function () {
-    var ready = (document.querySelector(".shots") || {}).dataset;
-    document.querySelectorAll(".shot img").forEach(function (img) {
-      function fallback() { img.parentElement.innerHTML = '<span class="ph">Screenshot akan datang</span>'; applyLang(); }
-      if (!ready || ready.ready !== "true") { fallback(); return; }
-      img.addEventListener("error", fallback);
-      img.src = img.dataset.src;
-    });
-  })();
+  document.querySelectorAll(".shot img").forEach(function (img) {
+    function fallback() { img.parentElement.innerHTML = '<span class="ph">Screenshot akan datang</span>'; applyLang(); }
+    if (img.complete && img.naturalWidth === 0) fallback(); else img.addEventListener("error", fallback);
+  });
 
   // QR: point at the APK link once it is set, otherwise at this page's download section.
   (function () {
