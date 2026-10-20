@@ -196,6 +196,32 @@
   .steps h3 { font-size: 24px; font-stretch: 112%; }
   .steps p { color: var(--band-muted); font-size: 15.5px; }
 
+  /* Hadith rotator at the top */
+  .hadith-top { padding: 20px 0 0; }
+  .hadith-bar { position: relative; overflow: hidden; background: var(--band); color: var(--band-fg); border-radius: 28px; padding: 26px 30px 30px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 36px; cursor: pointer; user-select: none; -webkit-user-select: none; }
+  .hb-side { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .hb-label { background: var(--lime); color: var(--on-lime); font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; }
+  .hb-count { font-size: 13px; color: var(--band-muted); font-variant-numeric: tabular-nums; }
+  .hb-count b { color: var(--band-fg); font-weight: 900; font-stretch: 125%; font-size: 30px; letter-spacing: -.03em; margin-right: 2px; }
+  .hb-btns { display: flex; gap: 8px; margin-top: auto; }
+  .hb-btn { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--band-line); background: transparent; color: var(--band-fg); font: inherit; font-size: 17px; font-weight: 700; display: grid; place-items: center; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s; }
+  .hb-btn:hover { background: var(--lime); color: var(--on-lime); border-color: var(--lime); }
+  .hb-stack { display: grid; }
+  .hb-item { grid-area: 1 / 1; margin: 0; display: grid; gap: 10px; align-content: center; opacity: 0; visibility: hidden; translate: 0 18px; transition: opacity .5s ease, translate .7s cubic-bezier(.16,1,.3,1), visibility 0s .5s; }
+  .hb-item.on { opacity: 1; visibility: visible; translate: 0 0; transition: opacity .6s ease .1s, translate .8s cubic-bezier(.16,1,.3,1) .1s, visibility 0s; }
+  .hb-item .ar { font-size: clamp(22px, 2.3vw, 30px); line-height: 1.8; color: var(--band-fg); }
+  .hb-item .tr { font-size: clamp(18px, 1.7vw, 22px); color: var(--band-fg); }
+  .hb-item .src { color: var(--band-muted); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .hb-tag { border: 1px solid var(--lime); color: var(--lime); border-radius: 99px; padding: 2px 9px; font-size: 11px; }
+  .hb-hint { max-width: 12ch; line-height: 1.4; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--band-muted); }
+  .hb-progress { position: absolute; left: 0; bottom: 0; height: 4px; width: 100%; background: var(--lime); transform-origin: left; transform: scaleX(0); }
+  @media (max-width: 900px) {
+    .hadith-bar { grid-template-columns: minmax(0, 1fr); padding: 20px 20px 24px; border-radius: 22px; }
+    .hb-side { flex-direction: row; align-items: center; flex-wrap: wrap; }
+    .hb-btns { margin: 0 0 0 auto; }
+    .hb-hint { display: none; }
+  }
+
   /* Sunnah */
   .ar { font-family: "Amiri", "Traditional Arabic", serif; direction: rtl; text-align: right; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.9; }
   .tr { font-family: var(--font-serif); font-style: italic; font-size: 21px; line-height: 1.35; }
@@ -382,6 +408,102 @@
 </header>
 
 <main id="atas">
+  <section class="hadith-top" aria-label="Hadis tentang pemakanan dan kesihatan">
+    <div class="wrap">
+      <div class="hadith-bar" id="hadith-bar">
+        <div class="hb-side">
+          <span class="hb-label">Hadis</span>
+          <span class="hb-count"><b id="hb-now">01</b> / 11</span>
+          <span class="hb-hint">Klik untuk hadis lain</span>
+          <div class="hb-btns">
+            <button type="button" class="hb-btn" id="hb-prev" aria-label="Hadis sebelum">←</button>
+            <button type="button" class="hb-btn" id="hb-next" aria-label="Hadis seterusnya">→</button>
+          </div>
+        </div>
+        <div class="hb-stack" aria-live="polite">
+          <figure class="hb-item on" aria-hidden="false">
+            <p class="ar" lang="ar" dir="rtl">مَا مَلَأَ آدَمِيٌّ وِعَاءً شَرًّا مِنْ بَطْنٍ، بِحَسْبِ ابْنِ آدَمَ أُكُلَاتٌ يُقِمْنَ صُلْبَهُ، فَإِنْ كَانَ لَا مَحَالَةَ فَثُلُثٌ لِطَعَامِهِ وَثُلُثٌ لِشَرَابِهِ وَثُلُثٌ لِنَفَسِهِ</p>
+            <figcaption>
+              <p class="tr">Tidak ada bekas yang diisi oleh anak Adam yang lebih buruk daripada perutnya. Cukuplah bagi anak Adam beberapa suap untuk menegakkan tulang belakangnya. Jika perlu juga, maka sepertiga untuk makanannya, sepertiga untuk minumannya dan sepertiga untuk nafasnya.</p>
+              <p class="src"><span class="hb-tag">Kawal porsi</span> HR at-Tirmizi (2380) dan Ibn Majah (3349). Hasan sahih.</p>
+            </figcaption>
+          </figure>
+          <figure class="hb-item" aria-hidden="true">
+            <p class="ar" lang="ar" dir="rtl">نِعْمَتَانِ مَغْبُونٌ فِيهِمَا كَثِيرٌ مِنَ النَّاسِ: الصِّحَّةُ وَالْفَرَاغُ</p>
+            <figcaption>
+              <p class="tr">Dua nikmat yang ramai manusia rugi padanya: kesihatan dan masa lapang.</p>
+              <p class="src"><span class="hb-tag">Kesihatan</span> HR al-Bukhari (6412)</p>
+            </figcaption>
+          </figure>
+          <figure class="hb-item" aria-hidden="true">
+            <p class="ar" lang="ar" dir="rtl">يَا غُلَامُ، سَمِّ اللَّهَ، وَكُلْ بِيَمِينِكَ، وَكُلْ مِمَّا يَلِيكَ</p>
+            <figcaption>
+              <p class="tr">Wahai anak, sebutlah nama Allah, makanlah dengan tangan kananmu, dan makanlah daripada makanan yang dekat denganmu.</p>
+              <p class="src"><span class="hb-tag">Adab makan</span> HR al-Bukhari (5376) dan Muslim (2022)</p>
+            </figcaption>
+          </figure>
+          <figure class="hb-item" aria-hidden="true">
+            <p class="ar" lang="ar" dir="rtl">الْمُؤْمِنُ الْقَوِيُّ خَيْرٌ وَأَحَبُّ إِلَى اللَّهِ مِنَ الْمُؤْمِنِ الضَّعِيفِ، وَفِي كُلٍّ خَيْرٌ</p>
+            <figcaption>
+              <p class="tr">Mukmin yang kuat lebih baik dan lebih dicintai Allah daripada mukmin yang lemah, dan pada kedua-duanya ada kebaikan.</p>
+              <p class="src"><span class="hb-tag">Kekuatan</span> HR Muslim (2664)</p>
+            </figcaption>
+          </figure>
+          <figure class="hb-item" aria-hidden="true">
+            <p class="ar" lang="ar" dir="rtl">طَعَامُ الِاثْنَيْنِ كَافِي الثَّلَاثَةِ، وَطَعَامُ الثَّلَاثَةِ كَافِي الْأَرْبَعَةِ</p>
+            <figcaption>
+              <p class="tr">Makanan untuk dua orang mencukupi untuk tiga orang, dan makanan untuk tiga orang mencukupi untuk empat orang.</p>
+              <p class="src"><span class="hb-tag">Berkongsi</span> HR al-Bukhari (5392) dan Muslim (2058)</p>
+            </figcaption>
+          </figure>
+          <figure class="hb-item" aria-hidden="true">
+            <p class="ar" lang="ar" dir="rtl">اغْتَنِمْ خَمْسًا قَبْلَ خَمْسٍ: شَبَابَكَ قَبْلَ هَرَمِكَ، وَصِحَّتَكَ قَبْلَ سَقَمِكَ، وَغِنَاكَ قَبْلَ فَقْرِكَ، وَفَرَاغَكَ قَبْلَ شُغْلِكَ، وَحَيَاتَكَ قَبْلَ مَوْتِكَ</p>
+            <figcaption>
+              <p class="tr">Rebutlah lima perkara sebelum lima perkara: mudamu sebelum tuamu, sihatmu sebelum sakitmu, kayamu sebelum miskinmu, lapangmu sebelum sibukmu, dan hidupmu sebelum matimu.</p>
+              <p class="src"><span class="hb-tag">Rebut peluang</span> HR al-Hakim dalam al-Mustadrak (7846)</p>
+            </figcaption>
+          </figure>
+          <figure class="hb-item" aria-hidden="true">
+            <p class="ar" lang="ar" dir="rtl">كَانَ رَسُولُ اللَّهِ ﷺ يَتَنَفَّسُ فِي الشَّرَابِ ثَلَاثًا</p>
+            <figcaption>
+              <p class="tr">Rasulullah ﷺ bernafas tiga kali ketika minum (minum dalam tiga teguk, dengan mengambil nafas di luar bekas).</p>
+              <p class="src"><span class="hb-tag">Cara minum</span> HR Muslim (2028)</p>
+            </figcaption>
+          </figure>
+          <figure class="hb-item" aria-hidden="true">
+            <p class="ar" lang="ar" dir="rtl">مَا عَابَ النَّبِيُّ ﷺ طَعَامًا قَطُّ، إِنِ اشْتَهَاهُ أَكَلَهُ، وَإِنْ كَرِهَهُ تَرَكَهُ</p>
+            <figcaption>
+              <p class="tr">Nabi ﷺ tidak pernah sekali-kali mencela makanan. Jika baginda berselera, baginda memakannya. Jika tidak, baginda meninggalkannya.</p>
+              <p class="src"><span class="hb-tag">Bersyukur</span> HR al-Bukhari (5409) dan Muslim (2064)</p>
+            </figcaption>
+          </figure>
+          <figure class="hb-item" aria-hidden="true">
+            <p class="ar" lang="ar" dir="rtl">مَا أَنْزَلَ اللَّهُ دَاءً إِلَّا أَنْزَلَ لَهُ شِفَاءً</p>
+            <figcaption>
+              <p class="tr">Allah tidak menurunkan sesuatu penyakit melainkan Dia turut menurunkan penawarnya.</p>
+              <p class="src"><span class="hb-tag">Ubat</span> HR al-Bukhari (5678)</p>
+            </figcaption>
+          </figure>
+          <figure class="hb-item" aria-hidden="true">
+            <p class="ar" lang="ar" dir="rtl">تَسَحَّرُوا فَإِنَّ فِي السَّحُورِ بَرَكَةً</p>
+            <figcaption>
+              <p class="tr">Bersahurlah kamu, kerana pada sahur itu ada keberkatan.</p>
+              <p class="src"><span class="hb-tag">Sahur</span> HR al-Bukhari (1923) dan Muslim (1095)</p>
+            </figcaption>
+          </figure>
+          <figure class="hb-item" aria-hidden="true">
+            <p class="ar" lang="ar" dir="rtl">الطُّهُورُ شَطْرُ الْإِيمَانِ</p>
+            <figcaption>
+              <p class="tr">Bersuci itu separuh daripada iman.</p>
+              <p class="src"><span class="hb-tag">Kebersihan</span> HR Muslim (223)</p>
+            </figcaption>
+          </figure>
+        </div>
+        <i class="hb-progress" aria-hidden="true"></i>
+      </div>
+    </div>
+  </section>
+
   <section class="hero">
     <canvas class="trail" aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
@@ -812,8 +934,8 @@
       addEventListener("pointerdown", function () { ring.classList.add("down"); });
       addEventListener("pointerup", function () { ring.classList.remove("down"); });
       document.addEventListener("pointerover", function (e) {
-        ring.classList.toggle("hover", !!e.target.closest("a, button, summary, .card, .phone"));
-        ring.classList.toggle("dark", !!e.target.closest(".band, footer, .phone, .id-card"));
+        ring.classList.toggle("hover", !!e.target.closest("a, button, summary, .card, .phone, .hadith-bar"));
+        ring.classList.toggle("dark", !!e.target.closest(".band, footer, .phone, .id-card, .hadith-bar"));
       });
       (function moveCursor() {
         rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
@@ -895,6 +1017,37 @@
       });
     }, { threshold: 0.6 });
     marks.forEach(function (m) { io.observe(m); });
+  })();
+
+  // Hadith rotator: click the card (or the arrows) to change; auto-advances unless hovered or reduced motion.
+  (function () {
+    var bar = document.getElementById("hadith-bar");
+    if (!bar) return;
+    var items = bar.querySelectorAll(".hb-item"), now = document.getElementById("hb-now");
+    var bar_ = bar.querySelector(".hb-progress"), i = 0, timer = null, paused = false;
+    var auto = !matchMedia("(prefers-reduced-motion: reduce)").matches, DUR = 10000;
+    function show(n) {
+      items[i].classList.remove("on"); items[i].setAttribute("aria-hidden", "true");
+      i = (n + items.length) % items.length;
+      items[i].classList.add("on"); items[i].setAttribute("aria-hidden", "false");
+      now.textContent = String(i + 1).padStart(2, "0");
+      restart();
+    }
+    function restart() {
+      if (!auto) return;
+      clearTimeout(timer);
+      bar_.style.transition = "none"; bar_.style.transform = "scaleX(0)";
+      if (paused) return;
+      void bar_.offsetWidth;
+      bar_.style.transition = "transform " + DUR + "ms linear"; bar_.style.transform = "scaleX(1)";
+      timer = setTimeout(function () { show(i + 1); }, DUR);
+    }
+    bar.addEventListener("click", function (e) {
+      if (e.target.closest("#hb-prev")) show(i - 1); else show(i + 1);
+    });
+    bar.addEventListener("pointerenter", function () { paused = true; restart(); });
+    bar.addEventListener("pointerleave", function () { paused = false; restart(); });
+    restart();
   })();
 
   // Language switch. The page is written in Malay; EN maps each Malay string to English.
@@ -1044,6 +1197,32 @@
     "Nabi ﷺ tidak pernah sekali-kali mencela makanan. Jika baginda berselera, baginda memakannya. Jika tidak, baginda meninggalkannya.": "The Prophet ﷺ never once criticised any food. If he liked it, he ate it. If not, he left it.",
     "HR al-Bukhari (5409) dan Muslim (2064)": "Narrated by al-Bukhari (5409) and Muslim (2064)",
     "Terjemahan ialah maksud ringkas. Rujuk guru agama atau sumber muktabar untuk huraian penuh.": "Translations give the brief meaning. Consult a religious teacher or a recognised source for full explanation.",
+    "Hadis tentang pemakanan dan kesihatan": "Hadith on eating and health",
+    "Hadis": "Hadith",
+    "Hadis sebelum": "Previous hadith",
+    "Hadis seterusnya": "Next hadith",
+    "Klik untuk hadis lain": "Click for another hadith",
+    "Kesihatan": "Health",
+    "Dua nikmat yang ramai manusia rugi padanya: kesihatan dan masa lapang.": "Two blessings that many people are cheated of: health and free time.",
+    "HR al-Bukhari (6412)": "Narrated by al-Bukhari (6412)",
+    "Kekuatan": "Strength",
+    "Mukmin yang kuat lebih baik dan lebih dicintai Allah daripada mukmin yang lemah, dan pada kedua-duanya ada kebaikan.": "The strong believer is better and more beloved to Allah than the weak believer, and there is good in both.",
+    "HR Muslim (2664)": "Narrated by Muslim (2664)",
+    "Rebut peluang": "Seize the time",
+    "Rebutlah lima perkara sebelum lima perkara: mudamu sebelum tuamu, sihatmu sebelum sakitmu, kayamu sebelum miskinmu, lapangmu sebelum sibukmu, dan hidupmu sebelum matimu.": "Take advantage of five before five: your youth before old age, your health before illness, your wealth before poverty, your free time before you are busy, and your life before death.",
+    "HR al-Hakim dalam al-Mustadrak (7846)": "Narrated by al-Hakim in al-Mustadrak (7846)",
+    "Cara minum": "How to drink",
+    "Rasulullah ﷺ bernafas tiga kali ketika minum (minum dalam tiga teguk, dengan mengambil nafas di luar bekas).": "The Messenger of Allah ﷺ would breathe three times while drinking (drinking in three sips, taking breath outside the vessel).",
+    "HR Muslim (2028)": "Narrated by Muslim (2028)",
+    "Ubat": "Cure",
+    "Allah tidak menurunkan sesuatu penyakit melainkan Dia turut menurunkan penawarnya.": "Allah has not sent down any disease without also sending down its cure.",
+    "HR al-Bukhari (5678)": "Narrated by al-Bukhari (5678)",
+    "Sahur": "Suhoor",
+    "Bersahurlah kamu, kerana pada sahur itu ada keberkatan.": "Eat suhoor, for in suhoor there is blessing.",
+    "HR al-Bukhari (1923) dan Muslim (1095)": "Narrated by al-Bukhari (1923) and Muslim (1095)",
+    "Kebersihan": "Cleanliness",
+    "Bersuci itu separuh daripada iman.": "Purity is half of faith.",
+    "HR Muslim (223)": "Narrated by Muslim (223)",
     "Privasi": "Privacy"
   };
   var lang = "ms";
