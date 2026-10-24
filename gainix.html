@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gainix · GX Works Motorsport</title>
 <meta name="description" content="Pelan senaman ikut matlamat dan 1RM anda. Gainix cadangkan set, ulangan dan berat, kemudian rekod setiap set dengan pemasa rehat.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gainix · GX Works Motorsport">
+<meta property="og:description" content="Pelan senaman ikut matlamat dan 1RM anda. Gainix cadangkan set, ulangan dan berat, kemudian rekod setiap set dengan pemasa rehat.">
+<meta property="og:url" content="https://shahredza.github.io/garaj/gainix.html">
+<meta property="og:image" content="https://shahredza.github.io/garaj/images/og/gainix.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0c1013" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#e7e9ed">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,6 +149,32 @@
     html { scroll-behavior: auto; }
     .rv, .line-in > span { opacity: 1; transform: none; transition: none; }
   }
+
+  /* Log perubahan, status bina, kiraan muat turun, hubungi */
+  [hidden] { display: none !important; }
+  .log { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--fg); }
+  .log li { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .log .v { display: block; font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase; color: var(--acc); }
+  .log time { display: block; margin-top: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: .12em; color: var(--muted); }
+  .log p { max-width: 40em; }
+  @media (max-width: 560px) { .log li { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+  .build { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .build li { padding: 18px; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line); display: grid; gap: 6px; }
+  .build li.done, .build li.now { border-top-color: var(--acc); }
+  .build li.now { background-image: repeating-linear-gradient(-45deg, transparent 0 12px, color-mix(in srgb, var(--acc) 14%, transparent) 12px 24px); }
+  .build b { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; }
+  .build small { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .build li.done small, .build li.now small { color: var(--acc); }
+  @media (max-width: 700px) { .build { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .contact { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .contact a { color: var(--fg); text-underline-offset: 3px; }
+
+  /* Mod gelap: ikut tetapan peranti */
+  @media (prefers-color-scheme: dark) {
+    :root { color-scheme: dark; --bg: #0c1013; --bg2: #141a1e; --fg: #eef1f3; --muted: #95a1a8; --acc: #00d7c4; --acc-ink: #04201d; --line: rgba(255,255,255,.13); --card: #141a1e; }
+    .hero { background: linear-gradient(150deg, #3a414a 0%, #1a1f25 50%, #0c1013 100%); }
+    .hero .tag { color: var(--acc); }
+  }
 </style>
 </head>
 <body>
@@ -215,7 +250,7 @@
           <div class="qr"><svg viewBox="0 0 39 39" shape-rendering="crispEdges" aria-hidden="true"><rect width="39" height="39" fill="#fff"/><path d="M1 1h1v1h-1zM2 1h1v1h-1zM3 1h1v1h-1zM4 1h1v1h-1zM5 1h1v1h-1zM6 1h1v1h-1zM7 1h1v1h-1zM9 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM16 1h1v1h-1zM18 1h1v1h-1zM21 1h1v1h-1zM24 1h1v1h-1zM26 1h1v1h-1zM28 1h1v1h-1zM29 1h1v1h-1zM31 1h1v1h-1zM32 1h1v1h-1zM33 1h1v1h-1zM34 1h1v1h-1zM35 1h1v1h-1zM36 1h1v1h-1zM37 1h1v1h-1zM1 2h1v1h-1zM7 2h1v1h-1zM13 2h1v1h-1zM14 2h1v1h-1zM15 2h1v1h-1zM17 2h1v1h-1zM19 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM23 2h1v1h-1zM27 2h1v1h-1zM29 2h1v1h-1zM31 2h1v1h-1zM37 2h1v1h-1zM1 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM5 3h1v1h-1zM7 3h1v1h-1zM10 3h1v1h-1zM11 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM16 3h1v1h-1zM18 3h1v1h-1zM19 3h1v1h-1zM20 3h1v1h-1zM21 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM27 3h1v1h-1zM31 3h1v1h-1zM33 3h1v1h-1zM34 3h1v1h-1zM35 3h1v1h-1zM37 3h1v1h-1zM1 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM7 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM11 4h1v1h-1zM15 4h1v1h-1zM16 4h1v1h-1zM19 4h1v1h-1zM20 4h1v1h-1zM24 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM29 4h1v1h-1zM31 4h1v1h-1zM33 4h1v1h-1zM34 4h1v1h-1zM35 4h1v1h-1zM37 4h1v1h-1zM1 5h1v1h-1zM3 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM7 5h1v1h-1zM9 5h1v1h-1zM11 5h1v1h-1zM12 5h1v1h-1zM14 5h1v1h-1zM15 5h1v1h-1zM17 5h1v1h-1zM22 5h1v1h-1zM24 5h1v1h-1zM26 5h1v1h-1zM27 5h1v1h-1zM28 5h1v1h-1zM29 5h1v1h-1zM31 5h1v1h-1zM33 5h1v1h-1zM34 5h1v1h-1zM35 5h1v1h-1zM37 5h1v1h-1zM1 6h1v1h-1zM7 6h1v1h-1zM9 6h1v1h-1zM10 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM21 6h1v1h-1zM25 6h1v1h-1zM31 6h1v1h-1zM37 6h1v1h-1zM1 7h1v1h-1zM2 7h1v1h-1zM3 7h1v1h-1zM4 7h1v1h-1zM5 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM9 7h1v1h-1zM11 7h1v1h-1zM13 7h1v1h-1zM15 7h1v1h-1zM17 7h1v1h-1zM19 7h1v1h-1zM21 7h1v1h-1zM23 7h1v1h-1zM25 7h1v1h-1zM27 7h1v1h-1zM29 7h1v1h-1zM31 7h1v1h-1zM32 7h1v1h-1zM33 7h1v1h-1zM34 7h1v1h-1zM35 7h1v1h-1zM36 7h1v1h-1zM37 7h1v1h-1zM9 8h1v1h-1zM14 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM21 8h1v1h-1zM22 8h1v1h-1zM27 8h1v1h-1zM1 9h1v1h-1zM5 9h1v1h-1zM7 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1zM11 9h1v1h-1zM12 9h1v1h-1zM13 9h1v1h-1zM18 9h1v1h-1zM19 9h1v1h-1zM21 9h1v1h-1zM22 9h1v1h-1zM23 9h1v1h-1zM25 9h1v1h-1zM28 9h1v1h-1zM30 9h1v1h-1zM31 9h1v1h-1zM32 9h1v1h-1zM33 9h1v1h-1zM34 9h1v1h-1zM37 9h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM13 10h1v1h-1zM14 10h1v1h-1zM17 10h1v1h-1zM18 10h1v1h-1zM19 10h1v1h-1zM21 10h1v1h-1zM24 10h1v1h-1zM27 10h1v1h-1zM28 10h1v1h-1zM29 10h1v1h-1zM30 10h1v1h-1zM33 10h1v1h-1zM36 10h1v1h-1zM1 11h1v1h-1zM2 11h1v1h-1zM5 11h1v1h-1zM7 11h1v1h-1zM8 11h1v1h-1zM10 11h1v1h-1zM15 11h1v1h-1zM17 11h1v1h-1zM18 11h1v1h-1zM22 11h1v1h-1zM24 11h1v1h-1zM25 11h1v1h-1zM26 11h1v1h-1zM27 11h1v1h-1zM28 11h1v1h-1zM29 11h1v1h-1zM32 11h1v1h-1zM35 11h1v1h-1zM2 12h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM15 12h1v1h-1zM18 12h1v1h-1zM22 12h1v1h-1zM23 12h1v1h-1zM25 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM31 12h1v1h-1zM35 12h1v1h-1zM36 12h1v1h-1zM1 13h1v1h-1zM7 13h1v1h-1zM10 13h1v1h-1zM12 13h1v1h-1zM13 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM21 13h1v1h-1zM22 13h1v1h-1zM23 13h1v1h-1zM30 13h1v1h-1zM31 13h1v1h-1zM32 13h1v1h-1zM34 13h1v1h-1zM35 13h1v1h-1zM36 13h1v1h-1zM37 13h1v1h-1zM2 14h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM11 14h1v1h-1zM13 14h1v1h-1zM14 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM17 14h1v1h-1zM18 14h1v1h-1zM19 14h1v1h-1zM22 14h1v1h-1zM23 14h1v1h-1zM24 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM33 14h1v1h-1zM34 14h1v1h-1zM1 15h1v1h-1zM4 15h1v1h-1zM6 15h1v1h-1zM7 15h1v1h-1zM14 15h1v1h-1zM16 15h1v1h-1zM17 15h1v1h-1zM19 15h1v1h-1zM21 15h1v1h-1zM24 15h1v1h-1zM26 15h1v1h-1zM27 15h1v1h-1zM28 15h1v1h-1zM29 15h1v1h-1zM32 15h1v1h-1zM33 15h1v1h-1zM34 15h1v1h-1zM35 15h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM5 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM11 16h1v1h-1zM12 16h1v1h-1zM13 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM22 16h1v1h-1zM23 16h1v1h-1zM24 16h1v1h-1zM29 16h1v1h-1zM30 16h1v1h-1zM32 16h1v1h-1zM33 16h1v1h-1zM35 16h1v1h-1zM3 17h1v1h-1zM6 17h1v1h-1zM7 17h1v1h-1zM11 17h1v1h-1zM14 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM22 17h1v1h-1zM23 17h1v1h-1zM24 17h1v1h-1zM25 17h1v1h-1zM30 17h1v1h-1zM31 17h1v1h-1zM32 17h1v1h-1zM34 17h1v1h-1zM35 17h1v1h-1zM36 17h1v1h-1zM37 17h1v1h-1zM1 18h1v1h-1zM8 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM14 18h1v1h-1zM15 18h1v1h-1zM18 18h1v1h-1zM19 18h1v1h-1zM21 18h1v1h-1zM22 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM29 18h1v1h-1zM33 18h1v1h-1zM36 18h1v1h-1zM2 19h1v1h-1zM4 19h1v1h-1zM5 19h1v1h-1zM6 19h1v1h-1zM7 19h1v1h-1zM8 19h1v1h-1zM9 19h1v1h-1zM16 19h1v1h-1zM18 19h1v1h-1zM19 19h1v1h-1zM23 19h1v1h-1zM24 19h1v1h-1zM25 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM30 19h1v1h-1zM31 19h1v1h-1zM1 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM6 20h1v1h-1zM8 20h1v1h-1zM9 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM22 20h1v1h-1zM23 20h1v1h-1zM25 20h1v1h-1zM27 20h1v1h-1zM32 20h1v1h-1zM33 20h1v1h-1zM35 20h1v1h-1zM36 20h1v1h-1zM1 21h1v1h-1zM3 21h1v1h-1zM5 21h1v1h-1zM6 21h1v1h-1zM7 21h1v1h-1zM10 21h1v1h-1zM13 21h1v1h-1zM14 21h1v1h-1zM15 21h1v1h-1zM17 21h1v1h-1zM18 21h1v1h-1zM21 21h1v1h-1zM22 21h1v1h-1zM23 21h1v1h-1zM24 21h1v1h-1zM25 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM30 21h1v1h-1zM31 21h1v1h-1zM32 21h1v1h-1zM35 21h1v1h-1zM1 22h1v1h-1zM3 22h1v1h-1zM6 22h1v1h-1zM8 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM11 22h1v1h-1zM12 22h1v1h-1zM16 22h1v1h-1zM17 22h1v1h-1zM19 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM27 22h1v1h-1zM28 22h1v1h-1zM29 22h1v1h-1zM30 22h1v1h-1zM32 22h1v1h-1zM33 22h1v1h-1zM4 23h1v1h-1zM5 23h1v1h-1zM6 23h1v1h-1zM7 23h1v1h-1zM9 23h1v1h-1zM10 23h1v1h-1zM11 23h1v1h-1zM14 23h1v1h-1zM15 23h1v1h-1zM16 23h1v1h-1zM18 23h1v1h-1zM21 23h1v1h-1zM22 23h1v1h-1zM23 23h1v1h-1zM24 23h1v1h-1zM25 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM32 23h1v1h-1zM33 23h1v1h-1zM34 23h1v1h-1zM35 23h1v1h-1zM6 24h1v1h-1zM9 24h1v1h-1zM10 24h1v1h-1zM11 24h1v1h-1zM12 24h1v1h-1zM13 24h1v1h-1zM15 24h1v1h-1zM18 24h1v1h-1zM19 24h1v1h-1zM22 24h1v1h-1zM24 24h1v1h-1zM28 24h1v1h-1zM32 24h1v1h-1zM33 24h1v1h-1zM35 24h1v1h-1zM36 24h1v1h-1zM2 25h1v1h-1zM5 25h1v1h-1zM7 25h1v1h-1zM8 25h1v1h-1zM9 25h1v1h-1zM14 25h1v1h-1zM15 25h1v1h-1zM16 25h1v1h-1zM18 25h1v1h-1zM20 25h1v1h-1zM21 25h1v1h-1zM22 25h1v1h-1zM23 25h1v1h-1zM25 25h1v1h-1zM30 25h1v1h-1zM31 25h1v1h-1zM32 25h1v1h-1zM34 25h1v1h-1zM35 25h1v1h-1zM36 25h1v1h-1zM1 26h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM8 26h1v1h-1zM9 26h1v1h-1zM11 26h1v1h-1zM12 26h1v1h-1zM13 26h1v1h-1zM17 26h1v1h-1zM21 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM25 26h1v1h-1zM27 26h1v1h-1zM28 26h1v1h-1zM30 26h1v1h-1zM33 26h1v1h-1zM34 26h1v1h-1zM3 27h1v1h-1zM5 27h1v1h-1zM6 27h1v1h-1zM7 27h1v1h-1zM10 27h1v1h-1zM11 27h1v1h-1zM12 27h1v1h-1zM13 27h1v1h-1zM14 27h1v1h-1zM17 27h1v1h-1zM18 27h1v1h-1zM21 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM26 27h1v1h-1zM27 27h1v1h-1zM28 27h1v1h-1zM29 27h1v1h-1zM32 27h1v1h-1zM33 27h1v1h-1zM35 27h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM12 28h1v1h-1zM13 28h1v1h-1zM18 28h1v1h-1zM19 28h1v1h-1zM22 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1zM30 28h1v1h-1zM32 28h1v1h-1zM33 28h1v1h-1zM35 28h1v1h-1zM1 29h1v1h-1zM2 29h1v1h-1zM3 29h1v1h-1zM4 29h1v1h-1zM7 29h1v1h-1zM8 29h1v1h-1zM9 29h1v1h-1zM16 29h1v1h-1zM18 29h1v1h-1zM20 29h1v1h-1zM21 29h1v1h-1zM22 29h1v1h-1zM25 29h1v1h-1zM29 29h1v1h-1zM30 29h1v1h-1zM31 29h1v1h-1zM32 29h1v1h-1zM33 29h1v1h-1zM34 29h1v1h-1zM35 29h1v1h-1zM37 29h1v1h-1zM9 30h1v1h-1zM12 30h1v1h-1zM13 30h1v1h-1zM15 30h1v1h-1zM16 30h1v1h-1zM22 30h1v1h-1zM24 30h1v1h-1zM28 30h1v1h-1zM29 30h1v1h-1zM33 30h1v1h-1zM1 31h1v1h-1zM2 31h1v1h-1zM3 31h1v1h-1zM4 31h1v1h-1zM5 31h1v1h-1zM6 31h1v1h-1zM7 31h1v1h-1zM9 31h1v1h-1zM11 31h1v1h-1zM12 31h1v1h-1zM14 31h1v1h-1zM16 31h1v1h-1zM17 31h1v1h-1zM18 31h1v1h-1zM21 31h1v1h-1zM22 31h1v1h-1zM23 31h1v1h-1zM24 31h1v1h-1zM26 31h1v1h-1zM27 31h1v1h-1zM29 31h1v1h-1zM31 31h1v1h-1zM33 31h1v1h-1zM1 32h1v1h-1zM7 32h1v1h-1zM12 32h1v1h-1zM14 32h1v1h-1zM16 32h1v1h-1zM17 32h1v1h-1zM18 32h1v1h-1zM20 32h1v1h-1zM21 32h1v1h-1zM22 32h1v1h-1zM23 32h1v1h-1zM24 32h1v1h-1zM27 32h1v1h-1zM29 32h1v1h-1zM33 32h1v1h-1zM34 32h1v1h-1zM35 32h1v1h-1zM1 33h1v1h-1zM3 33h1v1h-1zM4 33h1v1h-1zM5 33h1v1h-1zM7 33h1v1h-1zM9 33h1v1h-1zM10 33h1v1h-1zM12 33h1v1h-1zM13 33h1v1h-1zM15 33h1v1h-1zM18 33h1v1h-1zM20 33h1v1h-1zM22 33h1v1h-1zM24 33h1v1h-1zM25 33h1v1h-1zM29 33h1v1h-1zM30 33h1v1h-1zM31 33h1v1h-1zM32 33h1v1h-1zM33 33h1v1h-1zM34 33h1v1h-1zM35 33h1v1h-1zM36 33h1v1h-1zM37 33h1v1h-1zM1 34h1v1h-1zM3 34h1v1h-1zM4 34h1v1h-1zM5 34h1v1h-1zM7 34h1v1h-1zM10 34h1v1h-1zM14 34h1v1h-1zM15 34h1v1h-1zM19 34h1v1h-1zM21 34h1v1h-1zM22 34h1v1h-1zM24 34h1v1h-1zM26 34h1v1h-1zM27 34h1v1h-1zM30 34h1v1h-1zM31 34h1v1h-1zM32 34h1v1h-1zM36 34h1v1h-1zM37 34h1v1h-1zM1 35h1v1h-1zM3 35h1v1h-1zM4 35h1v1h-1zM5 35h1v1h-1zM7 35h1v1h-1zM10 35h1v1h-1zM11 35h1v1h-1zM13 35h1v1h-1zM14 35h1v1h-1zM16 35h1v1h-1zM18 35h1v1h-1zM21 35h1v1h-1zM24 35h1v1h-1zM25 35h1v1h-1zM26 35h1v1h-1zM28 35h1v1h-1zM30 35h1v1h-1zM31 35h1v1h-1zM1 36h1v1h-1zM7 36h1v1h-1zM10 36h1v1h-1zM13 36h1v1h-1zM17 36h1v1h-1zM18 36h1v1h-1zM21 36h1v1h-1zM22 36h1v1h-1zM24 36h1v1h-1zM27 36h1v1h-1zM30 36h1v1h-1zM33 36h1v1h-1zM34 36h1v1h-1zM35 36h1v1h-1zM36 36h1v1h-1zM1 37h1v1h-1zM2 37h1v1h-1zM3 37h1v1h-1zM4 37h1v1h-1zM5 37h1v1h-1zM6 37h1v1h-1zM7 37h1v1h-1zM9 37h1v1h-1zM11 37h1v1h-1zM14 37h1v1h-1zM15 37h1v1h-1zM16 37h1v1h-1zM17 37h1v1h-1zM18 37h1v1h-1zM21 37h1v1h-1zM22 37h1v1h-1zM23 37h1v1h-1zM25 37h1v1h-1zM28 37h1v1h-1zM30 37h1v1h-1zM32 37h1v1h-1zM35 37h1v1h-1zM36 37h1v1h-1zM37 37h1v1h-1z" fill="#0b0b0d"/></svg><small><span data-en="Scan with an Android phone">Imbas dengan telefon Android</span></small></div>
         </div>
         </div>
-        <dl class="kv rv"><div><dt><span data-en="Version">Versi</span></dt><dd>1.0.0</dd></div><div><dt><span data-en="Size">Saiz</span></dt><dd>8.6 MB</dd></div><div><dt><span data-en="Platform">Platform</span></dt><dd>Android 6.0+</dd></div><div><dt><span data-en="Languages">Bahasa</span></dt><dd>EN / BM</dd></div></dl>
+        <dl class="kv rv"><div><dt><span data-en="Version">Versi</span></dt><dd>1.0.0</dd></div><div><dt><span data-en="Size">Saiz</span></dt><dd>8.6 MB</dd></div><div><dt><span data-en="Platform">Platform</span></dt><dd>Android 6.0+</dd></div><div data-dl-repo="shahredza/gainix-app" hidden><dt><span data-en="Downloads">Muat turun</span></dt><dd><b data-count>-</b></dd></div><div><dt><span data-en="Languages">Bahasa</span></dt><dd>EN / BM</dd></div></dl>
       </div>
       
       <ol class="install rv">
@@ -259,6 +294,17 @@
     </div>
     <div class="rail" tabindex="0" aria-label="Gainix"><figure class="rv"><div class="frame"><img src="images/gainix/home.jpg" alt="Skrin utama" data-en-alt="Home screen" loading="lazy"></div><figcaption><span data-en="Home screen">Skrin utama</span></figcaption></figure><figure class="rv"><div class="frame"><img src="images/gainix/log.jpg" alt="Log senaman" data-en-alt="Workout log" loading="lazy"></div><figcaption><span data-en="Workout log">Log senaman</span></figcaption></figure><figure class="rv"><div class="frame"><img src="images/gainix/exercise.jpg" alt="Panduan senaman" data-en-alt="Exercise guide" loading="lazy"></div><figcaption><span data-en="Exercise guide">Panduan senaman</span></figcaption></figure><figure class="rv"><div class="frame"><img src="images/gainix/report.jpg" alt="Laporan" data-en-alt="Reports" loading="lazy"></div><figcaption><span data-en="Reports">Laporan</span></figcaption></figure><figure class="rv"><div class="frame"><img src="images/gainix/trainers.jpg" alt="Jurulatih" data-en-alt="Trainers" loading="lazy"></div><figcaption><span data-en="Trainers">Jurulatih</span></figcaption></figure><figure class="rv"><div class="frame"><img src="images/gainix/bm.jpg" alt="Bahasa Melayu" data-en-alt="Malay version" loading="lazy"></div><figcaption><span data-en="Malay version">Bahasa Melayu</span></figcaption></figure></div>
   </section>
+  <section class="sec" id="log" aria-labelledby="l-h">
+    <div class="wrap">
+      <p class="eyebrow rv"><span data-en="Race history">Sejarah perlumbaan</span></p>
+      <h2 id="l-h" class="rv"><span data-en="Changelog">Log perubahan</span></h2>
+      <!-- Release baru di GitHub ditambah automatik oleh releases.js. Tulis di sini untuk versi dwibahasa. -->
+      <ol class="log rv" data-log-repo="shahredza/gainix-app">
+        <li data-tag="v1.0.0"><div><span class="v">v1.0.0</span><time datetime="2026-10-24">24.10.2026</time></div><p><span data-en="First release: 1RM-based weight suggestions, rest timer with voice, supersets and plate calculator, records and badges, gym map and bookings, offline logging and an EN | BM switch.">Versi pertama: cadangan berat ikut 1RM, pemasa rehat dengan suara, superset dan kalkulator plat, rekod dan lencana, peta gim dan tempahan, rekod tanpa internet serta butang EN | BM.</span></p></li>
+      </ol>
+    </div>
+  </section>
+
   <section class="sec" aria-labelledby="o-h">
     <div class="wrap">
       <p class="eyebrow rv"><span data-en="Grid">Grid</span></p>
@@ -268,7 +314,7 @@
   </section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Shah Redza · GX Works Motorsport</span><span><span data-en="Sponsors on this site are made up">Penaja di laman ini rekaan semata-mata</span></span></div></footer>
+<footer><div class="wrap"><span>© 2026 Shah Redza · GX Works Motorsport</span><span><span data-en="Sponsors on this site are made up">Penaja di laman ini rekaan semata-mata</span></span><span class="contact"><a href="https://github.com/shahredza">GitHub</a><a href="mailto:rezashah900@gmail.com">rezashah900@gmail.com</a></span></div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
@@ -312,5 +358,6 @@
     } else els.forEach(function (e) { e.classList.add("in"); });
   })();
 </script>
+<script src="releases.js"></script>
 </body>
 </html>

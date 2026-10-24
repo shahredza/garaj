@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>App 03 · Team 03</title>
 <meta name="description" content="Kereta ketiga sedang dipasang. Nama, livery penuh dan ciri-cirinya akan didedahkan bila APK sedia untuk dimuat turun.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="App 03 · Team 03">
+<meta property="og:description" content="Kereta ketiga sedang dipasang. Nama, livery penuh dan ciri-cirinya akan didedahkan bila APK sedia untuk dimuat turun.">
+<meta property="og:url" content="https://shahredza.github.io/garaj/app03.html">
+<meta property="og:image" content="https://shahredza.github.io/garaj/images/og/app03.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b1030">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,6 +148,25 @@
     html { scroll-behavior: auto; }
     .rv, .line-in > span { opacity: 1; transform: none; transition: none; }
   }
+
+  /* Log perubahan, status bina, kiraan muat turun, hubungi */
+  [hidden] { display: none !important; }
+  .log { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--fg); }
+  .log li { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .log .v { display: block; font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase; color: var(--acc); }
+  .log time { display: block; margin-top: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: .12em; color: var(--muted); }
+  .log p { max-width: 40em; }
+  @media (max-width: 560px) { .log li { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+  .build { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .build li { padding: 18px; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line); display: grid; gap: 6px; }
+  .build li.done, .build li.now { border-top-color: var(--acc); }
+  .build li.now { background-image: repeating-linear-gradient(-45deg, transparent 0 12px, color-mix(in srgb, var(--acc) 14%, transparent) 12px 24px); }
+  .build b { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; }
+  .build small { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .build li.done small, .build li.now small { color: var(--acc); }
+  @media (max-width: 700px) { .build { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .contact { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .contact a { color: var(--fg); text-underline-offset: 3px; }
 </style>
 </head>
 <body>
@@ -214,8 +241,14 @@
         </div>
         <dl class="kv rv"><div><dt><span data-en="Version">Versi</span></dt><dd><span data-en="Coming soon">Akan datang</span></dd></div><div><dt><span data-en="Size">Saiz</span></dt><dd>-</dd></div><div><dt><span data-en="Platform">Platform</span></dt><dd>Android</dd></div><div><dt><span data-en="Status">Status</span></dt><dd><span data-en="In the garage">Dalam garaj</span></dd></div></dl>
       </div>
-      
-      
+      <p class="eyebrow rv" style="margin-top:56px"><span data-en="Build status">Status pembinaan</span></p>
+      <!-- Kemas kini: class="done" untuk selesai, class="now" untuk peringkat semasa -->
+      <ol class="build rv">
+        <li class="done"><small><span data-en="Done">Selesai</span> ✓</small><b><span data-en="Design">Reka</span></b></li>
+        <li class="now"><small><span data-en="In progress">Sedang dibina</span></small><b><span data-en="Build">Bina</span></b></li>
+        <li><small><span data-en="Next">Seterusnya</span></small><b><span data-en="Test">Uji</span></b></li>
+        <li><small><span data-en="Final lap">Pusingan akhir</span></small><b><span data-en="Launch">Lancar</span></b></li>
+      </ol>
     </div>
   </section>
 
@@ -244,7 +277,7 @@
   </section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Shah Redza · Team 03</span><span><span data-en="Sponsors on this site are made up">Penaja di laman ini rekaan semata-mata</span></span></div></footer>
+<footer><div class="wrap"><span>© 2026 Shah Redza · Team 03</span><span><span data-en="Sponsors on this site are made up">Penaja di laman ini rekaan semata-mata</span></span><span class="contact"><a href="https://github.com/shahredza">GitHub</a><a href="mailto:rezashah900@gmail.com">rezashah900@gmail.com</a></span></div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
