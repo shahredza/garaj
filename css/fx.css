@@ -1,0 +1,128 @@
+/* Kesan tambahan halaman utama. Dikawal oleh js/fx.js; setiap bahagian bernombor ikut ciri. */
+
+/* ===== 1. Tajuk pecah huruf ===== */
+.split-src { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.split .w { display: inline-block; white-space: nowrap; }
+.split .ch { display: inline-block; opacity: 0; transform: translateY(.55em) skewX(-14deg); transition: transform .8s cubic-bezier(.2, .8, .2, 1), opacity .5s; transition-delay: calc(var(--i) * 30ms + .1s); }
+.in .split .ch, .split.in .ch { opacity: 1; transform: none; }
+.chap-head h2.split-on { clip-path: none !important; transform: none !important; transition: none !important; }
+
+/* ===== 2. Trek dan kereta di bab Permulaan ===== */
+.tl-wrap { position: relative; }
+.tl.track-on { border-top-color: #2c2c33; }
+.tl.track-on li::before { background: #3a3a42; transition: background .3s, box-shadow .3s, transform .3s; }
+.tl.track-on li.passed::before { background: var(--red); box-shadow: 0 0 0 4px rgba(225, 6, 0, .25), 0 0 16px var(--red); transform: scale(1.2); }
+.tl.track-on li.passed .when { color: #fff; }
+.tl.track-on li .when { color: #8f8d96; transition: color .4s; }
+.tl-track { position: absolute; left: 0; right: 0; top: 0; height: 2px; pointer-events: none; transition: opacity .6s; }
+.tl:not(.in) ~ .tl-track { opacity: 0; }
+.tl-fill { position: absolute; inset: 0; background: var(--red); transform-origin: 0 50%; transform: scaleX(0); box-shadow: 0 0 12px rgba(225, 6, 0, .7); }
+.tl-car { position: absolute; left: 0; top: 1px; width: 76px; height: 29px; margin: -14px 0 0 -38px; will-change: transform; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .6)); }
+@media (max-width: 1000px) { .tl-track { display: none; } }
+
+/* ===== 3. Nombor kiraan ===== */
+[data-count], [data-std-n], [data-std-total] { font-variant-numeric: tabular-nums; }
+
+/* ===== 5. Kad senget 3D dengan kilauan ===== */
+.livery { transform: perspective(1000px) rotate(var(--rot, 0deg)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
+.livery.tilting { transition: transform .12s ease-out; }
+.livery.tilt-ease { transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+.bays .bay.in, .bays .bay.tilting { transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
+.bays .bay.tilting { transition: transform .12s ease-out, opacity .8s; }
+.bays .bay.tilt-ease { transition: transform .5s cubic-bezier(.2, .8, .2, 1), opacity .8s; }
+.livery::after, .bay::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .3), transparent 45%); opacity: 0; transition: opacity .3s; }
+.livery.tilting::after, .bay.tilting::after { opacity: 1; }
+
+/* ===== 6. Marquee ===== */
+.mq { background: var(--red); color: #fff; overflow: hidden; padding: clamp(12px, 1.6vw, 20px) 0; }
+.mq-row { display: flex; width: max-content; will-change: transform; }
+.mq-row span { font-family: var(--display); font-style: italic; font-weight: 900; text-transform: uppercase; font-size: clamp(44px, 7vw, 104px); line-height: .95; white-space: nowrap; padding-right: .35em; }
+.mq-row span i { font-style: normal; font-size: .4em; vertical-align: middle; margin-left: .35em; color: #0e0e10; }
+.mq-row.o span { color: transparent; -webkit-text-stroke: 2px #fff; }
+.mq-row.o span i { color: transparent; -webkit-text-stroke: 2px #0e0e10; }
+
+/* ===== 8. Bendera berpetak di garisan penamat ===== */
+.finish.has-flag { padding-top: 0; }
+.flag { display: flex; height: clamp(70px, 9vw, 120px); margin-bottom: clamp(60px, 8vw, 110px); overflow: hidden; clip-path: inset(0 100% 0 0); transition: clip-path 1.3s cubic-bezier(.7, 0, .2, 1); }
+.flag.seen { clip-path: inset(0); }
+.flag i { flex: 1; margin-right: -1px; background: conic-gradient(#f3f1ec 25%, #0e0e10 0 50%, #f3f1ec 0 75%, #0e0e10 0) 0 0 / 40px 40px; background-position: calc(var(--k) * -1 * (100vw / 32)) 0; animation: flagw 2.2s ease-in-out infinite alternate; animation-delay: calc(var(--k) * -.09s); animation-play-state: paused; }
+.flag.play i { animation-play-state: running; }
+@keyframes flagw { from { transform: translateY(-8%); filter: brightness(.82); } to { transform: translateY(8%); filter: brightness(1.04); } }
+
+/* ===== 9. Kedudukan kejuaraan ===== */
+.std-total { display: grid; justify-items: end; gap: 4px; }
+.std-total b { font-family: var(--display); font-style: italic; font-weight: 900; font-size: clamp(56px, 7vw, 96px); line-height: .85; color: var(--red); }
+.std-total span { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.std { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.std-row { --c: var(--red); position: relative; display: grid; grid-template-columns: 70px 96px minmax(0, 1.1fr) minmax(0, 2fr) 140px 110px; align-items: center; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); background: var(--paper); }
+.std-row[data-team="hb"] { --c: var(--hb); }
+.std-row[data-team="gx"] { --c: linear-gradient(90deg, var(--silver), var(--gx)); }
+.std-row[data-team="t3"] { --c: linear-gradient(90deg, #fd3851, #6371cd); }
+.std-pos { font-family: var(--display); font-style: italic; font-weight: 900; font-size: 46px; line-height: 1; color: var(--muted); transition: color .3s; }
+.std-row[data-pos="1"] .std-pos { color: var(--red); }
+.std-crest { width: 96px; height: 56px; }
+.std-name b { display: block; font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase; }
+.std-name small, .std-pts small { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.std-bar { height: 12px; background: var(--paper-2); overflow: hidden; transform: skewX(-20deg); }
+.std-bar i { display: block; height: 100%; background: var(--c); transform-origin: 0 50%; transform: scaleX(0); transition: transform 1.6s cubic-bezier(.2, .8, .2, 1); }
+.std-pts { text-align: right; }
+.std-pts b { display: block; font-family: var(--display); font-style: italic; font-weight: 900; font-size: 42px; line-height: 1; }
+.std-gap { font-family: var(--mono); font-size: 13px; text-align: right; color: var(--muted); }
+.std-row[data-pos="1"] .std-gap { color: var(--red); font-weight: 700; }
+.std-note { margin-top: 18px; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; color: var(--muted); }
+@media (max-width: 860px) {
+  .std-row { grid-template-columns: 48px minmax(0, 1fr) auto; gap: 10px 14px; }
+  .std-crest { display: none; }
+  .std-total { justify-items: start; }
+  .std-pos { font-size: 36px; }
+  .std-name b { font-size: 26px; }
+  .std-bar { grid-column: 1 / -1; grid-row: 2; }
+  .std-gap { grid-column: 1 / -1; text-align: left; }
+}
+
+/* ===== 10. Kuiz pilih pasukan ===== */
+.quiz-sec { background: var(--paper-2); }
+.quiz { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(32px, 6vw, 90px); align-items: start; }
+.quiz h2 { font-size: clamp(52px, 7vw, 110px); }
+@media (max-width: 900px) { .quiz { grid-template-columns: minmax(0, 1fr); } }
+.qz-card { position: relative; overflow: hidden; min-height: 400px; padding: clamp(22px, 3vw, 36px); background: var(--paper); border: 1px solid var(--line); }
+.qz-in { animation: qzIn .5s cubic-bezier(.2, .8, .2, 1); }
+@keyframes qzIn { from { opacity: 0; transform: translateX(28px); } }
+.qz-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.qz-dots { display: flex; gap: 6px; }
+.qz-dots i { width: 28px; height: 4px; background: var(--line); transition: background .3s; }
+.qz-dots i.on { background: var(--red); }
+.qz-q { font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: clamp(32px, 3.6vw, 48px); line-height: .95; margin: 22px 0 24px; outline: none; }
+.qz-opts { display: grid; gap: 10px; }
+.qz-opt { display: flex; align-items: center; gap: 16px; width: 100%; text-align: left; padding: 16px 18px; background: transparent; border: 1.5px solid var(--line); cursor: pointer; font-size: 17px; font-weight: 600; transition: border-color .2s, transform .2s, background .2s; }
+.qz-opt:hover { border-color: var(--ink); transform: translateX(6px); }
+.qz-opt b { flex: none; display: grid; place-items: center; width: 32px; height: 32px; font-family: var(--mono); font-size: 13px; color: var(--paper); background: var(--ink); }
+.qz-opt:hover b { background: var(--red); color: #fff; }
+.qz-res { display: grid; gap: 16px; }
+.qz-res::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: var(--c, var(--red)); }
+.qz-res .crest { width: 150px; height: 90px; }
+.qz-res .crest.wide { width: 210px; }
+.qz-res h3 { font-size: clamp(48px, 6vw, 84px); line-height: .85; }
+.qz-res p { color: var(--ink-2); max-width: 32em; }
+.qz-res .row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.qz-again { background: transparent; border: 0; padding: 0; cursor: pointer; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); text-decoration: underline; text-underline-offset: 4px; justify-self: start; }
+.qz-again:hover { color: var(--red); }
+
+/* ===== 11. Butang tema gelap/cerah ===== */
+.theme-btn { margin-left: 8px; width: 38px; height: 34px; flex: none; display: grid; place-items: center; background: transparent; border: 1.5px solid currentColor; cursor: pointer; padding: 0; }
+.theme-btn svg { width: 18px; height: 18px; }
+.theme-btn .moon, html.dk .theme-btn .sun { display: none; }
+html.dk .theme-btn .moon { display: block; }
+@media (max-width: 480px) { .theme-btn { margin-left: 6px; width: 34px; } }
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+html.dk .qz-card { background: #1b1b20; }
+html.dk .std-row { background: var(--paper); }
+
+/* Kurang gerakan: semua kesan berhenti */
+@media (prefers-reduced-motion: reduce) {
+  .split .ch { opacity: 1; transform: none; transition: none; }
+  .flag { clip-path: none; transition: none; }
+  .flag i { animation: none; }
+  .qz-in { animation: none; }
+  .std-bar i { transition: none; }
+}

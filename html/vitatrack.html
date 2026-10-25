@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VitaTrack · VitaTrack Performance Racing</title>
+<meta name="description" content="Jejak langkah, senaman, air, tidur dan mood harian, lalu tukarkannya kepada cabaran harian, lencana dan laporan kesihatan.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="VitaTrack · VitaTrack Performance Racing">
+<meta property="og:description" content="Jejak langkah, senaman, air, tidur dan mood harian, lalu tukarkannya kepada cabaran harian, lencana dan laporan kesihatan.">
+<meta property="og:url" content="https://shahredza.github.io/garaj/html/vitatrack.html">
+<meta property="og:image" content="https://shahredza.github.io/garaj/images/og/vitatrack.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0c1732">
+<link rel="icon" href="../images/vt-icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Titillium+Web:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  /* Halaman pasukan VitaTrack Performance Racing: seluruh laman ikut livery pasukan (dari lencana VitaTrack). */
+  :root {
+    --bg: #0a1430; --bg2: #0c1732; --fg: #f3f4fa; --muted: #a9aecb;
+    --acc: #fd3851; --acc-ink: #ffffff; --line: rgba(255,255,255,.14); --card: #111d42;
+    --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+    --body: "Titillium Web", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --g: max(16px, env(safe-area-inset-left, 0px));
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 var(--g); }
+  h1, h2, h3 { font-family: var(--display); font-weight: 800; text-transform: uppercase; line-height: .88; margin: 0; text-wrap: balance; }
+  h2 { font-size: clamp(48px, 7.4vw, 110px); margin: 12px 0 40px; }
+  h3 { font-size: 30px; margin-bottom: 16px; }
+  p { margin: 0; }
+  .eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+  .eyebrow::before { content: ""; width: 24px; height: 4px; background: var(--acc); transform: skewX(-20deg); }
+  .sec { padding: clamp(80px, 10vw, 140px) 0; border-top: 1px solid var(--line); }
+
+  /* Nav */
+  .nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .3s; }
+  .nav.solid { background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; gap: 16px; height: 66px; }
+  .back { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacing: .04em; }
+  .back svg { width: 18px; height: 18px; }
+  .nav .team { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .lang { margin-left: auto; display: flex; border: 1.5px solid currentColor; }
+  .lang button { background: transparent; border: 0; padding: 7px 10px; cursor: pointer; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .1em; opacity: .55; }
+  .lang button[aria-pressed="true"] { background: var(--acc); color: var(--acc-ink); opacity: 1; }
+  @media (max-width: 560px) { .nav .team { display: none; } }
+
+  /* Hero livery */
+  .hero { position: relative; min-height: 100svh; display: grid; align-items: end; overflow: hidden; background: radial-gradient(60% 50% at 80% 30%, rgba(99,113,205,.35), transparent 70%), linear-gradient(150deg,#1a2550 0%,#0c1732 55%,#070d22 100%); padding: 100px 0 0; }
+  .hero .stripe { position: absolute; left: -5%; right: -5%; top: 58%; height: 34px; background: linear-gradient(90deg,#fd3851,#6371cd); transform: skewY(-8deg); opacity: .5; }
+  .hero .bignum { position: absolute; right: -2vw; top: 6vh; font-family: var(--display); font-style: italic; font-weight: 900; font-size: clamp(220px, 40vw, 560px); line-height: .8; color: transparent; -webkit-text-stroke: 2px color-mix(in srgb, var(--fg) 28%, transparent); will-change: transform; }
+  .hero .crest { width: clamp(150px, 20vw, 260px); height: auto; aspect-ratio: 1; filter: drop-shadow(0 24px 30px rgba(0,0,0,.35)); will-change: transform; }
+  .hero .inner { width: 100%; position: relative; padding-bottom: 40px; display: grid; gap: 22px; }
+  .hero h1 { font-size: clamp(64px, 13vw, 200px); line-height: .8; }
+  .hero .sub { font-family: var(--mono); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
+  .hero .tag { font-family: var(--display); font-style: italic; font-weight: 800; font-size: clamp(26px, 3vw, 40px); text-transform: uppercase; color: #fd3851; }
+  .hero-foot { display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: center; justify-content: space-between; padding: 22px 0 26px; border-top: 1px solid var(--line); }
+  .hero-foot p { max-width: 40em; font-size: clamp(17px, 1.4vw, 20px); }
+  .cue { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
+  .line-in { display: block; overflow: hidden; }
+  .line-in > span { display: block; transform: translateY(105%); transition: transform 1.1s cubic-bezier(.2, .8, .2, 1); }
+  .line-in.in > span { transform: none; }
+
+  /* Muat turun */
+  .dl { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+  @media (max-width: 900px) { .dl { grid-template-columns: minmax(0, 1fr); } }
+  .dl-row { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; margin-top: 8px; }
+  .btn { display: inline-flex; align-items: center; gap: 12px; padding: 15px 26px; font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; border: 0; cursor: pointer; transition: transform .2s, filter .2s; clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+  .btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+  .btn svg { width: 22px; height: 22px; }
+  .btn-acc { background: var(--acc); color: var(--acc-ink); }
+  .btn.big { font-size: 26px; padding: 20px 34px; }
+  .qr { width: 150px; background: #fff; padding: 8px; display: grid; gap: 6px; box-shadow: 0 16px 30px -18px rgba(0,0,0,.5); }
+  .qr svg { width: 100%; height: auto; display: block; }
+  .qr small { color: #111; font-size: 11px; font-weight: 700; text-align: center; line-height: 1.2; }
+  .soon { display: inline-flex; padding: 16px 24px; font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; border: 2px dashed var(--acc); color: var(--acc); }
+  .kv { margin: 0; border-top: 2px solid var(--fg); }
+  .kv div { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .kv dt { color: var(--muted); font-size: 15px; }
+  .kv dd { margin: 0; font-weight: 700; }
+  .install { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); counter-reset: s; border-top: 1px solid var(--line); }
+  @media (max-width: 900px) { .install { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .install { grid-template-columns: minmax(0, 1fr); } }
+  .install li { counter-increment: s; padding: 20px 20px 20px 0; display: grid; gap: 6px; align-content: start; }
+  .install li::before { content: "0" counter(s); font-family: var(--display); font-style: italic; font-weight: 900; font-size: 44px; line-height: .9; color: var(--acc); }
+  .install p { color: var(--muted); font-size: 15px; }
+  .warn, .note { margin-top: 16px; padding: 14px 18px; border-left: 4px solid var(--acc); background: var(--card); font-size: 15px; }
+
+  /* Tentang kami */
+  .about { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(32px, 6vw, 90px); }
+  @media (max-width: 900px) { .about { grid-template-columns: minmax(0, 1fr); } }
+  .about .big-p { font-size: clamp(20px, 1.9vw, 26px); line-height: 1.45; }
+  .about .mission { margin-top: 24px; padding-left: 18px; border-left: 4px solid var(--acc); color: var(--muted); font-size: 18px; }
+  .driver { display: flex; gap: 16px; align-items: center; margin-top: 32px; padding: 16px; background: var(--card); border: 1px solid var(--line); }
+  .driver img { width: 72px; height: 72px; object-fit: cover; filter: grayscale(.2); }
+  .driver small { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .driver b { display: block; font-family: var(--display); font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1.05; }
+  .side { display: grid; gap: 40px; align-content: start; }
+  .spons { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .spons li { font-family: var(--display); font-style: italic; font-weight: 900; font-size: 30px; text-transform: uppercase; padding: 10px 16px; background: var(--card); border: 1px solid var(--line); }
+
+  /* Ciri */
+  .feats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  @media (max-width: 900px) { .feats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .feats { grid-template-columns: minmax(0, 1fr); } }
+  .feats li { background: var(--bg); padding: 26px; display: grid; gap: 8px; align-content: start; transition: background .25s; }
+  .feats li:hover { background: var(--card); }
+  .feats .fn { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--acc); letter-spacing: .14em; }
+  .feats b { font-family: var(--display); font-weight: 800; font-size: 28px; text-transform: uppercase; line-height: 1; }
+  .feats p { color: var(--muted); font-size: 15px; }
+
+  /* Galeri */
+  .rail { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--g) 20px max(var(--g), calc((100vw - 1240px) / 2 + var(--g))); scrollbar-width: thin; }
+  .rail figure { margin: 0; flex: 0 0 230px; scroll-snap-align: start; display: grid; gap: 10px; }
+  .rail .frame { border-radius: 26px; padding: 7px; background: #0b0b0d; box-shadow: 0 24px 50px -30px rgba(0,0,0,.6); }
+  .rail img { width: 100%; aspect-ratio: 9 / 19.5; object-fit: cover; object-position: top; border-radius: 20px; }
+  .rail figcaption { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+  /* Pasukan lain */
+  .others { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 700px) { .others { grid-template-columns: minmax(0, 1fr); } }
+  .other { display: flex; align-items: center; gap: 18px; padding: 20px; text-decoration: none; color: #fff; transition: transform .25s; }
+  .other:hover { transform: translateY(-3px); }
+  .other svg { width: 70px; height: 60px; flex: none; }
+  .other small { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .8; }
+  .other b { display: block; font-family: var(--display); font-weight: 800; font-size: 34px; text-transform: uppercase; line-height: 1; }
+  .other i { margin-left: auto; font-style: normal; font-size: 26px; }
+  .o-hb { background: linear-gradient(135deg, #ff2a1f, #8f0400); }
+  .o-gx { background: linear-gradient(135deg, #e6e8ec, #9aa0aa 60%, #00bfae); color: #0b0b0d; }
+  .o-t3 { background: linear-gradient(135deg, #1a2550, #0c1732); border: 1px solid rgba(253,56,81,.45); }
+  footer { padding: 26px 0 calc(26px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+  .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1); }
+  .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rv, .line-in > span { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* Log perubahan, status bina, kiraan muat turun, hubungi */
+  [hidden] { display: none !important; }
+  .log { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--fg); }
+  .log li { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .log .v { display: block; font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase; color: var(--acc); }
+  .log time { display: block; margin-top: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: .12em; color: var(--muted); }
+  .log p { max-width: 40em; }
+  @media (max-width: 560px) { .log li { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+  .build { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .build li { padding: 18px; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line); display: grid; gap: 6px; }
+  .build li.done, .build li.now { border-top-color: var(--acc); }
+  .build li.now { background-image: repeating-linear-gradient(-45deg, transparent 0 12px, color-mix(in srgb, var(--acc) 14%, transparent) 12px 24px); }
+  .build b { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; }
+  .build small { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .build li.done small, .build li.now small { color: var(--acc); }
+  @media (max-width: 700px) { .build { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .contact { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .contact a { color: var(--fg); text-underline-offset: 3px; }
+
+
+  /* Lenis (smooth scroll): CSS scroll-behavior mesti dimatikan, jika tidak dua-dua melawan dan scroll tersangkut */
+  html.lenis, html.lenis body { height: auto; }
+  html.lenis { scroll-behavior: auto !important; }
+  .lenis.lenis-stopped { overflow: hidden; }
+  /* Logo VitaTrack lebar (2.3:1) */
+  .hero .crest { width: clamp(240px, 34vw, 440px); aspect-ratio: 2.31; }
+
+  /* Rakan penaja penuh (parody), ikut senarai di halaman utama */
+  .tp-note { margin: 0 0 14px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted); }
+  .tp { margin: 0; display: grid; gap: 14px; }
+  .tp > div { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .tp dt { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .tp dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tp dd span { padding: 4px 9px; border: 1px solid var(--line); font-size: 13px; line-height: 1.3; transition: border-color .2s, background .2s; }
+  .tp dd span:hover { border-color: var(--acc); background: color-mix(in srgb, var(--acc) 10%, transparent); }
+  .tp .title dd span { border: 0; padding: 0 12px 0 0; font-family: var(--display); font-style: italic; font-weight: 900; font-size: 26px; text-transform: uppercase; background: none; }
+
+  .tp dd span:has(> a) { padding: 0; }
+  .tp dd span > a { display: block; padding: 4px 9px; color: inherit; text-decoration: none; }
+  .tp dd span > a::after { content: " ↗"; font-size: .8em; opacity: .5; }
+  .tp dd span > a:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+  .tp .title dd span > a { padding: 0; }
+  .tp .title dd span > a::after { font-size: .45em; vertical-align: super; }
+  .tp dd span.fake { border-style: dashed; cursor: help; }
+</style>
+<script src="../js/sound.js"></script>
+<script src="../js/transition.js"></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="arcTop" d="M14 50 A36 36 0 0 1 86 50"/>
+    <path id="arcBot" d="M10 50 A40 40 0 0 0 90 50"/>
+  </defs>
+  <symbol id="crest-hb" viewBox="0 0 120 100">
+    <!-- Lencana HealthyBite gaya Ferrari (dipotong dari images/hb-emblem.png) -->
+    <image href="../images/hb-crest.png" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
+  </symbol>
+  <symbol id="crest-gx" viewBox="0 0 100 100">
+    <!-- Lencana GX Works (dipotong dari images/gx-emblem.png) -->
+    <image href="../images/gx-crest.png" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
+  </symbol>
+  <symbol id="crest-t3" viewBox="0 0 231 100">
+    <!-- Logo VitaTrack Performance Racing (dari images/vt-emblem.png, atas plat biru tua) -->
+    <image href="../images/vt-crest.png" x="0" y="0" width="231" height="100"/>
+  </symbol>
+</svg>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="back" href="../index.html#pit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg><span data-en="Grid">Grid</span></a>
+    <span class="team">#3 · VitaTrack Performance Racing</span>
+    <div class="lang" role="group" aria-label="Language / Bahasa"><button type="button" data-lang="en">EN</button><button type="button" data-lang="ms" aria-pressed="true">BM</button></div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="h1">
+    <span class="stripe" aria-hidden="true"></span>
+    <span class="bignum" data-speed="0.3" aria-hidden="true">3</span>
+    <div class="wrap inner">
+      <svg class="crest" viewBox="0 0 231 100" data-speed="-0.15" role="img" aria-label="VitaTrack Performance Racing"><use href="#crest-t3"/></svg>
+      <p class="sub">#3 · VitaTrack Performance Racing · <span data-en="Telemetry">Telemetri</span></p>
+      <h1 id="h1"><span class="line-in"><span>VitaTrack</span></span></h1>
+      <p class="tag"><span class="line-in"><span><span data-en="Every day counts.">Setiap hari dikira.</span></span></span></p>
+      <div class="hero-foot">
+        <p><span data-en="Track your steps, workouts, water, sleep and mood, then turn them into daily challenges, badges and health reports.">Jejak langkah, senaman, air, tidur dan mood harian, lalu tukarkannya kepada cabaran harian, lencana dan laporan kesihatan.</span></p>
+        <a class="cue" href="#muat-turun">↓ <span data-en="Download">Muat turun</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="muat-turun" aria-labelledby="d-h" style="border-top:0">
+    <div class="wrap">
+      <div class="dl">
+        <div class="rv">
+          <p class="eyebrow"><span data-en="Pit stop">Pit stop</span></p>
+          <h2 id="d-h"><span data-en="Download">Muat turun</span> VitaTrack</h2>
+          <div class="dl-row">
+          <a class="btn btn-acc big" href="https://github.com/shahredza/vitatrack-app/releases/latest/download/VitaTrack-1.0.0.apk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span data-en="Download APK">Muat turun APK</span></a>
+          <div class="qr"><svg viewBox="0 0 43 43" shape-rendering="crispEdges" aria-hidden="true"><rect width="43" height="43" fill="#fff"/><path d="M1 1h1v1h-1zM2 1h1v1h-1zM3 1h1v1h-1zM4 1h1v1h-1zM5 1h1v1h-1zM6 1h1v1h-1zM7 1h1v1h-1zM11 1h1v1h-1zM14 1h1v1h-1zM17 1h1v1h-1zM18 1h1v1h-1zM19 1h1v1h-1zM20 1h1v1h-1zM22 1h1v1h-1zM23 1h1v1h-1zM26 1h1v1h-1zM31 1h1v1h-1zM32 1h1v1h-1zM33 1h1v1h-1zM35 1h1v1h-1zM36 1h1v1h-1zM37 1h1v1h-1zM38 1h1v1h-1zM39 1h1v1h-1zM40 1h1v1h-1zM41 1h1v1h-1zM1 2h1v1h-1zM7 2h1v1h-1zM11 2h1v1h-1zM13 2h1v1h-1zM15 2h1v1h-1zM17 2h1v1h-1zM18 2h1v1h-1zM21 2h1v1h-1zM22 2h1v1h-1zM26 2h1v1h-1zM27 2h1v1h-1zM28 2h1v1h-1zM31 2h1v1h-1zM33 2h1v1h-1zM35 2h1v1h-1zM41 2h1v1h-1zM1 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM5 3h1v1h-1zM7 3h1v1h-1zM9 3h1v1h-1zM12 3h1v1h-1zM15 3h1v1h-1zM18 3h1v1h-1zM19 3h1v1h-1zM20 3h1v1h-1zM22 3h1v1h-1zM23 3h1v1h-1zM25 3h1v1h-1zM26 3h1v1h-1zM28 3h1v1h-1zM29 3h1v1h-1zM32 3h1v1h-1zM33 3h1v1h-1zM35 3h1v1h-1zM37 3h1v1h-1zM38 3h1v1h-1zM39 3h1v1h-1zM41 3h1v1h-1zM1 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM7 4h1v1h-1zM9 4h1v1h-1zM11 4h1v1h-1zM12 4h1v1h-1zM15 4h1v1h-1zM17 4h1v1h-1zM20 4h1v1h-1zM21 4h1v1h-1zM22 4h1v1h-1zM25 4h1v1h-1zM27 4h1v1h-1zM28 4h1v1h-1zM29 4h1v1h-1zM31 4h1v1h-1zM35 4h1v1h-1zM37 4h1v1h-1zM38 4h1v1h-1zM39 4h1v1h-1zM41 4h1v1h-1zM1 5h1v1h-1zM3 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM7 5h1v1h-1zM9 5h1v1h-1zM10 5h1v1h-1zM13 5h1v1h-1zM14 5h1v1h-1zM15 5h1v1h-1zM19 5h1v1h-1zM20 5h1v1h-1zM21 5h1v1h-1zM23 5h1v1h-1zM24 5h1v1h-1zM29 5h1v1h-1zM32 5h1v1h-1zM33 5h1v1h-1zM35 5h1v1h-1zM37 5h1v1h-1zM38 5h1v1h-1zM39 5h1v1h-1zM41 5h1v1h-1zM1 6h1v1h-1zM7 6h1v1h-1zM9 6h1v1h-1zM11 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM17 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM21 6h1v1h-1zM23 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM29 6h1v1h-1zM30 6h1v1h-1zM35 6h1v1h-1zM41 6h1v1h-1zM1 7h1v1h-1zM2 7h1v1h-1zM3 7h1v1h-1zM4 7h1v1h-1zM5 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM9 7h1v1h-1zM11 7h1v1h-1zM13 7h1v1h-1zM15 7h1v1h-1zM17 7h1v1h-1zM19 7h1v1h-1zM21 7h1v1h-1zM23 7h1v1h-1zM25 7h1v1h-1zM27 7h1v1h-1zM29 7h1v1h-1zM31 7h1v1h-1zM33 7h1v1h-1zM35 7h1v1h-1zM36 7h1v1h-1zM37 7h1v1h-1zM38 7h1v1h-1zM39 7h1v1h-1zM40 7h1v1h-1zM41 7h1v1h-1zM9 8h1v1h-1zM11 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM15 8h1v1h-1zM17 8h1v1h-1zM19 8h1v1h-1zM21 8h1v1h-1zM22 8h1v1h-1zM23 8h1v1h-1zM28 8h1v1h-1zM32 8h1v1h-1zM1 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM6 9h1v1h-1zM7 9h1v1h-1zM11 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM18 9h1v1h-1zM21 9h1v1h-1zM23 9h1v1h-1zM25 9h1v1h-1zM26 9h1v1h-1zM28 9h1v1h-1zM30 9h1v1h-1zM35 9h1v1h-1zM36 9h1v1h-1zM37 9h1v1h-1zM38 9h1v1h-1zM39 9h1v1h-1zM1 10h1v1h-1zM3 10h1v1h-1zM13 10h1v1h-1zM15 10h1v1h-1zM17 10h1v1h-1zM19 10h1v1h-1zM20 10h1v1h-1zM21 10h1v1h-1zM23 10h1v1h-1zM24 10h1v1h-1zM25 10h1v1h-1zM29 10h1v1h-1zM31 10h1v1h-1zM32 10h1v1h-1zM33 10h1v1h-1zM34 10h1v1h-1zM35 10h1v1h-1zM37 10h1v1h-1zM39 10h1v1h-1zM40 10h1v1h-1zM41 10h1v1h-1zM2 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM6 11h1v1h-1zM7 11h1v1h-1zM8 11h1v1h-1zM9 11h1v1h-1zM10 11h1v1h-1zM11 11h1v1h-1zM12 11h1v1h-1zM13 11h1v1h-1zM18 11h1v1h-1zM19 11h1v1h-1zM22 11h1v1h-1zM23 11h1v1h-1zM28 11h1v1h-1zM29 11h1v1h-1zM31 11h1v1h-1zM33 11h1v1h-1zM34 11h1v1h-1zM37 11h1v1h-1zM40 11h1v1h-1zM1 12h1v1h-1zM3 12h1v1h-1zM5 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM15 12h1v1h-1zM16 12h1v1h-1zM22 12h1v1h-1zM28 12h1v1h-1zM29 12h1v1h-1zM32 12h1v1h-1zM33 12h1v1h-1zM36 12h1v1h-1zM37 12h1v1h-1zM38 12h1v1h-1zM40 12h1v1h-1zM2 13h1v1h-1zM3 13h1v1h-1zM6 13h1v1h-1zM7 13h1v1h-1zM12 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM21 13h1v1h-1zM23 13h1v1h-1zM24 13h1v1h-1zM25 13h1v1h-1zM26 13h1v1h-1zM27 13h1v1h-1zM28 13h1v1h-1zM29 13h1v1h-1zM30 13h1v1h-1zM32 13h1v1h-1zM36 13h1v1h-1zM38 13h1v1h-1zM39 13h1v1h-1zM40 13h1v1h-1zM2 14h1v1h-1zM3 14h1v1h-1zM4 14h1v1h-1zM5 14h1v1h-1zM9 14h1v1h-1zM11 14h1v1h-1zM13 14h1v1h-1zM14 14h1v1h-1zM18 14h1v1h-1zM19 14h1v1h-1zM22 14h1v1h-1zM26 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM30 14h1v1h-1zM31 14h1v1h-1zM33 14h1v1h-1zM35 14h1v1h-1zM36 14h1v1h-1zM37 14h1v1h-1zM41 14h1v1h-1zM3 15h1v1h-1zM4 15h1v1h-1zM6 15h1v1h-1zM7 15h1v1h-1zM10 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM15 15h1v1h-1zM16 15h1v1h-1zM17 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM23 15h1v1h-1zM24 15h1v1h-1zM25 15h1v1h-1zM26 15h1v1h-1zM27 15h1v1h-1zM28 15h1v1h-1zM29 15h1v1h-1zM30 15h1v1h-1zM32 15h1v1h-1zM34 15h1v1h-1zM36 15h1v1h-1zM37 15h1v1h-1zM38 15h1v1h-1zM3 16h1v1h-1zM5 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM10 16h1v1h-1zM11 16h1v1h-1zM16 16h1v1h-1zM17 16h1v1h-1zM22 16h1v1h-1zM24 16h1v1h-1zM27 16h1v1h-1zM28 16h1v1h-1zM31 16h1v1h-1zM32 16h1v1h-1zM33 16h1v1h-1zM35 16h1v1h-1zM3 17h1v1h-1zM7 17h1v1h-1zM9 17h1v1h-1zM10 17h1v1h-1zM15 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM23 17h1v1h-1zM24 17h1v1h-1zM25 17h1v1h-1zM27 17h1v1h-1zM28 17h1v1h-1zM30 17h1v1h-1zM32 17h1v1h-1zM33 17h1v1h-1zM34 17h1v1h-1zM36 17h1v1h-1zM39 17h1v1h-1zM40 17h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM5 18h1v1h-1zM6 18h1v1h-1zM9 18h1v1h-1zM10 18h1v1h-1zM15 18h1v1h-1zM16 18h1v1h-1zM17 18h1v1h-1zM20 18h1v1h-1zM21 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM27 18h1v1h-1zM29 18h1v1h-1zM30 18h1v1h-1zM31 18h1v1h-1zM32 18h1v1h-1zM33 18h1v1h-1zM35 18h1v1h-1zM36 18h1v1h-1zM37 18h1v1h-1zM38 18h1v1h-1zM40 18h1v1h-1zM41 18h1v1h-1zM1 19h1v1h-1zM6 19h1v1h-1zM7 19h1v1h-1zM8 19h1v1h-1zM12 19h1v1h-1zM15 19h1v1h-1zM16 19h1v1h-1zM17 19h1v1h-1zM19 19h1v1h-1zM21 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM28 19h1v1h-1zM29 19h1v1h-1zM30 19h1v1h-1zM33 19h1v1h-1zM37 19h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM5 20h1v1h-1zM12 20h1v1h-1zM13 20h1v1h-1zM17 20h1v1h-1zM20 20h1v1h-1zM27 20h1v1h-1zM28 20h1v1h-1zM30 20h1v1h-1zM31 20h1v1h-1zM32 20h1v1h-1zM33 20h1v1h-1zM34 20h1v1h-1zM37 20h1v1h-1zM38 20h1v1h-1zM40 20h1v1h-1zM41 20h1v1h-1zM1 21h1v1h-1zM2 21h1v1h-1zM3 21h1v1h-1zM6 21h1v1h-1zM7 21h1v1h-1zM10 21h1v1h-1zM11 21h1v1h-1zM12 21h1v1h-1zM16 21h1v1h-1zM17 21h1v1h-1zM19 21h1v1h-1zM22 21h1v1h-1zM23 21h1v1h-1zM25 21h1v1h-1zM28 21h1v1h-1zM32 21h1v1h-1zM33 21h1v1h-1zM39 21h1v1h-1zM40 21h1v1h-1zM41 21h1v1h-1zM2 22h1v1h-1zM4 22h1v1h-1zM8 22h1v1h-1zM11 22h1v1h-1zM12 22h1v1h-1zM14 22h1v1h-1zM16 22h1v1h-1zM17 22h1v1h-1zM20 22h1v1h-1zM21 22h1v1h-1zM22 22h1v1h-1zM24 22h1v1h-1zM26 22h1v1h-1zM27 22h1v1h-1zM29 22h1v1h-1zM30 22h1v1h-1zM31 22h1v1h-1zM32 22h1v1h-1zM33 22h1v1h-1zM34 22h1v1h-1zM35 22h1v1h-1zM36 22h1v1h-1zM37 22h1v1h-1zM38 22h1v1h-1zM39 22h1v1h-1zM40 22h1v1h-1zM41 22h1v1h-1zM1 23h1v1h-1zM2 23h1v1h-1zM6 23h1v1h-1zM7 23h1v1h-1zM8 23h1v1h-1zM10 23h1v1h-1zM12 23h1v1h-1zM13 23h1v1h-1zM14 23h1v1h-1zM15 23h1v1h-1zM21 23h1v1h-1zM25 23h1v1h-1zM26 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM29 23h1v1h-1zM31 23h1v1h-1zM35 23h1v1h-1zM39 23h1v1h-1zM12 24h1v1h-1zM14 24h1v1h-1zM15 24h1v1h-1zM16 24h1v1h-1zM17 24h1v1h-1zM20 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM25 24h1v1h-1zM28 24h1v1h-1zM29 24h1v1h-1zM33 24h1v1h-1zM35 24h1v1h-1zM36 24h1v1h-1zM41 24h1v1h-1zM2 25h1v1h-1zM4 25h1v1h-1zM7 25h1v1h-1zM10 25h1v1h-1zM15 25h1v1h-1zM18 25h1v1h-1zM23 25h1v1h-1zM25 25h1v1h-1zM26 25h1v1h-1zM27 25h1v1h-1zM29 25h1v1h-1zM30 25h1v1h-1zM36 25h1v1h-1zM38 25h1v1h-1zM39 25h1v1h-1zM1 26h1v1h-1zM2 26h1v1h-1zM3 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM8 26h1v1h-1zM9 26h1v1h-1zM11 26h1v1h-1zM12 26h1v1h-1zM13 26h1v1h-1zM15 26h1v1h-1zM17 26h1v1h-1zM18 26h1v1h-1zM19 26h1v1h-1zM20 26h1v1h-1zM21 26h1v1h-1zM22 26h1v1h-1zM24 26h1v1h-1zM29 26h1v1h-1zM32 26h1v1h-1zM34 26h1v1h-1zM35 26h1v1h-1zM36 26h1v1h-1zM37 26h1v1h-1zM38 26h1v1h-1zM41 26h1v1h-1zM1 27h1v1h-1zM2 27h1v1h-1zM4 27h1v1h-1zM5 27h1v1h-1zM7 27h1v1h-1zM8 27h1v1h-1zM9 27h1v1h-1zM10 27h1v1h-1zM14 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM18 27h1v1h-1zM21 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM28 27h1v1h-1zM30 27h1v1h-1zM31 27h1v1h-1zM33 27h1v1h-1zM34 27h1v1h-1zM36 27h1v1h-1zM40 27h1v1h-1zM1 28h1v1h-1zM2 28h1v1h-1zM3 28h1v1h-1zM5 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM11 28h1v1h-1zM12 28h1v1h-1zM14 28h1v1h-1zM15 28h1v1h-1zM17 28h1v1h-1zM22 28h1v1h-1zM23 28h1v1h-1zM24 28h1v1h-1zM28 28h1v1h-1zM32 28h1v1h-1zM33 28h1v1h-1zM34 28h1v1h-1zM37 28h1v1h-1zM38 28h1v1h-1zM40 28h1v1h-1zM41 28h1v1h-1zM3 29h1v1h-1zM7 29h1v1h-1zM10 29h1v1h-1zM11 29h1v1h-1zM12 29h1v1h-1zM16 29h1v1h-1zM18 29h1v1h-1zM23 29h1v1h-1zM24 29h1v1h-1zM26 29h1v1h-1zM30 29h1v1h-1zM32 29h1v1h-1zM38 29h1v1h-1zM39 29h1v1h-1zM41 29h1v1h-1zM1 30h1v1h-1zM5 30h1v1h-1zM6 30h1v1h-1zM8 30h1v1h-1zM10 30h1v1h-1zM12 30h1v1h-1zM15 30h1v1h-1zM16 30h1v1h-1zM19 30h1v1h-1zM21 30h1v1h-1zM22 30h1v1h-1zM25 30h1v1h-1zM28 30h1v1h-1zM29 30h1v1h-1zM30 30h1v1h-1zM31 30h1v1h-1zM34 30h1v1h-1zM35 30h1v1h-1zM36 30h1v1h-1zM37 30h1v1h-1zM38 30h1v1h-1zM39 30h1v1h-1zM40 30h1v1h-1zM41 30h1v1h-1zM1 31h1v1h-1zM5 31h1v1h-1zM6 31h1v1h-1zM7 31h1v1h-1zM8 31h1v1h-1zM9 31h1v1h-1zM11 31h1v1h-1zM13 31h1v1h-1zM15 31h1v1h-1zM16 31h1v1h-1zM17 31h1v1h-1zM19 31h1v1h-1zM20 31h1v1h-1zM26 31h1v1h-1zM27 31h1v1h-1zM33 31h1v1h-1zM34 31h1v1h-1zM35 31h1v1h-1zM38 31h1v1h-1zM39 31h1v1h-1zM1 32h1v1h-1zM5 32h1v1h-1zM6 32h1v1h-1zM9 32h1v1h-1zM14 32h1v1h-1zM16 32h1v1h-1zM20 32h1v1h-1zM21 32h1v1h-1zM22 32h1v1h-1zM25 32h1v1h-1zM29 32h1v1h-1zM31 32h1v1h-1zM32 32h1v1h-1zM34 32h1v1h-1zM35 32h1v1h-1zM36 32h1v1h-1zM37 32h1v1h-1zM38 32h1v1h-1zM40 32h1v1h-1zM1 33h1v1h-1zM6 33h1v1h-1zM7 33h1v1h-1zM8 33h1v1h-1zM10 33h1v1h-1zM14 33h1v1h-1zM16 33h1v1h-1zM17 33h1v1h-1zM18 33h1v1h-1zM19 33h1v1h-1zM20 33h1v1h-1zM23 33h1v1h-1zM26 33h1v1h-1zM27 33h1v1h-1zM30 33h1v1h-1zM32 33h1v1h-1zM33 33h1v1h-1zM34 33h1v1h-1zM35 33h1v1h-1zM36 33h1v1h-1zM37 33h1v1h-1zM38 33h1v1h-1zM39 33h1v1h-1zM41 33h1v1h-1zM9 34h1v1h-1zM10 34h1v1h-1zM11 34h1v1h-1zM18 34h1v1h-1zM19 34h1v1h-1zM20 34h1v1h-1zM21 34h1v1h-1zM22 34h1v1h-1zM24 34h1v1h-1zM26 34h1v1h-1zM29 34h1v1h-1zM31 34h1v1h-1zM33 34h1v1h-1zM37 34h1v1h-1zM38 34h1v1h-1zM41 34h1v1h-1zM1 35h1v1h-1zM2 35h1v1h-1zM3 35h1v1h-1zM4 35h1v1h-1zM5 35h1v1h-1zM6 35h1v1h-1zM7 35h1v1h-1zM11 35h1v1h-1zM12 35h1v1h-1zM13 35h1v1h-1zM16 35h1v1h-1zM18 35h1v1h-1zM21 35h1v1h-1zM22 35h1v1h-1zM26 35h1v1h-1zM27 35h1v1h-1zM28 35h1v1h-1zM29 35h1v1h-1zM31 35h1v1h-1zM32 35h1v1h-1zM33 35h1v1h-1zM35 35h1v1h-1zM37 35h1v1h-1zM38 35h1v1h-1zM1 36h1v1h-1zM7 36h1v1h-1zM9 36h1v1h-1zM10 36h1v1h-1zM16 36h1v1h-1zM18 36h1v1h-1zM19 36h1v1h-1zM22 36h1v1h-1zM23 36h1v1h-1zM25 36h1v1h-1zM26 36h1v1h-1zM29 36h1v1h-1zM32 36h1v1h-1zM33 36h1v1h-1zM37 36h1v1h-1zM38 36h1v1h-1zM40 36h1v1h-1zM1 37h1v1h-1zM3 37h1v1h-1zM4 37h1v1h-1zM5 37h1v1h-1zM7 37h1v1h-1zM9 37h1v1h-1zM10 37h1v1h-1zM12 37h1v1h-1zM13 37h1v1h-1zM14 37h1v1h-1zM15 37h1v1h-1zM17 37h1v1h-1zM21 37h1v1h-1zM22 37h1v1h-1zM24 37h1v1h-1zM27 37h1v1h-1zM31 37h1v1h-1zM33 37h1v1h-1zM34 37h1v1h-1zM35 37h1v1h-1zM36 37h1v1h-1zM37 37h1v1h-1zM38 37h1v1h-1zM39 37h1v1h-1zM1 38h1v1h-1zM3 38h1v1h-1zM4 38h1v1h-1zM5 38h1v1h-1zM7 38h1v1h-1zM9 38h1v1h-1zM13 38h1v1h-1zM14 38h1v1h-1zM15 38h1v1h-1zM16 38h1v1h-1zM19 38h1v1h-1zM20 38h1v1h-1zM21 38h1v1h-1zM23 38h1v1h-1zM24 38h1v1h-1zM34 38h1v1h-1zM36 38h1v1h-1zM1 39h1v1h-1zM3 39h1v1h-1zM4 39h1v1h-1zM5 39h1v1h-1zM7 39h1v1h-1zM9 39h1v1h-1zM11 39h1v1h-1zM14 39h1v1h-1zM16 39h1v1h-1zM17 39h1v1h-1zM18 39h1v1h-1zM19 39h1v1h-1zM21 39h1v1h-1zM22 39h1v1h-1zM26 39h1v1h-1zM28 39h1v1h-1zM29 39h1v1h-1zM32 39h1v1h-1zM34 39h1v1h-1zM35 39h1v1h-1zM36 39h1v1h-1zM37 39h1v1h-1zM1 40h1v1h-1zM7 40h1v1h-1zM13 40h1v1h-1zM18 40h1v1h-1zM22 40h1v1h-1zM24 40h1v1h-1zM27 40h1v1h-1zM31 40h1v1h-1zM32 40h1v1h-1zM33 40h1v1h-1zM34 40h1v1h-1zM37 40h1v1h-1zM40 40h1v1h-1zM1 41h1v1h-1zM2 41h1v1h-1zM3 41h1v1h-1zM4 41h1v1h-1zM5 41h1v1h-1zM6 41h1v1h-1zM7 41h1v1h-1zM9 41h1v1h-1zM10 41h1v1h-1zM15 41h1v1h-1zM23 41h1v1h-1zM24 41h1v1h-1zM25 41h1v1h-1zM26 41h1v1h-1zM27 41h1v1h-1zM30 41h1v1h-1zM32 41h1v1h-1zM36 41h1v1h-1zM37 41h1v1h-1zM39 41h1v1h-1z" fill="#0b0b0d"/></svg><small><span data-en="Scan with an Android phone">Imbas dengan telefon Android</span></small></div>
+        </div>
+        </div>
+        <dl class="kv rv"><div><dt><span data-en="Version">Versi</span></dt><dd>1.0.0</dd></div><div><dt><span data-en="Size">Saiz</span></dt><dd>9.7 MB</dd></div><div><dt><span data-en="Platform">Platform</span></dt><dd>Android 6.0+</dd></div><div data-dl-repo="shahredza/vitatrack-app" hidden><dt><span data-en="Downloads">Muat turun</span></dt><dd><b data-count>-</b></dd></div></dl>
+      </div>
+      <ol class="install rv">
+        <li><b><span data-en="Download">Muat turun</span></b><p><span data-en="Tap the button above on an Android phone, or scan the QR from a laptop.">Tekan butang di atas pada telefon Android, atau imbas QR dari laptop.</span></p></li>
+        <li><b><span data-en="Open the file">Buka fail</span></b><p><span data-en="Open the APK from the notification or the Downloads folder.">Buka fail APK dari notifikasi atau folder Downloads.</span></p></li>
+        <li><b><span data-en="Allow">Benarkan</span></b><p><span data-en="If asked, turn on &quot;Allow from this source&quot;, then tap Install.">Jika diminta, hidupkan "Allow from this source", kemudian tekan Install.</span></p></li>
+        <li><b><span data-en="Sign up">Daftar</span></b><p><span data-en="Create an account and set your daily goals.">Cipta akaun dan tetapkan sasaran harian anda.</span></p></li>
+      </ol>
+      <p class="warn rv"><b><span data-en="Play Protect warning?">Amaran Play Protect?</span></b> <span data-en="Normal for apps not on the Play Store yet. Tap More details → Install anyway, only if you downloaded from this site.">Biasa untuk app yang belum di Play Store. Tekan More details → Install anyway, hanya jika anda muat turun dari laman ini.</span></p>
+      <p class="note rv"><b><span data-en="Internet">Internet</span>:</b> <span data-en="Needs internet to sign in. After that, saved data opens offline and logs sync when you are back online.">Perlukan internet untuk log masuk. Selepas itu data tersimpan boleh dibuka tanpa internet, dan log diselaraskan bila talian kembali.</span></p>
+      <p class="note rv"><b><span data-en="Found a bug?">Jumpa pepijat?</span></b> <a href="https://github.com/shahredza/vitatrack-app/issues/new" target="_blank" rel="noopener"><span data-en="Report it on GitHub ↗">Laporkan di GitHub ↗</span></a></p>
+    </div>
+  </section>
+
+  <section class="sec" id="tentang" aria-labelledby="a-h">
+    <div class="wrap">
+      <p class="eyebrow rv"><span data-en="About us">Tentang kami</span></p>
+      <h2 id="a-h" class="rv">VitaTrack Performance Racing</h2>
+      <div class="about">
+        <div class="rv">
+          <p class="big-p"><span data-en="VitaTrack Performance Racing is the telemetry team on this grid. Like an F1 engineer reading car data, VitaTrack reads your daily data: activity, water, sleep and mood, so you can see where to improve.">VitaTrack Performance Racing ialah pasukan telemetri dalam grid ini. Seperti jurutera F1 yang membaca data kereta, VitaTrack membaca data harian anda: aktiviti, air, tidur dan mood, supaya anda nampak di mana boleh jadi lebih baik.</span></p>
+          <p class="mission"><span data-en="Our mission: make a healthy lifestyle something you can measure, a little every day.">Misi kami: menjadikan gaya hidup sihat sesuatu yang boleh diukur, sedikit demi sedikit setiap hari.</span></p>
+        </div>
+        <div class="side"><div class="rv"><h3><span data-en="Technical data">Data teknikal</span></h3><dl class="kv"><div><dt><span data-en="Front end">Bahagian depan</span></dt><dd>React 19, TypeScript, Tailwind CSS (Vite)</dd></div><div><dt><span data-en="Database">Pangkalan data</span></dt><dd><span data-en="Supabase (PostgreSQL, Auth, Row Level Security) via jQuery AJAX">Supabase (PostgreSQL, Auth, Row Level Security) melalui jQuery AJAX</span></dd></div><div><dt>APK</dt><dd><span data-en="Capacitor 7, signed release">Capacitor 7, release bertandatangan</span></dd></div><div><dt><span data-en="HTML5 APIs">API HTML5</span></dt><dd>Geolocation, Canvas, Drag &amp; Drop, Web Worker, Service Worker, Web Storage</dd></div></dl></div><div class="rv"><h3><span data-en="Partners (parody)">Rakan penaja (parody)</span></h3><p class="tp-note"><span data-en="Fan-made parody · All partners shown are fictional and not real sponsorships.">Fan-made parody · Semua rakan penaja yang dipaparkan adalah rekaan dan bukan tajaan sebenar.</span><br><span data-en="Click a name to open the company's official site (new tab). Names with a dashed border are made up.">Klik nama untuk ke laman rasmi syarikat (tab baru). Nama bergaris putus-putus ialah rekaan.</span></p><dl class="tp"><div class="title"><dt>Title Partner</dt><dd><span><a href="https://www.oracle.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Oracle · parody, bukan tajaan sebenar">Oracle</a></span></dd></div><div class=""><dt>Premium Partner</dt><dd><span><a href="https://www.tagheuer.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi TAG Heuer · parody, bukan tajaan sebenar">TAG Heuer</a></span><span><a href="https://www.pirelli.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Pirelli · parody, bukan tajaan sebenar">Pirelli</a></span><span><a href="https://www.rauch.cc" target="_blank" rel="noopener noreferrer" title="Laman rasmi Rauch · parody, bukan tajaan sebenar">Rauch</a></span><span><a href="https://www.armorall.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Armor All · parody, bukan tajaan sebenar">Armor All</a></span><span><a href="https://www.hardrock.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Hard Rock International · parody, bukan tajaan sebenar">Hard Rock International</a></span><span><a href="https://castore.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Castore · parody, bukan tajaan sebenar">Castore</a></span><span><a href="https://www.neweracap.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi New Era · parody, bukan tajaan sebenar">New Era</a></span><span><a href="https://www.rokt.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Rokt · parody, bukan tajaan sebenar">Rokt</a></span><span><a href="https://www.heineken.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Heineken · parody, bukan tajaan sebenar">Heineken</a></span><span><a href="https://www.visa.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Visa · parody, bukan tajaan sebenar">Visa</a></span><span><a href="https://www.yeti.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi YETI · parody, bukan tajaan sebenar">YETI</a></span><span><a href="https://www.carlyle.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Carlyle · parody, bukan tajaan sebenar">Carlyle</a></span><span><a href="https://www.clearme.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Clear · parody, bukan tajaan sebenar">Clear</a></span><span><a href="https://www.avatrade.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi AvaTrade · parody, bukan tajaan sebenar">AvaTrade</a></span><span><a href="https://www.damacproperties.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi DAMAC Properties · parody, bukan tajaan sebenar">DAMAC Properties</a></span><span><a href="https://www.gate.io" target="_blank" rel="noopener noreferrer" title="Laman rasmi Gate.io · parody, bukan tajaan sebenar">Gate.io</a></span><span><a href="https://www.mauijim.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Maui Jim · parody, bukan tajaan sebenar">Maui Jim</a></span><span><a href="https://www.mophie.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Mophie · parody, bukan tajaan sebenar">Mophie</a></span><span><a href="https://www.pepejeans.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Pepe Jeans · parody, bukan tajaan sebenar">Pepe Jeans</a></span><span><a href="https://www.ppds.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Philips Professional Displays (PPDS) · parody, bukan tajaan sebenar">Philips Professional Displays (PPDS)</a></span></dd></div><div class=""><dt>Technical Partner</dt><dd><span><a href="https://www.oracle.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Oracle · parody, bukan tajaan sebenar">Oracle</a></span><span><a href="https://www.mobil1.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Mobil 1 · parody, bukan tajaan sebenar">Mobil 1</a></span><span><a href="https://www.esso.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Esso Synergy · parody, bukan tajaan sebenar">Esso Synergy</a></span><span><a href="https://www.siemens.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Siemens · parody, bukan tajaan sebenar">Siemens</a></span><span><a href="https://www.att.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi AT&amp;T · parody, bukan tajaan sebenar">AT&amp;T</a></span><span><a href="https://www.hpe.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi HPE · parody, bukan tajaan sebenar">HPE</a></span><span><a href="https://www.dmgmori.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi DMG Mori · parody, bukan tajaan sebenar">DMG Mori</a></span><span><a href="https://hexagon.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Hexagon · parody, bukan tajaan sebenar">Hexagon</a></span><span><a href="https://www.ansys.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Ansys · parody, bukan tajaan sebenar">Ansys</a></span><span><a href="https://www.athleticpropulsionlabs.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi APL · parody, bukan tajaan sebenar">APL</a></span><span><a href="https://www.pwr.com.au" target="_blank" rel="noopener noreferrer" title="Laman rasmi PWR · parody, bukan tajaan sebenar">PWR</a></span><span><a href="https://www.cdw.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi CDW · parody, bukan tajaan sebenar">CDW</a></span><span><a href="https://secretlab.co" target="_blank" rel="noopener noreferrer" title="Laman rasmi Secretlab · parody, bukan tajaan sebenar">Secretlab</a></span><span><a href="https://1password.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi 1Password · parody, bukan tajaan sebenar">1Password</a></span><span><a href="https://neat.no" target="_blank" rel="noopener noreferrer" title="Laman rasmi Neat · parody, bukan tajaan sebenar">Neat</a></span><span><a href="https://www.sparco-official.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Sparco · parody, bukan tajaan sebenar">Sparco</a></span></dd></div><div class=""><dt>Official Partner</dt><dd><span class="fake" title="Nama rekaan untuk parody · tiada laman rasmi">Roti Canai Motors</span><span class="fake" title="Nama rekaan untuk parody · tiada laman rasmi">Teh Tarik Fuel</span></dd></div></dl></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="f-h">
+    <div class="wrap">
+      <p class="eyebrow rv"><span data-en="Car spec">Spesifikasi kereta</span></p>
+      <h2 id="f-h" class="rv"><span data-en="What is under the hood">Apa di bawah bonet</span></h2>
+      <ol class="feats"><li class="rv"><span class="fn">01</span><b><span data-en="Daily dashboard">Papan pemuka harian</span></b><p><span data-en="Step, water and sleep rings show today's progress against your goals.">Cincin langkah, air dan tidur menunjukkan kemajuan hari ini berbanding sasaran.</span></p></li><li class="rv"><span class="fn">02</span><b><span data-en="One-tap water log">Log air sekali tekan</span></b><p><span data-en="Add 250 ml or 500 ml in one tap and see what is left of your goal.">Tambah 250 ml atau 500 ml dengan satu tekanan dan lihat baki sasaran.</span></p></li><li class="rv"><span class="fn">03</span><b><span data-en="Sleep tracking">Jejak tidur</span></b><p><span data-en="Log last night's sleep, with a 7-day chart and weekly average.">Log tidur malam tadi, dengan graf 7 hari dan purata mingguan.</span></p></li><li class="rv"><span class="fn">04</span><b><span data-en="Daily challenges &amp; XP">Cabaran harian & XP</span></b><p><span data-en="Five challenges a day, streaks and Bronze to Platinum tiers.">Lima cabaran setiap hari, streak dan tahap Bronze hingga Platinum.</span></p></li><li class="rv"><span class="fn">05</span><b><span data-en="Weekly &amp; monthly reports">Laporan mingguan & bulanan</span></b><p><span data-en="Charts for steps, sleep, water and mood. Share or download as CSV.">Graf langkah, tidur, air dan mood. Kongsi atau muat turun sebagai CSV.</span></p></li><li class="rv"><span class="fn">06</span><b><span data-en="Focus &amp; Flow reminders">Peringatan Focus & Flow</span></b><p><span data-en="Water, movement and sleep reminders arrive even when the app is closed.">Peringatan air, bergerak dan tidur tetap sampai walaupun app ditutup.</span></p></li></ol>
+    </div>
+  </section>
+
+  <section class="sec shots-sec" aria-labelledby="s-h">
+    <div class="wrap">
+      <p class="eyebrow rv"><span data-en="Gallery">Galeri</span></p>
+      <h2 id="s-h" class="rv"><span data-en="On track">Di trek</span></h2>
+    </div>
+    <div class="rail" tabindex="0" aria-label="VitaTrack"><figure class="rv"><div class="frame"><img src="../images/vitatrack/home.jpg" alt="Papan pemuka" data-en-alt="Dashboard" loading="lazy"></div><figcaption><span data-en="Dashboard">Papan pemuka</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/water.jpg" alt="Log air" data-en-alt="Water log" loading="lazy"></div><figcaption><span data-en="Water log">Log air</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/sleep.jpg" alt="Jejak tidur" data-en-alt="Sleep tracking" loading="lazy"></div><figcaption><span data-en="Sleep tracking">Jejak tidur</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/challenges.jpg" alt="Cabaran harian" data-en-alt="Daily challenges" loading="lazy"></div><figcaption><span data-en="Daily challenges">Cabaran harian</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/report.jpg" alt="Laporan mingguan" data-en-alt="Weekly report" loading="lazy"></div><figcaption><span data-en="Weekly report">Laporan mingguan</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/reminders.jpg" alt="Peringatan" data-en-alt="Reminders" loading="lazy"></div><figcaption><span data-en="Reminders">Peringatan</span></figcaption></figure></div>
+  </section>
+
+  <section class="sec" id="log" aria-labelledby="l-h">
+    <div class="wrap">
+      <p class="eyebrow rv"><span data-en="Race history">Sejarah perlumbaan</span></p>
+      <h2 id="l-h" class="rv"><span data-en="Changelog">Log perubahan</span></h2>
+      <!-- Release baru di GitHub ditambah automatik oleh releases.js. Tulis di sini untuk versi dwibahasa. -->
+      <ol class="log rv" data-log-repo="shahredza/vitatrack-app">
+        <li data-tag="v1.0.0"><div><span class="v">v1.0.0</span><time datetime="2026-10-25">25.10.2026</time></div><p><span data-en="First Android release: daily dashboard, one-tap water log, sleep tracking, daily challenges and XP, weekly and monthly reports, and reminders that arrive even when the app is closed.">Versi pertama untuk Android: papan pemuka harian, log air sekali tekan, jejak tidur, cabaran harian dan XP, laporan mingguan dan bulanan, serta peringatan yang sampai walaupun app ditutup.</span></p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="o-h">
+    <div class="wrap">
+      <p class="eyebrow rv"><span data-en="Grid">Grid</span></p>
+      <h2 id="o-h" class="rv"><span data-en="Other teams">Pasukan lain</span></h2>
+      <div class="others rv"><a class="other o-hb" href="healthybite.html"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#crest-hb"/></svg><span><small>#44 · HealthyBite Racing</small><b>HealthyBite</b></span><i aria-hidden="true">→</i></a><a class="other o-gx" href="gainix.html"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#crest-gx"/></svg><span><small>#12 · GX Works Motorsport</small><b>Gainix</b></span><i aria-hidden="true">→</i></a></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Garaj · VitaTrack Performance Racing</span><span><span data-en="Sponsors on this site are made up">Penaja di laman ini rekaan semata-mata</span></span><span class="contact"><a href="about.html"><span data-en="Crew">Krew</span></a><a href="privasi.html"><span data-en="Privacy">Privasi</span></a><a href="https://github.com/shahredza">GitHub</a><a href="mailto:rezashah900@gmail.com">rezashah900@gmail.com</a></span></div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+  (function () {
+    var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Dwibahasa: setiap teks BM ada data-en untuk versi English
+    var spans = document.querySelectorAll("[data-en]"), alts = document.querySelectorAll("[data-en-alt]");
+    spans.forEach(function (s) { s.dataset.ms = s.innerHTML; });
+    alts.forEach(function (i) { i.dataset.msAlt = i.alt; });
+    function setLang(l) {
+      spans.forEach(function (s) { if (l === "en") s.textContent = s.dataset.en; else s.innerHTML = s.dataset.ms; });
+      alts.forEach(function (i) { i.alt = l === "en" ? i.dataset.enAlt : i.dataset.msAlt; });
+      document.documentElement.lang = l === "en" ? "en" : "ms";
+      document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === l)); });
+      try { localStorage.setItem("lang", l); } catch (e) {}
+    }
+    document.querySelectorAll(".lang button").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
+    var saved = null; try { saved = localStorage.getItem("lang"); } catch (e) {}
+    if (saved === "en") setLang("en");
+
+    var nav = document.getElementById("nav");
+    var speedEls = document.querySelectorAll("[data-speed]");
+    function frame() {
+      var y = window.scrollY, vh = window.innerHeight;
+      nav.classList.toggle("solid", y > vh * 0.6);
+      if (reduce) return;
+      if (y < vh * 1.3) speedEls.forEach(function (el) { el.style.transform = "translateY(" + (y * parseFloat(el.dataset.speed)) + "px)"; });
+    }
+    var ticking = false;
+    window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; frame(); }); } }, { passive: true }); frame();
+    if (!reduce && window.Lenis) {
+      var lenis = new Lenis({ lerp: 0.12, smoothWheel: true });
+      (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) { a.addEventListener("click", function (e) { var id = a.getAttribute("href"); if (document.querySelector(id)) { e.preventDefault(); lenis.scrollTo(id, { offset: -66 }); } }); });
+    }
+    // Animasi hero bermula selepas tirai peralihan halaman terbuka
+    (window.ptReady || function (f) { f(); })(function () { requestAnimationFrame(function () { document.querySelectorAll(".line-in").forEach(function (l, i) { setTimeout(function () { l.classList.add("in"); }, i * 150); }); }); });
+    var els = document.querySelectorAll(".rv");
+    if ("IntersectionObserver" in window && !reduce) {
+      var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }); }, { rootMargin: "0px 0px -8% 0px" });
+      els.forEach(function (e) { io.observe(e); });
+    } else els.forEach(function (e) { e.classList.add("in"); });
+  })();
+</script>
+<script src="../js/releases.js"></script>
+<script src="../js/fx.js"></script>
+<script src="../js/egg.js"></script>
+</body>
+</html>

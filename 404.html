@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Keluar trek · Shah Redza</title>
+<title>Keluar trek · Garaj</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0e0e10">
 <!-- Halaman ini boleh dipapar pada sebarang laluan, jadi semua link guna alamat penuh -->
-<link rel="icon" href="https://shahredza.github.io/garaj/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="https://shahredza.github.io/garaj/images/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,800;0,900;1,900&family=Titillium+Web:wght@400;700&family=JetBrains+Mono:wght@700&display=swap">
 <style>
   :root {
-    --night: #0e0e10; --fg: #f3f1ec; --muted: #9a98a1; --line: #2c2c33; --red: #e10600; --hb: #ff2a1f; --gx: #00bfae; --t3: #ffb000;
+    --night: #0e0e10; --fg: #f3f1ec; --muted: #9a98a1; --line: #2c2c33; --red: #e10600; --hb: #ff2a1f; --gx: #00bfae; --t3: #fd3851;
     --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
     --body: "Titillium Web", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
@@ -52,7 +52,7 @@
 </head>
 <body>
 <header><div class="wrap">
-  <a class="mark" href="https://shahredza.github.io/garaj/"><b>SR</b>Shah Redza</a>
+  <a class="mark" href="https://shahredza.github.io/garaj/"><b>G</b>Garaj</a>
   <div class="lang" role="group" aria-label="Language / Bahasa"><button type="button" data-lang="en">EN</button><button type="button" data-lang="ms" aria-pressed="true">BM</button></div>
 </div></header>
 
@@ -65,14 +65,14 @@
     <p class="lede" data-en="This page isn't on the circuit. The link may be wrong, or the page has been moved to another pit lane.">Halaman ini tiada di litar. Mungkin link salah, atau halaman sudah dipindah ke lorong pit lain.</p>
     <div class="row">
       <a class="btn btn-red" href="https://shahredza.github.io/garaj/"><span data-en="Back to the grid">Kembali ke grid</span></a>
-      <a class="btn btn-line" href="https://shahredza.github.io/garaj/healthybite.html"><i style="background:var(--hb)" aria-hidden="true"></i>HealthyBite</a>
-      <a class="btn btn-line" href="https://shahredza.github.io/garaj/gainix.html"><i style="background:var(--gx)" aria-hidden="true"></i>Gainix</a>
-      <a class="btn btn-line" href="https://shahredza.github.io/garaj/app03.html"><i style="background:var(--t3)" aria-hidden="true"></i>App 03</a>
+      <a class="btn btn-line" href="https://shahredza.github.io/garaj/html/healthybite.html"><i style="background:var(--hb)" aria-hidden="true"></i>HealthyBite</a>
+      <a class="btn btn-line" href="https://shahredza.github.io/garaj/html/gainix.html"><i style="background:var(--gx)" aria-hidden="true"></i>Gainix</a>
+      <a class="btn btn-line" href="https://shahredza.github.io/garaj/html/vitatrack.html"><i style="background:var(--t3)" aria-hidden="true"></i>VitaTrack</a>
     </div>
   </div>
 </main>
 
-<footer><div class="wrap">© 2026 Shah Redza · HealthyBite × Gainix</div></footer>
+<footer><div class="wrap">© 2026 Garaj · HealthyBite × Gainix</div></footer>
 
 <script>
   (function () {
@@ -81,7 +81,7 @@
     function setLang(l) {
       els.forEach(function (e) { e.textContent = l === "en" ? e.dataset.en : e.dataset.ms; });
       document.documentElement.lang = l === "en" ? "en" : "ms";
-      document.title = l === "en" ? "Off track · Shah Redza" : "Keluar trek · Shah Redza";
+      document.title = l === "en" ? "Off track · Garaj" : "Keluar trek · Garaj";
       document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === l)); });
       try { localStorage.setItem("lang", l); } catch (e) {}
     }

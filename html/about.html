@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Krew · Garaj</title>
+<meta name="description" content="Kenali tiga pembangun di sebalik HealthyBite, Gainix dan VitaTrack.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Krew · Garaj">
+<meta property="og:description" content="Kenali tiga pembangun di sebalik HealthyBite, Gainix dan VitaTrack.">
+<meta property="og:url" content="https://shahredza.github.io/garaj/html/about.html">
+<meta property="og:image" content="https://shahredza.github.io/garaj/images/og/garaj.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e0e10">
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Titillium+Web:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  /* Halaman Krew: tiga pembangun, setiap kad ikut warna pasukan app masing-masing. */
+  :root {
+    --bg: #0e0e10; --bg2: #18181c; --fg: #f3f1ec; --muted: #9a98a1;
+    --acc: #e10600; --acc-ink: #ffffff; --line: rgba(255,255,255,.12); --card: #17171b;
+    --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+    --body: "Titillium Web", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --g: max(16px, env(safe-area-inset-left, 0px));
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 var(--g); }
+  h1, h2, h3 { font-family: var(--display); font-weight: 800; text-transform: uppercase; line-height: .88; margin: 0; text-wrap: balance; }
+  h2 { font-size: clamp(48px, 7.4vw, 110px); margin: 12px 0 40px; }
+  h3 { font-size: 30px; margin-bottom: 16px; }
+  p { margin: 0; }
+  .eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+  .eyebrow::before { content: ""; width: 24px; height: 4px; background: var(--acc); transform: skewX(-20deg); }
+  .sec { padding: clamp(80px, 10vw, 140px) 0; border-top: 1px solid var(--line); }
+
+  /* Nav */
+  .nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .3s; }
+  .nav.solid { background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; gap: 16px; height: 66px; }
+  .back { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacing: .04em; }
+  .back svg { width: 18px; height: 18px; }
+  .nav .team { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .lang { margin-left: auto; display: flex; border: 1.5px solid currentColor; }
+  .lang button { background: transparent; border: 0; padding: 7px 10px; cursor: pointer; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .1em; opacity: .55; }
+  .lang button[aria-pressed="true"] { background: var(--acc); color: var(--acc-ink); opacity: 1; }
+  @media (max-width: 560px) { .nav .team { display: none; } }
+
+  /* Hero livery */
+  .hero { position: relative; min-height: 100svh; display: grid; align-items: end; overflow: hidden; background: radial-gradient(50% 60% at 82% 30%, rgba(225,6,0,.22), transparent 70%), linear-gradient(150deg,#1b1b20 0%,#0e0e10 60%); padding: 100px 0 0; }
+  .hero .stripe { position: absolute; left: -5%; right: -5%; top: 58%; height: 34px; background: linear-gradient(90deg,#ff2a1f 0 33%,#00bfae 33% 66%,#fd3851 66%); transform: skewY(-8deg); opacity: .5; }
+  .hero .bignum { position: absolute; right: -2vw; top: 6vh; font-family: var(--display); font-style: italic; font-weight: 900; font-size: clamp(220px, 40vw, 560px); line-height: .8; color: transparent; -webkit-text-stroke: 2px color-mix(in srgb, var(--fg) 28%, transparent); will-change: transform; }
+  .hero .crest { width: clamp(150px, 20vw, 260px); height: auto; aspect-ratio: 1; filter: drop-shadow(0 24px 30px rgba(0,0,0,.35)); will-change: transform; }
+  .hero .inner { width: 100%; position: relative; padding-bottom: 40px; display: grid; gap: 22px; }
+  .hero h1 { font-size: clamp(64px, 13vw, 200px); line-height: .8; }
+  .hero .sub { font-family: var(--mono); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
+  .hero .tag { font-family: var(--display); font-style: italic; font-weight: 800; font-size: clamp(26px, 3vw, 40px); text-transform: uppercase; color: #e10600; }
+  .hero-foot { display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: center; justify-content: space-between; padding: 22px 0 26px; border-top: 1px solid var(--line); }
+  .hero-foot p { max-width: 40em; font-size: clamp(17px, 1.4vw, 20px); }
+  .cue { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
+  .line-in { display: block; overflow: hidden; }
+  .line-in > span { display: block; transform: translateY(105%); transition: transform 1.1s cubic-bezier(.2, .8, .2, 1); }
+  .line-in.in > span { transform: none; }
+
+  /* Muat turun */
+  .dl { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+  @media (max-width: 900px) { .dl { grid-template-columns: minmax(0, 1fr); } }
+  .dl-row { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; margin-top: 8px; }
+  .btn { display: inline-flex; align-items: center; gap: 12px; padding: 15px 26px; font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; border: 0; cursor: pointer; transition: transform .2s, filter .2s; clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+  .btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+  .btn svg { width: 22px; height: 22px; }
+  .btn-acc { background: var(--acc); color: var(--acc-ink); }
+  .btn.big { font-size: 26px; padding: 20px 34px; }
+  .qr { width: 150px; background: #fff; padding: 8px; display: grid; gap: 6px; box-shadow: 0 16px 30px -18px rgba(0,0,0,.5); }
+  .qr svg { width: 100%; height: auto; display: block; }
+  .qr small { color: #111; font-size: 11px; font-weight: 700; text-align: center; line-height: 1.2; }
+  .soon { display: inline-flex; padding: 16px 24px; font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; border: 2px dashed var(--acc); color: var(--acc); }
+  .kv { margin: 0; border-top: 2px solid var(--fg); }
+  .kv div { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .kv dt { color: var(--muted); font-size: 15px; }
+  .kv dd { margin: 0; font-weight: 700; }
+  .install { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); counter-reset: s; border-top: 1px solid var(--line); }
+  @media (max-width: 900px) { .install { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .install { grid-template-columns: minmax(0, 1fr); } }
+  .install li { counter-increment: s; padding: 20px 20px 20px 0; display: grid; gap: 6px; align-content: start; }
+  .install li::before { content: "0" counter(s); font-family: var(--display); font-style: italic; font-weight: 900; font-size: 44px; line-height: .9; color: var(--acc); }
+  .install p { color: var(--muted); font-size: 15px; }
+  .warn, .note { margin-top: 16px; padding: 14px 18px; border-left: 4px solid var(--acc); background: var(--card); font-size: 15px; }
+
+  /* Tentang kami */
+  .about { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(32px, 6vw, 90px); }
+  @media (max-width: 900px) { .about { grid-template-columns: minmax(0, 1fr); } }
+  .about .big-p { font-size: clamp(20px, 1.9vw, 26px); line-height: 1.45; }
+  .about .mission { margin-top: 24px; padding-left: 18px; border-left: 4px solid var(--acc); color: var(--muted); font-size: 18px; }
+  .driver { display: flex; gap: 16px; align-items: center; margin-top: 32px; padding: 16px; background: var(--card); border: 1px solid var(--line); }
+  .driver img { width: 72px; height: 72px; object-fit: cover; filter: grayscale(.2); }
+  .driver small { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .driver b { display: block; font-family: var(--display); font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1.05; }
+  .side { display: grid; gap: 40px; align-content: start; }
+  .spons { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .spons li { font-family: var(--display); font-style: italic; font-weight: 900; font-size: 30px; text-transform: uppercase; padding: 10px 16px; background: var(--card); border: 1px solid var(--line); }
+
+  /* Ciri */
+  .feats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  @media (max-width: 900px) { .feats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .feats { grid-template-columns: minmax(0, 1fr); } }
+  .feats li { background: var(--bg); padding: 26px; display: grid; gap: 8px; align-content: start; transition: background .25s; }
+  .feats li:hover { background: var(--card); }
+  .feats .fn { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--acc); letter-spacing: .14em; }
+  .feats b { font-family: var(--display); font-weight: 800; font-size: 28px; text-transform: uppercase; line-height: 1; }
+  .feats p { color: var(--muted); font-size: 15px; }
+
+  /* Galeri */
+  .rail { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--g) 20px max(var(--g), calc((100vw - 1240px) / 2 + var(--g))); scrollbar-width: thin; }
+  .rail figure { margin: 0; flex: 0 0 230px; scroll-snap-align: start; display: grid; gap: 10px; }
+  .rail .frame { border-radius: 26px; padding: 7px; background: #0b0b0d; box-shadow: 0 24px 50px -30px rgba(0,0,0,.6); }
+  .rail img { width: 100%; aspect-ratio: 9 / 19.5; object-fit: cover; object-position: top; border-radius: 20px; }
+  .rail figcaption { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+  /* Pasukan lain */
+  .others { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 700px) { .others { grid-template-columns: minmax(0, 1fr); } }
+  .other { display: flex; align-items: center; gap: 18px; padding: 20px; text-decoration: none; color: #fff; transition: transform .25s; }
+  .other:hover { transform: translateY(-3px); }
+  .other svg { width: 70px; height: 60px; flex: none; }
+  .other small { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .8; }
+  .other b { display: block; font-family: var(--display); font-weight: 800; font-size: 34px; text-transform: uppercase; line-height: 1; }
+  .other i { margin-left: auto; font-style: normal; font-size: 26px; }
+  .o-hb { background: linear-gradient(135deg, #ff2a1f, #8f0400); }
+  .o-gx { background: linear-gradient(135deg, #e6e8ec, #9aa0aa 60%, #00bfae); color: #0b0b0d; }
+  .o-t3 { background: linear-gradient(135deg, #1a2550, #0c1732); border: 1px solid rgba(253,56,81,.45); }
+  footer { padding: 26px 0 calc(26px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+
+  .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1); }
+  .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rv, .line-in > span { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* Log perubahan, status bina, kiraan muat turun, hubungi */
+  [hidden] { display: none !important; }
+  .log { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--fg); }
+  .log li { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .log .v { display: block; font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase; color: var(--acc); }
+  .log time { display: block; margin-top: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: .12em; color: var(--muted); }
+  .log p { max-width: 40em; }
+  @media (max-width: 560px) { .log li { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+  .build { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .build li { padding: 18px; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--line); display: grid; gap: 6px; }
+  .build li.done, .build li.now { border-top-color: var(--acc); }
+  .build li.now { background-image: repeating-linear-gradient(-45deg, transparent 0 12px, color-mix(in srgb, var(--acc) 14%, transparent) 12px 24px); }
+  .build b { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; }
+  .build small { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .build li.done small, .build li.now small { color: var(--acc); }
+  @media (max-width: 700px) { .build { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .contact { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .contact a { color: var(--fg); text-underline-offset: 3px; }
+
+
+  /* Lenis (smooth scroll): CSS scroll-behavior mesti dimatikan, jika tidak dua-dua melawan dan scroll tersangkut */
+  html.lenis, html.lenis body { height: auto; }
+  html.lenis { scroll-behavior: auto !important; }
+  .lenis.lenis-stopped { overflow: hidden; }
+
+  /* Krew: kad pemandu */
+  .hero { min-height: 74svh; }
+  .hero .stripe { top: auto; bottom: 0; opacity: .35; }
+  .crew { display: grid; gap: clamp(28px, 4vw, 48px); }
+  .racer { --tc: #e10600; --tc-bg: #e10600; --ini: #fff; --car: #e10600; --car2: #ffffff; --car3: #111114; --carnum: #ffffff; position: relative; padding: clamp(22px, 3.4vw, 40px); background: var(--card); border: 1px solid var(--line); }
+  .racer::before { content: ""; position: absolute; left: -1px; right: -1px; top: -1px; height: 6px; background: var(--tc); }
+  .racer.r-hb { --tc: #ff2a1f; --tc-bg: linear-gradient(150deg, #ff2a1f, #8f0400); --car: #e8160c; --car2: #ffffff; --car3: #1a0505; --carnum: #ffffff; }
+  .racer.r-gx { --tc: #00bfae; --tc-bg: linear-gradient(150deg, #e6e8ec, #9aa0aa 60%, #00bfae); --ini: #0b0b0d; --car: #111318; --car2: #00bfae; --car3: #050608; --carnum: #00bfae; }
+  .racer.r-vt { --tc: #fd3851; --tc-bg: linear-gradient(150deg, #1a2550, #0c1732 70%); --ini: #fd3851; --car: #1a2550; --car2: #fd3851; --car3: #080c1c; --carnum: #ffffff; }
+  .racer.r-gx::before { background: linear-gradient(90deg, #c3c7cf, #00bfae); }
+  .racer.r-vt::before { background: linear-gradient(90deg, #fd3851, #6371cd); }
+  .racer-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 72px); align-items: center; padding-top: clamp(22px, 3vw, 36px); }
+  .racer:nth-child(even) .racer-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
+  .racer:nth-child(even) .photo { order: 2; }
+  .photo { position: relative; aspect-ratio: 4 / 5; background: var(--tc-bg); overflow: hidden; }
+  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+  .photo .ini { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--display); font-style: italic; font-weight: 900; font-size: clamp(120px, 16vw, 220px); line-height: 1; color: var(--ini); opacity: .9; }
+  .photo .num { position: absolute; right: 12px; bottom: 4px; font-family: var(--display); font-style: italic; font-weight: 900; font-size: clamp(64px, 7vw, 96px); line-height: 1; color: #fff; text-shadow: 0 6px 24px rgba(0,0,0,.45); }
+  .photo .badge { position: absolute; left: 14px; top: 16px; width: 92px; height: 78px; filter: drop-shadow(0 8px 14px rgba(0,0,0,.4)); }
+  .r-vt .photo .badge { width: 150px; height: 66px; }
+  .racer .eyebrow { margin-bottom: 10px; }
+  .racer .eyebrow::before { background: var(--tc); }
+  .racer h2 { font-size: clamp(64px, 9vw, 128px); margin: 0 0 6px; }
+  .racer .role { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .racer .bio { margin-top: 20px; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; max-width: 36em; }
+  .racer .why { margin: 22px 0 0; padding: 4px 0 4px 18px; border-left: 4px solid var(--tc); color: #d0ced5; max-width: 38em; }
+  .racer .why b { display: block; margin-bottom: 4px; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--tc); }
+  .racer .btn { margin-top: 26px; background: var(--tc); color: #fff; }
+  .racer.r-gx .btn { color: #04201d; }
+  .draft { margin-top: 12px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--muted); }
+  @media (max-width: 860px) { .racer-grid, .racer:nth-child(even) .racer-grid { grid-template-columns: minmax(0, 1fr); } .racer:nth-child(even) .photo { order: 0; } .photo { aspect-ratio: 1; } }
+
+  /* Lorong: kereta F1 memecut ke depan bila kursor didekatkan, kemudian "Tentang" terbuka */
+  .lane { all: unset; box-sizing: border-box; display: grid; grid-template-columns: minmax(180px, .32fr) minmax(0, 1fr); gap: 20px; align-items: center; width: 100%; cursor: pointer; }
+  .lane:focus-visible { outline: 3px solid var(--tc); outline-offset: 6px; }
+  .lane-label { display: grid; gap: 4px; }
+  .lane-label .eyebrow { margin: 0 0 4px; }
+  .lane-label b { font-family: var(--display); font-weight: 800; font-size: clamp(44px, 5vw, 68px); line-height: .85; text-transform: uppercase; }
+  .lane-label small { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .lane-label small i { width: 8px; height: 8px; border-radius: 50%; background: var(--tc); animation: pulse 1.4s infinite; }
+  .open .lane-label small i { animation: none; opacity: .4; }
+  @keyframes pulse { 50% { opacity: .2; } }
+  .hint-touch { display: none; }
+  @media (hover: none) { .hint-mouse { display: none; } .hint-touch { display: inline; } }
+  /* Trek dari atas: asfalt, garisan putus-putus, kerb merah-putih, bendera penamat */
+  .track { --th: clamp(120px, 12vw, 160px); --cw: min(330px, 58%, calc((var(--th) - 20px) * 2.5)); position: relative; height: var(--th); overflow: hidden;
+    background: repeating-linear-gradient(90deg, var(--tc) 0 22px, #fff 22px 44px) top / 100% 7px no-repeat, repeating-linear-gradient(90deg, var(--tc) 0 22px, #fff 22px 44px) bottom / 100% 7px no-repeat,
+      radial-gradient(120% 70% at 50% 50%, #26262c, #18181c 70%), #18181c; }
+  .track::before { content: ""; position: absolute; inset: 7px 0; background: repeating-linear-gradient(115deg, rgba(255,255,255,.018) 0 2px, transparent 2px 6px); pointer-events: none; }
+  .track::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 3px; transform: translateY(-50%); background: repeating-linear-gradient(90deg, rgba(255,255,255,.28) 0 34px, transparent 34px 64px); }
+  .finish { position: absolute; right: 0; top: 7px; bottom: 7px; width: 22px; z-index: 1; background-color: #fff; background-image: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%), linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%); background-size: 11px 11px; background-position: 0 0, 5.5px 5.5px; opacity: .9; }
+  .car { position: absolute; z-index: 2; left: 3%; top: 50%; translate: 0 -50%; width: var(--cw); height: auto; overflow: visible; transition: left 1s cubic-bezier(.65, 0, .25, 1); }
+  .car .tread { transform-box: view-box; }
+  .car .trail { opacity: 0; transform: translateX(-30px); transition: opacity .3s, transform .9s; }
+  .car .heat { transform-box: fill-box; transform-origin: right center; opacity: .35; }
+  .speed { position: absolute; left: 0; top: 18%; bottom: 18%; width: 0; opacity: 0; background: repeating-linear-gradient(180deg, transparent 0 9px, color-mix(in srgb, var(--tc) 60%, transparent) 9px 11px); -webkit-mask-image: linear-gradient(90deg, transparent, #000); mask-image: linear-gradient(90deg, transparent, #000); transition: width 1s cubic-bezier(.65, 0, .25, 1), opacity .4s; }
+  /* Diam: enjin hidup, kereta bergegar halus */
+  .car { animation: idle .11s linear infinite; }
+  @keyframes idle { 25% { transform: translate(.4px, -.3px); } 75% { transform: translate(-.3px, .3px); } }
+  .car .heat { animation: heat .5s ease-in-out infinite alternate; }
+  @keyframes heat { to { transform: scaleX(1.25) scaleY(.85); opacity: .55; } }
+  /* Memecut: condong sedikit, tayar berputar, garisan laju, kabur dan haba ekzos */
+  .driving .car { left: calc(100% - var(--cw) - 30px); animation: launch .7s cubic-bezier(.3, 0, .2, 1); }
+  @keyframes launch { 0% { rotate: 0deg; } 18% { rotate: -2.6deg; transform: scaleX(1.03); } 55% { rotate: .8deg; } 100% { rotate: 0deg; } }
+  .driving .car .tread { animation: tread .09s linear infinite; }
+  @keyframes tread { to { transform: translateX(-8px); } }
+  .driving .car .trail { opacity: .55; transform: translateX(-70px); }
+  .driving .car .heat { animation-duration: .12s; }
+  .driving .speed { width: calc(100% - var(--cw) - 30px); opacity: 1; }
+  .parked .speed, .parked .car .trail { opacity: 0; transition: opacity .6s; }
+  .parked .car .tread { animation: none; }
+  .parked .car .heat { animation: heat .5s ease-in-out infinite alternate; }
+  @media (max-width: 700px) { .lane { grid-template-columns: minmax(0, 1fr); gap: 12px; } .track { --th: 104px; --cw: min(205px, 56%, calc((var(--th) - 18px) * 2.5)); } }
+
+  /* "Tentang" tersembunyi sehingga kereta tiba (hanya bila JavaScript jalan) */
+  html.js .racer-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .8s cubic-bezier(.2, .8, .2, 1); }
+  html.js .racer-body > .racer-grid { min-height: 0; overflow: hidden; opacity: 0; transform: translateY(18px); transition: opacity .6s .15s, transform .8s .1s cubic-bezier(.2, .8, .2, 1); }
+  html.js .racer.open .racer-body { grid-template-rows: 1fr; }
+  html.js .racer.open .racer-body > .racer-grid { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .car, .speed, .car .trail, html.js .racer-body, html.js .racer-body > .racer-grid { transition: none; } .car, .car .heat, .car .tread, .driving .car, .driving .car .tread { animation: none !important; } }
+</style>
+<script>document.documentElement.classList.add("js");</script>
+<script src="../js/sound.js"></script>
+<script src="../js/transition.js"></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="arcTop" d="M14 50 A36 36 0 0 1 86 50"/>
+    <path id="arcBot" d="M10 50 A40 40 0 0 0 90 50"/>
+  </defs>
+  <symbol id="crest-hb" viewBox="0 0 120 100">
+    <!-- Lencana HealthyBite gaya Ferrari (dipotong dari images/hb-emblem.png) -->
+    <image href="../images/hb-crest.png" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
+  </symbol>
+  <symbol id="crest-gx" viewBox="0 0 100 100">
+    <!-- Lencana GX Works (dipotong dari images/gx-emblem.png) -->
+    <image href="../images/gx-crest.png" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
+  </symbol>
+  <symbol id="crest-t3" viewBox="0 0 231 100">
+    <!-- Logo VitaTrack Performance Racing (dari images/vt-emblem.png, atas plat biru tua) -->
+    <image href="../images/vt-crest.png" x="0" y="0" width="231" height="100"/>
+  </symbol>
+</svg>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="back" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg><span data-en="Grid">Grid</span></a>
+    <span class="team">Krew · Garaj</span>
+    <div class="lang" role="group" aria-label="Language / Bahasa"><button type="button" data-lang="en">EN</button><button type="button" data-lang="ms" aria-pressed="true">BM</button></div>
+  </div>
+</header>
+
+<main>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- Kereta F1 pandangan atas: definisi kongsi (cahaya, karbon, bayang, kabur gerakan, klip tayar) -->
+  <defs>
+    <linearGradient id="ct-gloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".42"/><stop offset=".28" stop-color="#fff" stop-opacity=".06"/><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></linearGradient>
+    <linearGradient id="ct-len" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".35"/><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".12"/></linearGradient>
+    <linearGradient id="ct-tyre" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".7"/><stop offset=".3" stop-color="#fff" stop-opacity=".08"/><stop offset=".7" stop-color="#fff" stop-opacity=".04"/><stop offset="1" stop-color="#000" stop-opacity=".75"/></linearGradient>
+    <radialGradient id="ct-helmet" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset=".35" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></radialGradient>
+    <radialGradient id="ct-heat"><stop offset="0" stop-color="#ffb26b" stop-opacity=".55"/><stop offset=".5" stop-color="#ff6a3d" stop-opacity=".18"/><stop offset="1" stop-color="#ff6a3d" stop-opacity="0"/></radialGradient>
+    <pattern id="ct-carbon" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#141417"/><path d="M0 0h3v3H0zM3 3h3v3H3z" fill="#1d1d22"/></pattern>
+    <filter id="ct-soft" x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="ct-mblur" x="-40%" y="-10%" width="180%" height="120%"><feGaussianBlur stdDeviation="16 0"/></filter>
+    <clipPath id="ct-t0"><rect x="70" y="28" width="74" height="46" rx="9"/></clipPath><clipPath id="ct-t1"><rect x="70" y="166" width="74" height="46" rx="9"/></clipPath><clipPath id="ct-t2"><rect x="404" y="38" width="64" height="40" rx="9"/></clipPath><clipPath id="ct-t3"><rect x="404" y="162" width="64" height="40" rx="9"/></clipPath>
+  </defs>
+</svg>
+
+  <section class="hero" aria-labelledby="h1">
+    <span class="stripe" aria-hidden="true"></span>
+    <span class="bignum" data-speed="0.3" aria-hidden="true">×3</span>
+    <div class="wrap inner">
+      <p class="sub">Garaj · TVETMARA Lumut</p>
+      <h1 id="h1"><span class="line-in"><span><span data-en="Crew">Krew</span></span></span></h1>
+      <p class="tag"><span class="line-in"><span><span data-en="Three drivers. Three teams.">Tiga pemandu. Tiga pasukan.</span></span></span></p>
+      <div class="hero-foot">
+        <p><span data-en="Meet the three developers behind HealthyBite, Gainix and VitaTrack. Bring your cursor to a car to meet its driver.">Kenali tiga pembangun di sebalik HealthyBite, Gainix dan VitaTrack. Dekatkan kursor pada kereta untuk kenal pemandunya.</span></p>
+        <a class="cue" href="#krew">↓ <span data-en="Meet the crew">Kenali krew</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="krew" aria-label="Krew" style="border-top:0">
+    <div class="wrap">
+      <div class="crew">
+        <article class="racer r-hb rv" id="krew-shah">
+          <button class="lane" type="button" aria-expanded="false" aria-controls="krew-shah-body" data-sound="hb">
+            <span class="lane-label">
+              <span class="eyebrow">#44 · HealthyBite Racing</span>
+              <b>Shah</b>
+              <small><i aria-hidden="true"></i><span class="hint-mouse" data-en="Hover over the car">Dekatkan kursor pada kereta</span><span class="hint-touch" data-en="Tap the car">Tekan kereta</span></small>
+            </span>
+            <span class="track" aria-hidden="true">
+              <span class="speed"></span>
+              <span class="finish"></span>
+              <svg class="car" viewBox="0 0 600 240" aria-hidden="true" focusable="false">
+                <rect class="trail" x="40" y="58" width="520" height="124" rx="58" fill="var(--car)" filter="url(#ct-mblur)"/>
+                <rect x="34" y="40" width="540" height="168" rx="70" fill="#000" opacity=".55" filter="url(#ct-soft)"/>
+                <g class="heat"><ellipse cx="-4" cy="120" rx="34" ry="16" fill="url(#ct-heat)"/><ellipse cx="-22" cy="120" rx="22" ry="10" fill="url(#ct-heat)"/></g>
+                <path d="M118 90 Q128 58 172 56 L432 62 Q474 68 482 96 L482 144 Q474 172 432 178 L172 184 Q128 182 118 150 Z" fill="url(#ct-carbon)"/>
+                <path d="M118 90 Q128 58 172 56 L432 62 Q474 68 482 96 L482 144 Q474 172 432 178 L172 184 Q128 182 118 150 Z" fill="none" stroke="#000" stroke-opacity=".6" stroke-width="2"/>
+                <g stroke="#23232a" stroke-width="5" stroke-linecap="round"><path d="M152 100 L112 70"/><path d="M168 98 L126 70"/><path d="M152 140 L112 170"/><path d="M168 142 L126 170"/><path d="M398 104 L432 76"/><path d="M414 108 L446 78"/><path d="M398 136 L432 164"/><path d="M414 132 L446 162"/></g>
+                <rect x="70" y="28" width="74" height="46" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t0)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M60 28 v46"/><path d="M68 28 v46"/><path d="M76 28 v46"/><path d="M84 28 v46"/><path d="M92 28 v46"/><path d="M100 28 v46"/><path d="M108 28 v46"/><path d="M116 28 v46"/><path d="M124 28 v46"/><path d="M132 28 v46"/><path d="M140 28 v46"/><path d="M148 28 v46"/></g></g><rect x="70" y="28" width="74" height="46" rx="9" fill="url(#ct-tyre)"/><rect x="76" y="31" width="62" height="3" rx="1.5" fill="#fff" opacity=".07"/><rect x="70" y="166" width="74" height="46" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t1)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M60 166 v46"/><path d="M68 166 v46"/><path d="M76 166 v46"/><path d="M84 166 v46"/><path d="M92 166 v46"/><path d="M100 166 v46"/><path d="M108 166 v46"/><path d="M116 166 v46"/><path d="M124 166 v46"/><path d="M132 166 v46"/><path d="M140 166 v46"/><path d="M148 166 v46"/></g></g><rect x="70" y="166" width="74" height="46" rx="9" fill="url(#ct-tyre)"/><rect x="76" y="169" width="62" height="3" rx="1.5" fill="#fff" opacity=".07"/><rect x="404" y="38" width="64" height="40" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t2)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M394 38 v40"/><path d="M402 38 v40"/><path d="M410 38 v40"/><path d="M418 38 v40"/><path d="M426 38 v40"/><path d="M434 38 v40"/><path d="M442 38 v40"/><path d="M450 38 v40"/><path d="M458 38 v40"/><path d="M466 38 v40"/><path d="M474 38 v40"/></g></g><rect x="404" y="38" width="64" height="40" rx="9" fill="url(#ct-tyre)"/><rect x="410" y="41" width="52" height="3" rx="1.5" fill="#fff" opacity=".07"/><rect x="404" y="162" width="64" height="40" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t3)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M394 162 v40"/><path d="M402 162 v40"/><path d="M410 162 v40"/><path d="M418 162 v40"/><path d="M426 162 v40"/><path d="M434 162 v40"/><path d="M442 162 v40"/><path d="M450 162 v40"/><path d="M458 162 v40"/><path d="M466 162 v40"/><path d="M474 162 v40"/></g></g><rect x="404" y="162" width="64" height="40" rx="9" fill="url(#ct-tyre)"/><rect x="410" y="165" width="52" height="3" rx="1.5" fill="#fff" opacity=".07"/>
+                <rect x="20" y="38" width="46" height="164" rx="4" fill="url(#ct-carbon)"/>
+                <rect x="24" y="44" width="34" height="152" rx="3" fill="var(--car3)"/>
+                <rect x="40" y="44" width="10" height="152" rx="2" fill="var(--car2)"/>
+                <rect x="14" y="34" width="58" height="10" rx="3" fill="var(--car)"/><rect x="14" y="196" width="58" height="10" rx="3" fill="var(--car)"/>
+                <path d="M64 108 L150 97 Q176 68 232 66 L330 69 Q372 73 394 98 L414 103 L414 137 L394 142 Q372 167 330 171 L232 174 Q176 172 150 143 L64 132 Z" fill="var(--car)"/>
+                <path d="M182 84 Q246 72 326 78 L338 88 Q254 84 190 94 Z M182 156 Q246 168 326 162 L338 152 Q254 156 190 146 Z" fill="var(--car2)"/>
+                <path d="M400 105 L520 111 Q552 115 560 120 Q552 125 520 129 L400 135 Z" fill="var(--car)"/>
+                <path d="M412 117 L536 118 L536 122 L412 123 Z" fill="var(--car2)"/>
+                <path d="M64 108 L150 97 Q176 68 232 66 L330 69 Q372 73 394 98 L414 103 L414 137 L394 142 Q372 167 330 171 L232 174 Q176 172 150 143 L64 132 Z" fill="url(#ct-gloss)"/><path d="M64 108 L150 97 Q176 68 232 66 L330 69 Q372 73 394 98 L414 103 L414 137 L394 142 Q372 167 330 171 L232 174 Q176 172 150 143 L64 132 Z" fill="url(#ct-len)"/><path d="M400 105 L520 111 Q552 115 560 120 Q552 125 520 129 L400 135 Z" fill="url(#ct-gloss)"/>
+                <path d="M200 76 Q270 66 336 74" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+                <rect x="104" y="117" width="62" height="6" rx="3" fill="var(--car2)"/>
+                <text x="206" y="129" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-style="italic" font-weight="900" font-size="28" fill="var(--carnum)">44</text>
+                <text x="184" y="105" font-family="JetBrains Mono, monospace" font-weight="700" font-size="7.4" letter-spacing="1" fill="var(--carnum)" opacity=".85">NASI LEMAK ENERGY</text>
+                <text x="184" y="143" font-family="JetBrains Mono, monospace" font-weight="700" font-size="7.4" letter-spacing="1" fill="var(--carnum)" opacity=".85">SAMBAL TURBO</text>
+                <ellipse cx="268" cy="120" rx="17" ry="12" fill="var(--car3)"/>
+                <path d="M288 107 Q320 100 352 109 L352 131 Q320 140 288 133 Z" fill="#08080a"/>
+                <circle cx="314" cy="120" r="13" fill="var(--car2)"/><circle cx="314" cy="120" r="13" fill="url(#ct-helmet)"/>
+                <path d="M320 112 Q326 120 320 128" fill="none" stroke="#0b0b0d" stroke-width="4" stroke-linecap="round"/>
+                <path d="M282 108 Q336 98 364 120 Q336 142 282 132" fill="none" stroke="#1b1b20" stroke-width="5.5" stroke-linecap="round"/>
+                <path d="M282 108 Q336 98 364 120" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5"/>
+                <path d="M348 96 L362 90 M348 144 L362 150" stroke="#1b1b20" stroke-width="3"/><rect x="358" y="84" width="12" height="8" rx="2" fill="var(--car)"/><rect x="358" y="148" width="12" height="8" rx="2" fill="var(--car)"/>
+                <path d="M524 28 Q558 26 586 44 L590 120 L586 196 Q558 214 524 212 L534 194 L552 160 L556 120 L552 80 L534 46 Z" fill="var(--car)"/>
+                <path d="M534 46 L552 80 L556 120 L552 160 L534 194" fill="none" stroke="var(--car2)" stroke-width="4"/>
+                <path d="M562 52 L572 120 L562 188" fill="none" stroke="url(#ct-carbon)" stroke-width="7"/>
+                <path d="M524 28 Q558 26 586 44 L590 120 L586 196 Q558 214 524 212" fill="url(#ct-gloss)" opacity=".7"/>
+                <rect x="518" y="20" width="72" height="9" rx="3" fill="var(--car3)"/><rect x="518" y="211" width="72" height="9" rx="3" fill="var(--car3)"/>
+              </svg>
+            </span>
+          </button>
+          <div class="racer-body" id="krew-shah-body"><div class="racer-grid">
+          <div class="photo">
+            <img src="../images/krew/shah.jpg" alt="Shah" loading="lazy">
+            <svg class="badge" viewBox="0 0 120 100" aria-hidden="true"><use href="#crest-hb"/></svg>
+            <span class="num" aria-hidden="true">#44</span>
+          </div>
+          <div>
+            <p class="eyebrow">#44 · HealthyBite Racing</p>
+            <h2>Shah</h2>
+            <p class="role"><span data-en="HealthyBite developer · TVETMARA Lumut">Pembangun HealthyBite · TVETMARA Lumut</span></p>
+            <p class="bio"><span data-en="I'm Shah, 25, a student at TVETMARA Lumut.">Saya Shah, 25 tahun, pelajar di TVETMARA Lumut.</span></p>
+            <blockquote class="why"><b><span data-en="Why HealthyBite?">Kenapa HealthyBite?</span></b><span data-en="Health needs looking after, especially for men. Our mothers, siblings, spouses and children depend on us, so I built HealthyBite to make watching what you eat as easy as taking a photo.">Kesihatan perlu dijaga, lebih-lebih lagi bagi lelaki. Ibu, adik-adik, pasangan dan anak-anak bergantung kepada kita, jadi saya bina HealthyBite supaya menjaga pemakanan semudah mengambil gambar.</span></blockquote>
+            <a class="btn" href="healthybite.html"><span data-en="See HealthyBite">Lihat HealthyBite</span> →</a>
+          </div>
+          </div></div>
+        </article>
+        <article class="racer r-gx rv" id="krew-haziq">
+          <button class="lane" type="button" aria-expanded="false" aria-controls="krew-haziq-body" data-sound="gx">
+            <span class="lane-label">
+              <span class="eyebrow">#12 · GX Works Motorsport</span>
+              <b>Haziq</b>
+              <small><i aria-hidden="true"></i><span class="hint-mouse" data-en="Hover over the car">Dekatkan kursor pada kereta</span><span class="hint-touch" data-en="Tap the car">Tekan kereta</span></small>
+            </span>
+            <span class="track" aria-hidden="true">
+              <span class="speed"></span>
+              <span class="finish"></span>
+              <svg class="car" viewBox="0 0 600 240" aria-hidden="true" focusable="false">
+                <rect class="trail" x="40" y="58" width="520" height="124" rx="58" fill="var(--car)" filter="url(#ct-mblur)"/>
+                <rect x="34" y="40" width="540" height="168" rx="70" fill="#000" opacity=".55" filter="url(#ct-soft)"/>
+                <g class="heat"><ellipse cx="-4" cy="120" rx="34" ry="16" fill="url(#ct-heat)"/><ellipse cx="-22" cy="120" rx="22" ry="10" fill="url(#ct-heat)"/></g>
+                <path d="M118 90 Q128 58 172 56 L432 62 Q474 68 482 96 L482 144 Q474 172 432 178 L172 184 Q128 182 118 150 Z" fill="url(#ct-carbon)"/>
+                <path d="M118 90 Q128 58 172 56 L432 62 Q474 68 482 96 L482 144 Q474 172 432 178 L172 184 Q128 182 118 150 Z" fill="none" stroke="#000" stroke-opacity=".6" stroke-width="2"/>
+                <g stroke="#23232a" stroke-width="5" stroke-linecap="round"><path d="M152 100 L112 70"/><path d="M168 98 L126 70"/><path d="M152 140 L112 170"/><path d="M168 142 L126 170"/><path d="M398 104 L432 76"/><path d="M414 108 L446 78"/><path d="M398 136 L432 164"/><path d="M414 132 L446 162"/></g>
+                <rect x="70" y="28" width="74" height="46" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t0)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M60 28 v46"/><path d="M68 28 v46"/><path d="M76 28 v46"/><path d="M84 28 v46"/><path d="M92 28 v46"/><path d="M100 28 v46"/><path d="M108 28 v46"/><path d="M116 28 v46"/><path d="M124 28 v46"/><path d="M132 28 v46"/><path d="M140 28 v46"/><path d="M148 28 v46"/></g></g><rect x="70" y="28" width="74" height="46" rx="9" fill="url(#ct-tyre)"/><rect x="76" y="31" width="62" height="3" rx="1.5" fill="#fff" opacity=".07"/><rect x="70" y="166" width="74" height="46" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t1)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M60 166 v46"/><path d="M68 166 v46"/><path d="M76 166 v46"/><path d="M84 166 v46"/><path d="M92 166 v46"/><path d="M100 166 v46"/><path d="M108 166 v46"/><path d="M116 166 v46"/><path d="M124 166 v46"/><path d="M132 166 v46"/><path d="M140 166 v46"/><path d="M148 166 v46"/></g></g><rect x="70" y="166" width="74" height="46" rx="9" fill="url(#ct-tyre)"/><rect x="76" y="169" width="62" height="3" rx="1.5" fill="#fff" opacity=".07"/><rect x="404" y="38" width="64" height="40" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t2)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M394 38 v40"/><path d="M402 38 v40"/><path d="M410 38 v40"/><path d="M418 38 v40"/><path d="M426 38 v40"/><path d="M434 38 v40"/><path d="M442 38 v40"/><path d="M450 38 v40"/><path d="M458 38 v40"/><path d="M466 38 v40"/><path d="M474 38 v40"/></g></g><rect x="404" y="38" width="64" height="40" rx="9" fill="url(#ct-tyre)"/><rect x="410" y="41" width="52" height="3" rx="1.5" fill="#fff" opacity=".07"/><rect x="404" y="162" width="64" height="40" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t3)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M394 162 v40"/><path d="M402 162 v40"/><path d="M410 162 v40"/><path d="M418 162 v40"/><path d="M426 162 v40"/><path d="M434 162 v40"/><path d="M442 162 v40"/><path d="M450 162 v40"/><path d="M458 162 v40"/><path d="M466 162 v40"/><path d="M474 162 v40"/></g></g><rect x="404" y="162" width="64" height="40" rx="9" fill="url(#ct-tyre)"/><rect x="410" y="165" width="52" height="3" rx="1.5" fill="#fff" opacity=".07"/>
+                <rect x="20" y="38" width="46" height="164" rx="4" fill="url(#ct-carbon)"/>
+                <rect x="24" y="44" width="34" height="152" rx="3" fill="var(--car3)"/>
+                <rect x="40" y="44" width="10" height="152" rx="2" fill="var(--car2)"/>
+                <rect x="14" y="34" width="58" height="10" rx="3" fill="var(--car)"/><rect x="14" y="196" width="58" height="10" rx="3" fill="var(--car)"/>
+                <path d="M64 108 L150 97 Q176 68 232 66 L330 69 Q372 73 394 98 L414 103 L414 137 L394 142 Q372 167 330 171 L232 174 Q176 172 150 143 L64 132 Z" fill="var(--car)"/>
+                <path d="M182 84 Q246 72 326 78 L338 88 Q254 84 190 94 Z M182 156 Q246 168 326 162 L338 152 Q254 156 190 146 Z" fill="var(--car2)"/>
+                <path d="M400 105 L520 111 Q552 115 560 120 Q552 125 520 129 L400 135 Z" fill="var(--car)"/>
+                <path d="M412 117 L536 118 L536 122 L412 123 Z" fill="var(--car2)"/>
+                <path d="M64 108 L150 97 Q176 68 232 66 L330 69 Q372 73 394 98 L414 103 L414 137 L394 142 Q372 167 330 171 L232 174 Q176 172 150 143 L64 132 Z" fill="url(#ct-gloss)"/><path d="M64 108 L150 97 Q176 68 232 66 L330 69 Q372 73 394 98 L414 103 L414 137 L394 142 Q372 167 330 171 L232 174 Q176 172 150 143 L64 132 Z" fill="url(#ct-len)"/><path d="M400 105 L520 111 Q552 115 560 120 Q552 125 520 129 L400 135 Z" fill="url(#ct-gloss)"/>
+                <path d="M200 76 Q270 66 336 74" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+                <rect x="104" y="117" width="62" height="6" rx="3" fill="var(--car2)"/>
+                <text x="206" y="129" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-style="italic" font-weight="900" font-size="28" fill="var(--carnum)">12</text>
+                <text x="184" y="105" font-family="JetBrains Mono, monospace" font-weight="700" font-size="7.4" letter-spacing="1" fill="var(--carnum)" opacity=".85">GX WORKS MOTORSPORT</text>
+                <text x="184" y="143" font-family="JetBrains Mono, monospace" font-weight="700" font-size="7.4" letter-spacing="1" fill="var(--carnum)" opacity=".85">GAINIX</text>
+                <ellipse cx="268" cy="120" rx="17" ry="12" fill="var(--car3)"/>
+                <path d="M288 107 Q320 100 352 109 L352 131 Q320 140 288 133 Z" fill="#08080a"/>
+                <circle cx="314" cy="120" r="13" fill="var(--car2)"/><circle cx="314" cy="120" r="13" fill="url(#ct-helmet)"/>
+                <path d="M320 112 Q326 120 320 128" fill="none" stroke="#0b0b0d" stroke-width="4" stroke-linecap="round"/>
+                <path d="M282 108 Q336 98 364 120 Q336 142 282 132" fill="none" stroke="#1b1b20" stroke-width="5.5" stroke-linecap="round"/>
+                <path d="M282 108 Q336 98 364 120" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5"/>
+                <path d="M348 96 L362 90 M348 144 L362 150" stroke="#1b1b20" stroke-width="3"/><rect x="358" y="84" width="12" height="8" rx="2" fill="var(--car)"/><rect x="358" y="148" width="12" height="8" rx="2" fill="var(--car)"/>
+                <path d="M524 28 Q558 26 586 44 L590 120 L586 196 Q558 214 524 212 L534 194 L552 160 L556 120 L552 80 L534 46 Z" fill="var(--car)"/>
+                <path d="M534 46 L552 80 L556 120 L552 160 L534 194" fill="none" stroke="var(--car2)" stroke-width="4"/>
+                <path d="M562 52 L572 120 L562 188" fill="none" stroke="url(#ct-carbon)" stroke-width="7"/>
+                <path d="M524 28 Q558 26 586 44 L590 120 L586 196 Q558 214 524 212" fill="url(#ct-gloss)" opacity=".7"/>
+                <rect x="518" y="20" width="72" height="9" rx="3" fill="var(--car3)"/><rect x="518" y="211" width="72" height="9" rx="3" fill="var(--car3)"/>
+              </svg>
+            </span>
+          </button>
+          <div class="racer-body" id="krew-haziq-body"><div class="racer-grid">
+          <div class="photo">
+            <img src="../images/krew/haziq.jpg" alt="Haziq" loading="lazy">
+            <svg class="badge" viewBox="0 0 100 100" aria-hidden="true"><use href="#crest-gx"/></svg>
+            <span class="num" aria-hidden="true">#12</span>
+          </div>
+          <div>
+            <p class="eyebrow">#12 · GX Works Motorsport</p>
+            <h2>Haziq</h2>
+            <p class="role"><span data-en="Gainix developer · TVETMARA Lumut">Pembangun Gainix · TVETMARA Lumut</span></p>
+            <p class="bio"><span data-en="Hi, I'm Haziq. I like understanding how a system works, from the database to the screen, and turning complicated ideas into something easy to use.">Hai, saya Haziq. Saya suka memahami bagaimana sesuatu sistem berfungsi, dari pangkalan data hingga ke skrin, dan menukar idea yang rumit menjadi sesuatu yang mudah digunakan.</span></p>
+            <blockquote class="why"><b><span data-en="Why Gainix?">Kenapa Gainix?</span></b><span data-en="Many people go to the gym without a plan and aren't sure how much to lift. Gainix answers that from your 1RM, and raises the load as you get stronger.">Ramai orang ke gim tanpa pelan dan tak pasti berapa berat yang patut diangkat. Gainix menjawab soalan itu berdasarkan 1RM, dan menaikkan beban bila anda makin kuat.</span></blockquote>
+            <a class="btn" href="gainix.html"><span data-en="See Gainix">Lihat Gainix</span> →</a>
+            <p class="draft"><span data-en="Draft: written by the site team, awaiting review">Draf: teks ini ditulis oleh pasukan laman web, menunggu semakan</span></p>
+          </div>
+          </div></div>
+        </article>
+        <article class="racer r-vt rv" id="krew-sasha">
+          <button class="lane" type="button" aria-expanded="false" aria-controls="krew-sasha-body" data-sound="t3">
+            <span class="lane-label">
+              <span class="eyebrow">#3 · VitaTrack Performance Racing</span>
+              <b>Sasha</b>
+              <small><i aria-hidden="true"></i><span class="hint-mouse" data-en="Hover over the car">Dekatkan kursor pada kereta</span><span class="hint-touch" data-en="Tap the car">Tekan kereta</span></small>
+            </span>
+            <span class="track" aria-hidden="true">
+              <span class="speed"></span>
+              <span class="finish"></span>
+              <svg class="car" viewBox="0 0 600 240" aria-hidden="true" focusable="false">
+                <rect class="trail" x="40" y="58" width="520" height="124" rx="58" fill="var(--car)" filter="url(#ct-mblur)"/>
+                <rect x="34" y="40" width="540" height="168" rx="70" fill="#000" opacity=".55" filter="url(#ct-soft)"/>
+                <g class="heat"><ellipse cx="-4" cy="120" rx="34" ry="16" fill="url(#ct-heat)"/><ellipse cx="-22" cy="120" rx="22" ry="10" fill="url(#ct-heat)"/></g>
+                <path d="M118 90 Q128 58 172 56 L432 62 Q474 68 482 96 L482 144 Q474 172 432 178 L172 184 Q128 182 118 150 Z" fill="url(#ct-carbon)"/>
+                <path d="M118 90 Q128 58 172 56 L432 62 Q474 68 482 96 L482 144 Q474 172 432 178 L172 184 Q128 182 118 150 Z" fill="none" stroke="#000" stroke-opacity=".6" stroke-width="2"/>
+                <g stroke="#23232a" stroke-width="5" stroke-linecap="round"><path d="M152 100 L112 70"/><path d="M168 98 L126 70"/><path d="M152 140 L112 170"/><path d="M168 142 L126 170"/><path d="M398 104 L432 76"/><path d="M414 108 L446 78"/><path d="M398 136 L432 164"/><path d="M414 132 L446 162"/></g>
+                <rect x="70" y="28" width="74" height="46" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t0)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M60 28 v46"/><path d="M68 28 v46"/><path d="M76 28 v46"/><path d="M84 28 v46"/><path d="M92 28 v46"/><path d="M100 28 v46"/><path d="M108 28 v46"/><path d="M116 28 v46"/><path d="M124 28 v46"/><path d="M132 28 v46"/><path d="M140 28 v46"/><path d="M148 28 v46"/></g></g><rect x="70" y="28" width="74" height="46" rx="9" fill="url(#ct-tyre)"/><rect x="76" y="31" width="62" height="3" rx="1.5" fill="#fff" opacity=".07"/><rect x="70" y="166" width="74" height="46" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t1)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M60 166 v46"/><path d="M68 166 v46"/><path d="M76 166 v46"/><path d="M84 166 v46"/><path d="M92 166 v46"/><path d="M100 166 v46"/><path d="M108 166 v46"/><path d="M116 166 v46"/><path d="M124 166 v46"/><path d="M132 166 v46"/><path d="M140 166 v46"/><path d="M148 166 v46"/></g></g><rect x="70" y="166" width="74" height="46" rx="9" fill="url(#ct-tyre)"/><rect x="76" y="169" width="62" height="3" rx="1.5" fill="#fff" opacity=".07"/><rect x="404" y="38" width="64" height="40" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t2)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M394 38 v40"/><path d="M402 38 v40"/><path d="M410 38 v40"/><path d="M418 38 v40"/><path d="M426 38 v40"/><path d="M434 38 v40"/><path d="M442 38 v40"/><path d="M450 38 v40"/><path d="M458 38 v40"/><path d="M466 38 v40"/><path d="M474 38 v40"/></g></g><rect x="404" y="38" width="64" height="40" rx="9" fill="url(#ct-tyre)"/><rect x="410" y="41" width="52" height="3" rx="1.5" fill="#fff" opacity=".07"/><rect x="404" y="162" width="64" height="40" rx="9" fill="#17171b" stroke="#3a3a42" stroke-width="1.5"/><g clip-path="url(#ct-t3)"><g class="tread" stroke="#34343c" stroke-width="2.4"><path d="M394 162 v40"/><path d="M402 162 v40"/><path d="M410 162 v40"/><path d="M418 162 v40"/><path d="M426 162 v40"/><path d="M434 162 v40"/><path d="M442 162 v40"/><path d="M450 162 v40"/><path d="M458 162 v40"/><path d="M466 162 v40"/><path d="M474 162 v40"/></g></g><rect x="404" y="162" width="64" height="40" rx="9" fill="url(#ct-tyre)"/><rect x="410" y="165" width="52" height="3" rx="1.5" fill="#fff" opacity=".07"/>
+                <rect x="20" y="38" width="46" height="164" rx="4" fill="url(#ct-carbon)"/>
+                <rect x="24" y="44" width="34" height="152" rx="3" fill="var(--car3)"/>
+                <rect x="40" y="44" width="10" height="152" rx="2" fill="var(--car2)"/>
+                <rect x="14" y="34" width="58" height="10" rx="3" fill="var(--car)"/><rect x="14" y="196" width="58" height="10" rx="3" fill="var(--car)"/>
+                <path d="M64 108 L150 97 Q176 68 232 66 L330 69 Q372 73 394 98 L414 103 L414 137 L394 142 Q372 167 330 171 L232 174 Q176 172 150 143 L64 132 Z" fill="var(--car)"/>
+                <path d="M182 84 Q246 72 326 78 L338 88 Q254 84 190 94 Z M182 156 Q246 168 326 162 L338 152 Q254 156 190 146 Z" fill="var(--car2)"/>
+                <path d="M400 105 L520 111 Q552 115 560 120 Q552 125 520 129 L400 135 Z" fill="var(--car)"/>
+                <path d="M412 117 L536 118 L536 122 L412 123 Z" fill="var(--car2)"/>
+                <path d="M64 108 L150 97 Q176 68 232 66 L330 69 Q372 73 394 98 L414 103 L414 137 L394 142 Q372 167 330 171 L232 174 Q176 172 150 143 L64 132 Z" fill="url(#ct-gloss)"/><path d="M64 108 L150 97 Q176 68 232 66 L330 69 Q372 73 394 98 L414 103 L414 137 L394 142 Q372 167 330 171 L232 174 Q176 172 150 143 L64 132 Z" fill="url(#ct-len)"/><path d="M400 105 L520 111 Q552 115 560 120 Q552 125 520 129 L400 135 Z" fill="url(#ct-gloss)"/>
+                <path d="M200 76 Q270 66 336 74" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+                <rect x="104" y="117" width="62" height="6" rx="3" fill="var(--car2)"/>
+                <text x="206" y="129" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-style="italic" font-weight="900" font-size="28" fill="var(--carnum)">3</text>
+                <text x="184" y="105" font-family="JetBrains Mono, monospace" font-weight="700" font-size="7.4" letter-spacing="1" fill="var(--carnum)" opacity=".85">ROTI CANAI MOTORS</text>
+                <text x="184" y="143" font-family="JetBrains Mono, monospace" font-weight="700" font-size="7.4" letter-spacing="1" fill="var(--carnum)" opacity=".85">TEH TARIK FUEL</text>
+                <ellipse cx="268" cy="120" rx="17" ry="12" fill="var(--car3)"/>
+                <path d="M288 107 Q320 100 352 109 L352 131 Q320 140 288 133 Z" fill="#08080a"/>
+                <circle cx="314" cy="120" r="13" fill="var(--car2)"/><circle cx="314" cy="120" r="13" fill="url(#ct-helmet)"/>
+                <path d="M320 112 Q326 120 320 128" fill="none" stroke="#0b0b0d" stroke-width="4" stroke-linecap="round"/>
+                <path d="M282 108 Q336 98 364 120 Q336 142 282 132" fill="none" stroke="#1b1b20" stroke-width="5.5" stroke-linecap="round"/>
+                <path d="M282 108 Q336 98 364 120" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5"/>
+                <path d="M348 96 L362 90 M348 144 L362 150" stroke="#1b1b20" stroke-width="3"/><rect x="358" y="84" width="12" height="8" rx="2" fill="var(--car)"/><rect x="358" y="148" width="12" height="8" rx="2" fill="var(--car)"/>
+                <path d="M524 28 Q558 26 586 44 L590 120 L586 196 Q558 214 524 212 L534 194 L552 160 L556 120 L552 80 L534 46 Z" fill="var(--car)"/>
+                <path d="M534 46 L552 80 L556 120 L552 160 L534 194" fill="none" stroke="var(--car2)" stroke-width="4"/>
+                <path d="M562 52 L572 120 L562 188" fill="none" stroke="url(#ct-carbon)" stroke-width="7"/>
+                <path d="M524 28 Q558 26 586 44 L590 120 L586 196 Q558 214 524 212" fill="url(#ct-gloss)" opacity=".7"/>
+                <rect x="518" y="20" width="72" height="9" rx="3" fill="var(--car3)"/><rect x="518" y="211" width="72" height="9" rx="3" fill="var(--car3)"/>
+              </svg>
+            </span>
+          </button>
+          <div class="racer-body" id="krew-sasha-body"><div class="racer-grid">
+          <div class="photo">
+            <img src="../images/krew/sasha.jpg" alt="Sasha" loading="lazy">
+            <svg class="badge" viewBox="0 0 231 100" aria-hidden="true"><use href="#crest-t3"/></svg>
+            <span class="num" aria-hidden="true">#3</span>
+          </div>
+          <div>
+            <p class="eyebrow">#3 · VitaTrack Performance Racing</p>
+            <h2>Sasha</h2>
+            <p class="role"><span data-en="VitaTrack developer · TVETMARA Lumut">Pembangun VitaTrack · TVETMARA Lumut</span></p>
+            <p class="bio"><span data-en="Hello! I'm Sasha, a student exploring the world of mobile app development. I enjoy designing clean interfaces and bringing ideas to life through code. Always learning, always curious!">Hai! Saya Sasha, pelajar yang sedang meneroka dunia pembangunan aplikasi mudah alih. Saya suka mereka antara muka yang kemas dan menghidupkan idea melalui kod. Sentiasa belajar, sentiasa ingin tahu!</span></p>
+            <blockquote class="why"><b><span data-en="Why VitaTrack?">Kenapa VitaTrack?</span></b><span data-en="A healthy lifestyle starts with small daily habits: drinking water, sleeping enough and staying active. VitaTrack makes those habits easier to keep, because we stay motivated when we can see our own progress.">Gaya hidup sihat bermula dengan tabiat kecil setiap hari: minum air, tidur cukup dan terus bergerak. VitaTrack memudahkan tabiat itu dijaga, kerana kita lebih bersemangat bila nampak kemajuan sendiri.</span></blockquote>
+            <a class="btn" href="vitatrack.html"><span data-en="See VitaTrack">Lihat VitaTrack</span> →</a>
+          </div>
+          </div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Garaj · Krew</span><span><span data-en="Sponsors on this site are made up">Penaja di laman ini rekaan semata-mata</span></span><span class="contact"><a href="privasi.html"><span data-en="Privacy">Privasi</span></a><a href="https://github.com/shahredza">GitHub</a><a href="mailto:rezashah900@gmail.com">rezashah900@gmail.com</a></span></div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+  (function () {
+    var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Dwibahasa: setiap teks BM ada data-en untuk versi English
+    var spans = document.querySelectorAll("[data-en]"), alts = document.querySelectorAll("[data-en-alt]");
+    spans.forEach(function (s) { s.dataset.ms = s.innerHTML; });
+    alts.forEach(function (i) { i.dataset.msAlt = i.alt; });
+    function setLang(l) {
+      spans.forEach(function (s) { if (l === "en") s.textContent = s.dataset.en; else s.innerHTML = s.dataset.ms; });
+      alts.forEach(function (i) { i.alt = l === "en" ? i.dataset.enAlt : i.dataset.msAlt; });
+      document.documentElement.lang = l === "en" ? "en" : "ms";
+      document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === l)); });
+      try { localStorage.setItem("lang", l); } catch (e) {}
+    }
+    document.querySelectorAll(".lang button").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
+    var saved = null; try { saved = localStorage.getItem("lang"); } catch (e) {}
+    if (saved === "en") setLang("en");
+
+    var nav = document.getElementById("nav");
+    var speedEls = document.querySelectorAll("[data-speed]");
+    function frame() {
+      var y = window.scrollY, vh = window.innerHeight;
+      nav.classList.toggle("solid", y > vh * 0.6);
+      if (reduce) return;
+      if (y < vh * 1.3) speedEls.forEach(function (el) { el.style.transform = "translateY(" + (y * parseFloat(el.dataset.speed)) + "px)"; });
+    }
+    var ticking = false;
+    window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; frame(); }); } }, { passive: true }); frame();
+    if (!reduce && window.Lenis) {
+      var lenis = new Lenis({ lerp: 0.12, smoothWheel: true });
+      (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) { a.addEventListener("click", function (e) { var id = a.getAttribute("href"); if (document.querySelector(id)) { e.preventDefault(); lenis.scrollTo(id, { offset: -66 }); } }); });
+    }
+    // Animasi hero bermula selepas tirai peralihan halaman terbuka
+    (window.ptReady || function (f) { f(); })(function () { requestAnimationFrame(function () { document.querySelectorAll(".line-in").forEach(function (l, i) { setTimeout(function () { l.classList.add("in"); }, i * 150); }); }); });
+
+    // Lorong kereta: kursor dekat (atau tekan) → kereta memecut ke garisan penamat → "Tentang" terbuka
+    document.querySelectorAll(".lane").forEach(function (lane) {
+      var card = lane.closest(".racer"), track = lane.querySelector(".track"), busy = false;
+      function open() {
+        if (card.classList.contains("open") || busy) return;
+        if (reduce) { card.classList.add("open"); lane.setAttribute("aria-expanded", "true"); return; }
+        busy = true;
+        track.classList.add("driving");
+        if (window.engineSound) window.engineSound.rev(lane.dataset.sound);
+        setTimeout(function () { card.classList.add("open"); lane.setAttribute("aria-expanded", "true"); }, 700);
+        setTimeout(function () { track.classList.add("parked"); busy = false; }, 1050);
+      }
+      function close() {
+        if (busy) return;
+        card.classList.remove("open"); lane.setAttribute("aria-expanded", "false");
+        track.classList.remove("parked"); track.classList.remove("driving");
+      }
+      if (matchMedia("(hover: hover) and (pointer: fine)").matches) lane.addEventListener("mouseenter", open);
+      lane.addEventListener("click", function () { card.classList.contains("open") ? close() : open(); });
+    });
+    var els = document.querySelectorAll(".rv");
+    if ("IntersectionObserver" in window && !reduce) {
+      var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }); }, { rootMargin: "0px 0px -8% 0px" });
+      els.forEach(function (e) { io.observe(e); });
+    } else els.forEach(function (e) { e.classList.add("in"); });
+  })();
+</script>
+<script src="../js/egg.js"></script>
+</body>
+</html>

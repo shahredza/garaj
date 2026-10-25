@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privasi · Garaj</title>
+<meta name="description" content="Bagaimana HealthyBite, Gainix, VitaTrack dan laman Garaj mengendalikan data anda.">
+<link rel="canonical" href="https://shahredza.github.io/garaj/html/privasi.html">
+<meta name="theme-color" content="#f3f1ec">
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,800;1,900&family=Titillium+Web:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root {
+    --paper: #f3f1ec; --paper-2: #e9e6df; --ink: #0e0e10; --ink-2: #3b3b42; --muted: #77757d; --line: #d8d4cb; --red: #e10600;
+    --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+    --body: "Titillium Web", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --g: max(16px, env(safe-area-inset-left, 0px));
+  }
+  html.dk { color-scheme: dark; --paper: #141417; --paper-2: #1c1c21; --ink: #f1efea; --ink-2: #c5c3cb; --muted: #95939c; --line: #2e2e35; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 var(--g); }
+  .nav { border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; gap: 16px; height: 64px; }
+  .mark { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; }
+  .mark svg { width: 46px; height: 32px; }
+  .mark span { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .lang { display: flex; border: 1.5px solid currentColor; }
+  .lang button { background: transparent; border: 0; padding: 7px 10px; cursor: pointer; font: 700 12px var(--mono); letter-spacing: .1em; color: inherit; opacity: .55; }
+  .lang button[aria-pressed="true"] { background: var(--red); color: #fff; opacity: 1; }
+  header.top { padding: clamp(56px, 9vw, 110px) 0 clamp(30px, 5vw, 50px); }
+  .eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .eyebrow b { color: var(--red); }
+  h1, h2 { font-family: var(--display); font-weight: 800; text-transform: uppercase; line-height: .9; margin: 0; }
+  h1 { font-size: clamp(64px, 12vw, 150px); margin-top: 14px; }
+  h1 i { color: var(--red); }
+  .lede { font-size: clamp(18px, 1.6vw, 21px); color: var(--ink-2); margin-top: 22px; max-width: 36em; }
+  section { border-top: 2px solid var(--ink); padding: 26px 0 34px; }
+  h2 { font-size: clamp(32px, 4vw, 46px); margin-bottom: 14px; display: flex; gap: 14px; align-items: baseline; }
+  h2 small { font-family: var(--mono); font-size: 13px; color: var(--red); letter-spacing: .1em; }
+  p { margin: 0 0 12px; color: var(--ink-2); }
+  ul { margin: 0 0 12px; padding-left: 20px; color: var(--ink-2); }
+  li { margin-bottom: 8px; }
+  li b, p b { color: var(--ink); }
+  .apps { display: grid; gap: 12px; }
+  .app { padding: 16px 18px; border-left: 5px solid var(--c); background: var(--paper-2); }
+  .app h3 { margin: 0 0 6px; font-family: var(--display); font-weight: 800; font-size: 26px; text-transform: uppercase; }
+  .app p { margin: 0; font-size: 16px; }
+  footer { border-top: 1px solid var(--line); padding: 26px 0 calc(26px + env(safe-area-inset-bottom, 0px)); font-size: 14px; color: var(--muted); margin-top: 30px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; }
+</style>
+<script>
+  // Tema sama seperti halaman utama: pilihan butang (localStorage "theme"), jika tiada ikut peranti
+  (function () {
+    var t = null; try { t = localStorage.getItem("theme"); } catch (e) {}
+    if (t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.classList.add("dk");
+  })();
+</script>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="mark" href="../index.html" aria-label="Garaj">
+      <svg viewBox="0 0 46 32" aria-hidden="true"><path d="M4 30 12 2h30l-8 28Z" fill="#e10600"/><text x="23" y="23" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-style="italic" font-weight="900" font-size="22" fill="#fff">G</text></svg>
+      <span data-en="← Back to the garage">← Kembali ke garaj</span>
+    </a>
+    <div class="lang" role="group" aria-label="Language / Bahasa"><button type="button" data-lang="en">EN</button><button type="button" data-lang="ms" aria-pressed="true">BM</button></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <header class="top">
+    <p class="eyebrow"><b>●</b> <span data-en="Updated 25.10.2026">Dikemas kini 25.10.2026</span></p>
+    <h1><span data-en="Privacy">Privasi</span><i>.</i></h1>
+    <p class="lede"><span data-en="Garaj is a team of three students at TVETMARA Lumut. This page explains what data our three apps and this website use, and why.">Garaj ialah pasukan tiga pelajar TVETMARA Lumut. Halaman ini menerangkan data apa yang digunakan oleh tiga app kami dan laman web ini, dan kenapa.</span></p>
+  </header>
+
+  <section>
+    <h2><small>01</small><span data-en="Your account">Akaun anda</span></h2>
+    <p><span data-en="Each app has its own account. Sign-in and data storage are handled by Supabase. Row Level Security rules make sure each user can only see their own data, not anyone else's.">Setiap app ada akaun sendiri. Log masuk dan simpanan data diuruskan oleh Supabase. Peraturan Row Level Security memastikan setiap pengguna hanya boleh melihat data sendiri, bukan data orang lain.</span></p>
+    <p><span data-en="We only use the information you enter yourself, such as your profile and logs, to make the app work for you. We do not sell your data or show ads.">Kami hanya menggunakan maklumat yang anda isi sendiri, seperti profil dan log, untuk menjalankan app untuk anda. Kami tidak menjual data anda dan tidak memaparkan iklan.</span></p>
+  </section>
+
+  <section>
+    <h2><small>02</small><span data-en="What each app uses">Apa yang setiap app guna</span></h2>
+    <div class="apps">
+      <div class="app" style="--c:#ff2a1f"><h3>HealthyBite</h3><p><span data-en="Food photos you take are sent to an AI service to estimate calories and macros. Barcodes are looked up in Open Food Facts. Meal, water and sleep logs are saved to your account. Family Mode only shares what you choose to share.">Gambar makanan yang anda ambil dihantar ke perkhidmatan AI untuk menganggar kalori dan makro. Barcode dicari dalam Open Food Facts. Log makanan, air dan tidur disimpan dalam akaun anda. Mod Keluarga hanya berkongsi apa yang anda pilih.</span></p></div>
+      <div class="app" style="--c:#00bfae"><h3>Gainix</h3><p><span data-en="Workouts, records and progress photos are saved to your account. Your location is only used for the gym map, and only if you allow it. Workouts logged offline are kept on your phone until they can be sent.">Senaman, rekod dan foto progres disimpan dalam akaun anda. Lokasi hanya digunakan untuk peta gim, dan hanya jika anda benarkan. Senaman yang direkod tanpa internet disimpan dalam telefon sehingga boleh dihantar.</span></p></div>
+      <div class="app" style="--c:#fd3851"><h3>VitaTrack</h3><p><span data-en="Steps, workouts, water, sleep and mood logs are saved to your account to build your challenges and reports. Location is only used if you allow it. You can export your own reports as CSV.">Log langkah, senaman, air, tidur dan mood disimpan dalam akaun anda untuk membina cabaran dan laporan. Lokasi hanya digunakan jika anda benarkan. Anda boleh eksport laporan sendiri sebagai CSV.</span></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>03</small><span data-en="This website">Laman web ini</span></h2>
+    <ul>
+      <li><span data-en="No sign-up, no analytics and no tracking cookies.">Tiada pendaftaran, tiada analitik dan tiada kuki penjejak.</span></li>
+      <li><span data-en="Your browser remembers your language, sound and theme choices (localStorage). They never leave your device.">Pelayar anda mengingati pilihan bahasa, bunyi dan tema (localStorage). Ia tidak keluar dari peranti anda.</span></li>
+      <li><span data-en="Download counts and changelogs come from the GitHub API and are cached in your browser for 10 minutes.">Kiraan muat turun dan log perubahan diambil dari API GitHub dan disimpan sementara dalam pelayar selama 10 minit.</span></li>
+      <li><span data-en="Fonts load from Google Fonts and the smooth-scroll script from jsDelivr. Like any website, these services can see your IP address when they send files.">Fon dimuat dari Google Fonts dan skrip scroll licin dari jsDelivr. Seperti mana-mana laman web, perkhidmatan ini boleh nampak alamat IP anda semasa menghantar fail.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><small>04</small><span data-en="Your choices">Pilihan anda</span></h2>
+    <p><span data-en="You can ask us to delete your account and all its data at any time. Email us from the address you signed up with.">Anda boleh minta kami padam akaun dan semua datanya pada bila-bila masa. E-mel kami dari alamat yang anda gunakan semasa mendaftar.</span></p>
+    <p><span data-en="Calorie estimates and weight suggestions are guidance only, not medical advice.">Anggaran kalori dan cadangan berat hanyalah panduan, bukan nasihat perubatan.</span></p>
+  </section>
+
+  <section>
+    <h2><small>05</small><span data-en="Contact">Hubungi</span></h2>
+    <p><a href="mailto:rezashah900@gmail.com">rezashah900@gmail.com</a> · <a href="https://github.com/shahredza/garaj/issues/new" target="_blank" rel="noopener"><span data-en="Report a bug on GitHub ↗">Lapor pepijat di GitHub ↗</span></a></p>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Garaj · <span data-en="TVETMARA Lumut student projects">Projek pelajar TVETMARA Lumut</span></span><a href="../index.html"><span data-en="Home">Laman utama</span></a></div></footer>
+
+<script>
+  (function () {
+    var spans = document.querySelectorAll("[data-en]");
+    spans.forEach(function (s) { s.dataset.ms = s.textContent; });
+    function setLang(l) {
+      spans.forEach(function (s) { s.textContent = l === "en" ? s.dataset.en : s.dataset.ms; });
+      document.documentElement.lang = l === "en" ? "en" : "ms";
+      document.title = l === "en" ? "Privacy · Garaj" : "Privasi · Garaj";
+      document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === l)); });
+      try { localStorage.setItem("lang", l); } catch (e) {}
+    }
+    document.querySelectorAll(".lang button").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
+    var saved = null; try { saved = localStorage.getItem("lang"); } catch (e) {}
+    if (saved === "en") setLang("en");
+  })();
+</script>
+<script src="../js/egg.js"></script>
+</body>
+</html>

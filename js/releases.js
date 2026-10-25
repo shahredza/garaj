@@ -1,6 +1,7 @@
 // Data dari GitHub Releases: kiraan muat turun dan log perubahan.
 // Disimpan 10 minit dalam sessionStorage supaya tak kena had API GitHub (60 permintaan sejam).
 //   <… data-dl-repo="pemilik/repo" hidden> … <b data-count></b> …  → isi jumlah muat turun, kemudian papar
+//   window.garajReleases(repo, cb)                                → data mentah untuk papan kedudukan
 //   <ol data-log-repo="pemilik/repo"> <li data-tag="v1.0.0">…     → tambah release baru yang belum ditulis
 (function () {
   var pending = {};
@@ -26,6 +27,9 @@
     pending[repo].then(cb).catch(function () {}); // Gagal: elemen kekal tersembunyi
   }
 
+  // Untuk fx.js (papan kedudukan): garajReleases("pemilik/repo", function (senarai) { ... })
+  window.garajReleases = get;
+
   function fmt(iso) {
     var d = new Date(iso);
     return ("0" + d.getDate()).slice(-2) + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear();
@@ -34,7 +38,9 @@
   document.querySelectorAll("[data-dl-repo]").forEach(function (el) {
     get(el.getAttribute("data-dl-repo"), function (rs) {
       var n = rs.reduce(function (s, r) { return s + r.dl; }, 0);
-      el.querySelector("[data-count]").textContent = n.toLocaleString("en-US");
+      var c = el.querySelector("[data-count]");
+      c.textContent = n.toLocaleString("en-US"); c.setAttribute("data-n", n);
+      if (window.garajCount) window.garajCount(c, n); // fx.js: kira naik bila nampak di skrin
       el.hidden = false;
     });
   });

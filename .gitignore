@@ -1,0 +1,23 @@
+# Fail sistem
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor dan alat
+.vscode/
+.idea/
+node_modules/
+*.log
+
+# Rahsia dan kunci tandatangan APK: jangan sekali-kali dimuat naik
+.env
+.env.*
+*.jks
+*.keystore
+keystore.properties
+*.pem
+*.p12
+
+# Gambar sumber besar (lebih 1 MB) yang tidak dipaparkan di mana-mana halaman.
+# Lencana yang dipakai ialah *-crest.png (dipotong daripada fail ini).
+images/*-emblem.png
