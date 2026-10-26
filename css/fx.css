@@ -57,7 +57,7 @@
 .std-row { --c: var(--red); position: relative; display: grid; grid-template-columns: 70px 96px minmax(0, 1.1fr) minmax(0, 2fr) 140px 110px; align-items: center; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); background: var(--paper); }
 .std-row[data-team="hb"] { --c: var(--hb); }
 .std-row[data-team="gx"] { --c: linear-gradient(90deg, var(--silver), var(--gx)); }
-.std-row[data-team="t3"] { --c: linear-gradient(90deg, #fd3851, #6371cd); }
+.std-row[data-team="t3"] { --c: linear-gradient(90deg, #2ecc71, #38bdf8, #f59e0b); }
 .std-pos { font-family: var(--display); font-style: italic; font-weight: 900; font-size: 46px; line-height: 1; color: var(--muted); transition: color .3s; }
 .std-row[data-pos="1"] .std-pos { color: var(--red); }
 .std-crest { width: 96px; height: 56px; }
@@ -100,8 +100,7 @@
 .qz-opt:hover b { background: var(--red); color: #fff; }
 .qz-res { display: grid; gap: 16px; }
 .qz-res::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: var(--c, var(--red)); }
-.qz-res .crest { width: 150px; height: 90px; }
-.qz-res .crest.wide { width: 210px; }
+.qz-res .crest { height: 90px; width: auto; max-width: 150px; justify-self: start; }
 .qz-res h3 { font-size: clamp(48px, 6vw, 84px); line-height: .85; }
 .qz-res p { color: var(--ink-2); max-width: 32em; }
 .qz-res .row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }

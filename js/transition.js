@@ -12,8 +12,8 @@
   var THEMES = {
     hb:   { crest: "crest-hb", box: "0 0 120 100", no: "#44", name: "HealthyBite Racing", bg: "linear-gradient(150deg, #ff2a1f, #8f0400)", fg: "#fff", edge: "repeating-linear-gradient(90deg, #fff 0 34px, transparent 34px 48px)" },
     gx:   { crest: "crest-gx", box: "0 0 100 100", no: "#12", name: "GX Works Motorsport", bg: "linear-gradient(150deg, #e6e8ec, #9aa0aa 60%, #00bfae)", fg: "#0b0b0d", edge: "#00bfae" },
-    t3:   { crest: "crest-t3", box: "0 0 231 100", wide: true, no: "#3", name: "VitaTrack Performance Racing", bg: "linear-gradient(150deg, #1a2550, #0c1732 70%)", fg: "#f3f4fa", edge: "linear-gradient(90deg, #fd3851, #6371cd)", accent: "#fd3851" },
-    crew: { logo: true, no: "KREW", name: "Shah · Haziq · Sasha", bg: "#0e0e10", fg: "#f3f1ec", edge: "linear-gradient(90deg, #ff2a1f, #00bfae, #fd3851)", accent: "#e10600" },
+    t3:   { crest: "crest-t3", box: "0 0 286 100", wide: true, no: "#3", name: "VitaTrack Racing", bg: "linear-gradient(150deg, #1d2638, #121826 70%)", fg: "#f4f4f5", edge: "linear-gradient(90deg, #2ecc71, #38bdf8, #f59e0b)", accent: "#4ade80" },
+    crew: { logo: true, no: "KREW", name: "Shah · Haziq · Sasha", bg: "#0e0e10", fg: "#f3f1ec", edge: "linear-gradient(90deg, #ff2a1f, #00bfae, #2ecc71)", accent: "#e10600" },
     home: { logo: true, no: "GRID", name: "Garaj", bg: "#0e0e10", fg: "#f3f1ec", edge: "#e10600", accent: "#e10600" }
   };
   // Halaman tujuan -> tema tirai

@@ -3,26 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>VitaTrack · VitaTrack Performance Racing</title>
+<title>VitaTrack · VitaTrack Racing</title>
 <meta name="description" content="Jejak langkah, senaman, air, tidur dan mood harian, lalu tukarkannya kepada cabaran harian, lencana dan laporan kesihatan.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="VitaTrack · VitaTrack Performance Racing">
+<meta property="og:title" content="VitaTrack · VitaTrack Racing">
 <meta property="og:description" content="Jejak langkah, senaman, air, tidur dan mood harian, lalu tukarkannya kepada cabaran harian, lencana dan laporan kesihatan.">
 <meta property="og:url" content="https://shahredza.github.io/garaj/html/vitatrack.html">
 <meta property="og:image" content="https://shahredza.github.io/garaj/images/og/vitatrack.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0c1732">
-<link rel="icon" href="../images/vt-icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#121826">
+<link rel="icon" href="../images/vitatrack/vt-favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../images/vitatrack/vt-touch.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Titillium+Web:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-  /* Halaman pasukan VitaTrack Performance Racing: seluruh laman ikut livery pasukan (dari lencana VitaTrack). */
+  /* Halaman pasukan VitaTrack Racing: seluruh laman ikut livery pasukan (dari lencana VitaTrack). */
   :root {
-    --bg: #0a1430; --bg2: #0c1732; --fg: #f3f4fa; --muted: #a9aecb;
-    --acc: #fd3851; --acc-ink: #ffffff; --line: rgba(255,255,255,.14); --card: #111d42;
+    --bg: #121826; --bg2: #0e131e; --fg: #f4f4f5; --muted: #94a3b8;
+    --acc: #2ecc71; --acc-ink: #121826; --line: rgba(255,255,255,.12); --card: #1b2436;
+    --acc-hi: #4ade80; --blue: #38bdf8; --orange: #f59e0b;
     --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
     --body: "Titillium Web", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
@@ -57,14 +59,14 @@
   @media (max-width: 560px) { .nav .team { display: none; } }
 
   /* Hero livery */
-  .hero { position: relative; min-height: 100svh; display: grid; align-items: end; overflow: hidden; background: radial-gradient(60% 50% at 80% 30%, rgba(99,113,205,.35), transparent 70%), linear-gradient(150deg,#1a2550 0%,#0c1732 55%,#070d22 100%); padding: 100px 0 0; }
-  .hero .stripe { position: absolute; left: -5%; right: -5%; top: 58%; height: 34px; background: linear-gradient(90deg,#fd3851,#6371cd); transform: skewY(-8deg); opacity: .5; }
+  .hero { position: relative; min-height: 100svh; display: grid; align-items: end; overflow: hidden; background: radial-gradient(60% 50% at 80% 30%, rgba(46,204,113,.2), transparent 70%), radial-gradient(40% 40% at 15% 85%, rgba(56,189,248,.12), transparent 70%), linear-gradient(150deg,#1d2638 0%,#121826 55%,#0b0f18 100%); padding: 100px 0 0; }
+  .hero .stripe { position: absolute; left: -5%; right: -5%; top: 58%; height: 34px; background: linear-gradient(90deg, #2ecc71, #38bdf8, #f59e0b); transform: skewY(-8deg); opacity: .55; }
   .hero .bignum { position: absolute; right: -2vw; top: 6vh; font-family: var(--display); font-style: italic; font-weight: 900; font-size: clamp(220px, 40vw, 560px); line-height: .8; color: transparent; -webkit-text-stroke: 2px color-mix(in srgb, var(--fg) 28%, transparent); will-change: transform; }
   .hero .crest { width: clamp(150px, 20vw, 260px); height: auto; aspect-ratio: 1; filter: drop-shadow(0 24px 30px rgba(0,0,0,.35)); will-change: transform; }
   .hero .inner { width: 100%; position: relative; padding-bottom: 40px; display: grid; gap: 22px; }
   .hero h1 { font-size: clamp(64px, 13vw, 200px); line-height: .8; }
   .hero .sub { font-family: var(--mono); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
-  .hero .tag { font-family: var(--display); font-style: italic; font-weight: 800; font-size: clamp(26px, 3vw, 40px); text-transform: uppercase; color: #fd3851; }
+  .hero .tag { font-family: var(--display); font-style: italic; font-weight: 800; font-size: clamp(26px, 3vw, 40px); text-transform: uppercase; color: var(--acc-hi); }
   .hero-foot { display: flex; flex-wrap: wrap; gap: 14px 30px; align-items: center; justify-content: space-between; padding: 22px 0 26px; border-top: 1px solid var(--line); }
   .hero-foot p { max-width: 40em; font-size: clamp(17px, 1.4vw, 20px); }
   .cue { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
@@ -138,7 +140,7 @@
   .other i { margin-left: auto; font-style: normal; font-size: 26px; }
   .o-hb { background: linear-gradient(135deg, #ff2a1f, #8f0400); }
   .o-gx { background: linear-gradient(135deg, #e6e8ec, #9aa0aa 60%, #00bfae); color: #0b0b0d; }
-  .o-t3 { background: linear-gradient(135deg, #1a2550, #0c1732); border: 1px solid rgba(253,56,81,.45); }
+  .o-t3 { background: linear-gradient(135deg, #1d2638, #121826); border: 1px solid rgba(46,204,113,.45); }
   footer { padding: 26px 0 calc(26px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
 
@@ -174,7 +176,7 @@
   html.lenis { scroll-behavior: auto !important; }
   .lenis.lenis-stopped { overflow: hidden; }
   /* Logo VitaTrack lebar (2.3:1) */
-  .hero .crest { width: clamp(240px, 34vw, 440px); aspect-ratio: 2.31; }
+  .hero .crest { width: clamp(240px, 34vw, 440px); aspect-ratio: 2.86; }
 
   /* Rakan penaja penuh (parody), ikut senarai di halaman utama */
   .tp-note { margin: 0 0 14px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted); }
@@ -211,15 +213,19 @@
     <!-- Lencana GX Works (dipotong dari images/gx-emblem.png) -->
     <image href="../images/gx-crest.png" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
-  <symbol id="crest-t3" viewBox="0 0 231 100">
-    <!-- Logo VitaTrack Performance Racing (dari images/vt-emblem.png, atas plat biru tua) -->
-    <image href="../images/vt-crest.png" x="0" y="0" width="231" height="100"/>
+  <symbol id="crest-t3" viewBox="0 0 286 100">
+    <!-- Logo VitaTrack (cincin + nama, latar telus) untuk tempat lebar atas latar gelap: images/vitatrack/vt-logo.webp -->
+    <image href="../images/vitatrack/vt-logo.webp" x="0" y="0" width="286" height="100"/>
+  </symbol>
+  <symbol id="crest-t3i" viewBox="0 0 100 100">
+    <!-- Ikon VitaTrack (segi empat bulat) untuk tempat kecil atau latar cerah -->
+    <image href="../images/vitatrack/vt-icon.webp" x="0" y="0" width="100" height="100"/>
   </symbol>
 </svg>
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="back" href="../index.html#pit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg><span data-en="Grid">Grid</span></a>
-    <span class="team">#3 · VitaTrack Performance Racing</span>
+    <span class="team">#3 · VitaTrack Racing</span>
     <div class="lang" role="group" aria-label="Language / Bahasa"><button type="button" data-lang="en">EN</button><button type="button" data-lang="ms" aria-pressed="true">BM</button></div>
   </div>
 </header>
@@ -229,8 +235,8 @@
     <span class="stripe" aria-hidden="true"></span>
     <span class="bignum" data-speed="0.3" aria-hidden="true">3</span>
     <div class="wrap inner">
-      <svg class="crest" viewBox="0 0 231 100" data-speed="-0.15" role="img" aria-label="VitaTrack Performance Racing"><use href="#crest-t3"/></svg>
-      <p class="sub">#3 · VitaTrack Performance Racing · <span data-en="Telemetry">Telemetri</span></p>
+      <svg class="crest" viewBox="0 0 286 100" data-speed="-0.15" role="img" aria-label="VitaTrack Racing"><use href="#crest-t3"/></svg>
+      <p class="sub">#3 · VitaTrack Racing · <span data-en="Telemetry">Telemetri</span></p>
       <h1 id="h1"><span class="line-in"><span>VitaTrack</span></span></h1>
       <p class="tag"><span class="line-in"><span><span data-en="Every day counts.">Setiap hari dikira.</span></span></span></p>
       <div class="hero-foot">
@@ -268,10 +274,10 @@
   <section class="sec" id="tentang" aria-labelledby="a-h">
     <div class="wrap">
       <p class="eyebrow rv"><span data-en="About us">Tentang kami</span></p>
-      <h2 id="a-h" class="rv">VitaTrack Performance Racing</h2>
+      <h2 id="a-h" class="rv">VitaTrack Racing</h2>
       <div class="about">
         <div class="rv">
-          <p class="big-p"><span data-en="VitaTrack Performance Racing is the telemetry team on this grid. Like an F1 engineer reading car data, VitaTrack reads your daily data: activity, water, sleep and mood, so you can see where to improve.">VitaTrack Performance Racing ialah pasukan telemetri dalam grid ini. Seperti jurutera F1 yang membaca data kereta, VitaTrack membaca data harian anda: aktiviti, air, tidur dan mood, supaya anda nampak di mana boleh jadi lebih baik.</span></p>
+          <p class="big-p"><span data-en="VitaTrack Racing is the telemetry team on this grid. Like an F1 engineer reading car data, VitaTrack reads your daily data: activity, water, sleep and mood, so you can see where to improve.">VitaTrack Racing ialah pasukan telemetri dalam grid ini. Seperti jurutera F1 yang membaca data kereta, VitaTrack membaca data harian anda: aktiviti, air, tidur dan mood, supaya anda nampak di mana boleh jadi lebih baik.</span></p>
           <p class="mission"><span data-en="Our mission: make a healthy lifestyle something you can measure, a little every day.">Misi kami: menjadikan gaya hidup sihat sesuatu yang boleh diukur, sedikit demi sedikit setiap hari.</span></p>
         </div>
         <div class="side"><div class="rv"><h3><span data-en="Technical data">Data teknikal</span></h3><dl class="kv"><div><dt><span data-en="Front end">Bahagian depan</span></dt><dd>React 19, TypeScript, Tailwind CSS (Vite)</dd></div><div><dt><span data-en="Database">Pangkalan data</span></dt><dd><span data-en="Supabase (PostgreSQL, Auth, Row Level Security) via jQuery AJAX">Supabase (PostgreSQL, Auth, Row Level Security) melalui jQuery AJAX</span></dd></div><div><dt>APK</dt><dd><span data-en="Capacitor 7, signed release">Capacitor 7, release bertandatangan</span></dd></div><div><dt><span data-en="HTML5 APIs">API HTML5</span></dt><dd>Geolocation, Canvas, Drag &amp; Drop, Web Worker, Service Worker, Web Storage</dd></div></dl></div><div class="rv"><h3><span data-en="Partners (parody)">Rakan penaja (parody)</span></h3><p class="tp-note"><span data-en="Fan-made parody · All partners shown are fictional and not real sponsorships.">Fan-made parody · Semua rakan penaja yang dipaparkan adalah rekaan dan bukan tajaan sebenar.</span><br><span data-en="Click a name to open the company's official site (new tab). Names with a dashed border are made up.">Klik nama untuk ke laman rasmi syarikat (tab baru). Nama bergaris putus-putus ialah rekaan.</span></p><dl class="tp"><div class="title"><dt>Title Partner</dt><dd><span><a href="https://www.oracle.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Oracle · parody, bukan tajaan sebenar">Oracle</a></span></dd></div><div class=""><dt>Premium Partner</dt><dd><span><a href="https://www.tagheuer.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi TAG Heuer · parody, bukan tajaan sebenar">TAG Heuer</a></span><span><a href="https://www.pirelli.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Pirelli · parody, bukan tajaan sebenar">Pirelli</a></span><span><a href="https://www.rauch.cc" target="_blank" rel="noopener noreferrer" title="Laman rasmi Rauch · parody, bukan tajaan sebenar">Rauch</a></span><span><a href="https://www.armorall.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Armor All · parody, bukan tajaan sebenar">Armor All</a></span><span><a href="https://www.hardrock.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Hard Rock International · parody, bukan tajaan sebenar">Hard Rock International</a></span><span><a href="https://castore.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Castore · parody, bukan tajaan sebenar">Castore</a></span><span><a href="https://www.neweracap.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi New Era · parody, bukan tajaan sebenar">New Era</a></span><span><a href="https://www.rokt.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Rokt · parody, bukan tajaan sebenar">Rokt</a></span><span><a href="https://www.heineken.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Heineken · parody, bukan tajaan sebenar">Heineken</a></span><span><a href="https://www.visa.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Visa · parody, bukan tajaan sebenar">Visa</a></span><span><a href="https://www.yeti.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi YETI · parody, bukan tajaan sebenar">YETI</a></span><span><a href="https://www.carlyle.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Carlyle · parody, bukan tajaan sebenar">Carlyle</a></span><span><a href="https://www.clearme.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Clear · parody, bukan tajaan sebenar">Clear</a></span><span><a href="https://www.avatrade.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi AvaTrade · parody, bukan tajaan sebenar">AvaTrade</a></span><span><a href="https://www.damacproperties.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi DAMAC Properties · parody, bukan tajaan sebenar">DAMAC Properties</a></span><span><a href="https://www.gate.io" target="_blank" rel="noopener noreferrer" title="Laman rasmi Gate.io · parody, bukan tajaan sebenar">Gate.io</a></span><span><a href="https://www.mauijim.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Maui Jim · parody, bukan tajaan sebenar">Maui Jim</a></span><span><a href="https://www.mophie.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Mophie · parody, bukan tajaan sebenar">Mophie</a></span><span><a href="https://www.pepejeans.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Pepe Jeans · parody, bukan tajaan sebenar">Pepe Jeans</a></span><span><a href="https://www.ppds.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Philips Professional Displays (PPDS) · parody, bukan tajaan sebenar">Philips Professional Displays (PPDS)</a></span></dd></div><div class=""><dt>Technical Partner</dt><dd><span><a href="https://www.oracle.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Oracle · parody, bukan tajaan sebenar">Oracle</a></span><span><a href="https://www.mobil1.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Mobil 1 · parody, bukan tajaan sebenar">Mobil 1</a></span><span><a href="https://www.esso.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Esso Synergy · parody, bukan tajaan sebenar">Esso Synergy</a></span><span><a href="https://www.siemens.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Siemens · parody, bukan tajaan sebenar">Siemens</a></span><span><a href="https://www.att.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi AT&amp;T · parody, bukan tajaan sebenar">AT&amp;T</a></span><span><a href="https://www.hpe.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi HPE · parody, bukan tajaan sebenar">HPE</a></span><span><a href="https://www.dmgmori.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi DMG Mori · parody, bukan tajaan sebenar">DMG Mori</a></span><span><a href="https://hexagon.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Hexagon · parody, bukan tajaan sebenar">Hexagon</a></span><span><a href="https://www.ansys.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Ansys · parody, bukan tajaan sebenar">Ansys</a></span><span><a href="https://www.athleticpropulsionlabs.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi APL · parody, bukan tajaan sebenar">APL</a></span><span><a href="https://www.pwr.com.au" target="_blank" rel="noopener noreferrer" title="Laman rasmi PWR · parody, bukan tajaan sebenar">PWR</a></span><span><a href="https://www.cdw.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi CDW · parody, bukan tajaan sebenar">CDW</a></span><span><a href="https://secretlab.co" target="_blank" rel="noopener noreferrer" title="Laman rasmi Secretlab · parody, bukan tajaan sebenar">Secretlab</a></span><span><a href="https://1password.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi 1Password · parody, bukan tajaan sebenar">1Password</a></span><span><a href="https://neat.no" target="_blank" rel="noopener noreferrer" title="Laman rasmi Neat · parody, bukan tajaan sebenar">Neat</a></span><span><a href="https://www.sparco-official.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Sparco · parody, bukan tajaan sebenar">Sparco</a></span></dd></div><div class=""><dt>Official Partner</dt><dd><span class="fake" title="Nama rekaan untuk parody · tiada laman rasmi">Roti Canai Motors</span><span class="fake" title="Nama rekaan untuk parody · tiada laman rasmi">Teh Tarik Fuel</span></dd></div></dl></div></div>
@@ -315,7 +321,7 @@
   </section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Garaj · VitaTrack Performance Racing</span><span><span data-en="Sponsors on this site are made up">Penaja di laman ini rekaan semata-mata</span></span><span class="contact"><a href="about.html"><span data-en="Crew">Krew</span></a><a href="privasi.html"><span data-en="Privacy">Privasi</span></a><a href="https://github.com/shahredza">GitHub</a><a href="mailto:rezashah900@gmail.com">rezashah900@gmail.com</a></span></div></footer>
+<footer><div class="wrap"><span>© 2026 Garaj · VitaTrack Racing</span><span><span data-en="Sponsors on this site are made up">Penaja di laman ini rekaan semata-mata</span></span><span class="contact"><a href="about.html"><span data-en="Crew">Krew</span></a><a href="privasi.html"><span data-en="Privacy">Privasi</span></a><a href="https://github.com/shahredza">GitHub</a><a href="mailto:rezashah900@gmail.com">rezashah900@gmail.com</a></span></div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>

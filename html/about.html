@@ -58,7 +58,7 @@
 
   /* Hero livery */
   .hero { position: relative; min-height: 100svh; display: grid; align-items: end; overflow: hidden; background: radial-gradient(50% 60% at 82% 30%, rgba(225,6,0,.22), transparent 70%), linear-gradient(150deg,#1b1b20 0%,#0e0e10 60%); padding: 100px 0 0; }
-  .hero .stripe { position: absolute; left: -5%; right: -5%; top: 58%; height: 34px; background: linear-gradient(90deg,#ff2a1f 0 33%,#00bfae 33% 66%,#fd3851 66%); transform: skewY(-8deg); opacity: .5; }
+  .hero .stripe { position: absolute; left: -5%; right: -5%; top: 58%; height: 34px; background: linear-gradient(90deg,#ff2a1f 0 33%,#00bfae 33% 66%,#2ecc71 66%); transform: skewY(-8deg); opacity: .5; }
   .hero .bignum { position: absolute; right: -2vw; top: 6vh; font-family: var(--display); font-style: italic; font-weight: 900; font-size: clamp(220px, 40vw, 560px); line-height: .8; color: transparent; -webkit-text-stroke: 2px color-mix(in srgb, var(--fg) 28%, transparent); will-change: transform; }
   .hero .crest { width: clamp(150px, 20vw, 260px); height: auto; aspect-ratio: 1; filter: drop-shadow(0 24px 30px rgba(0,0,0,.35)); will-change: transform; }
   .hero .inner { width: 100%; position: relative; padding-bottom: 40px; display: grid; gap: 22px; }
@@ -138,7 +138,7 @@
   .other i { margin-left: auto; font-style: normal; font-size: 26px; }
   .o-hb { background: linear-gradient(135deg, #ff2a1f, #8f0400); }
   .o-gx { background: linear-gradient(135deg, #e6e8ec, #9aa0aa 60%, #00bfae); color: #0b0b0d; }
-  .o-t3 { background: linear-gradient(135deg, #1a2550, #0c1732); border: 1px solid rgba(253,56,81,.45); }
+  .o-t3 { background: linear-gradient(135deg, #1d2638, #121826); border: 1px solid rgba(46,204,113,.45); }
   footer { padding: 26px 0 calc(26px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
 
@@ -182,9 +182,11 @@
   .racer::before { content: ""; position: absolute; left: -1px; right: -1px; top: -1px; height: 6px; background: var(--tc); }
   .racer.r-hb { --tc: #ff2a1f; --tc-bg: linear-gradient(150deg, #ff2a1f, #8f0400); --car: #e8160c; --car2: #ffffff; --car3: #1a0505; --carnum: #ffffff; }
   .racer.r-gx { --tc: #00bfae; --tc-bg: linear-gradient(150deg, #e6e8ec, #9aa0aa 60%, #00bfae); --ini: #0b0b0d; --car: #111318; --car2: #00bfae; --car3: #050608; --carnum: #00bfae; }
-  .racer.r-vt { --tc: #fd3851; --tc-bg: linear-gradient(150deg, #1a2550, #0c1732 70%); --ini: #fd3851; --car: #1a2550; --car2: #fd3851; --car3: #080c1c; --carnum: #ffffff; }
+  /* VitaTrack: badan kereta biru gelap, aksen hijau (warna logo) */
+  .racer.r-vt { --tc: #2ecc71; --tc-bg: linear-gradient(150deg, #1d2638, #121826 70%); --ini: #4ade80; --car: #1e2a40; --car2: #2ecc71; --car3: #0b101a; --carnum: #ffffff; }
   .racer.r-gx::before { background: linear-gradient(90deg, #c3c7cf, #00bfae); }
-  .racer.r-vt::before { background: linear-gradient(90deg, #fd3851, #6371cd); }
+  .racer.r-vt::before { background: linear-gradient(90deg, #2ecc71, #38bdf8, #f59e0b); }
+  .racer.r-vt .btn { color: #121826; } /* teks gelap atas hijau */
   .racer-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 72px); align-items: center; padding-top: clamp(22px, 3vw, 36px); }
   .racer:nth-child(even) .racer-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
   .racer:nth-child(even) .photo { order: 2; }
@@ -193,7 +195,7 @@
   .photo .ini { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--display); font-style: italic; font-weight: 900; font-size: clamp(120px, 16vw, 220px); line-height: 1; color: var(--ini); opacity: .9; }
   .photo .num { position: absolute; right: 12px; bottom: 4px; font-family: var(--display); font-style: italic; font-weight: 900; font-size: clamp(64px, 7vw, 96px); line-height: 1; color: #fff; text-shadow: 0 6px 24px rgba(0,0,0,.45); }
   .photo .badge { position: absolute; left: 14px; top: 16px; width: 92px; height: 78px; filter: drop-shadow(0 8px 14px rgba(0,0,0,.4)); }
-  .r-vt .photo .badge { width: 150px; height: 66px; }
+  .r-vt .photo .badge { width: 78px; height: 78px; }
   .racer .eyebrow { margin-bottom: 10px; }
   .racer .eyebrow::before { background: var(--tc); }
   .racer h2 { font-size: clamp(64px, 9vw, 128px); margin: 0 0 6px; }
@@ -273,9 +275,13 @@
     <!-- Lencana GX Works (dipotong dari images/gx-emblem.png) -->
     <image href="../images/gx-crest.png" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
-  <symbol id="crest-t3" viewBox="0 0 231 100">
-    <!-- Logo VitaTrack Performance Racing (dari images/vt-emblem.png, atas plat biru tua) -->
-    <image href="../images/vt-crest.png" x="0" y="0" width="231" height="100"/>
+  <symbol id="crest-t3" viewBox="0 0 286 100">
+    <!-- Logo VitaTrack (cincin + nama, latar telus) untuk tempat lebar atas latar gelap: images/vitatrack/vt-logo.webp -->
+    <image href="../images/vitatrack/vt-logo.webp" x="0" y="0" width="286" height="100"/>
+  </symbol>
+  <symbol id="crest-t3i" viewBox="0 0 100 100">
+    <!-- Ikon VitaTrack (segi empat bulat) untuk tempat kecil atau latar cerah -->
+    <image href="../images/vitatrack/vt-icon.webp" x="0" y="0" width="100" height="100"/>
   </symbol>
 </svg>
 <header class="nav" id="nav">
@@ -449,7 +455,7 @@
         <article class="racer r-vt rv" id="krew-sasha">
           <button class="lane" type="button" aria-expanded="false" aria-controls="krew-sasha-body" data-sound="t3">
             <span class="lane-label">
-              <span class="eyebrow">#3 · VitaTrack Performance Racing</span>
+              <span class="eyebrow">#3 · VitaTrack Racing</span>
               <b>Sasha</b>
               <small><i aria-hidden="true"></i><span class="hint-mouse" data-en="Hover over the car">Dekatkan kursor pada kereta</span><span class="hint-touch" data-en="Tap the car">Tekan kereta</span></small>
             </span>
@@ -496,11 +502,11 @@
           <div class="racer-body" id="krew-sasha-body"><div class="racer-grid">
           <div class="photo">
             <img src="../images/krew/sasha.jpg" alt="Sasha" loading="lazy">
-            <svg class="badge" viewBox="0 0 231 100" aria-hidden="true"><use href="#crest-t3"/></svg>
+            <svg class="badge" viewBox="0 0 100 100" aria-hidden="true"><use href="#crest-t3i"/></svg>
             <span class="num" aria-hidden="true">#3</span>
           </div>
           <div>
-            <p class="eyebrow">#3 · VitaTrack Performance Racing</p>
+            <p class="eyebrow">#3 · VitaTrack Racing</p>
             <h2>Sasha</h2>
             <p class="role"><span data-en="VitaTrack developer · TVETMARA Lumut">Pembangun VitaTrack · TVETMARA Lumut</span></p>
             <p class="bio"><span data-en="Hello! I'm Sasha, a student exploring the world of mobile app development. I enjoy designing clean interfaces and bringing ideas to life through code. Always learning, always curious!">Hai! Saya Sasha, pelajar yang sedang meneroka dunia pembangunan aplikasi mudah alih. Saya suka mereka antara muka yang kemas dan menghidupkan idea melalui kod. Sentiasa belajar, sentiasa ingin tahu!</span></p>

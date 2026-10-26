@@ -242,7 +242,7 @@
         ms: "Anda pemandu bahan api. HealthyBite menganggar kalori dan makro dari gambar makanan anda.", en: "You're a fuel driver. HealthyBite estimates calories and macros from a photo of your food." },
       gx: { name: "Gainix", tag: "GX Works Motorsport · #12", href: "html/gainix.html", crest: "crest-gx", box: "0 0 100 100", c: "linear-gradient(90deg, var(--silver), var(--gx))", btn: "btn-gx",
         ms: "Anda pemandu enjin. Gainix mencadangkan set, ulangan dan berat ikut 1RM anda.", en: "You're an engine driver. Gainix suggests sets, reps and weight from your 1RM." },
-      t3: { name: "VitaTrack", tag: "VitaTrack Performance Racing · #3", href: "html/vitatrack.html", crest: "crest-t3", box: "0 0 231 100", wide: true, c: "linear-gradient(90deg, #fd3851, #6371cd)", btn: "btn-t3",
+      t3: { name: "VitaTrack", tag: "VitaTrack Racing · #3", href: "html/vitatrack.html", crest: "crest-t3i", box: "0 0 100 100", c: "linear-gradient(90deg, #2ecc71, #38bdf8, #f59e0b)", btn: "btn-t3",
         ms: "Anda pemandu telemetri. VitaTrack menjejak langkah, air, tidur dan mood, lalu menjadikannya cabaran harian.", en: "You're a telemetry driver. VitaTrack tracks steps, water, sleep and mood, and turns them into daily challenges." }
     };
     var step = 0, picks = [];
