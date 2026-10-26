@@ -1,0 +1,17 @@
+/* Telefon dan iPad: dipakai oleh semua halaman.
+   Sasaran sentuh sekurang-kurangnya 44 x 44 px pada skrin sentuh (garis panduan Apple). */
+@media (pointer: coarse) {
+  .lang button { min-height: 40px; min-width: 44px; }
+  .snd, .theme-btn { min-height: 44px; min-width: 44px; justify-content: center; }
+  .chap-btn { min-height: 44px; }
+  .back, .cue, .scroll-cue { display: inline-flex; align-items: center; min-height: 44px; }
+  footer a, .contact a { display: inline-flex; align-items: center; min-height: 44px; }
+  .qz-again { min-height: 44px; }
+}
+
+/* Telefon kecil: nav halaman utama mesti muat dalam 360 px. Butang Bab jadi ikon sahaja (teks kekal untuk pembaca skrin). */
+@media (max-width: 430px) {
+  .nav .wrap { gap: 6px; }
+  .nav .chap-btn { font-size: 0; gap: 0; min-width: 44px; justify-content: center; padding: 0 12px; margin-left: 6px; }
+  .nav .theme-btn { margin-left: 0; }
+}

@@ -33,7 +33,7 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; overflow-x: clip; }
   body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: clip; }
-  img { max-width: 100%; display: block; }
+  img { max-width: 100%; height: auto; display: block; }
   a { color: inherit; }
   button { font: inherit; color: inherit; }
   a:focus-visible, button:focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; }
@@ -196,6 +196,7 @@
   .tp .title dd span > a::after { font-size: .45em; vertical-align: super; }
   .tp dd span.fake { border-style: dashed; cursor: help; }
 </style>
+<link rel="stylesheet" href="../css/touch.css">
 <script src="../js/sound.js"></script>
 <script src="../js/transition.js"></script>
 </head>
@@ -207,11 +208,11 @@
   </defs>
   <symbol id="crest-hb" viewBox="0 0 120 100">
     <!-- Lencana HealthyBite gaya Ferrari (dipotong dari images/hb-emblem.png) -->
-    <image href="../images/hb-crest.png" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
+    <image href="../images/hb-crest.webp" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
   <symbol id="crest-gx" viewBox="0 0 100 100">
     <!-- Lencana GX Works (dipotong dari images/gx-emblem.png) -->
-    <image href="../images/gx-crest.png" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
+    <image href="../images/gx-crest.webp" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
   <symbol id="crest-t3" viewBox="0 0 286 100">
     <!-- Logo VitaTrack (cincin + nama, latar telus) untuk tempat lebar atas latar gelap: images/vitatrack/vt-logo.webp -->
@@ -298,7 +299,7 @@
       <p class="eyebrow rv"><span data-en="Gallery">Galeri</span></p>
       <h2 id="s-h" class="rv"><span data-en="On track">Di trek</span></h2>
     </div>
-    <div class="rail" tabindex="0" aria-label="VitaTrack"><figure class="rv"><div class="frame"><img src="../images/vitatrack/home.jpg" alt="Papan pemuka" data-en-alt="Dashboard" loading="lazy"></div><figcaption><span data-en="Dashboard">Papan pemuka</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/water.jpg" alt="Log air" data-en-alt="Water log" loading="lazy"></div><figcaption><span data-en="Water log">Log air</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/sleep.jpg" alt="Jejak tidur" data-en-alt="Sleep tracking" loading="lazy"></div><figcaption><span data-en="Sleep tracking">Jejak tidur</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/challenges.jpg" alt="Cabaran harian" data-en-alt="Daily challenges" loading="lazy"></div><figcaption><span data-en="Daily challenges">Cabaran harian</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/report.jpg" alt="Laporan mingguan" data-en-alt="Weekly report" loading="lazy"></div><figcaption><span data-en="Weekly report">Laporan mingguan</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/reminders.jpg" alt="Peringatan" data-en-alt="Reminders" loading="lazy"></div><figcaption><span data-en="Reminders">Peringatan</span></figcaption></figure></div>
+    <div class="rail" tabindex="0" aria-label="VitaTrack"><figure class="rv"><div class="frame"><img src="../images/vitatrack/home.webp" width="720" height="1558" alt="Papan pemuka" data-en-alt="Dashboard" loading="lazy"></div><figcaption><span data-en="Dashboard">Papan pemuka</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/water.webp" width="720" height="1558" alt="Log air" data-en-alt="Water log" loading="lazy"></div><figcaption><span data-en="Water log">Log air</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/sleep.webp" width="720" height="1558" alt="Jejak tidur" data-en-alt="Sleep tracking" loading="lazy"></div><figcaption><span data-en="Sleep tracking">Jejak tidur</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/challenges.webp" width="720" height="1558" alt="Cabaran harian" data-en-alt="Daily challenges" loading="lazy"></div><figcaption><span data-en="Daily challenges">Cabaran harian</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/report.webp" width="720" height="1558" alt="Laporan mingguan" data-en-alt="Weekly report" loading="lazy"></div><figcaption><span data-en="Weekly report">Laporan mingguan</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/vitatrack/reminders.webp" width="720" height="1470" alt="Peringatan" data-en-alt="Reminders" loading="lazy"></div><figcaption><span data-en="Reminders">Peringatan</span></figcaption></figure></div>
   </section>
 
   <section class="sec" id="log" aria-labelledby="l-h">

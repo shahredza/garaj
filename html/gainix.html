@@ -33,7 +33,7 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; overflow-x: clip; }
   body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: clip; }
-  img { max-width: 100%; display: block; }
+  img { max-width: 100%; height: auto; display: block; }
   a { color: inherit; }
   button { font: inherit; color: inherit; }
   a:focus-visible, button:focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; }
@@ -201,6 +201,7 @@
   .tp .title dd span > a::after { font-size: .45em; vertical-align: super; }
   .tp dd span.fake { border-style: dashed; cursor: help; }
 </style>
+<link rel="stylesheet" href="../css/touch.css">
 <script src="../js/sound.js"></script>
 <script src="../js/transition.js"></script>
 </head>
@@ -212,11 +213,11 @@
   </defs>
   <symbol id="crest-hb" viewBox="0 0 120 100">
     <!-- Lencana HealthyBite gaya Ferrari (dipotong dari images/hb-emblem.png) -->
-    <image href="../images/hb-crest.png" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
+    <image href="../images/hb-crest.webp" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
   <symbol id="crest-gx" viewBox="0 0 100 100">
     <!-- Lencana GX Works (dipotong dari images/gx-emblem.png) -->
-    <image href="../images/gx-crest.png" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
+    <image href="../images/gx-crest.webp" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
   <symbol id="crest-t3" viewBox="0 0 286 100">
     <!-- Logo VitaTrack (cincin + nama, latar telus) untuk tempat lebar atas latar gelap: images/vitatrack/vt-logo.webp -->
@@ -305,7 +306,7 @@
       <p class="eyebrow rv"><span data-en="Gallery">Galeri</span></p>
       <h2 id="s-h" class="rv"><span data-en="On track">Di trek</span></h2>
     </div>
-    <div class="rail" tabindex="0" aria-label="Gainix"><figure class="rv"><div class="frame"><img src="../images/gainix/home.jpg" alt="Skrin utama" data-en-alt="Home screen" loading="lazy"></div><figcaption><span data-en="Home screen">Skrin utama</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/gainix/log.jpg" alt="Log senaman" data-en-alt="Workout log" loading="lazy"></div><figcaption><span data-en="Workout log">Log senaman</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/gainix/exercise.jpg" alt="Panduan senaman" data-en-alt="Exercise guide" loading="lazy"></div><figcaption><span data-en="Exercise guide">Panduan senaman</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/gainix/report.jpg" alt="Laporan" data-en-alt="Reports" loading="lazy"></div><figcaption><span data-en="Reports">Laporan</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/gainix/trainers.jpg" alt="Jurulatih" data-en-alt="Trainers" loading="lazy"></div><figcaption><span data-en="Trainers">Jurulatih</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/gainix/bm.jpg" alt="Bahasa Melayu" data-en-alt="Malay version" loading="lazy"></div><figcaption><span data-en="Malay version">Bahasa Melayu</span></figcaption></figure></div>
+    <div class="rail" tabindex="0" aria-label="Gainix"><figure class="rv"><div class="frame"><img src="../images/gainix/home.webp" width="540" height="1168" alt="Skrin utama" data-en-alt="Home screen" loading="lazy"></div><figcaption><span data-en="Home screen">Skrin utama</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/gainix/log.webp" width="540" height="1168" alt="Log senaman" data-en-alt="Workout log" loading="lazy"></div><figcaption><span data-en="Workout log">Log senaman</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/gainix/exercise.webp" width="540" height="1168" alt="Panduan senaman" data-en-alt="Exercise guide" loading="lazy"></div><figcaption><span data-en="Exercise guide">Panduan senaman</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/gainix/report.webp" width="540" height="1168" alt="Laporan" data-en-alt="Reports" loading="lazy"></div><figcaption><span data-en="Reports">Laporan</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/gainix/trainers.webp" width="540" height="1168" alt="Jurulatih" data-en-alt="Trainers" loading="lazy"></div><figcaption><span data-en="Trainers">Jurulatih</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/gainix/bm.webp" width="540" height="1168" alt="Bahasa Melayu" data-en-alt="Malay version" loading="lazy"></div><figcaption><span data-en="Malay version">Bahasa Melayu</span></figcaption></figure></div>
   </section>
   <section class="sec" id="log" aria-labelledby="l-h">
     <div class="wrap">

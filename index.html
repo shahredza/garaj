@@ -11,7 +11,7 @@
 <meta property="og:title" content="Garaj · HealthyBite × Gainix × VitaTrack">
 <meta property="og:description" content="Tiga pasukan, tiga pembangun. Muat turun HealthyBite, Gainix dan VitaTrack untuk Android.">
 <meta property="og:url" content="https://shahredza.github.io/garaj/">
-<meta property="og:image" content="https://shahredza.github.io/garaj/images/og/garaj.png">
+<meta property="og:image" content="https://shahredza.github.io/garaj/images/og/garaj.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -52,7 +52,7 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: 72px; }
   body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-  img { max-width: 100%; display: block; }
+  img { max-width: 100%; height: auto; display: block; }
   a { color: inherit; }
   button { font: inherit; color: inherit; }
   a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
@@ -241,7 +241,7 @@
   .bay-row { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
   .qr { width: 118px; background: #fff; padding: 6px; border: 1px solid var(--line); display: grid; gap: 4px; }
   .qr svg { width: 100%; height: auto; display: block; }
-  .qr small { font-size: 10px; font-weight: 700; text-align: center; line-height: 1.2; color: var(--ink-2); }
+  .qr small { font-size: 11px; font-weight: 700; text-align: center; line-height: 1.2; color: var(--ink-2); }
   .install { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; counter-reset: s; border-top: 2px solid var(--ink); }
   @media (max-width: 900px) { .install { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 520px) { .install { grid-template-columns: minmax(0, 1fr); } }
@@ -449,6 +449,7 @@
   .spx-chips li.fake { border-style: dashed; cursor: help; }
 </style>
 <link rel="stylesheet" href="css/fx.css">
+<link rel="stylesheet" href="css/touch.css">
 <script src="js/sound.js"></script>
 <script src="js/transition.js"></script>
 <script>
@@ -476,11 +477,11 @@
   </defs>
   <symbol id="crest-hb" viewBox="0 0 120 100">
     <!-- Lencana HealthyBite gaya Ferrari (dipotong dari images/hb-emblem.png) -->
-    <image href="images/hb-crest.png" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
+    <image href="images/hb-crest.webp" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
   <symbol id="crest-gx" viewBox="0 0 100 100">
     <!-- Lencana GX Works (dipotong dari images/gx-emblem.png) -->
-    <image href="images/gx-crest.png" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
+    <image href="images/gx-crest.webp" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
   <symbol id="crest-t3" viewBox="0 0 286 100">
     <!-- Logo VitaTrack (cincin + nama, latar telus) untuk tempat lebar atas latar gelap: images/vitatrack/vt-logo.webp -->
@@ -667,8 +668,8 @@
           <p class="sponsor">Penaja: <b>HP Pitwall</b> · <b>Nasi Lemak Energy</b> · <b>Sambal Turbo</b> · <a href="#sp-h">semua rakan</a></p>
         </div>
         <div class="shots rv">
-          <figure><div class="frame"><img src="images/screenshots/home.png" alt="Skrin utama HealthyBite" loading="lazy"></div><figcaption>Skrin utama</figcaption></figure>
-          <figure data-speed="-0.08"><div class="frame"><img src="images/screenshots/ai.png" alt="Pembantu AI HealthyBite" loading="lazy"></div><figcaption>HealthyBite AI</figcaption></figure>
+          <figure><div class="frame"><img src="images/screenshots/home.webp" width="696" height="1530" alt="Skrin utama HealthyBite" loading="lazy"></div><figcaption>Skrin utama</figcaption></figure>
+          <figure data-speed="-0.08"><div class="frame"><img src="images/screenshots/ai.webp" width="684" height="1532" alt="Pembantu AI HealthyBite" loading="lazy"></div><figcaption>HealthyBite AI</figcaption></figure>
         </div>
       </article>
 
@@ -689,8 +690,8 @@
           <p class="sponsor">Penaja: <b>Petronas</b> · <b>Microsoft</b> · <a href="#sp-h">semua rakan</a></p>
         </div>
         <div class="shots rv">
-          <figure><div class="frame"><img src="images/gainix/log.jpg" alt="Sesi senaman Gainix dengan pemasa rehat" loading="lazy"></div><figcaption>Log senaman</figcaption></figure>
-          <figure data-speed="-0.08"><div class="frame"><img src="images/gainix/exercise.jpg" alt="Panduan senaman Bench Press dalam Gainix" loading="lazy"></div><figcaption>Panduan senaman</figcaption></figure>
+          <figure><div class="frame"><img src="images/gainix/log.webp" width="540" height="1168" alt="Sesi senaman Gainix dengan pemasa rehat" loading="lazy"></div><figcaption>Log senaman</figcaption></figure>
+          <figure data-speed="-0.08"><div class="frame"><img src="images/gainix/exercise.webp" width="540" height="1168" alt="Panduan senaman Bench Press dalam Gainix" loading="lazy"></div><figcaption>Panduan senaman</figcaption></figure>
         </div>
       </article>
 
@@ -711,8 +712,8 @@
           <p class="sponsor">Penaja: <b>Oracle</b> · <b>Roti Canai Motors</b> · <b>Teh Tarik Fuel</b> · <a href="#sp-h">semua rakan</a></p>
         </div>
         <div class="shots rv">
-          <figure><div class="frame"><img src="images/vitatrack/home.jpg" alt="Papan pemuka harian VitaTrack" loading="lazy"></div><figcaption>Papan pemuka</figcaption></figure>
-          <figure data-speed="-0.08"><div class="frame"><img src="images/vitatrack/challenges.jpg" alt="Cabaran harian VitaTrack" loading="lazy"></div><figcaption>Cabaran harian</figcaption></figure>
+          <figure><div class="frame"><img src="images/vitatrack/home.webp" width="720" height="1558" alt="Papan pemuka harian VitaTrack" loading="lazy"></div><figcaption>Papan pemuka</figcaption></figure>
+          <figure data-speed="-0.08"><div class="frame"><img src="images/vitatrack/challenges.webp" width="720" height="1558" alt="Cabaran harian VitaTrack" loading="lazy"></div><figcaption>Cabaran harian</figcaption></figure>
         </div>
       </article>
     </div>
@@ -772,10 +773,10 @@
     <div class="wrap">
       <div class="chap-head rv"><span class="chap-num" data-speed="-0.12">04</span><div><p class="eyebrow">Bab 04</p><h2 id="life-h">Hidup di garaj</h2></div></div>
       <div class="life">
-        <article class="rv" style="--bg:url('images/gainix/home.jpg')"><span class="n">01</span><div><h3>Reka</h3><p>Setiap skrin dilakar dulu: apa yang pengguna perlu nampak, dan apa yang boleh dibuang.</p></div></article>
-        <article class="rv" style="--bg:url('images/screenshots/meals.png')"><span class="n">02</span><div><h3>Bina</h3><p>Kod app, pangkalan data Supabase, dan peraturan keselamatan supaya setiap orang hanya nampak data sendiri.</p></div></article>
-        <article class="rv" style="--bg:url('images/gainix/report.jpg')"><span class="n">03</span><div><h3>Uji</h3><p>Diuji dalam Chrome dan emulator Android, mod cerah dan gelap, sebelum dibina jadi APK.</p></div></article>
-        <article class="rv" style="--bg:url('images/screenshots/family.png')"><span class="n">04</span><div><h3>Lancar</h3><p>APK diterbitkan di GitHub. Laman ini sentiasa menghala ke versi terkini.</p></div></article>
+        <article class="rv" style="--bg:url('images/gainix/home.webp')"><span class="n">01</span><div><h3>Reka</h3><p>Setiap skrin dilakar dulu: apa yang pengguna perlu nampak, dan apa yang boleh dibuang.</p></div></article>
+        <article class="rv" style="--bg:url('images/screenshots/meals.webp')"><span class="n">02</span><div><h3>Bina</h3><p>Kod app, pangkalan data Supabase, dan peraturan keselamatan supaya setiap orang hanya nampak data sendiri.</p></div></article>
+        <article class="rv" style="--bg:url('images/gainix/report.webp')"><span class="n">03</span><div><h3>Uji</h3><p>Diuji dalam Chrome dan emulator Android, mod cerah dan gelap, sebelum dibina jadi APK.</p></div></article>
+        <article class="rv" style="--bg:url('images/screenshots/family.webp')"><span class="n">04</span><div><h3>Lancar</h3><p>APK diterbitkan di GitHub. Laman ini sentiasa menghala ke versi terkini.</p></div></article>
       </div>
     </div>
   </section>

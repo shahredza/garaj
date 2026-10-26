@@ -9,7 +9,7 @@
 <meta property="og:title" content="Krew · Garaj">
 <meta property="og:description" content="Kenali tiga pembangun di sebalik HealthyBite, Gainix dan VitaTrack.">
 <meta property="og:url" content="https://shahredza.github.io/garaj/html/about.html">
-<meta property="og:image" content="https://shahredza.github.io/garaj/images/og/garaj.png">
+<meta property="og:image" content="https://shahredza.github.io/garaj/images/og/garaj.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -31,7 +31,7 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; overflow-x: clip; }
   body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: clip; }
-  img { max-width: 100%; display: block; }
+  img { max-width: 100%; height: auto; display: block; }
   a { color: inherit; }
   button { font: inherit; color: inherit; }
   a:focus-visible, button:focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; }
@@ -257,6 +257,7 @@
   html.js .racer.open .racer-body > .racer-grid { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { .car, .speed, .car .trail, html.js .racer-body, html.js .racer-body > .racer-grid { transition: none; } .car, .car .heat, .car .tread, .driving .car, .driving .car .tread { animation: none !important; } }
 </style>
+<link rel="stylesheet" href="../css/touch.css">
 <script>document.documentElement.classList.add("js");</script>
 <script src="../js/sound.js"></script>
 <script src="../js/transition.js"></script>
@@ -269,11 +270,11 @@
   </defs>
   <symbol id="crest-hb" viewBox="0 0 120 100">
     <!-- Lencana HealthyBite gaya Ferrari (dipotong dari images/hb-emblem.png) -->
-    <image href="../images/hb-crest.png" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
+    <image href="../images/hb-crest.webp" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
   <symbol id="crest-gx" viewBox="0 0 100 100">
     <!-- Lencana GX Works (dipotong dari images/gx-emblem.png) -->
-    <image href="../images/gx-crest.png" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
+    <image href="../images/gx-crest.webp" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
   <symbol id="crest-t3" viewBox="0 0 286 100">
     <!-- Logo VitaTrack (cincin + nama, latar telus) untuk tempat lebar atas latar gelap: images/vitatrack/vt-logo.webp -->
@@ -374,7 +375,7 @@
           </button>
           <div class="racer-body" id="krew-shah-body"><div class="racer-grid">
           <div class="photo">
-            <img src="../images/krew/shah.jpg" alt="Shah" loading="lazy">
+            <img src="../images/krew/shah.webp" width="800" height="800" alt="Shah" loading="lazy">
             <svg class="badge" viewBox="0 0 120 100" aria-hidden="true"><use href="#crest-hb"/></svg>
             <span class="num" aria-hidden="true">#44</span>
           </div>
@@ -437,7 +438,7 @@
           </button>
           <div class="racer-body" id="krew-haziq-body"><div class="racer-grid">
           <div class="photo">
-            <img src="../images/krew/haziq.jpg" alt="Haziq" loading="lazy">
+            <img src="../images/krew/haziq.webp" width="714" height="1000" alt="Haziq" loading="lazy">
             <svg class="badge" viewBox="0 0 100 100" aria-hidden="true"><use href="#crest-gx"/></svg>
             <span class="num" aria-hidden="true">#12</span>
           </div>
@@ -501,7 +502,7 @@
           </button>
           <div class="racer-body" id="krew-sasha-body"><div class="racer-grid">
           <div class="photo">
-            <img src="../images/krew/sasha.jpg" alt="Sasha" loading="lazy">
+            <img src="../images/krew/sasha.webp" width="750" height="1000" alt="Sasha" loading="lazy">
             <svg class="badge" viewBox="0 0 100 100" aria-hidden="true"><use href="#crest-t3i"/></svg>
             <span class="num" aria-hidden="true">#3</span>
           </div>

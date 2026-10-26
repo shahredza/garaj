@@ -32,7 +32,7 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; overflow-x: clip; }
   body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: clip; }
-  img { max-width: 100%; display: block; }
+  img { max-width: 100%; height: auto; display: block; }
   a { color: inherit; }
   button { font: inherit; color: inherit; }
   a:focus-visible, button:focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; }
@@ -190,7 +190,7 @@
   .meal { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; border: 1px solid #26262c; padding: 9px 12px; }
   .meal span:last-child { color: #a9a7b0; white-space: nowrap; }
   .scan-btn { margin-top: 12px; text-align: center; background: var(--acc); color: var(--acc-ink); padding: 10px; font-family: var(--display); font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacing: .06em; }
-  .hb-phone .cap { position: absolute; left: 0; right: 0; bottom: -30px; text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; color: rgba(255,255,255,.7); transform: rotate(-4deg); }
+  .hb-phone .cap { position: absolute; left: 0; right: 0; bottom: -30px; text-align: center; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: rgba(255,255,255,.7); transform: rotate(-4deg); }
   @media (max-width: 1099px) { .hb-phone { display: none; } }
   @media (min-width: 1100px) { .hero .inner { padding-right: 330px; } .hero h1 { font-size: clamp(64px, 10vw, 170px); } }
 
@@ -200,7 +200,7 @@
   .fx-tab { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; align-items: center; text-align: left; font: inherit; color: var(--fg); background: var(--bg); border: 0; padding: 18px 20px; cursor: pointer; transition: background .25s; }
   .fx-tab i { font-family: var(--mono); font-style: normal; font-size: 13px; font-weight: 700; color: var(--acc); letter-spacing: .12em; }
   .fx-tab b { display: block; font-family: var(--display); font-weight: 800; font-size: 26px; text-transform: uppercase; line-height: 1; }
-  .fx-tab small { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .fx-tab small { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
   .fx-tab:hover { background: var(--card); }
   .fx-tab[aria-selected="true"] { background: var(--acc); color: var(--acc-ink); }
   .fx-tab[aria-selected="true"] i, .fx-tab[aria-selected="true"] small { color: var(--acc-ink); }
@@ -234,7 +234,7 @@
   .d-av { width: 34px; height: 34px; background: var(--acc); color: var(--acc-ink); display: grid; place-items: center; font-family: var(--display); font-weight: 900; font-size: 18px; flex: none; }
   .d-sleep { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; align-items: end; height: 150px; }
   .d-sleep i { display: block; height: var(--h); background: var(--acc); transform-origin: bottom; }
-  .d-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; text-align: center; font-family: var(--mono); font-size: 10px; color: #a9a7b0; text-transform: uppercase; letter-spacing: .06em; }
+  .d-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; text-align: center; font-family: var(--mono); font-size: 11px; color: #a9a7b0; text-transform: uppercase; letter-spacing: .06em; }
   @media (max-width: 900px) {
     .fx { grid-template-columns: minmax(0, 1fr); }
     .fx-list { grid-auto-flow: column; grid-auto-columns: minmax(210px, 1fr); overflow-x: auto; scroll-snap-type: x mandatory; }
@@ -266,10 +266,10 @@
   .flip-face .photo { width: 104px; height: 104px; object-fit: cover; object-position: center 30%; border: 3px solid var(--acc); }
   .flip-face .role { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
   .flip-face .who { font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase; }
-  .flip-face .hint { margin-top: auto; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .flip-face .hint { margin-top: auto; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
   .flip-face.back .hint { color: rgba(255,255,255,.75); }
   .flip-face dl { margin: 0; display: grid; gap: 12px; font-size: 15px; }
-  .flip-face dt { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
+  .flip-face dt { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
   .flip-face dd { margin: 0; font-weight: 700; }
   .glare { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.18), transparent 45%); opacity: 0; transition: opacity .3s; }
   .flip:hover .glare { opacity: 1; }
@@ -300,6 +300,7 @@
   .tp .title dd span > a::after { font-size: .45em; vertical-align: super; }
   .tp dd span.fake { border-style: dashed; cursor: help; }
 </style>
+<link rel="stylesheet" href="../css/touch.css">
 <script src="../js/sound.js"></script>
 <script src="../js/transition.js"></script>
 </head>
@@ -311,11 +312,11 @@
   </defs>
   <symbol id="crest-hb" viewBox="0 0 120 100">
     <!-- Lencana HealthyBite gaya Ferrari (dipotong dari images/hb-emblem.png) -->
-    <image href="../images/hb-crest.png" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
+    <image href="../images/hb-crest.webp" x="0" y="0" width="120" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
   <symbol id="crest-gx" viewBox="0 0 100 100">
     <!-- Lencana GX Works (dipotong dari images/gx-emblem.png) -->
-    <image href="../images/gx-crest.png" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
+    <image href="../images/gx-crest.webp" x="0" y="0" width="100" height="100" preserveAspectRatio="xMinYMid meet"/>
   </symbol>
   <symbol id="crest-t3" viewBox="0 0 286 100">
     <!-- Logo VitaTrack (cincin + nama, latar telus) untuk tempat lebar atas latar gelap: images/vitatrack/vt-logo.webp -->
@@ -523,7 +524,7 @@
       <p class="eyebrow rv"><span data-en="Gallery">Galeri</span></p>
       <h2 id="s-h" class="rv"><span data-en="On track">Di trek</span></h2>
     </div>
-    <div class="rail" tabindex="0" aria-label="HealthyBite"><figure class="rv"><div class="frame"><img src="../images/screenshots/home.png" alt="Skrin utama" data-en-alt="Home screen" loading="lazy"></div><figcaption><span data-en="Home screen">Skrin utama</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/screenshots/ai.png" alt="HealthyBite AI" data-en-alt="HealthyBite AI" loading="lazy"></div><figcaption><span data-en="HealthyBite AI">HealthyBite AI</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/screenshots/family.png" alt="Mod Keluarga" data-en-alt="Family Mode" loading="lazy"></div><figcaption><span data-en="Family Mode">Mod Keluarga</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/screenshots/meals.png" alt="Log makanan" data-en-alt="Meal log" loading="lazy"></div><figcaption><span data-en="Meal log">Log makanan</span></figcaption></figure></div>
+    <div class="rail" tabindex="0" aria-label="HealthyBite"><figure class="rv"><div class="frame"><img src="../images/screenshots/home.webp" width="696" height="1530" alt="Skrin utama" data-en-alt="Home screen" loading="lazy"></div><figcaption><span data-en="Home screen">Skrin utama</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/screenshots/ai.webp" width="684" height="1532" alt="HealthyBite AI" data-en-alt="HealthyBite AI" loading="lazy"></div><figcaption><span data-en="HealthyBite AI">HealthyBite AI</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/screenshots/family.webp" width="684" height="1130" alt="Mod Keluarga" data-en-alt="Family Mode" loading="lazy"></div><figcaption><span data-en="Family Mode">Mod Keluarga</span></figcaption></figure><figure class="rv"><div class="frame"><img src="../images/screenshots/meals.webp" width="680" height="744" alt="Log makanan" data-en-alt="Meal log" loading="lazy"></div><figcaption><span data-en="Meal log">Log makanan</span></figcaption></figure></div>
   </section>
   <section class="sec" id="log" aria-labelledby="l-h">
     <div class="wrap">
