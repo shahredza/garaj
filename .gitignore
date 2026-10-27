@@ -18,6 +18,7 @@ keystore.properties
 *.pem
 *.p12
 
-# Gambar sumber besar (lebih 1 MB) yang tidak dipaparkan di mana-mana halaman.
-# Lencana yang dipakai ialah *-crest.png (dipotong daripada fail ini).
-images/*-emblem.png
+# Gambar sumber besar (lebih 1 MB) yang tidak dipaparkan di laman.
+# Laman guna versi kecil: images/<pasukan>/crest.webp atau logo.webp
+images/**/*-emblem.png
+images/**/*-full.png
