@@ -29,6 +29,7 @@
     --body: "Titillium Web", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
     --g: max(16px, env(safe-area-inset-left, 0px));
+    --view-bg: #0e131e; --flip-back: linear-gradient(150deg, #1d2638, #121826 70%); --flip-back-fg: #f4f4f5;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; overflow-x: clip; }
@@ -113,14 +114,6 @@
   .spons li { font-family: var(--display); font-style: italic; font-weight: 900; font-size: 30px; text-transform: uppercase; padding: 10px 16px; background: var(--card); border: 1px solid var(--line); }
 
   /* Ciri */
-  .feats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  @media (max-width: 900px) { .feats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { .feats { grid-template-columns: minmax(0, 1fr); } }
-  .feats li { background: var(--bg); padding: 26px; display: grid; gap: 8px; align-content: start; transition: background .25s; }
-  .feats li:hover { background: var(--card); }
-  .feats .fn { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--acc); letter-spacing: .14em; }
-  .feats b { font-family: var(--display); font-weight: 800; font-size: 28px; text-transform: uppercase; line-height: 1; }
-  .feats p { color: var(--muted); font-size: 15px; }
 
   /* Galeri */
   .rail { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--g) 20px max(var(--g), calc((100vw - 1240px) / 2 + var(--g))); scrollbar-width: thin; }
@@ -196,6 +189,7 @@
   .tp .title dd span > a::after { font-size: .45em; vertical-align: super; }
   .tp dd span.fake { border-style: dashed; cursor: help; }
 </style>
+<link rel="stylesheet" href="../css/team.css">
 <link rel="stylesheet" href="../css/touch.css">
 <script src="../js/sound.js"></script>
 <script src="../js/transition.js"></script>
@@ -280,6 +274,28 @@
         <div class="rv">
           <p class="big-p"><span data-en="VitaTrack Racing is the telemetry team on this grid. Like an F1 engineer reading car data, VitaTrack reads your daily data: activity, water, sleep and mood, so you can see where to improve.">VitaTrack Racing ialah pasukan telemetri dalam grid ini. Seperti jurutera F1 yang membaca data kereta, VitaTrack membaca data harian anda: aktiviti, air, tidur dan mood, supaya anda nampak di mana boleh jadi lebih baik.</span></p>
           <p class="mission"><span data-en="Our mission: make a healthy lifestyle something you can measure, a little every day.">Misi kami: menjadikan gaya hidup sihat sesuatu yang boleh diukur, sedikit demi sedikit setiap hari.</span></p>
+          <div class="flip" tabindex="0" role="button" aria-pressed="false" aria-label="Kad pasukan, klik untuk pusing" data-en-label="Team card, click to flip">
+            <div class="flip-in">
+              <div class="flip-face front">
+                <span class="tnum" aria-hidden="true">#3</span>
+                <svg class="crest-sm" viewBox="0 0 100 100" aria-hidden="true"><use href="#crest-t3i"/></svg>
+                <span class="role"><span data-en="Team card · #3">Kad pasukan · #3</span></span>
+                <span class="who">VitaTrack Racing</span><span class="sum"><span data-en="The telemetry team: every day counts.">Pasukan telemetri: setiap hari dikira.</span></span>
+                <span class="hint"><span data-en="Click to flip ↻">Klik untuk pusing ↻</span></span>
+                <i class="glare"></i>
+              </div>
+              <div class="flip-face back">
+                <dl>
+                  <div><dt><span data-en="App">App</span></dt><dd>VitaTrack 1.0.1 · Android</dd></div>
+                  <div><dt>Program</dt><dd><span data-en="Diploma in Computer Technology (Big Data)">Diploma Teknologi Komputer (Big Data)</span></dd></div>
+                  <div><dt><span data-en="Institution">Institusi</span></dt><dd>TVETMARA Lumut</dd></div>
+                  <div><dt><span data-en="Expected to graduate">Dijangka tamat</span></dt><dd><span data-en="June 2027">Jun 2027</span></dd></div>
+                </dl>
+                <span class="hint"><span data-en="Click to flip ↻">Klik untuk pusing ↻</span></span>
+                <i class="glare"></i>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="side"><div class="rv"><h3><span data-en="Technical data">Data teknikal</span></h3><dl class="kv"><div><dt><span data-en="Front end">Bahagian depan</span></dt><dd>React 19, TypeScript, Tailwind CSS (Vite)</dd></div><div><dt><span data-en="Database">Pangkalan data</span></dt><dd><span data-en="Supabase (PostgreSQL, Auth, Row Level Security) via jQuery AJAX">Supabase (PostgreSQL, Auth, Row Level Security) melalui jQuery AJAX</span></dd></div><div><dt>APK</dt><dd><span data-en="Capacitor 7, signed release">Capacitor 7, release bertandatangan</span></dd></div><div><dt><span data-en="HTML5 APIs">API HTML5</span></dt><dd>Geolocation, Canvas, Drag &amp; Drop, Web Worker, Service Worker, Web Storage</dd></div></dl></div><div class="rv"><h3><span data-en="Partners (parody)">Rakan penaja (parody)</span></h3><p class="tp-note"><span data-en="Fan-made parody · All partners shown are fictional and not real sponsorships.">Fan-made parody · Semua rakan penaja yang dipaparkan adalah rekaan dan bukan tajaan sebenar.</span><br><span data-en="Click a name to open the company's official site (new tab). Names with a dashed border are made up.">Klik nama untuk ke laman rasmi syarikat (tab baru). Nama bergaris putus-putus ialah rekaan.</span></p><dl class="tp"><div class="title"><dt>Title Partner</dt><dd><span><a href="https://www.oracle.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Oracle · parody, bukan tajaan sebenar">Oracle</a></span></dd></div><div class=""><dt>Premium Partner</dt><dd><span><a href="https://www.tagheuer.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi TAG Heuer · parody, bukan tajaan sebenar">TAG Heuer</a></span><span><a href="https://www.pirelli.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Pirelli · parody, bukan tajaan sebenar">Pirelli</a></span><span><a href="https://www.rauch.cc" target="_blank" rel="noopener noreferrer" title="Laman rasmi Rauch · parody, bukan tajaan sebenar">Rauch</a></span><span><a href="https://www.armorall.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Armor All · parody, bukan tajaan sebenar">Armor All</a></span><span><a href="https://www.hardrock.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Hard Rock International · parody, bukan tajaan sebenar">Hard Rock International</a></span><span><a href="https://castore.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Castore · parody, bukan tajaan sebenar">Castore</a></span><span><a href="https://www.neweracap.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi New Era · parody, bukan tajaan sebenar">New Era</a></span><span><a href="https://www.rokt.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Rokt · parody, bukan tajaan sebenar">Rokt</a></span><span><a href="https://www.heineken.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Heineken · parody, bukan tajaan sebenar">Heineken</a></span><span><a href="https://www.visa.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Visa · parody, bukan tajaan sebenar">Visa</a></span><span><a href="https://www.yeti.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi YETI · parody, bukan tajaan sebenar">YETI</a></span><span><a href="https://www.carlyle.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Carlyle · parody, bukan tajaan sebenar">Carlyle</a></span><span><a href="https://www.clearme.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Clear · parody, bukan tajaan sebenar">Clear</a></span><span><a href="https://www.avatrade.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi AvaTrade · parody, bukan tajaan sebenar">AvaTrade</a></span><span><a href="https://www.damacproperties.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi DAMAC Properties · parody, bukan tajaan sebenar">DAMAC Properties</a></span><span><a href="https://www.gate.io" target="_blank" rel="noopener noreferrer" title="Laman rasmi Gate.io · parody, bukan tajaan sebenar">Gate.io</a></span><span><a href="https://www.mauijim.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Maui Jim · parody, bukan tajaan sebenar">Maui Jim</a></span><span><a href="https://www.mophie.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Mophie · parody, bukan tajaan sebenar">Mophie</a></span><span><a href="https://www.pepejeans.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Pepe Jeans · parody, bukan tajaan sebenar">Pepe Jeans</a></span><span><a href="https://www.ppds.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Philips Professional Displays (PPDS) · parody, bukan tajaan sebenar">Philips Professional Displays (PPDS)</a></span></dd></div><div class=""><dt>Technical Partner</dt><dd><span><a href="https://www.oracle.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Oracle · parody, bukan tajaan sebenar">Oracle</a></span><span><a href="https://www.mobil1.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Mobil 1 · parody, bukan tajaan sebenar">Mobil 1</a></span><span><a href="https://www.esso.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Esso Synergy · parody, bukan tajaan sebenar">Esso Synergy</a></span><span><a href="https://www.siemens.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Siemens · parody, bukan tajaan sebenar">Siemens</a></span><span><a href="https://www.att.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi AT&amp;T · parody, bukan tajaan sebenar">AT&amp;T</a></span><span><a href="https://www.hpe.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi HPE · parody, bukan tajaan sebenar">HPE</a></span><span><a href="https://www.dmgmori.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi DMG Mori · parody, bukan tajaan sebenar">DMG Mori</a></span><span><a href="https://hexagon.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Hexagon · parody, bukan tajaan sebenar">Hexagon</a></span><span><a href="https://www.ansys.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Ansys · parody, bukan tajaan sebenar">Ansys</a></span><span><a href="https://www.athleticpropulsionlabs.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi APL · parody, bukan tajaan sebenar">APL</a></span><span><a href="https://www.pwr.com.au" target="_blank" rel="noopener noreferrer" title="Laman rasmi PWR · parody, bukan tajaan sebenar">PWR</a></span><span><a href="https://www.cdw.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi CDW · parody, bukan tajaan sebenar">CDW</a></span><span><a href="https://secretlab.co" target="_blank" rel="noopener noreferrer" title="Laman rasmi Secretlab · parody, bukan tajaan sebenar">Secretlab</a></span><span><a href="https://1password.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi 1Password · parody, bukan tajaan sebenar">1Password</a></span><span><a href="https://neat.no" target="_blank" rel="noopener noreferrer" title="Laman rasmi Neat · parody, bukan tajaan sebenar">Neat</a></span><span><a href="https://www.sparco-official.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Sparco · parody, bukan tajaan sebenar">Sparco</a></span></dd></div><div class=""><dt>Official Partner</dt><dd><span class="fake" title="Nama rekaan untuk parody · tiada laman rasmi">Roti Canai Motors</span><span class="fake" title="Nama rekaan untuk parody · tiada laman rasmi">Teh Tarik Fuel</span></dd></div></dl></div></div>
       </div>
@@ -290,7 +306,81 @@
     <div class="wrap">
       <p class="eyebrow rv"><span data-en="Car spec">Spesifikasi kereta</span></p>
       <h2 id="f-h" class="rv"><span data-en="What is under the hood">Apa di bawah bonet</span></h2>
-      <ol class="feats"><li class="rv"><span class="fn">01</span><b><span data-en="Daily dashboard">Papan pemuka harian</span></b><p><span data-en="Step, water and sleep rings show today's progress against your goals.">Cincin langkah, air dan tidur menunjukkan kemajuan hari ini berbanding sasaran.</span></p></li><li class="rv"><span class="fn">02</span><b><span data-en="One-tap water log">Log air sekali tekan</span></b><p><span data-en="Add 250 ml or 500 ml in one tap and see what is left of your goal.">Tambah 250 ml atau 500 ml dengan satu tekanan dan lihat baki sasaran.</span></p></li><li class="rv"><span class="fn">03</span><b><span data-en="Sleep tracking">Jejak tidur</span></b><p><span data-en="Log last night's sleep, with a 7-day chart and weekly average.">Log tidur malam tadi, dengan graf 7 hari dan purata mingguan.</span></p></li><li class="rv"><span class="fn">04</span><b><span data-en="Daily challenges &amp; XP">Cabaran harian & XP</span></b><p><span data-en="Five challenges a day, streaks and Bronze to Platinum tiers.">Lima cabaran setiap hari, streak dan tahap Bronze hingga Platinum.</span></p></li><li class="rv"><span class="fn">05</span><b><span data-en="Weekly &amp; monthly reports">Laporan mingguan & bulanan</span></b><p><span data-en="Charts for steps, sleep, water and mood. Share or download as CSV.">Graf langkah, tidur, air dan mood. Kongsi atau muat turun sebagai CSV.</span></p></li><li class="rv"><span class="fn">06</span><b><span data-en="Focus &amp; Flow reminders">Peringatan Focus & Flow</span></b><p><span data-en="Water, movement and sleep reminders arrive even when the app is closed.">Peringatan air, bergerak dan tidur tetap sampai walaupun app ditutup.</span></p></li></ol>
+      <div class="fx rv">
+        <div class="fx-list" role="tablist" aria-label="Ciri VitaTrack" data-en-label="VitaTrack features">
+          <button type="button" class="fx-tab" role="tab" id="fx-t0" aria-controls="fx-p0" aria-selected="true" tabindex="0"><i>01</i><span><b><span data-en="Daily dashboard">Papan pemuka harian</span></b><small><span data-en="Daily">Harian</span></small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t1" aria-controls="fx-p1" aria-selected="false" tabindex="-1"><i>02</i><span><b><span data-en="One-tap water log">Log air sekali tekan</span></b><small><span data-en="One tap">Sekali tekan</span></small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t2" aria-controls="fx-p2" aria-selected="false" tabindex="-1"><i>03</i><span><b><span data-en="Sleep tracking">Jejak tidur</span></b><small><span data-en="7 days">7 hari</span></small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t3" aria-controls="fx-p3" aria-selected="false" tabindex="-1"><i>04</i><span><b><span data-en="Daily challenges & XP">Cabaran harian & XP</span></b><small><span data-en="XP">XP</span></small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t4" aria-controls="fx-p4" aria-selected="false" tabindex="-1"><i>05</i><span><b><span data-en="Weekly & monthly reports">Laporan mingguan & bulanan</span></b><small><span data-en="CSV">CSV</span></small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t5" aria-controls="fx-p5" aria-selected="false" tabindex="-1"><i>06</i><span><b><span data-en="Focus & Flow reminders">Peringatan Focus & Flow</span></b><small><span data-en="Even when closed">Walaupun app ditutup</span></small></span></button>
+        </div>
+        <div class="fx-view">
+          <div class="fx-panel on" role="tabpanel" id="fx-p0" aria-labelledby="fx-t0">
+            <span class="tag"><span data-en="Daily">Harian</span></span>
+            <h3><span data-en="Daily dashboard">Papan pemuka harian</span></h3>
+            <p><span data-en="Step, water and sleep rings show today's progress against your goals.">Cincin langkah, air dan tidur menunjukkan kemajuan hari ini berbanding sasaran anda.</span></p>
+            <div class="demo">
+              <div class="d-ring pop" style="--i:0"><div class="ring"><svg viewBox="0 0 104 104" aria-hidden="true"><circle class="track" cx="52" cy="52" r="42" fill="none" stroke-width="10"/><circle class="bar" cx="52" cy="52" r="42" fill="none" stroke-width="10" stroke-dasharray="200.6 263.9"/></svg><div class="num"><b>7,600</b><span><span data-en="steps">langkah</span></span></div></div><div class="d-box" style="flex:1"><span><span data-en="Left today">Baki hari ini</span></span><b><span data-en="2,400 steps">2,400 langkah</span></b></div></div>
+              <div class="d-box pop" style="--i:1"><span><span data-en="Water">Air</span></span><b>1.3 / 2.0 L</b></div>
+              <div class="d-box pop" style="--i:2"><span><span data-en="Last night's sleep">Tidur malam tadi</span></span><b><span data-en="6 h 40 m">6 j 40 m</span></b></div>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p1" aria-labelledby="fx-t1">
+            <span class="tag"><span data-en="One tap">Sekali tekan</span></span>
+            <h3><span data-en="One-tap water log">Log air sekali tekan</span></h3>
+            <p><span data-en="Add 250 ml or 500 ml in one tap and see what is left of today's goal.">Tambah 250 ml atau 500 ml dengan satu tekanan dan lihat baki sasaran hari ini.</span></p>
+            <div class="demo">
+              <div class="pop" style="--i:0;display:flex;gap:8px;flex-wrap:wrap"><span class="d-chip">+250 ml</span><span class="d-chip ghost">+500 ml</span></div>
+              <div class="d-box pop" style="--i:1"><span><span data-en="Water today">Air hari ini</span></span><b>1.5 / 2.0 L</b></div>
+              <div class="d-box pop" style="--i:2"><span><span data-en="Left">Baki</span></span><b>500 ml</b></div>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p2" aria-labelledby="fx-t2">
+            <span class="tag"><span data-en="7 days">7 hari</span></span>
+            <h3><span data-en="Sleep tracking">Jejak tidur</span></h3>
+            <p><span data-en="Log last night's sleep, then see a 7-day chart and your weekly average.">Log tidur malam tadi, kemudian lihat graf 7 hari dan purata mingguan.</span></p>
+            <div class="demo">
+              <div class="d-sleep pop" style="--i:0" aria-hidden="true"><i style="--h:70%;--i:0"></i><i style="--h:62%;--i:1"></i><i style="--h:85%;--i:2"></i><i style="--h:58%;--i:3"></i><i style="--h:76%;--i:4"></i><i style="--h:92%;--i:5"></i><i style="--h:80%;--i:6"></i></div>
+              <div class="d-days" aria-hidden="true"><span data-en="Mon">Isn</span><span data-en="Tue">Sel</span><span data-en="Wed">Rab</span><span data-en="Thu">Kha</span><span data-en="Fri">Jum</span><span data-en="Sat">Sab</span><span data-en="Sun">Ahd</span></div>
+              <div class="d-box pop" style="--i:2"><span><span data-en="Average this week">Purata minggu ini</span></span><b><span data-en="6 h 52 m">6 j 52 m</span></b></div>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p3" aria-labelledby="fx-t3">
+            <span class="tag"><span data-en="XP">XP</span></span>
+            <h3><span data-en="Daily challenges & XP">Cabaran harian & XP</span></h3>
+            <p><span data-en="Five challenges a day. Earn XP and streaks, and level up from Bronze to Platinum.">Lima cabaran setiap hari. Kumpul XP dan streak, dan naik tahap dari Bronze hingga Platinum.</span></p>
+            <div class="demo">
+              <div class="d-box pop" style="--i:0"><span><span data-en="Walk 10,000 steps">Jalan 10,000 langkah</span></span><b>+50 XP</b></div>
+              <div class="d-box pop" style="--i:1"><span><span data-en="Drink 8 glasses of water">Minum 8 gelas air</span></span><b>+30 XP</b></div>
+              <div class="d-box pop" style="--i:2"><span><span data-en="Tier">Tahap</span></span><b>Silver · 4,538 XP</b></div>
+              <span class="d-chip pop" style="--i:3"><span data-en="35-day streak">Streak 35 hari</span></span>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p4" aria-labelledby="fx-t4">
+            <span class="tag"><span data-en="CSV">CSV</span></span>
+            <h3><span data-en="Weekly & monthly reports">Laporan mingguan & bulanan</span></h3>
+            <p><span data-en="Charts for steps, sleep, water and mood. Share the report or download it as CSV.">Graf langkah, tidur, air dan mood. Kongsi laporan atau muat turun sebagai CSV.</span></p>
+            <div class="demo">
+              <div class="d-sleep pop" style="--i:0" aria-hidden="true"><i style="--h:55%;--i:0"></i><i style="--h:72%;--i:1"></i><i style="--h:64%;--i:2"></i><i style="--h:88%;--i:3"></i><i style="--h:60%;--i:4"></i><i style="--h:95%;--i:5"></i><i style="--h:78%;--i:6"></i></div>
+              <div class="d-days" aria-hidden="true"><span data-en="Mon">Isn</span><span data-en="Tue">Sel</span><span data-en="Wed">Rab</span><span data-en="Thu">Kha</span><span data-en="Fri">Jum</span><span data-en="Sat">Sab</span><span data-en="Sun">Ahd</span></div>
+              <div class="d-box pop" style="--i:2"><span><span data-en="Steps this week">Langkah minggu ini</span></span><b>58,300</b></div>
+              <span class="d-chip pop" style="--i:3"><span data-en="Download CSV">Muat turun CSV</span></span>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p5" aria-labelledby="fx-t5">
+            <span class="tag"><span data-en="Even when closed">Walaupun app ditutup</span></span>
+            <h3><span data-en="Focus & Flow reminders">Peringatan Focus & Flow</span></h3>
+            <p><span data-en="Water, movement and sleep reminders arrive even when the app is closed.">Peringatan air, bergerak dan tidur tetap sampai walaupun app ditutup.</span></p>
+            <div class="demo">
+              <div class="d-box pop" style="--i:0"><span>🔔 <span data-en="Time to drink water">Masa minum air</span></span><b>10:00</b></div>
+              <div class="d-box pop" style="--i:1"><span>🚶 <span data-en="Get up and move for 5 minutes">Bangun dan bergerak 5 minit</span></span><b>15:00</b></div>
+              <div class="d-box pop" style="--i:2"><span>🌙 <span data-en="Get ready for bed">Bersedia untuk tidur</span></span><b>22:30</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="note rv"><span data-en="Sample screens. Numbers are for illustration only.">Contoh paparan. Angka hanya untuk ilustrasi.</span></p>
     </div>
   </section>
 
@@ -369,6 +459,7 @@
   })();
 </script>
 <script src="../js/releases.js"></script>
+<script src="../js/team.js"></script>
 <script src="../js/fx.js"></script>
 <script src="../js/egg.js"></script>
 </body>

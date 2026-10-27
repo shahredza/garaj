@@ -29,6 +29,7 @@
     --body: "Titillium Web", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
     --g: max(16px, env(safe-area-inset-left, 0px));
+    --tnum: #00796b; --flip-back: linear-gradient(150deg, #e6e8ec, #9aa0aa 60%, #00bfae); --flip-back-fg: #0b0d10;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; overflow-x: clip; }
@@ -113,14 +114,6 @@
   .spons li { font-family: var(--display); font-style: italic; font-weight: 900; font-size: 30px; text-transform: uppercase; padding: 10px 16px; background: var(--card); border: 1px solid var(--line); }
 
   /* Ciri */
-  .feats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  @media (max-width: 900px) { .feats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { .feats { grid-template-columns: minmax(0, 1fr); } }
-  .feats li { background: var(--bg); padding: 26px; display: grid; gap: 8px; align-content: start; transition: background .25s; }
-  .feats li:hover { background: var(--card); }
-  .feats .fn { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--acc); letter-spacing: .14em; }
-  .feats b { font-family: var(--display); font-weight: 800; font-size: 28px; text-transform: uppercase; line-height: 1; }
-  .feats p { color: var(--muted); font-size: 15px; }
 
   /* Galeri */
   .rail { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--g) 20px max(var(--g), calc((100vw - 1240px) / 2 + var(--g))); scrollbar-width: thin; }
@@ -201,6 +194,7 @@
   .tp .title dd span > a::after { font-size: .45em; vertical-align: super; }
   .tp dd span.fake { border-style: dashed; cursor: help; }
 </style>
+<link rel="stylesheet" href="../css/team.css">
 <link rel="stylesheet" href="../css/touch.css">
 <script src="../js/sound.js"></script>
 <script src="../js/transition.js"></script>
@@ -286,6 +280,28 @@
         <div class="rv">
           <p class="big-p"><span data-en="GX Works Motorsport is the engine team on this grid. Gainix was built as a mobile app project at TVETMARA Lumut around one simple question: how much should I lift today? The app answers it from your 1RM, and raises it as you get stronger.">GX Works Motorsport ialah pasukan enjin dalam grid ini. Gainix dibina sebagai projek aplikasi mudah alih di TVETMARA Lumut, dengan satu soalan mudah: berapa berat yang patut saya angkat hari ini? App ini menjawabnya daripada 1RM anda, dan menaikkannya bila anda makin kuat.</span></p>
           <p class="mission"><span data-en="Our mission: give everyone in the gym a clear plan, so no training session goes to waste.">Misi kami: memberi setiap orang di gim pelan yang jelas, supaya tiada sesi latihan yang sia-sia.</span></p>
+          <div class="flip" tabindex="0" role="button" aria-pressed="false" aria-label="Kad pasukan, klik untuk pusing" data-en-label="Team card, click to flip">
+            <div class="flip-in">
+              <div class="flip-face front">
+                <span class="tnum" aria-hidden="true">#12</span>
+                <svg class="crest-sm" viewBox="0 0 100 100" aria-hidden="true"><use href="#crest-gx"/></svg>
+                <span class="role"><span data-en="Team card · #12">Kad pasukan · #12</span></span>
+                <span class="who">GX Works Motorsport</span><span class="sum"><span data-en="The engine team: every set, every rep.">Pasukan enjin: setiap set, setiap rep.</span></span>
+                <span class="hint"><span data-en="Click to flip ↻">Klik untuk pusing ↻</span></span>
+                <i class="glare"></i>
+              </div>
+              <div class="flip-face back">
+                <dl>
+                  <div><dt><span data-en="App">App</span></dt><dd>Gainix 1.0.0 · Android</dd></div>
+                  <div><dt>Program</dt><dd><span data-en="Diploma in Computer Technology (Big Data)">Diploma Teknologi Komputer (Big Data)</span></dd></div>
+                  <div><dt><span data-en="Institution">Institusi</span></dt><dd>TVETMARA Lumut</dd></div>
+                  <div><dt><span data-en="Expected to graduate">Dijangka tamat</span></dt><dd><span data-en="June 2027">Jun 2027</span></dd></div>
+                </dl>
+                <span class="hint"><span data-en="Click to flip ↻">Klik untuk pusing ↻</span></span>
+                <i class="glare"></i>
+              </div>
+            </div>
+          </div>
           
         </div>
         <div class="side"><div class="rv"><h3><span data-en="Technical data">Data teknikal</span></h3><dl class="kv"><div><dt><span data-en="Front end">Bahagian depan</span></dt><dd>HTML5, CSS3, JavaScript, jQuery 3.7 &amp; AJAX</dd></div><div><dt><span data-en="Database">Pangkalan data</span></dt><dd><span data-en="Supabase + Row Level Security; PHP + MySQL version">Supabase + Row Level Security; versi PHP + MySQL</span></dd></div><div><dt><span data-en="APK">APK</span></dt><dd><span data-en="Capacitor 7, signed release">Capacitor 7, release bertandatangan</span></dd></div><div><dt><span data-en="HTML5 APIs">API HTML5</span></dt><dd>Geolocation, Drag &amp; Drop, Service Worker, Web Worker, IndexedDB, Wake Lock, Speech, Canvas</dd></div></dl></div><div class="rv"><h3><span data-en="Partners (parody)">Rakan penaja (parody)</span></h3><p class="tp-note"><span data-en="Fan-made parody · All partners shown are fictional and not real sponsorships.">Fan-made parody · Semua rakan penaja yang dipaparkan adalah rekaan dan bukan tajaan sebenar.</span><br><span data-en="Click a name to open the company's official site (new tab). Names with a dashed border are made up.">Klik nama untuk ke laman rasmi syarikat (tab baru). Nama bergaris putus-putus ialah rekaan.</span></p><dl class="tp"><div class="title"><dt>Title Partner</dt><dd><span><a href="https://www.petronas.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Petronas · parody, bukan tajaan sebenar">Petronas</a></span><span><a href="https://www.microsoft.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Microsoft · parody, bukan tajaan sebenar">Microsoft</a></span></dd></div><div class=""><dt>Premium / Principal Partner</dt><dd><span><a href="https://www.ineos.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi INEOS · parody, bukan tajaan sebenar">INEOS</a></span><span><a href="https://www.crowdstrike.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi CrowdStrike · parody, bukan tajaan sebenar">CrowdStrike</a></span><span><a href="https://www.ubs.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi UBS · parody, bukan tajaan sebenar">UBS</a></span><span><a href="https://www.teamviewer.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi TeamViewer · parody, bukan tajaan sebenar">TeamViewer</a></span><span><a href="https://www.hpe.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Hewlett Packard Enterprise (HPE) · parody, bukan tajaan sebenar">Hewlett Packard Enterprise (HPE)</a></span><span><a href="https://www.iwc.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi IWC Schaffhausen · parody, bukan tajaan sebenar">IWC Schaffhausen</a></span><span><a href="https://www.marriott.com/loyalty.mi" target="_blank" rel="noopener noreferrer" title="Laman rasmi Marriott Bonvoy · parody, bukan tajaan sebenar">Marriott Bonvoy</a></span><span><a href="https://www.amd.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi AMD · parody, bukan tajaan sebenar">AMD</a></span><span><a href="https://www.akkodis.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Akkodis · parody, bukan tajaan sebenar">Akkodis</a></span><span><a href="https://www.solera.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Solera · parody, bukan tajaan sebenar">Solera</a></span><span><a href="https://www.sherwin-williams.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Sherwin-Williams · parody, bukan tajaan sebenar">Sherwin-Williams</a></span><span><a href="https://www.einhell.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Einhell · parody, bukan tajaan sebenar">Einhell</a></span><span><a href="https://www.g42.ai" target="_blank" rel="noopener noreferrer" title="Laman rasmi G42 · parody, bukan tajaan sebenar">G42</a></span><span><a href="https://www.whatsapp.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi WhatsApp · parody, bukan tajaan sebenar">WhatsApp</a></span><span><a href="https://www.sap.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi SAP · parody, bukan tajaan sebenar">SAP</a></span><span><a href="https://www.qualcomm.com/snapdragon" target="_blank" rel="noopener noreferrer" title="Laman rasmi Snapdragon · parody, bukan tajaan sebenar">Snapdragon</a></span><span><a href="https://www.adidas.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Adidas · parody, bukan tajaan sebenar">Adidas</a></span><span><a href="https://nu.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Nu · parody, bukan tajaan sebenar">Nu</a></span><span><a href="https://www.signify.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Signify · parody, bukan tajaan sebenar">Signify</a></span><span><a href="https://www.pepsico.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi PepsiCo (Gatorade, Sting, Doritos) · parody, bukan tajaan sebenar">PepsiCo (Gatorade, Sting, Doritos)</a></span><span><a href="https://www.nasdaq.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Nasdaq · parody, bukan tajaan sebenar">Nasdaq</a></span><span><a href="https://www.meta.ai" target="_blank" rel="noopener noreferrer" title="Laman rasmi Meta AI · parody, bukan tajaan sebenar">Meta AI</a></span></dd></div><div class=""><dt>Technical Partner</dt><dd><span><a href="https://www.microsoft.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Microsoft · parody, bukan tajaan sebenar">Microsoft</a></span><span><a href="https://www.amd.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi AMD · parody, bukan tajaan sebenar">AMD</a></span><span><a href="https://www.akkodis.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Akkodis · parody, bukan tajaan sebenar">Akkodis</a></span><span><a href="https://www.solera.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Solera · parody, bukan tajaan sebenar">Solera</a></span></dd></div><div class=""><dt>Official Partner</dt><dd><span><a href="https://www.endless-sport.co.jp" target="_blank" rel="noopener noreferrer" title="Laman rasmi Endless · parody, bukan tajaan sebenar">Endless</a></span><span><a href="https://www.pirelli.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi Pirelli · parody, bukan tajaan sebenar">Pirelli</a></span><span><a href="https://www.mous.co" target="_blank" rel="noopener noreferrer" title="Laman rasmi Mous · parody, bukan tajaan sebenar">Mous</a></span><span><a href="https://www.betterup.com" target="_blank" rel="noopener noreferrer" title="Laman rasmi BetterUp · parody, bukan tajaan sebenar">BetterUp</a></span></dd></div></dl></div></div>
@@ -297,7 +313,81 @@
     <div class="wrap">
       <p class="eyebrow rv"><span data-en="Car spec">Spesifikasi kereta</span></p>
       <h2 id="f-h" class="rv"><span data-en="What is under the hood">Apa di bawah bonet</span></h2>
-      <ol class="feats"><li class="rv"><span class="fn">01</span><b><span data-en="1RM-based suggestions">Cadangan ikut 1RM</span></b><p><span data-en="Sets, reps and weight worked out for you.">Set, ulangan dan berat dikira untuk anda.</span></p></li><li class="rv"><span class="fn">02</span><b><span data-en="Rest timer &amp; voice">Pemasa rehat & suara</span></b><p><span data-en="Supersets, warm-up sets, plate calculator.">Superset, set pemanasan, kalkulator plat.</span></p></li><li class="rv"><span class="fn">03</span><b><span data-en="Records &amp; badges">Rekod & lencana</span></b><p><span data-en="1RM, volume, body weight and progress photos.">1RM, volum, berat badan dan foto progres.</span></p></li><li class="rv"><span class="fn">04</span><b><span data-en="Gyms &amp; trainers">Gim & jurulatih</span></b><p><span data-en="Find gyms on a map and book trainers.">Cari gim di peta dan tempah jurulatih.</span></p></li><li class="rv"><span class="fn">05</span><b><span data-en="Works offline">Tanpa internet</span></b><p><span data-en="Workouts sync when you are back online.">Senaman dihantar bila talian kembali.</span></p></li><li class="rv"><span class="fn">06</span><b><span data-en="Export &amp; privacy">Eksport & privasi</span></b><p><span data-en="CSV or PDF. Your data is only yours.">CSV atau PDF. Data anda hanya untuk anda.</span></p></li></ol>
+      <div class="fx rv">
+        <div class="fx-list" role="tablist" aria-label="Ciri Gainix" data-en-label="Gainix features">
+          <button type="button" class="fx-tab" role="tab" id="fx-t0" aria-controls="fx-p0" aria-selected="true" tabindex="0"><i>01</i><span><b><span data-en="1RM-based suggestions">Cadangan ikut 1RM</span></b><small><span data-en="1RM">1RM</span></small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t1" aria-controls="fx-p1" aria-selected="false" tabindex="-1"><i>02</i><span><b><span data-en="Rest timer & voice">Pemasa rehat & suara</span></b><small><span data-en="Timer">Pemasa</span></small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t2" aria-controls="fx-p2" aria-selected="false" tabindex="-1"><i>03</i><span><b><span data-en="Records & badges">Rekod & lencana</span></b><small><span data-en="Progress">Progres</span></small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t3" aria-controls="fx-p3" aria-selected="false" tabindex="-1"><i>04</i><span><b><span data-en="Gyms & trainers">Gim & jurulatih</span></b><small><span data-en="Map">Peta</span></small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t4" aria-controls="fx-p4" aria-selected="false" tabindex="-1"><i>05</i><span><b><span data-en="Works offline">Tanpa internet</span></b><small><span data-en="Offline">Luar talian</span></small></span></button>
+          <button type="button" class="fx-tab" role="tab" id="fx-t5" aria-controls="fx-p5" aria-selected="false" tabindex="-1"><i>06</i><span><b><span data-en="Export & privacy">Eksport & privasi</span></b><small><span data-en="Data">Data</span></small></span></button>
+        </div>
+        <div class="fx-view">
+          <div class="fx-panel on" role="tabpanel" id="fx-p0" aria-labelledby="fx-t0">
+            <span class="tag"><span data-en="1RM">1RM</span></span>
+            <h3><span data-en="1RM-based suggestions">Cadangan ikut 1RM</span></h3>
+            <p><span data-en="Enter your 1RM and Gainix works out today's sets, reps and weight. The weight goes up as you get stronger.">Masukkan 1RM anda dan Gainix mengira set, ulangan dan berat untuk hari ini. Berat naik bila anda makin kuat.</span></p>
+            <div class="demo">
+              <div class="d-box pop" style="--i:0"><span><span data-en="Bench Press 1RM">1RM Bench Press</span></span><b>60 kg</b></div>
+              <div class="d-box pop" style="--i:1"><span><span data-en="Today's plan">Cadangan hari ini</span></span><b><span data-en="4 × 6 @ 47.5 kg">4 × 6 @ 47.5 kg</span></b></div>
+              <div class="d-box pop" style="--i:2"><span><span data-en="Goal">Matlamat</span></span><b><span data-en="Strength">Kekuatan</span></b></div>
+              <span class="d-chip pop" style="--i:3"><span data-en="Start workout">Mula senaman</span></span>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p1" aria-labelledby="fx-t1">
+            <span class="tag"><span data-en="Timer">Pemasa</span></span>
+            <h3><span data-en="Rest timer & voice">Pemasa rehat & suara</span></h3>
+            <p><span data-en="The rest timer starts after every set and a voice tells you the next one. Includes supersets, warm-up sets and a plate calculator.">Pemasa rehat bermula sendiri selepas setiap set, dan suara memberitahu set seterusnya. Ada superset, set pemanasan dan kalkulator plat.</span></p>
+            <div class="demo">
+              <div class="d-ring pop" style="--i:0"><div class="ring"><svg viewBox="0 0 104 104" aria-hidden="true"><circle class="track" cx="52" cy="52" r="42" fill="none" stroke-width="10"/><circle class="bar" cx="52" cy="52" r="42" fill="none" stroke-width="10" stroke-dasharray="163.6 263.9"/></svg><div class="num"><b>01:30</b><span><span data-en="rest">rehat</span></span></div></div><div class="d-box" style="flex:1"><span><span data-en="Next set">Set seterusnya</span></span><b>3 / 4</b></div></div>
+              <div class="d-box pop" style="--i:1"><span>🔊 <span data-en="“Set three: 6 reps”">“Set ketiga: 6 ulangan”</span></span></div>
+              <div class="d-box pop" style="--i:2"><span><span data-en="Plates per side">Plat setiap sisi</span></span><b>10 + 2.5 + 1.25 kg</b></div>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p2" aria-labelledby="fx-t2">
+            <span class="tag"><span data-en="Progress">Progres</span></span>
+            <h3><span data-en="Records & badges">Rekod & lencana</span></h3>
+            <p><span data-en="Track your 1RM, volume, body weight and progress photos week by week, and earn badges when you set a record.">Lihat 1RM, volum, berat badan dan foto progres anda dari minggu ke minggu, dan kumpul lencana bila pecah rekod.</span></p>
+            <div class="demo">
+              <div class="d-sleep pop" style="--i:0" aria-hidden="true"><i style="--h:45%;--i:0"></i><i style="--h:60%;--i:1"></i><i style="--h:52%;--i:2"></i><i style="--h:70%;--i:3"></i><i style="--h:64%;--i:4"></i><i style="--h:82%;--i:5"></i><i style="--h:90%;--i:6"></i></div>
+              <div class="d-days" aria-hidden="true"><span data-en="Mon">Isn</span><span data-en="Tue">Sel</span><span data-en="Wed">Rab</span><span data-en="Thu">Kha</span><span data-en="Fri">Jum</span><span data-en="Sat">Sab</span><span data-en="Sun">Ahd</span></div>
+              <div class="d-box pop" style="--i:2"><span><span data-en="New 1RM record">Rekod baru 1RM</span></span><b>62.5 kg 🏅</b></div>
+              <div class="d-box pop" style="--i:3"><span><span data-en="Volume this week">Volum minggu ini</span></span><b>8,450 kg</b></div>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p3" aria-labelledby="fx-t3">
+            <span class="tag"><span data-en="Map">Peta</span></span>
+            <h3><span data-en="Gyms & trainers">Gim & jurulatih</span></h3>
+            <p><span data-en="Find nearby gyms on a map and book a session with a trainer right from the app.">Cari gim berdekatan di peta dan tempah sesi dengan jurulatih terus dari app.</span></p>
+            <div class="demo">
+              <div class="d-box pop" style="--i:0"><div class="d-row"><span class="d-av">G</span><span><span data-en="Nearby gym">Gim berdekatan</span><small><span data-en="1.2 km · open until 11 pm">1.2 km · dibuka hingga 11 mlm</span></small></span></div></div>
+              <div class="d-box pop" style="--i:1"><div class="d-row"><span class="d-av">J</span><span><span data-en="Personal trainer">Jurulatih peribadi</span><small><span data-en="Saturday · 9:00 am">Sabtu · 9:00 pg</span></small></span></div></div>
+              <span class="d-chip pop" style="--i:2"><span data-en="Book session">Tempah sesi</span></span>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p4" aria-labelledby="fx-t4">
+            <span class="tag"><span data-en="Offline">Luar talian</span></span>
+            <h3><span data-en="Works offline">Tanpa internet</span></h3>
+            <p><span data-en="Log workouts even without internet at the gym. Every set is saved on your phone and syncs when you are back online.">Rekod senaman walaupun tiada internet di gim. Setiap set disimpan dalam telefon dan dihantar bila talian kembali.</span></p>
+            <div class="demo">
+              <div class="d-box pop" style="--i:0"><span>📡 <span data-en="No internet">Tiada internet</span></span><b><span data-en="3 sets saved">3 set disimpan</span></b></div>
+              <span class="d-chip ghost pop" style="--i:1"><span data-en="Waiting for connection...">Menunggu talian...</span></span>
+              <span class="d-chip pop" style="--i:2"><span data-en="Synced ✓">Dihantar ✓</span></span>
+            </div>
+          </div>
+          <div class="fx-panel" role="tabpanel" id="fx-p5" aria-labelledby="fx-t5">
+            <span class="tag"><span data-en="Data">Data</span></span>
+            <h3><span data-en="Export & privacy">Eksport & privasi</span></h3>
+            <p><span data-en="Download your training history as CSV or PDF. Only you can see your data.">Muat turun sejarah latihan anda sebagai CSV atau PDF. Data anda hanya boleh dilihat oleh anda.</span></p>
+            <div class="demo">
+              <div class="d-box pop" style="--i:0"><span><span data-en="Export">Eksport</span></span><b>CSV · PDF</b></div>
+              <div class="d-box pop" style="--i:1"><span><span data-en="Who can see it">Siapa boleh lihat</span></span><b><span data-en="Only you">Anda sahaja</span></b></div>
+              <span class="d-chip pop" style="--i:2"><span data-en="Download report">Muat turun laporan</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="note rv"><span data-en="Sample screens. Numbers are for illustration only.">Contoh paparan. Angka hanya untuk ilustrasi.</span></p>
     </div>
   </section>
 
@@ -374,6 +464,7 @@
   })();
 </script>
 <script src="../js/releases.js"></script>
+<script src="../js/team.js"></script>
 <script src="../js/fx.js"></script>
 <script src="../js/egg.js"></script>
 </body>

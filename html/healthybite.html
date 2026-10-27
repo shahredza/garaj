@@ -28,6 +28,7 @@
     --body: "Titillium Web", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
     --g: max(16px, env(safe-area-inset-left, 0px));
+    --flip-back: linear-gradient(150deg, #ff2a1f, #8f0400); --flip-back-fg: #fff;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; overflow-x: clip; }
@@ -111,16 +112,6 @@
   .spons { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
   .spons li { font-family: var(--display); font-style: italic; font-weight: 900; font-size: 30px; text-transform: uppercase; padding: 10px 16px; background: var(--card); border: 1px solid var(--line); }
 
-  /* Ciri */
-  .feats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  @media (max-width: 900px) { .feats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { .feats { grid-template-columns: minmax(0, 1fr); } }
-  .feats li { background: var(--bg); padding: 26px; display: grid; gap: 8px; align-content: start; transition: background .25s; }
-  .feats li:hover { background: var(--card); }
-  .feats .fn { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--acc); letter-spacing: .14em; }
-  .feats b { font-family: var(--display); font-weight: 800; font-size: 28px; text-transform: uppercase; line-height: 1; }
-  .feats p { color: var(--muted); font-size: 15px; }
-
   /* Galeri */
   .rail { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--g) 20px max(var(--g), calc((100vw - 1240px) / 2 + var(--g))); scrollbar-width: thin; }
   .rail figure { margin: 0; flex: 0 0 230px; scroll-snap-align: start; display: grid; gap: 10px; }
@@ -175,12 +166,6 @@
   .hb-phone .notch { width: 84px; height: 7px; border-radius: 99px; background: #26262c; margin: 0 auto 16px; }
   .hb-phone h3 { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: #a9a7b0; margin: 0; }
   .ring-row { display: flex; align-items: center; gap: 14px; margin: 12px 0 14px; }
-  .ring { position: relative; width: 104px; height: 104px; flex: none; }
-  .ring svg { width: 104px; height: 104px; transform: rotate(-90deg); }
-  .ring .track { stroke: #26262c; } .ring .bar { stroke: var(--acc); }
-  .ring .num { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; line-height: 1.1; }
-  .ring .num b { font-family: var(--display); font-size: 28px; font-weight: 800; }
-  .ring .num span { font-size: 11px; color: #a9a7b0; }
   .macros { flex: 1; min-width: 0; display: grid; gap: 9px; font-size: 12px; }
   .macros .row { display: flex; justify-content: space-between; color: #a9a7b0; }
   .macros .row b { color: #f3f1ec; }
@@ -194,87 +179,8 @@
   @media (max-width: 1099px) { .hb-phone { display: none; } }
   @media (min-width: 1100px) { .hero .inner { padding-right: 330px; } .hero h1 { font-size: clamp(64px, 10vw, 170px); } }
 
-  /* Demo ciri: tab di kiri, paparan hidup di kanan */
-  .fx { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 20px; }
-  .fx-list { display: grid; gap: 1px; align-content: start; background: var(--line); border: 1px solid var(--line); }
-  .fx-tab { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; align-items: center; text-align: left; font: inherit; color: var(--fg); background: var(--bg); border: 0; padding: 18px 20px; cursor: pointer; transition: background .25s; }
-  .fx-tab i { font-family: var(--mono); font-style: normal; font-size: 13px; font-weight: 700; color: var(--acc); letter-spacing: .12em; }
-  .fx-tab b { display: block; font-family: var(--display); font-weight: 800; font-size: 26px; text-transform: uppercase; line-height: 1; }
-  .fx-tab small { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-  .fx-tab:hover { background: var(--card); }
-  .fx-tab[aria-selected="true"] { background: var(--acc); color: var(--acc-ink); }
-  .fx-tab[aria-selected="true"] i, .fx-tab[aria-selected="true"] small { color: var(--acc-ink); }
-  .fx-view { background: #0b0b0d; color: #f3f1ec; border: 1px solid var(--line); padding: 34px; min-height: 540px; display: grid; }
-  .fx-panel { grid-area: 1 / 1; display: none; align-content: start; gap: 14px; }
-  .fx-panel.on { display: grid; }
-  .fx-panel h3 { font-size: clamp(32px, 3.4vw, 48px); margin: 0; }
-  .fx-panel > p { color: #b9b7bf; max-width: 46ch; }
-  .fx-panel .tag { justify-self: start; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); border: 1px solid var(--acc); padding: 3px 10px; }
-  .demo { margin-top: 8px; display: grid; gap: 10px; align-content: start; }
-  .d-box { border: 1px solid #2a2a30; padding: 13px 16px; display: flex; justify-content: space-between; gap: 12px; align-items: center; font-size: 15px; }
-  .d-box b { color: var(--acc); white-space: nowrap; }
-  .d-chip { justify-self: start; background: var(--acc); color: var(--acc-ink); font-family: var(--display); font-weight: 800; font-size: 16px; text-transform: uppercase; letter-spacing: .04em; padding: 6px 14px; }
-  .d-chip.ghost { background: transparent; color: var(--acc); border: 1px solid var(--acc); }
-  .d-cam { position: relative; height: 180px; overflow: hidden; background: radial-gradient(circle at 45% 50%, #fff 0 7%, transparent 7.5%), radial-gradient(circle at 57% 60%, #c2411f 0 6%, transparent 6.5%), radial-gradient(circle at 57% 42%, #b8742b 0 7%, transparent 7.5%), radial-gradient(circle at 43% 62%, #3f7d2a 0 4%, transparent 4.5%), radial-gradient(circle at 50% 52%, #fbf6e6 0 22%, #e8d6a2 22.5% 25%, transparent 25.5%), repeating-linear-gradient(45deg, #1a1a1f 0 10px, #202026 10px 20px); }
-  .d-cam::before { content: ""; position: absolute; inset: 16px; background:
-      linear-gradient(var(--acc), var(--acc)) top left / 26px 3px no-repeat, linear-gradient(var(--acc), var(--acc)) top left / 3px 26px no-repeat,
-      linear-gradient(var(--acc), var(--acc)) top right / 26px 3px no-repeat, linear-gradient(var(--acc), var(--acc)) top right / 3px 26px no-repeat,
-      linear-gradient(var(--acc), var(--acc)) bottom left / 26px 3px no-repeat, linear-gradient(var(--acc), var(--acc)) bottom left / 3px 26px no-repeat,
-      linear-gradient(var(--acc), var(--acc)) bottom right / 26px 3px no-repeat, linear-gradient(var(--acc), var(--acc)) bottom right / 3px 26px no-repeat; }
-  .d-cam::after { content: ""; position: absolute; left: 16px; right: 16px; top: 16px; height: 3px; background: var(--acc); box-shadow: 0 0 18px var(--acc); }
-  .d-code { position: relative; height: 130px; background: #f3f1ec; overflow: hidden; }
-  .d-code::before { content: ""; position: absolute; inset: 22px 30px; background: repeating-linear-gradient(90deg, #0b0b0d 0 3px, transparent 3px 6px, #0b0b0d 6px 7px, transparent 7px 11px, #0b0b0d 11px 15px, transparent 15px 17px); }
-  .d-code::after { content: ""; position: absolute; top: 12px; bottom: 12px; left: 20px; width: 3px; background: var(--acc); box-shadow: 0 0 14px var(--acc); }
-  .d-ring { display: flex; align-items: center; gap: 18px; }
-  .d-q { justify-self: end; background: var(--acc); color: var(--acc-ink); padding: 10px 14px; max-width: 80%; font-weight: 600; font-size: 15px; }
-  .d-a { justify-self: start; border: 1px solid #2a2a30; padding: 10px 14px; max-width: 88%; font-size: 15px; }
-  .d-row { display: flex; align-items: center; gap: 12px; }
-  .d-row > span:last-child { display: grid; line-height: 1.3; }
-  .d-row small { color: #a9a7b0; }
-  .d-av { width: 34px; height: 34px; background: var(--acc); color: var(--acc-ink); display: grid; place-items: center; font-family: var(--display); font-weight: 900; font-size: 18px; flex: none; }
-  .d-sleep { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; align-items: end; height: 150px; }
-  .d-sleep i { display: block; height: var(--h); background: var(--acc); transform-origin: bottom; }
-  .d-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; text-align: center; font-family: var(--mono); font-size: 11px; color: #a9a7b0; text-transform: uppercase; letter-spacing: .06em; }
-  @media (max-width: 900px) {
-    .fx { grid-template-columns: minmax(0, 1fr); }
-    .fx-list { grid-auto-flow: column; grid-auto-columns: minmax(210px, 1fr); overflow-x: auto; scroll-snap-type: x mandatory; }
-    .fx-tab { scroll-snap-align: start; }
-    .fx-view { padding: 22px; min-height: 0; }
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .fx-panel.on .pop { animation: pop .6s cubic-bezier(.16,1,.3,1) both; animation-delay: calc(var(--i, 0) * .12s); }
-    .d-cam::after { animation: scan 2.2s ease-in-out infinite alternate; }
-    .d-code::after { animation: scanx 1.8s ease-in-out infinite alternate; }
-    .fx-panel.on .d-ring .bar { animation: ringfill 1.4s .2s cubic-bezier(.16,1,.3,1) both; }
-    .fx-panel.on .d-sleep i { animation: grow .9s cubic-bezier(.16,1,.3,1) both; animation-delay: calc(var(--i) * .07s); }
-  }
-  @keyframes pop { from { opacity: 0; translate: 0 14px; scale: .96; } to { opacity: 1; translate: 0 0; scale: 1; } }
-  @keyframes scan { to { top: calc(100% - 19px); } }
-  @keyframes scanx { to { left: calc(100% - 23px); } }
-  @keyframes ringfill { from { stroke-dasharray: 0 263.9; } }
-  @keyframes grow { from { scale: 1 0; } }
-
-  /* Kad ID dipusing */
-  .flip { margin-top: 32px; max-width: 420px; perspective: 1200px; cursor: pointer; rotate: -2deg; outline-offset: 6px; }
-  .flip-in { position: relative; display: grid; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.2,.7,.2,1); transform: rotateX(var(--rx, 0deg)) rotateY(calc(var(--ry, 0deg) + var(--fl, 0deg))); }
-  .flip.flipped .flip-in { --fl: 180deg; }
-  .flip-face { grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; min-height: 300px; padding: 26px; display: grid; gap: 14px; align-content: start; position: relative; overflow: hidden; background: var(--card); border: 1px solid var(--line); border-top: 6px solid var(--acc); }
-  .flip-face.back { transform: rotateY(180deg); background: linear-gradient(150deg, #ff2a1f, #8f0400); color: #fff; border-color: transparent; }
-  .flip-face .tnum { position: absolute; top: 12px; right: 18px; font-family: var(--display); font-style: italic; font-weight: 900; font-size: 64px; line-height: 1; color: var(--acc); opacity: .9; }
-  .flip-face .crest-sm { width: 120px; height: 100px; filter: drop-shadow(0 10px 16px rgba(0,0,0,.4)); }
-  .flip-face .sum { color: var(--muted); font-size: 15px; }
-  .flip-face .photo { width: 104px; height: 104px; object-fit: cover; object-position: center 30%; border: 3px solid var(--acc); }
-  .flip-face .role { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
-  .flip-face .who { font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1; text-transform: uppercase; }
-  .flip-face .hint { margin-top: auto; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-  .flip-face.back .hint { color: rgba(255,255,255,.75); }
-  .flip-face dl { margin: 0; display: grid; gap: 12px; font-size: 15px; }
-  .flip-face dt { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
-  .flip-face dd { margin: 0; font-weight: 700; }
-  .glare { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.18), transparent 45%); opacity: 0; transition: opacity .3s; }
-  .flip:hover .glare { opacity: 1; }
-  @media (max-width: 900px) { .flip { rotate: none; } }
-  @media (prefers-reduced-motion: reduce) { .flip-in { transition: none; } .hb-phone { transition: none; } }
+  /* Tab ciri dan kad pasukan: css/team.css (dikongsi dengan Gainix dan VitaTrack) */
+  @media (prefers-reduced-motion: reduce) { .hb-phone { transition: none; } }
 
 
   /* Lenis (smooth scroll): CSS scroll-behavior mesti dimatikan, jika tidak dua-dua melawan dan scroll tersangkut */
@@ -300,6 +206,7 @@
   .tp .title dd span > a::after { font-size: .45em; vertical-align: super; }
   .tp dd span.fake { border-style: dashed; cursor: help; }
 </style>
+<link rel="stylesheet" href="../css/team.css">
 <link rel="stylesheet" href="../css/touch.css">
 <script src="../js/sound.js"></script>
 <script src="../js/transition.js"></script>
@@ -592,6 +499,7 @@
   })();
 </script>
 <script src="../js/releases.js"></script>
+<script src="../js/team.js"></script>
 <script src="../js/fx.js"></script>
 <script src="../js/egg.js"></script>
 <script>
@@ -599,51 +507,6 @@
   (function () {
     var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     var fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-    // aria-label dwibahasa (ikut bahasa halaman)
-    var labelled = document.querySelectorAll("[data-en-label]");
-    labelled.forEach(function (el) { el.dataset.msLabel = el.getAttribute("aria-label"); });
-    function syncLabels() { var en = document.documentElement.lang === "en"; labelled.forEach(function (el) { el.setAttribute("aria-label", en ? el.dataset.enLabel : el.dataset.msLabel); }); }
-    new MutationObserver(syncLabels).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] }); syncLabels();
-
-    // Demo ciri: klik, hover atau anak panah pilih ciri; bertukar sendiri sehingga disentuh
-    var tabs = Array.prototype.slice.call(document.querySelectorAll(".fx-tab")), panels = document.querySelectorAll(".fx-panel");
-    var cur = 0, auto = !reduce, visible = false;
-    function show(i) {
-      if (i === cur) return;
-      tabs[cur].setAttribute("aria-selected", "false"); tabs[cur].tabIndex = -1; panels[cur].classList.remove("on");
-      cur = i;
-      tabs[cur].setAttribute("aria-selected", "true"); tabs[cur].tabIndex = 0; panels[cur].classList.add("on");
-    }
-    tabs.forEach(function (tb, i) {
-      tb.addEventListener("click", function () { auto = false; show(i); });
-      tb.addEventListener("mouseenter", function () { if (fine) { auto = false; show(i); } });
-      tb.addEventListener("keydown", function (e) {
-        var d = e.key === "ArrowDown" || e.key === "ArrowRight" ? 1 : e.key === "ArrowUp" || e.key === "ArrowLeft" ? -1 : 0;
-        if (!d) return; e.preventDefault(); auto = false;
-        var n = (cur + d + tabs.length) % tabs.length; show(n); tabs[n].focus();
-      });
-    });
-    var fx = document.querySelector(".fx");
-    if (fx && "IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: .3 }).observe(fx);
-    setInterval(function () { if (auto && visible) show((cur + 1) % tabs.length); }, 5200);
-
-    // Kad ID: klik / Enter / Space untuk pusing; condong dan kilauan ikut kursor
-    var card = document.querySelector(".flip");
-    if (card) {
-      var inner = card.querySelector(".flip-in");
-      var flip = function () { var on = card.classList.toggle("flipped"); card.setAttribute("aria-pressed", String(on)); };
-      card.addEventListener("click", flip);
-      card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
-      if (fine && !reduce) {
-        card.addEventListener("pointermove", function (e) {
-          var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-          inner.style.setProperty("--ry", ((x - .5) * 14) + "deg"); inner.style.setProperty("--rx", ((.5 - y) * 12) + "deg");
-          card.querySelectorAll(".glare").forEach(function (g) { g.style.setProperty("--mx", x * 100 + "%"); g.style.setProperty("--my", y * 100 + "%"); });
-        });
-        card.addEventListener("pointerleave", function () { inner.style.setProperty("--rx", "0deg"); inner.style.setProperty("--ry", "0deg"); });
-      }
-    }
 
     // Telefon di hero condong ke arah kursor
     var hero = document.querySelector(".hero"), phone = document.querySelector(".hb-phone");
